@@ -7,5 +7,5 @@ Cmput 301 Group Project 2017/2018 winter
 
 <!-- toc -->
 ### Project-Part-2
- - [Prelim-Storyboard](Doc/)
+ - [Prelim-Storyboard](doc/301STORYBOARD.png)
 
