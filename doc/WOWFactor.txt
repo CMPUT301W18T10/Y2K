@@ -1,0 +1,3 @@
+This program allows paid programming attended by the programmer for the requesting customer.
+Customer: Party requesting the code to be completed.
+Programmer: Party completing the requesting code.
