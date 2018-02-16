@@ -13,19 +13,7 @@ Cmput 301 Group Project 2017/2018 winter
 ### Project-Part-2
  - [Prelim-Storyboard](doc/301STORYBOARD.png)
  - [LICENSE](LICENSE)
- - Use Case/ User story as a downloadable document [here](doc/CMPUT301USECASE.dox)
-
-#### TODO
-Missing use cases
-- 01.02.01
-- 01.04.01
-- 02.02.01
-- 04.02.01
-- 05.02.01
-- 05.04.01
-- 06.01.01
-- 06.02.01
-
+ 
 ### Project-Part-3
 
 
