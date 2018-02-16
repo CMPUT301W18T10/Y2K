@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="com.example.syn_tax.ViewTaskP">
 
 
@@ -166,9 +167,9 @@
         android:layout_below="@+id/mybidtext"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
-        android:background="@color/colorPrimary"
         android:text="save"
-        android:textColor="@android:color/background_dark"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold" />
 

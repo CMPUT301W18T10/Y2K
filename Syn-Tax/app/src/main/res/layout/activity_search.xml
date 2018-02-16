@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
+    android:background="@color/colorPrimary"
     tools:context="com.example.syn_tax.Search">
 
     <SearchView
@@ -35,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.33"
-            android:background="@android:drawable/btn_default"
+            android:background="@color/colorPrimaryDark"
             app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
         <ImageButton
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.33"
-            android:background="@android:drawable/btn_default"
+            android:background="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_home_black_24dp" />
 
         <ImageButton
@@ -51,8 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.33"
-            android:background="@android:drawable/btn_default"
             android:tint="@android:color/black"
+            android:background="@color/colorPrimaryDark"
             app:srcCompat="@android:drawable/ic_menu_info_details" />
     </LinearLayout>
 

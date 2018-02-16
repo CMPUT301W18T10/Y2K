@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="bottom"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context=".Login">
 
@@ -84,9 +85,13 @@
 
             android:layout_gravity="center_horizontal"
             android:layout_toEndOf="@+id/title"
+
             android:layout_weight="0.64"
+            android:background="@color/colorPrimaryDark"
             android:text="Login"
-            android:textSize="18sp" />
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -103,8 +108,11 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/login"
             android:layout_weight="0.5"
+            android:background="@color/colorPrimaryDark"
             android:text="Create Account"
-            android:textSize="18sp" />
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

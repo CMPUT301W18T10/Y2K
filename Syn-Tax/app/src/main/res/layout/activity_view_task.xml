@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="20"
+    android:background="@color/colorPrimary"
     tools:context="com.example.syn_tax.ViewTask">
 
     <LinearLayout
@@ -95,6 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorPrimary"
             app:srcCompat="@android:drawable/ic_menu_camera" />
     </LinearLayout>
 
@@ -118,6 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
+            android:background="@color/colorPrimary"
             app:srcCompat="@android:drawable/ic_dialog_map" />
     </LinearLayout>
 
@@ -204,7 +207,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
-            android:background="@android:drawable/btn_default"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@android:color/background_light"
             android:text="Save"
             android:textAlignment="center"
             android:textSize="18sp" />
