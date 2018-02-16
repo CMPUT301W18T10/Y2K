@@ -58,7 +58,7 @@
         app:srcCompat="@android:drawable/stat_notify_sdcard_usb" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/doctext"
         android:layout_width="450dp"
         android:layout_height="55dp"
         android:layout_below="@+id/Works"
@@ -72,29 +72,29 @@
         android:id="@+id/documentimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView7"
+        android:layout_alignBottom="@+id/doctext"
         android:layout_alignParentStart="true"
         app:srcCompat="?android:attr/actionModePasteDrawable" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/reciepttext"
         android:layout_width="450dp"
         android:layout_height="55dp"
-        android:layout_below="@+id/textView7"
-        android:layout_toEndOf="@+id/imageButton10"
+        android:layout_below="@+id/doctext"
+        android:layout_toEndOf="@+id/imagereciept"
         android:text="Reciepts"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <ImageButton
-        android:id="@+id/imageButton10"
+        android:id="@+id/imagereciept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView8"
+        android:layout_alignBottom="@+id/reciepttext"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/documentimage"
-        android:layout_toStartOf="@+id/textView7"
+        android:layout_toStartOf="@+id/doctext"
         app:srcCompat="@android:drawable/sym_contact_card" />
 
     <Button

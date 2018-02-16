@@ -80,7 +80,7 @@
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/save"
+            android:layout_above="@+id/savebutton"
 
             android:layout_gravity="center_horizontal"
             android:layout_toEndOf="@+id/title"
@@ -98,7 +98,7 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/save"
+            android:id="@+id/savebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/login"
