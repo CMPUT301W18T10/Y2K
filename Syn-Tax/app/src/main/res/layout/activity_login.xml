@@ -25,7 +25,8 @@
             android:layout_alignStart="@+id/title"
             android:layout_weight="0.8"
             android:text="Syn-Tax"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            tools:ignore="DuplicateIds" />
     </LinearLayout>
 
     <LinearLayout

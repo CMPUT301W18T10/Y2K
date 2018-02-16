@@ -23,7 +23,9 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".UserProfile" />
         <activity android:name=".Search" />
-        <activity android:name=".ViewTask"></activity>
+        <activity android:name=".ViewTask" />
+        <activity android:name=".Photo" />
+        <activity android:name=".AddTask"></activity>
     </application>
 
 </manifest>
