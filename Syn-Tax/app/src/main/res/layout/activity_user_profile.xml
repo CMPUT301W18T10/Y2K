@@ -1,47 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context="com.example.syn_tax.MainActivity"
+    tools:context=".UserProfile"
     android:weightSum="20">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:gravity="center_horizontal"
+        android:gravity="center_vertical|center_horizontal|center"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Syn-Tax"
             android:textAlignment="center" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="2"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <Button
+        <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:background="@android:drawable/btn_default"
+            android:layout_weight="1"
             android:text="Username"
-            android:textSize="18sp" />
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -52,31 +55,87 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <Button
-            android:id="@+id/distribute"
+        <EditText
+            android:id="@+id/fname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.63"
-            android:background="@android:drawable/btn_default"
-            android:text="Distribute Code"
-            android:textSize="18sp" />
+            android:layout_weight="0.7"
+            android:ems="10"
+            android:hint="First Name"
+            android:inputType="textPersonName" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/lname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:ems="10"
+            android:hint="Last Name"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/phonenumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:ems="10"
+            android:hint="Phone Number (###)###-###"
+            android:inputType="phone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <Button
-            android:id="@+id/request"
+            android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.67"
+            android:layout_weight="0.7"
             android:background="@android:drawable/btn_default"
-            android:text="Request Code"
+            android:text="Save"
             android:textSize="18sp" />
     </LinearLayout>
 

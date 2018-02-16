@@ -4,22 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="bottom"
     android:orientation="vertical"
-    tools:context="com.example.syn_tax.MainActivity"
-    android:weightSum="20">
+    tools:context="com.example.syn_tax.HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Syn-Tax"
@@ -29,55 +26,67 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_weight="0.2"
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/title"
+        <TextView
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:background="@android:drawable/btn_default"
-            android:text="Username"
-            android:textSize="18sp" />
+            android:layout_weight="0.5"
+            android:text="Distributed Code"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Requested code"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:divider="?android:attr/dividerVertical"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:weightSum="1">
+
+        <ListView
+            android:id="@+id/distributelist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+
+        <ListView
+            android:id="@+id/requestlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
+
+        </ListView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <Button
-            android:id="@+id/distribute"
+            android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.63"
+            android:layout_weight="0.7"
             android:background="@android:drawable/btn_default"
-            android:text="Distribute Code"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <Button
-            android:id="@+id/request"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.67"
-            android:background="@android:drawable/btn_default"
-            android:text="Request Code"
-            android:textSize="18sp" />
+            android:text="Add Task" />
     </LinearLayout>
 
     <LinearLayout

@@ -18,6 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateAccount" />
+        <activity android:name=".Login" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".UserProfile" />
+        <activity android:name=".Search" />
+        <activity android:name=".ViewTask"></activity>
     </application>
 
 </manifest>
