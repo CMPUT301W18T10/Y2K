@@ -1,0 +1,184 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+
+\b \ul Release Planning For Project Part 4:
+\b0 \ulnone \
+\
+USE CASES: \
+1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 19, 20, 21, 22, 24, 25, 26, 27, 28\
+\
+USER STORIES: \
+US 03.01.01, US 03.02.01, US 03.03.01, US 02.01.01, US 01.02.01, US 05.04.01, US 01.01.01, \
+US 01.01.02, US 01.01.03, US 02.02.01, US 08.01.01, US 02.01.01, US 05.05.01, US 06.02.01, \
+US 09.02.01, US 10.02.01, US 10.03.01, US 05.02.01, US 06.01.01, US 04.01.01, US 04.02.01, \
+US 10.01.01, US 09.01.01, US 09.03.01, US 01.04.01\
+\
+\
+LOGIN PAGE\
+	-UI for choosing whether to create account or login, intent to switch to both\
+\
+LOGIN\
+	-UI for entering account username and password\
+	-Intents for navigating back out to home page as well as logging in (given correct credentials)\
+\
+CREATE ACCOUNT\
+	-UI for entering personal details\
+	-Intents for navigating back out to login as well as submitting the account creation\
+\
+USER PROFILE\
+	-View and edit details of user profile\
+\
+CONNECTIVITY ()\
+	-implement elastic search for data storage\
+\
+MAINPAGE\
+	-UI  for either requesting a task or searching for an existing task (provider)\
+	-Logout \
+        -Intent to go to the homepage\
+\
+\
+HOMEPAGE\
+	-UI for viewing details of a task(requested) or a task(provided) \
+	-Intent to go to to the add task page\
+\
+        \
+ADD TASK\
+	-UI for the requester to add details of the task, optional picture, a location, and a title for the task\
+	-Intent to return to homepage \
+	-Intent to go to the Photograph page\
+\
+EDIT TASK \
+      - UI for the user requester to edit details of the task, optional picture, location, description, status,\
+       and a title for the task as long as it has no bids - Intent to go to the Photograph page\
+      - Intent to go to the Location page \
+      - Intent to go back to the Task page\
+\
+VIEW TASK PROVIDED\
+	- UI for allowing the user provider to view task details and enter a bid  on a task\
+	- Intent to return to home page, or intent to return to search page\
+\
+VIEW TASK REQUESTED\
+	-UI for allowing the user requested to view tasks they have provided \
+	- Intent to Location page\
+\
+SEARCH\
+	-UI to search for existing requests \
+	-implements elastic search \
+	- Intent to go to View Task Provided page\
+\
+LOCATION\
+	-UI to allow user to add a location/ view a location/ edit location to a task\
+	- Intents to navigate back to initial screen(view task requester, add task and view task provider) when  \
+          location has been viewed/edited/added\
+	- Implements a google maps api\
+\
+PHOTOGRAPHY\
+	- UI to allow user to add/edit  a photo\
+	- Intents to return back to initial screen\
+	- implements bitmaps to get users image (image is a png)\
+\
+\
+DOCUMENTATION\
+        - Each code file will have a detailed description of its use and/or issues with its funcitonality\
+        - Provide Javadoc documentation for the classes\
+\
+UML DIAGRAMS\
+        - Start and continuously edit UML diagram with details on methods and attributes\
+       \
+\
+\
+
+\b \ul Planning For Project Part 5:
+\b0 \ulnone \
+\
+USE CASES: \
+10, 12, 13, 14, 15, 16, 17, 18, 23 \
+\
+USER STORIES: \
+US 01.03.01, US 05.01.01, US 05.06.01, US 07.01.01, US 07.02.01, US 05.07.01, US 04.02.01, \
+US 05.03.01\
+\
+LOGIN PAGE\
+	-UI will now allow User to choose to create a new account or login to existing account using Intents to open corresponding activities\
+\
+\
+LOGIN\
+	-UI for entering account username and password\
+	-UI will allow user ( pending correct input) to log in to account\
+\
+CREATE ACCOUNT\
+	-UI for entering personal details\
+	-User will be able to create a new profile ( pending valid inputs)\
+\
+USER PROFILE\
+	-View and edit details of user profile\
+\
+CONNECTIVITY ()\
+	-implement elastic search for data storage\
+        -offline changes made by user will now be updated when the user regains connectivity\
+\
+MAINPAGE\
+	-UI  for either requesting a task or searching for an existing task (provider)\
+	-Intents for searching/requesting for search will allow User to post or receive a task\
+\
+HOMEPAGE\
+	-UI for viewing details of a task(requested) or a task(provided) \
+	-Intent to go to to the add task page\
+\
+ADD TASK\
+	-UI for the requester to add details of the task, optional picture, a location, title, description, for  \
+         the task.\
+	-User can now add Task to Syn-Tax for providers to bid\
+        - Intent to go to the Photograph page\
+        - Intent to go to the Location page\
+        - Intent to go to back to the homepage\
+\
+EDIT TASK\
+        -UI for the user requester to edit details of the task, optional picture, location, description, status,   \
+         and a title for the task as long as it has no bids\
+       - Intent to go to the Photograph page\
+       - Intent to go to the Location page\
+       - Intent to go back to the Task page\
+\
+VIEW TASK PROVIDED\
+	- UI for allowing the user provider to view task details and enter a bid  on a task\
+	- User provider can successfully bid on a task after viewing details\
+\
+VIEW TASK REQUESTED\
+	-UI for allowing the user requested to view tasks they have provided \
+	- User can successfully view tasks they requested/provided and can navigate between mainpage and task page\
+\
+SEARCH\
+	-UI to search for existing requests \
+	-implements elastic search \
+	- Intent to go to View Task Provided page\
+\
+LOCATION\
+	-UI to allow user to add a location/ view a location/ edit location to a task\
+	- intents to navigate back to initial screen(view task requester, add task and view task provider) when \
+          location has been viewed/edited/added\
+	- implements a google maps api\
+        - User Requested can add a location and User Provider can view location of task requested\
+\
+PHOTOGRAPHY\
+	- UI to allow user to add/edit  a photo\
+	- Intents to return back to initial screen\
+	- implements bitmaps to get users image (image is a png)\
+DOCUMENTATION\
+        - Each code file will have a detailed description of its use and/or issues with its funcitonality\
+        - Provide Javadoc documentation for the classes\
+\
+UML DIAGRAMS\
+        - Finalize the UML diagram with details on methods and attributes\
+\
+All Intents should now successfully redirect the User to the appropriate pages to allow User to navigate the App, request/provide services.\
+\
+Create a product demonstration of Syn-Tax for potential users showing all its functionalities\
+Create a product promotional video of Syn-Tax to garner attention and interest in the app.\
+       }
