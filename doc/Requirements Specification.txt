@@ -1,4 +1,3 @@
-
 Name: 1
 
 Participating actors: User, 2
@@ -102,6 +101,7 @@ Relevant Artifacts: US 03.01.01, US 03.02.01
 
 
 
+
 Name: 3
 
 Participating actors: User, 1, 2, 4, 6, 8, 19
@@ -136,6 +136,7 @@ Relevant Artifacts: US 03.03.01
 
 
 
+
 Name: 4
 
 Participating actors: User, 3
@@ -160,6 +161,7 @@ Exception:
 Qualities: NONE
 
 Relevant Artifacts: US 03.03.01
+
 
 
 
@@ -197,6 +199,7 @@ Relevant Artifacts: US 03.02.01 US 03.03.01
 
 
 
+
 Name: 6
 
 Participating actors: User, 3, 4, 7, 8, 9, 11, 19
@@ -220,6 +223,7 @@ Exception: User’s Tasks do not show correctly.
 Qualities: NONE
 
 Relevant Artifacts: US 02.01.01, US 01.02.01
+
 
 
 
@@ -254,6 +258,7 @@ Exception:
 Qualities: NONE
 
 Relevant Artifacts: US 02.01.01, US 01.02.01, US 05.04.01
+
 
 
 
@@ -297,6 +302,7 @@ Relevant Artifacts: US 01.01.01, US 01.01.02, US 01.01.03, US 02.02.01, US 08.01
 
 
 
+
 Name: 9
 
 Participating actors: UserR, 6, 7, 10, 20
@@ -326,6 +332,7 @@ Exception:
 Qualities: NONE
 
 Relevant Artifacts: US 02.01.01, US 05.05.01, US 06.02.01, US 09.02.01, US 10.02.01, US 10.03.01
+
 
 
 
@@ -365,6 +372,7 @@ Relevant Artifacts: US 01.03.01, US 08.01.01
 
 
 
+
 Name: 11
 
 Participating actors: UserP, 6, 7, 19, 20
@@ -394,6 +402,7 @@ Exception:
 Qualities: NONE
 
 Relevant Artifacts: US 02.01.01, US 05.02.01, US 06.01.01
+
 
 
 
@@ -428,6 +437,7 @@ Exception:
 Qualities: NONE
 
 Relevant Artifacts: US 05.01.01, US 02.02.01
+
 
 
 
@@ -492,6 +502,7 @@ Exception: UserR changes status to “done” but no update to status occurs
 Qualities: NONE
 
 Relevant Artifacts: US 07.01.01, US 02.02.01
+
 
 
 
@@ -609,6 +620,7 @@ Exception: Other bids are not removed when UserR selects on accept bid.
 Qualities: NONE
 
 Relevant Artifacts: US 05.06.01
+
 
 
 
