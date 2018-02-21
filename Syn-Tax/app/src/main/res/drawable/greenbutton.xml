@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Citations
+http://www.androidnovice.com/designing-buttons-xml-drawable-resources/
+Published November 1, 2015
+Used Feb 21 2018
+-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
