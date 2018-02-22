@@ -13,15 +13,18 @@ public class Task {
     private String TaskObjective;
     private String TaskStatus;
     private Date TaskDate;
-    private Double  TaskBid;
+    private Double  CurrentBid;
     private ArrayList<Double> TaskBids = new ArrayList<Double>();
+    private String BidStatus;
+    private ArrayList<String> BidStatuses = new ArrayList<String>();
 
 
     public Task(String Name, String Objective, String Status, Double Bid) {
         this.TaskName = Name;
         this.TaskObjective = Objective;
         this.TaskStatus = Status;
-        this.TaskBid = Bid;
+        AddTaskBids(0,Bid);
+        this.CurrentBid = getTaskBid();
         //this.TaskDate = Date;
     }
 
@@ -57,15 +60,33 @@ public class Task {
         TaskDate = taskDate;
     }
 
-    public void AddTaskBids(double Bid){
-        TaskBid = Bid;
-        TaskBids.add(0,TaskBid);
+    public void AddTaskBids(int pos, double Bid){
+        CurrentBid = Bid;
+        TaskBids.add(pos,CurrentBid);
     }
 
-    public Double getTaskBid(int count){
+    public Double getTaskBid(){
 
         return TaskBids.get(0);
 
     }
 
+    public void setBidStatus(int pos, String bidStatus){
+        if (pos >=1) {
+            for (int i = 0; i < (pos - 1); i++) {
+                BidStatuses.set(i, bidStatus);
+            }
+        }
+    }
+
+    public void clearBids(int pos) {
+        if (pos >= 1){
+            for (int i = 0; i < (pos-1); i++){
+                if (BidStatuses.get(i) != "Accepted"|| BidStatuses.get(i) != "Undecided"){
+                    TaskBids.remove(i);
+                    BidStatuses.remove(i);
+                }
+            }
+        }
+    }
 }

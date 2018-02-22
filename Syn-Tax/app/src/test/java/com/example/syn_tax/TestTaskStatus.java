@@ -32,10 +32,10 @@ public class TestTaskStatus extends ActivityInstrumentationTestCase2 {
         task.setTaskStatus("Bidded");
         assertEquals("Bidded", task.getTaskStatus());
 
+    }
 
-
-
-
+    public void TestBids(){
+        Task task = new Task("Test", "Bid Test", "Bidded", 20.00);
 
     }
 
