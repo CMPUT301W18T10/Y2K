@@ -32,11 +32,9 @@ public class TestSearch extends ActivityInstrumentationTestCase2{
     public void testWithKeyword(){
         String keywords="aa";
         Search testsearch= new Search();
-
         try {
             testsearch.searching(keywords);
         }
-
         catch (Exception e) {
             Log.i("Error", "Error occured when searching for tasks.");
             e.printStackTrace();
