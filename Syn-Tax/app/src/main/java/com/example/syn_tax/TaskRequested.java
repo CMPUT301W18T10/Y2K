@@ -1,20 +1,23 @@
 package com.example.syn_tax;
 
 /**
- * Created by Hamsemare on 2018-02-21.
+ * Created by hamdamare on 2018-02-22.
  */
 
-public class Task {
+public class TaskRequested {
 
     private String id;
     private Location location;
     private Photo photo;
-
     private TaskRequested taskrequested;
     private TaskProvided taskprovided;
 
+    public boolean hasTask(TaskRequested testtaskR) {
+        return true;
+    }
 
-    public Task(String title, String description, User user){}
+
+    public TaskRequested(String title, String description, User user){}
 
 
     public void setId(String id) {
@@ -49,22 +52,19 @@ public class Task {
     public void editLocation(Location testNewLocation) {
     }
 
-    public void deleteTask(Task task) {}
-
-
 
     public boolean hasLocation(Location testLocation) {
         return true;
     }
 
 
-    public boolean hasTask(Task task) {
-        return true;
-    }
-
-    public Task getTask(Task task) {
+    public TaskRequested getTask(TaskRequested task) {
         return task;
     }
+
+    public void deleteTask(TaskRequested task) {
+    }
+
 
     public TaskRequested getTaskRequested() {
         return taskrequested;
@@ -73,3 +73,5 @@ public class Task {
         return taskprovided;
     }
 }
+
+

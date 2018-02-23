@@ -31,9 +31,9 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
     //Test to make sure were adding tasks to the database successfully
     public void testAddTask(){
         User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
-        Task task= new Task("Assignment", "Complete a coding project", testuser);
+        TaskRequested task= new TaskRequested("Assignment", "Complete a coding project", testuser);
         AsyncTask<Task, Void, Void> execute= new ElasticSearchController.addTask();
-        execute.execute(task);
+        execute.execute((Runnable) task);
     }
 
 

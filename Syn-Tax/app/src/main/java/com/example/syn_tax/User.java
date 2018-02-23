@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public class User {
-    private ArrayList<String> contactInfo = new ArrayList<>();
+    public ArrayList<String> contactInfo = new ArrayList<>();
 
     public User(String username, String email, String phoneNumber){
         contactInfo.add(username);

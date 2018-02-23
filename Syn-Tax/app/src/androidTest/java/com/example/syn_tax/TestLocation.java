@@ -16,7 +16,7 @@ public class TestLocation extends ActivityInstrumentationTestCase2{
         Location testLocation= new Location();
         Location testNewLocation= new Location();
         User testUser= new User("hamse", "test@g.ca", "000-0000-0000");
-        Task testTask= new Task("test", "testing add photo", testUser);
+        TaskRequested testTask= new TaskRequested("test", "testing add photo", testUser);
 
         testTask.addLocation(testLocation);
         testTask.editLocation(testNewLocation);
@@ -31,7 +31,7 @@ public class TestLocation extends ActivityInstrumentationTestCase2{
     public void testAddLocation(){
         Location testLocation= new Location();
         User testUser= new User("hamse", "test@g.ca", "000-0000-0000");
-        Task testTask= new Task("test", "testing add photo", testUser);
+        TaskRequested testTask= new TaskRequested("test", "testing add photo", testUser);
 
         testTask.addLocation(testLocation);
         assertTrue(testTask.hasLocation(testLocation));

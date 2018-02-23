@@ -27,4 +27,5 @@ public class TestContactInfoRetrieval extends ActivityInstrumentationTestCase2 {
 
         assertEquals(testUser.retrieveContactInfo(), contactInfo);
     }
+
 }

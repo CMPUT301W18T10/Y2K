@@ -15,7 +15,7 @@ public class TestPhoto extends ActivityInstrumentationTestCase2 {
     public void testAddPhoto(){
         Photo testPhoto= new Photo();
         User testUser= new User("hamse", "test@g.ca", "000-0000-0000");
-        Task testTask= new Task("test", "testing add photo", testUser);
+        TaskRequested testTask= new TaskRequested("test", "testing add photo", testUser);
 
         testTask.addPhoto(testPhoto);
         assertTrue(testTask.hasPhoto(testPhoto));
@@ -25,7 +25,7 @@ public class TestPhoto extends ActivityInstrumentationTestCase2 {
     public void testDeletePhoto(){
         Photo testPhoto= new Photo();
         User testUser= new User("hamse", "test@g.ca", "000-0000-0000");
-        Task testTask= new Task("test", "testing add photo", testUser);
+        TaskRequested testTask= new TaskRequested("test", "testing add photo", testUser);
 
         testTask.addPhoto(testPhoto);
         testTask.deletePhoto(testPhoto);
@@ -41,4 +41,5 @@ public class TestPhoto extends ActivityInstrumentationTestCase2 {
         testPhoto= testTask.getPhoto();
         assertTrue(testTask.hasPhoto(testPhoto));
     }
+
 }
