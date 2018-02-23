@@ -36,4 +36,15 @@ public class TestTaskR  extends ActivityInstrumentationTestCase2 {
         assertFalse(testtaskR1.hasTask(testtaskR2));
 
     }
+
+    public void testEditTask() {
+        User testUser = new User("hamda", "test@g.ca","000-000-0000");
+        TaskRequested testtaskR1 = new TaskRequested("hamda","desc",testUser);
+        TaskRequested testtaskR2 = null;
+
+        testtaskR2 = testtaskR2.getTask(testtaskR1);
+        assertTrue(testtaskR1.hasTask(testtaskR1));
+        assertEquals(testtaskR2,testtaskR1);
+
+    }
 }
