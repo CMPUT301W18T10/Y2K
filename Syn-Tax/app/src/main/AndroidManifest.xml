@@ -6,6 +6,7 @@
 
     <uses-sdk android:minSdkVersion="11" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -33,7 +34,7 @@
         <activity android:name=".UserProfile" />
         <activity android:name=".Search" />
         <activity android:name=".ViewTask" />
-        <activity android:name=".Photo" />
+        <activity android:name=".PhotoManager" />
         <activity android:name=".AddTask" />
         <activity android:name=".Location" />
         <activity android:name=".ViewTaskP"></activity>

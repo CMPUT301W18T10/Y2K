@@ -18,8 +18,9 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
         String title = "test";
         String description = "testdesc";
         String status = "Requested";
+        String photoname = "photoname";
 
-        Photo testphoto = new Photo();
+        Photo testphoto = new Photo(photoname);
         Location testlocation = new Location();
         AddTask testaddTask = new AddTask(title, description, status);
         User testUser= new User("hamda", "test@g.ca", "000-0000-0000");
