@@ -49,9 +49,11 @@ public class TestBid extends ActivityInstrumentationTestCase2 {
         * */
         testBidList.clearBids();
         assertFalse(testBidList.hasBid(testBid));
+        assertFalse(testBidList.hasBid(testBid3));
 
         // Should have testbid2
         assertTrue(testBidList.hasBid(testBid2));
+
 
 
 

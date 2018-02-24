@@ -8,9 +8,7 @@ import java.util.ArrayList;
  */
 
 public class BidsList {
-
-    private Bid bid;
-    private ArrayList<Bid> bids;
+    private ArrayList<Bid> bids = new ArrayList<Bid>();
 
 
     public ArrayList<Bid> returnBids(){
@@ -33,7 +31,8 @@ public class BidsList {
     }
 
     public void clearBids(){
-        for ( Bid bid: bids) {
+        for ( int i = (bids.size()-1); i >=0; i--) {
+            Bid bid = bids.get(i);
                 if (bid.getBidStatus() == "Declined"){
                     bids.remove(bid);
             }
