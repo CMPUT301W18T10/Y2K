@@ -1,5 +1,8 @@
 package com.example.syn_tax;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Created by hamdamare on 2018-02-22.
  */
@@ -9,6 +12,7 @@ public class TaskRequested {
     private String id;
     private Location location;
     private Photo photo;
+    private ArrayList<Photo> photos = new ArrayList<Photo>();
     private TaskRequested taskrequested;
     private TaskProvided taskprovided;
 
@@ -25,20 +29,26 @@ public class TaskRequested {
     }
 
 
-
     public Photo getPhoto() {
         return photo;
     }
 
     public void addPhoto(Photo photo) {
+        photos.add(photo);
     }
 
     public void deletePhoto(Photo photo) {
+        photos.removeAll(Collections.singleton(photo));
     }
 
 
     public boolean hasPhoto(Photo photo) {
-        return true;
+
+        if (photos.contains(photo)){
+            return true;
+        }
+        else
+            return false;
     }
 
 
