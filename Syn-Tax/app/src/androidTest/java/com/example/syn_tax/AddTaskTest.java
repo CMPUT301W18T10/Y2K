@@ -20,9 +20,10 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
         String status = "Requested";
         String photoname = "photoname";
 
+        User testuser = new User("hamare","test@g.ca","000-000=0000");
         Photo testphoto = new Photo(photoname);
         Location testlocation = new Location();
-        AddTask testaddTask = new AddTask(title, description, status);
+        AddTask testaddTask = new AddTask(title, description, status,testuser);
         User testUser= new User("hamda", "test@g.ca", "000-0000-0000");
         TaskRequested testTaskR= new TaskRequested("test", "testing add photo", testUser);
 

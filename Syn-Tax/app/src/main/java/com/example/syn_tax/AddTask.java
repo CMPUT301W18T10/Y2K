@@ -17,7 +17,7 @@ public class AddTask extends AppCompatActivity {
     }
 
 
-    public AddTask(String title,String description, String status) {}
+    public AddTask(String title,String description, String status, User user) {}
 
     public void setId(String id) {
         this.id = id;

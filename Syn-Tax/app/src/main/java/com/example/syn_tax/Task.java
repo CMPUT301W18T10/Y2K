@@ -72,4 +72,13 @@ public class Task {
     public TaskProvided getTaskProvided() {
         return taskprovided;
     }
+
+    public void addUserProvided(User userP) {
+    }
+
+
+    Boolean userRNotified = true;
+    public boolean getUserRNotified() {
+        return userRNotified;
+    }
 }

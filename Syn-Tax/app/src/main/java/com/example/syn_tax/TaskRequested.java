@@ -72,6 +72,10 @@ public class TaskRequested {
     public TaskProvided getTaskProvided() {
         return taskprovided;
     }
+
+    public boolean selectTask(TaskRequested testtask) {
+        return true;
+    }
 }
 
 
