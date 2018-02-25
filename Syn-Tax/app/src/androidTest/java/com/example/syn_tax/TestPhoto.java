@@ -61,6 +61,7 @@ public class TestPhoto extends ActivityInstrumentationTestCase2 {
         assertFalse(testTask.hasPhoto(testPhoto2));
         assertFalse(testTask.hasPhoto(testPhoto3));
         assertFalse(testTask.hasPhoto(testPhoto4));
+
     }
 
     // Test to make sure user can get a photograph from a task.
@@ -79,7 +80,7 @@ public class TestPhoto extends ActivityInstrumentationTestCase2 {
         testTask.addPhoto(testPhoto4);
 
         ArrayList<Photo> testPhotos= testTask.getPhotos();
-        for (int i=0; i<testTask.numOfPhotos(); i++){
+        for (int i=0; i<(testPhotos.size()-1); i++){
             assertTrue(testTask.hasPhoto(testPhotos.get(i)));
         }
     }

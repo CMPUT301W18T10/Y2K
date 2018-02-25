@@ -1,6 +1,9 @@
 package com.example.syn_tax;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by Hamsemare on 2018-02-21.
@@ -11,6 +14,7 @@ public class Task {
     private String id;
     private Location location;
     private Photo photo;
+    private ArrayList<Photo> photos = new ArrayList<Photo>();
     private String status;
 
     private TaskRequested taskrequested;
@@ -30,16 +34,29 @@ public class Task {
         return photo;
     }
 
+    public ArrayList<Photo> getPhotos(){
+        return photos;
+    }
+
     public void addPhoto(Photo photo) {
+        photos.add(photo);
     }
 
     public void deletePhoto(Photo photo) {
+        photos.removeAll(Collections.singleton(photo));
     }
 
 
     public boolean hasPhoto(Photo photo) {
-        return true;
+
+        if (photos.contains(photo)){
+            return true;
+        }
+        else
+            return false;
     }
+
+
 
 
     public Location getLocation() {
