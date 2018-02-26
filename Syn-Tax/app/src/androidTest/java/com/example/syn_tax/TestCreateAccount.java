@@ -6,6 +6,10 @@ package com.example.syn_tax;
 import android.os.Looper;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+/*CITATIONS
+https://stackoverflow.com/questions/17379002/java-lang-runtimeexception-cant-create-handler-inside-thread-that-has-not-call
+Published Jun 6 '15
+Used FEB 25,2018*/
 
 public class TestCreateAccount extends ActivityInstrumentationTestCase2 {
 
