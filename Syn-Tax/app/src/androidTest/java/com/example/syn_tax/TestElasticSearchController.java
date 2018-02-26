@@ -66,7 +66,6 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
 
             }
-
             return tasks;
         }
     }
