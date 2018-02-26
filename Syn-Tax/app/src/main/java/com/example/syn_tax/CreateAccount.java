@@ -35,7 +35,6 @@ public class CreateAccount extends AppCompatActivity {
         newuser.add(id);
         contactinfo.add(phonenumber);
         contactinfo.add(email);
-
     }
 
     public ArrayList<String> getContactInfo() {
@@ -46,9 +45,4 @@ public class CreateAccount extends AppCompatActivity {
     public ArrayList<String> getNewUser() {
         return newuser;
     }
-
-
-
-
-
 }

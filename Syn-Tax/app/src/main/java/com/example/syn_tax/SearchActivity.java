@@ -6,7 +6,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-public class Search extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
+    private String keywords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,9 @@ public class Search extends AppCompatActivity {
     }
 
     public void searching(String keywords) {
+        //DO SOMETHING
     }
 
-
+    //public void startActivity() {
+    //}
 }

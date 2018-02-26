@@ -15,16 +15,16 @@ public class TestEditUserProfile  extends ActivityInstrumentationTestCase2 {
     }
 
     public void testEditInfo() {
-        String username = "hamda";
-        String email = "test@g.ca";
-        String phoneNumber = "000-0000-0000";
+        User user= new User("hamda","test@g.ca", "000-0000-0000");
+
+        EditUserProfile userEdit = new EditUserProfile(user);
+
+        userEdit.editUserProfile("hamse", "test1@g.ca", "000-999-0000");
 
 
-        User testUser= new User(username, email, phoneNumber);
-        EditUserProfile testEdit = new EditUserProfile(testUser);
-        testEdit.editUserProfile(testUser);
-        assertTrue(testEdit.valid());
 
+        assertEquals(user.retrieveContactInfo().get(0), "hamse");
+        assertEquals(user.retrieveContactInfo().get(1), "test1@g.ca");
+        assertEquals(user.retrieveContactInfo().get(2), "000-999-0000");
     }
-
 }

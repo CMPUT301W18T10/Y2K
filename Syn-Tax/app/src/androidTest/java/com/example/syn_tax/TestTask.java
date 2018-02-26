@@ -8,30 +8,68 @@ import android.test.ActivityInstrumentationTestCase2;
 public class TestTask extends ActivityInstrumentationTestCase2 {
 
     public TestTask() {
-        super(Task.class);
+        super(TaskList.class);
     }
 
     //make sure that user can get their tasks
     public void testGetTask() {
-        User testUser = new User("hamda", "test@g.ca","000-000-0000");
-        Task testtaskR1 = new Task("hamda","desc",testUser);
-        Task testtaskR2 = null;
+        User testUser = new User("hamda", "test@g.ca", "000-000-0000");
+        Task testtaskR1 = new Task("hamda", "desc", testUser);
+        //Add it
+        TaskList tasks = new TaskList();
+        tasks.addTask(testtaskR1);
 
-        testtaskR2 = testtaskR2.getTask(testtaskR1);
-        assertTrue(testtaskR2.hasTask(testtaskR2));
+        //Get it
+        int num= tasks.getPos(testtaskR1);
+        Task task= tasks.getTask(num);
 
+        //Test it
+        assertEquals(task, testtaskR1);
     }
+
+
     //make sure user can delete their tasks
     public void testDeleteTask() {
-        User testUser = new User("hamda", "test@g.ca","000-000-0000");
-        Task testtaskR1 = new Task("hamda","desc",testUser);
-        AddTask testaddtask = new AddTask("hamda","desc","Requested");
+        User testUser = new User("hamda", "test@g.ca", "000-000-0000");
+        Task testtaskR1 = new Task("hamda", "desc", testUser);
 
-        Task testtaskR2 = null;
+        TaskList tasks = new TaskList();
+        tasks.addTask(testtaskR1);
 
-        //we have a task
-        testtaskR1.deleteTask(testtaskR2);
+        //Do we have a task
+        if(tasks.hasTask(testtaskR1)){
+            tasks.deleteTask(testtaskR1);
+        }
+        assertFalse(tasks.hasTask(testtaskR1));
+    }
 
-        assertFalse(testtaskR1.hasTask(testtaskR2));
+
+    //EDIT A TASK
+    public void testEditTask() {
+        User testUser = new User("hamda", "test@g.ca", "000-000-0000");
+        Task testtaskR1 = new Task("hamda", "desc", testUser);
+
+        //Add it
+        TaskList tasks = new TaskList();
+        tasks.addTask(testtaskR1);
+
+
+        assertTrue(tasks.hasTask(testtaskR1));
+
+        //NOW EDIT IT
+        Task testtaskR2 = new Task("hada", "desc", testUser);
+
+        if (tasks.hasTask(testtaskR1)){
+            int num= tasks.getPos(testtaskR1);
+            tasks.editTask(num, testtaskR2);
+            tasks.deleteTask(testtaskR1);
+        }
+        else{
+            tasks.addTask(testtaskR2);
+        }
+
+        //TEST IT
+        assertFalse(tasks.hasTask(testtaskR1));
+        assertTrue(tasks.hasTask(testtaskR2));
     }
 }

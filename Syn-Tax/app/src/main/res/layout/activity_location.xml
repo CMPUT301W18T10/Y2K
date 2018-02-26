@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/googlemap"
-    tools:context="com.example.syn_tax.Location">
+    tools:context="com.example.syn_tax.LocationActivity">
 
 
 </android.support.constraint.ConstraintLayout>

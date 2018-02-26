@@ -1,8 +1,6 @@
 package com.example.syn_tax;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -11,31 +9,36 @@ import java.util.Collections;
 
 public class Task {
 
+    private String title;
+    private String description;
+    private User userR;
     private String id;
-    private Location location;
+    private LocationActivity location;
     private Photo photo;
     private ArrayList<Photo> photos = new ArrayList<Photo>();
     private String status;
-
-    private TaskRequested taskrequested;
-    private TaskProvided taskprovided;
+    private boolean userRNotified = true;
 
 
+    //-------------CONSTRUCTOR------------------
     public Task(String title, String description, User user) {
+        this.title= title;
+        this.description=description;
+        this.userR= user;
     }
-
 
     public void setId(String id) {
         this.id = id;
     }
 
-
-    public Photo getPhoto() {
-        return photo;
-    }
+    //-------------PHOTOS------------------
 
     public ArrayList<Photo> getPhotos(){
         return photos;
+    }
+
+    public Photo getPhoto() {
+        return photo;
     }
 
     public void addPhoto(Photo photo) {
@@ -46,9 +49,7 @@ public class Task {
         photos.removeAll(Collections.singleton(photo));
     }
 
-
     public boolean hasPhoto(Photo photo) {
-
         if (photos.contains(photo)){
             return true;
         }
@@ -58,52 +59,8 @@ public class Task {
 
 
 
+    //-------------STATUS------------------
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void addLocation(Location testLocation) {
-    }
-
-    public void editLocation(Location testNewLocation) {
-    }
-
-    public void deleteTask(Task task) {
-    }
-
-
-    public boolean hasLocation(Location testLocation) {
-        return true;
-    }
-
-
-    public boolean hasTask(Task task) {
-        return true;
-    }
-
-    public Task getTask(Task task) {
-        return task;
-    }
-
-    public TaskRequested getTaskRequested() {
-        return taskrequested;
-    }
-
-    public TaskProvided getTaskProvided() {
-        return taskprovided;
-    }
-
-<<<<<<< HEAD
-    public void addUserProvided(User userP) {
-    }
-
-
-    Boolean userRNotified = true;
-    public boolean getUserRNotified() {
-        return userRNotified;
-    }
-=======
     public String getStatus() {
         return status;
     }
@@ -112,7 +69,22 @@ public class Task {
         this.status = status;
     }
 
->>>>>>> d2744dcb5a07035e7c06df69f0f972a6034268d9
+
+    public boolean hasTask(Task task) {
+        return true;
+    }
+
+    public void addUserProvided(User userP) {
+       this.userRNotified = true;
+    }
+
+    public boolean getUserRNotified() {
+        return userRNotified;
+    }
+
+    public void addLocation(LocationActivity location) {
+        this.location=location;
+    }
 }
 
 

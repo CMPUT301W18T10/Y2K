@@ -12,12 +12,12 @@ public class TestCreateAccount extends ActivityInstrumentationTestCase2 {
         super(CreateAccount.class);
     }
 
-
     // Test to make sure user can add a new Account.
     public void testCreateAccount() {
         CreateAccount testNewAccount = new CreateAccount("hamda","testusername","000-0000-0000","test@g.ca","testpass");
         NewUser testNewUser = new NewUser(testNewAccount);
         testNewUser.addNewUser(testNewAccount);
+
         assertTrue(testNewUser.hasNewUser(testNewAccount));
     }
 

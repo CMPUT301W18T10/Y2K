@@ -8,10 +8,13 @@ import java.util.ArrayList;
 
 public class EditUserProfile {
 
-    public EditUserProfile(User user) {}
+    private User user= new User("","","");
 
-    public void editUserProfile(User user) {
+    public EditUserProfile(User user) {
+        this.user=user;
+    }
 
+    public void editUserProfile(String username,String email,String phoneNumber) {
         /*
         String Ousername = user.name;
         String Ophonenumber = user.phoneNumber;
@@ -20,21 +23,16 @@ public class EditUserProfile {
         EditText username = (EditText) findViewById(R.id.username);
         price.setText(Ousername.toString(), TextView.BufferType.EDITABLE);
 
-       EditText phoneNumber = (EditText) findViewById(R.id.phoneNumber);
+        EditText phoneNumber = (EditText) findViewById(R.id.phoneNumber);
         price.setText(OphoneNumber.toString(), TextView.BufferType.EDITABLE);
 
-       EditText email = (EditText) findViewById(R.id.email);
+        EditText email = (EditText) findViewById(R.id.email);
         price.setText(Oemail.toString(), TextView.BufferType.EDITABLE);
-         */
-        String username = "";
-        String email = "";
-        String phoneNumber = "";
+        */
 
-
-        user = new User(username, email, phoneNumber);
-        user.contactInfo.add(username);
-        user.contactInfo.add(email);
-        user.contactInfo.add(phoneNumber);
+        this.user.retrieveContactInfo().add(0,username);
+        this.user.retrieveContactInfo().add(1,email);
+        this.user.retrieveContactInfo().add(2, phoneNumber);
 
     }
 

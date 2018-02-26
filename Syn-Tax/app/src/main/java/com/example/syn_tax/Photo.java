@@ -7,5 +7,4 @@ package com.example.syn_tax;
 public class Photo {
     public Photo(String photoname){
     }
-
 }

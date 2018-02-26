@@ -11,7 +11,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 public class NotifyTest extends ActivityInstrumentationTestCase2{
     public NotifyTest(){
-        super(Task.class);
+        super(BidsList.class);
     }
 
     public void testNotify(){
@@ -28,7 +28,7 @@ public class NotifyTest extends ActivityInstrumentationTestCase2{
         Task task1= new Task("test", "testing add photo", UserR1);
         Task task2= new Task("test", "testing add photo", UserR2);
 
-        /*
+
         task.addUserProvided(UserP);
         // TODO: Check
         assertTrue(task.getUserRNotified());
@@ -42,10 +42,5 @@ public class NotifyTest extends ActivityInstrumentationTestCase2{
         task2.addUserProvided(UserP2);
         // TODO: Check
         assertTrue(task2.getUserRNotified());
-
-        */
-
-
     }
-
 }

@@ -41,6 +41,4 @@ public class TestLogin extends ActivityInstrumentationTestCase2{
             e.printStackTrace();
         }
     }
-
-
 }

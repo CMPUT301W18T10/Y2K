@@ -20,7 +20,7 @@ public class TestPhoto extends ActivityInstrumentationTestCase2 {
         Photo testPhoto3= new Photo("pic3");
         Photo testPhoto4= new Photo("pic4");
         User testUser= new User("hamse", "test@g.ca", "000-0000-0000");
-        TaskRequested testTask= new TaskRequested("test", "testing add photo", testUser);
+        Task testTask= new Task("test", "testing add photo", testUser);
 
         testTask.addPhoto(testPhoto);
         testTask.addPhoto(testPhoto2);
@@ -40,7 +40,7 @@ public class TestPhoto extends ActivityInstrumentationTestCase2 {
         Photo testPhoto3= new Photo("pic2");
         Photo testPhoto4= new Photo("pics");
         User testUser= new User("hamse", "test@g.ca", "000-0000-0000");
-        TaskRequested testTask= new TaskRequested("test", "testing add photo", testUser);
+        Task testTask= new Task("test", "testing add photo", testUser);
 
         testTask.addPhoto(testPhoto);
         testTask.addPhoto(testPhoto2);

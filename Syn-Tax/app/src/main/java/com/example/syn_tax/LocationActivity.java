@@ -2,7 +2,7 @@ package com.example.syn_tax;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Location extends AppCompatActivity {
+public class LocationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

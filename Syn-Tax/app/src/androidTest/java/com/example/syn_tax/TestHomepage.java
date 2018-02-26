@@ -14,24 +14,13 @@ public class TestHomepage extends ActivityInstrumentationTestCase2 {
 
     //homepage displays the tasks for both the user requested and the user provided
     //make sure that user requested can view their tasks
-    public void testRGetTask() {
+    public void testGetTask() {
         User testUser1 = new User("hamda", "test@g.ca","000-000-0000");
         Task testtask1 = new Task("hamda","desc",testUser1);
-        TaskRequested testtaskR;
 
-        testtaskR = testtask1.getTaskRequested();
-        assertTrue(testtaskR.hasTask(testtaskR));
-    }
+        TaskList tasks= new TaskList();
+        tasks.addTask(testtask1);
 
-
-    //make sure that user requested can view their tasks
-    public  void testPGetTask() {
-        User testUser2 = new User("hamda", "test@g.ca","000-000-0000");
-        Task testtask2 = new Task("hamda","desc",testUser2);
-        TaskProvided testtaskP;
-
-        testtaskP = testtask2.getTaskProvided();
-        assertTrue(testtaskP.hasTask(testtaskP));
-
+        assertTrue(tasks.hasTask(testtask1));
     }
 }
