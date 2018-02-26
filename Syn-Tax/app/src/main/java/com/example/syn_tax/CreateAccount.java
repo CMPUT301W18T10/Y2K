@@ -14,12 +14,6 @@ public class CreateAccount extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
-    }
-
     //arraylist containing user contact information
     private ArrayList<String> contactinfo = new ArrayList<>();
 
