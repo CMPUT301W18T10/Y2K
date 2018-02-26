@@ -21,10 +21,13 @@ public class TestMap extends ActivityInstrumentationTestCase2 {
 
     // Test to make sure user can edit location of a task.
     public void testEditLocation(){
-        Looper.prepare();
+        if(Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+
         Map address1= new Map();
 
-        String name=address1.manageLocation(-113.503299,53.421866);
+        String name = address1.manageLocation(-113.503299,53.421866);
         assertEquals(name, "Edmonton,Canada");
 
         name= address1.manageLocation(-75.695219,45.420282);
@@ -36,9 +39,12 @@ public class TestMap extends ActivityInstrumentationTestCase2 {
 
     // Test to make sure user can add location to a task.
     public void testAddLocation(){
-        Looper.prepare();
+        if(Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+
         Map address1= new Map();
-        String name1=address1.manageLocation(-113.503299,53.421866);
+        String name1 = address1.manageLocation(-113.503299,53.421866);
         assertEquals(name1, "Edmonton,Canada");
 
         Map address= new Map();

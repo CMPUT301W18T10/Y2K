@@ -1,5 +1,6 @@
 package com.example.syn_tax;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -26,6 +27,7 @@ USED Feb 22, 2018
 public class Map extends FragmentActivity {
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +42,13 @@ public class Map extends FragmentActivity {
         Uri gmmIntentUri = Uri.parse("geo.......");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
+
         startActivity(mapIntent);
     }
 
-    public String manageLocation(double longitude, double latitude) {
 
+
+    public String manageLocation(double longitude, double latitude) {
 
         String add = new String();
 
