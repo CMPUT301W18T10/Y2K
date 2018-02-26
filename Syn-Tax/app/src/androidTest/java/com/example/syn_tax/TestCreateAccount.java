@@ -26,6 +26,11 @@ public class TestCreateAccount extends ActivityInstrumentationTestCase2 {
         testNewUser.addNewUser(testNewAccount);
 
         assertTrue(testNewUser.hasNewUser(testNewAccount));
+
+
+        if(Looper.myLooper() == null) {
+            Looper.prepare();
+        }
     }
 
 }
