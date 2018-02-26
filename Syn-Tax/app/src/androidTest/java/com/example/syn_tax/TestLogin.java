@@ -41,7 +41,9 @@ public class TestLogin extends ActivityInstrumentationTestCase2 {
 
     //Test not missing info
     public void testloginWithinfo() {
-        Looper.prepare();
+        if(Looper.myLooper() == null) {
+            Looper.prepare();
+        }
 
 
         String username = "Username";

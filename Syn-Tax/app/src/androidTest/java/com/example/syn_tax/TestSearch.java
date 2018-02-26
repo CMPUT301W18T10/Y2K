@@ -56,10 +56,10 @@ public class TestSearch extends ActivityInstrumentationTestCase2{
         try {
             testsearch.searching(keywords);
         } catch (IllegalArgumentException e) {
-            Log.i("Error", "Error occured when searching for tasks.");
+            Log.e("Error", "Error occured when searching for tasks.");
             e.printStackTrace();
         } catch (RuntimeException e) {
-            Log.i("Error", "Error occured when searching for tasks.");
+            Log.e("Error", "Error occured when searching for tasks.");
             e.printStackTrace();
         }
     }

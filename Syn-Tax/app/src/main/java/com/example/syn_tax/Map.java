@@ -1,12 +1,14 @@
 package com.example.syn_tax;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 
 import java.io.IOException;
@@ -22,9 +24,19 @@ USED Feb 22, 2018
 Last update was July 25, 2017.
 FROM https://developers.google.com/maps/documentation/urls/android-intents
 USED Feb 22, 2018
+
+
+Citations:
+FROM: https://stackoverflow.com/questions/9409195/how-to-get-complete-address-from-latitude-and-longitude
+PUBLISHED: May 25, 2017
+USED: FEB 25,2018
 */
 
+
 public class Map extends FragmentActivity {
+
+
+    public Map(){}
 
 
 
@@ -47,22 +59,27 @@ public class Map extends FragmentActivity {
     }
 
 
+    public static String manageLocation(Context context, double longitude, double latitude) {
 
-    public String manageLocation(double longitude, double latitude) {
-
-        String add = new String();
-
+        String add = "";
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         try {
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            Address a = addresses.get(0);
-            add = a.getAddressLine(0) + ',' ;
-            add += a.getCountryName();
-            return add;
+            if (addresses != null && addresses.size() > 0) {
+                Address address = addresses.get(0);
+                add = address.getLocality() + ',';
+                add += address.getCountryName();
+                Log.i("Location", add);
+                return add;
+            }
+            else {
+                Log.i("Location", "No Address returned!");
+            }
         }
-        catch (IOException e) {
+        catch (Exception e) {
             e.printStackTrace();
+            Log.i("Error", "Failed, Can not get Location");
         }
-        return add;
+        return "";
     }
 }
