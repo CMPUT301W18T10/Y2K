@@ -22,7 +22,4 @@ public class SearchActivity extends AppCompatActivity {
     public void searching(String keywords) {
         //DO SOMETHING
     }
-
-    //public void startActivity() {
-    //}
 }
