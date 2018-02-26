@@ -31,6 +31,7 @@ public class Task {
         this.id = id;
     }
 
+
     //-------------PHOTOS------------------
 
     public ArrayList<Photo> getPhotos(){
@@ -70,20 +71,21 @@ public class Task {
     }
 
 
-    public boolean hasTask(Task task) {
-        return true;
-    }
+
 
     public void addUserProvided(User userP) {
        this.userRNotified = true;
     }
 
     public boolean getUserRNotified() {
-        return userRNotified;
+        return this.userRNotified;
     }
 
-    public void addLocation(LocationActivity location) {
-        this.location=location;
+
+    @Override
+    public String toString(){
+        String message = this.title +  this.description + this.userR.toString();
+        return message;
     }
 }
 

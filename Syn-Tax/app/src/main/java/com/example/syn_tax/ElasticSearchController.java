@@ -90,12 +90,11 @@ public class ElasticSearchController {
                     tasks.addAll(foundTask);
                 }
                 else{
-
+                    Log.i("Error", "Elasticseach was not able to excute");
                 }
             }
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-
             }
             return tasks;
         }

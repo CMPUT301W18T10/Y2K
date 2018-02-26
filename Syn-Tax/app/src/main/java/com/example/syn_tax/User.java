@@ -18,4 +18,10 @@ public class User {
     public ArrayList<String> retrieveContactInfo() {
         return contactInfo;
     }
+
+    @Override
+    public String toString(){
+        String message = contactInfo.get(0)+ contactInfo.get(1)+ contactInfo.get(2);
+        return message;
+    }
 }
