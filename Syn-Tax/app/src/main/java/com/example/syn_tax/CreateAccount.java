@@ -6,14 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
-
 import java.util.ArrayList;
 
+
+
 public class CreateAccount extends AppCompatActivity {
+
     private String id;
     private User newUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,16 @@ public class CreateAccount extends AppCompatActivity {
         //UNDERLINE Title
         TextView title = findViewById(R.id.title);
         title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+    }
+
+    public void createAccount(String name, String username, String email, String phonenumber, String password) {
+        ArrayList<String> newuser = new ArrayList<>();
+        ArrayList<String> contactinfo = new ArrayList<>();
+        newuser.add(name);
+        newuser.add(password);
+        newuser.add(id);
+        contactinfo.add(phonenumber);
+        contactinfo.add(email);
     }
 
 
@@ -37,16 +47,6 @@ public class CreateAccount extends AppCompatActivity {
     //arraylist containning user password and username
     private ArrayList<String> newuser = new ArrayList<>();
 
-
-    public CreateAccount(String name, String username, String email, String phonenumber, String password) {
-        ArrayList<String> newuser = new ArrayList<>();
-        ArrayList<String> contactinfo = new ArrayList<>();
-        newuser.add(name);
-        newuser.add(password);
-        newuser.add(id);
-        contactinfo.add(phonenumber);
-        contactinfo.add(email);
-    }
 
     public ArrayList<String> getContactInfo() {
         return contactinfo;
