@@ -7,27 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-
-public class HomeActivity extends AppCompatActivity {
+public class UserProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_user_profile);
 
         //UNDERLINE Titles
         TextView title = findViewById(R.id.title);
-        TextView requestTitle = findViewById(R.id.requestCodeTitle);
-        TextView distributeTitle = findViewById(R.id.distributeCodeTitle);
-
         title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        requestTitle.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        distributeTitle.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-    }
 
-    public void addTaskBtn(View view){
-        Intent intent = new Intent(this, AddTask.class);
-        startActivity(intent);
     }
 
     public void searchBtn(View view){

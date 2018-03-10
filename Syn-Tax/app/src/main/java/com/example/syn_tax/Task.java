@@ -13,7 +13,6 @@ public class Task {
     private String description;
     private User userR;
     private String id;
-    private LocationActivity location;
     private Photo photo;
     private ArrayList<Photo> photos = new ArrayList<Photo>();
     private String status;
@@ -86,6 +85,37 @@ public class Task {
     public String toString(){
         String message = this.title +  this.description + this.userR.toString();
         return message;
+    }
+
+    private ArrayList<Bid> bids = new ArrayList<Bid>();
+
+
+    public ArrayList<Bid> returnBids(){
+        return bids;
+    }
+
+    public void addBid(Bid newBid){
+        bids.add(newBid);
+    }
+
+    public void deleteBid(int pos){
+        bids.remove(pos);
+    }
+
+    public boolean hasBid(Bid bid){
+        if (bids.contains(bid))
+            return true;
+        else
+            return false;
+    }
+
+    public void clearBids(){
+        for ( int i = (bids.size()-1); i >=0; i--) {
+            Bid bid = bids.get(i);
+            if (bid.getBidStatus() == "Declined"){
+                bids.remove(bid);
+            }
+        }
     }
 }
 

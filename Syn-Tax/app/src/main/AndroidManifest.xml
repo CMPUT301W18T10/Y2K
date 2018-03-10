@@ -38,13 +38,10 @@
         <activity android:name=".CreateAccount" />
         <activity android:name=".Login" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".UserProfile" />
+        <activity android:name=".UserProfileActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".ViewTask" />
-        <activity android:name=".PhotoManager" />
         <activity android:name=".AddTask" />
-        <activity android:name=".LocationActivity" />
-        <activity android:name=".ViewTaskP" />
+        <activity android:name=".ViewTaskProviderActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

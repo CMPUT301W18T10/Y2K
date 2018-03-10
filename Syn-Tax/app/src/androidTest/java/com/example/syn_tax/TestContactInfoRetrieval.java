@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TestContactInfoRetrieval extends ActivityInstrumentationTestCase2 {
     public TestContactInfoRetrieval(){
-        super(UserProfile.class);
+        super(UserProfileActivity.class);
     }
 
     // Test to make sure user successfully retrieves and can see the contact information of a username.

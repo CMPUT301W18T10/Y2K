@@ -11,7 +11,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 public class NotifyTest extends ActivityInstrumentationTestCase2{
     public NotifyTest(){
-        super(BidsList.class);
+        super(Task.class);
     }
 
     public void testNotify(){

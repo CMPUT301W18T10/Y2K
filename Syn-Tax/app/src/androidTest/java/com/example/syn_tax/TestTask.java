@@ -5,8 +5,8 @@ import android.test.ActivityInstrumentationTestCase2;
 /**
  * Created by hamdamare on 2018-02-22.
  */
-public class TestTask extends ActivityInstrumentationTestCase2 {
-
+//public class TestTask extends ActivityInstrumentationTestCase2 {
+    /*
     public TestTask() {
         super(TaskList.class);
     }
@@ -72,4 +72,5 @@ public class TestTask extends ActivityInstrumentationTestCase2 {
         assertFalse(tasks.hasTask(testtaskR1));
         assertTrue(tasks.hasTask(testtaskR2));
     }
-}
+    */
+//}

@@ -4,46 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
-    tools:context="com.example.syn_tax.MainActivity"
-    android:weightSum="20">
+    android:weightSum="20"
+    tools:context="com.example.syn_tax.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Syn-Tax"
-            android:textAlignment="center" />
+            android:text="SYN-TAX"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="45sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="9"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <Button
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:id="@+id/usernameBtn"
+            android:layout_width="226dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
-            android:background="@color/colorPrimaryDark"
+            android:onClick="userProfileBtn"
             android:text="Username"
             android:textColor="@android:color/background_light"
-            android:textSize="18sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -56,34 +59,36 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/distribute"
+            android:id="@+id/distributeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.63"
             android:background="@color/colorPrimaryDark"
+            android:onClick="searchBtn"
             android:text="Distribute Code"
             android:textColor="@android:color/background_light"
-            android:textSize="18sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="3"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <Button
-            android:id="@+id/request"
-            android:layout_width="wrap_content"
+            android:id="@+id/requestBtn"
+            android:layout_width="247dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.67"
             android:background="@color/colorPrimaryDark"
+            android:onClick="requestCodeBtn"
             android:text="Request Code"
             android:textColor="@android:color/background_light"
-            android:textSize="18sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -98,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.33"
-            android:background="@color/colorPrimaryDark"
+            android:onClick="searchBtn"
             app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
         <ImageButton
@@ -106,15 +111,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.33"
-            android:background="@color/colorPrimaryDark"
+            android:onClick="homeBtn"
             app:srcCompat="@drawable/ic_home_black_24dp" />
 
         <ImageButton
             android:id="@+id/imageButton3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.33"
-            android:background="@color/colorPrimaryDark"
+            android:onClick="userProfileBtn"
             android:tint="@android:color/black"
             app:srcCompat="@android:drawable/ic_menu_info_details" />
     </LinearLayout>

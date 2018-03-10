@@ -13,6 +13,7 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
     }
 
     //to make sure user can add tasks
+    /*
     public void testAddTask() {
         String title = "test";
         String description = "testdesc";
@@ -32,7 +33,6 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
         task.addPhoto(testphoto);
 
         assertTrue(tasks.hasTask(task));
-
-
     }
+    */
 }

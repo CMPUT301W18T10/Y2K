@@ -7,29 +7,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class Login extends AppCompatActivity {
+public class ViewTaskProviderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_view_task_p);
 
         //UNDERLINE Titles
         TextView title = findViewById(R.id.title);
         title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
-
-    public void login(String password, String username) {
-    }
-
-    public void loginBtn(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void createAccountBtn(View view) {
-        Intent intent = new Intent(this, CreateAccount.class);
+    public void homeBtn(View view){
+        Intent intent= new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 }
