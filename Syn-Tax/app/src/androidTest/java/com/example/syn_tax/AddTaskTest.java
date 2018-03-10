@@ -9,7 +9,7 @@ import android.test.ActivityInstrumentationTestCase2;
 public class AddTaskTest extends ActivityInstrumentationTestCase2 {
 
     public AddTaskTest() {
-        super(AddTask.class);
+        super(AddTaskActivity.class);
     }
 
     //to make sure user can add tasks

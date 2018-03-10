@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void requestCodeBtn(View view){
-        Intent intent = new Intent(this, AddTask.class);
+        Intent intent = new Intent(this, AddTaskActivity.class);
         startActivity(intent);
     }
 
