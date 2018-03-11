@@ -1,145 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="20"
     android:background="@color/colorPrimary"
-    tools:context="com.example.syn_tax.AddTaskActivity">
+    tools:context=".AddTaskActivity">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="69dp"
-        android:text="Title:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/title"
-        android:layout_alignBottom="@+id/title"
-        android:layout_toEndOf="@+id/title"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_weight="6"
+        android:gravity="center_horizontal|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <EditText
-        android:id="@+id/descriptionText"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:text="SYN-TAX"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/description"
-        android:layout_alignBottom="@+id/description"
-        android:layout_alignStart="@+id/titleText"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+        android:layout_weight="2"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="  TITLE:"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/taskTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:clickable="false"
+            android:ems="10"
+            android:inputType="none|textMultiLine"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  DESCRIPTION:"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="189dp"
+            android:layout_height="87dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:ems="10"
+            android:hint="Description of the Task"
+            android:inputType="textMultiLine"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/title"
-        android:layout_below="@+id/titleText"
-        android:layout_marginTop="18dp"
-        android:text="Description:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_weight="2"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="  PHOTOS:"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/addPhoto"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/descriptionText"
-        android:layout_toStartOf="@+id/descriptionText"
-        android:onClick="addPhoto"
-        android:text="Upload Photo"
-        android:textColor="@android:color/background_dark"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        <ImageButton
+            android:id="@+id/photoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imagePhoto"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/descriptionText"
-        android:layout_toEndOf="@+id/addPhoto"
-        android:src="@android:drawable/ic_menu_camera"
-        android:layout_width="40dp" />
+        android:layout_weight="2"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="  LOCATION: "
+            android:textAlignment="textStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
+        <ImageButton
+            android:id="@+id/locationBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:background="@color/colorPrimary"
+            app:srcCompat="@android:drawable/ic_dialog_map" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/locationBtn"
-        android:layout_alignBottom="@+id/locationBtn"
-        android:layout_alignStart="@+id/addPhoto"
-        android:text="Location:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_weight="2"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/locationBtn"
-        android:layout_width="40dp"
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="  STATUS:"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:text="REQUESTED"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imagePhoto"
-        android:layout_toEndOf="@+id/description"
-        android:background="@android:drawable/ic_menu_mapmode"
-        android:onClick="addLocation" />
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/location"
-        android:layout_alignStart="@+id/location"
-        android:layout_below="@+id/locationBtn"
-        android:text="Status:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <Button
+            android:id="@+id/addbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:background="@color/colorPrimaryDark"
+            android:text="ADD"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/requestedtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/status"
-        android:layout_alignStart="@+id/locationBtn"
-        android:text="requested"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/addTaskBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="47dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="addTask"
-        android:text="Add"
-
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="?attr/actionModeCloseDrawable" />
-
-
-</android.widget.RelativeLayout>
+</LinearLayout>

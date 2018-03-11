@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void addTaskBtn(View view){
         Intent intent = new Intent(this, AddTaskActivity.class);
+        intent.putExtra("status", "");
         startActivity(intent);
     }
 

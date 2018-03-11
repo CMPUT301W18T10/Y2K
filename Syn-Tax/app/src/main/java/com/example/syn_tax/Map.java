@@ -44,7 +44,7 @@ public class Map extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        //Get the loongitude and latitude of a specific task
+        //Get the longitude and latitude of a specific task
         //Call to the getLocation to add the marker
         //onMapReady(longitude, latitude)
 
