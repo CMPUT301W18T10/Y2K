@@ -34,11 +34,11 @@ public class Task {
 
 
     //------------------------------CONSTRUCTOR-----------------------------------------
-    public Task(String title, String description, User requester) {
+    public Task(String title, String description, String status ) {
         this.title= title;
         this.description=description;
-        this.requester=requester;
-        this.status="requested";
+        //this.requester= owner;
+        this.status=status;
     }
 
 
@@ -159,7 +159,7 @@ public class Task {
     // METHOD TO CONVERT A TASK TO STRING TYPE
     @Override
     public String toString(){
-        String message = this.title +  this.description + this.provider.toString();
+        String message = this.title +  this.description + this.requester.toString();
         return message;
     }
 }

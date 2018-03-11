@@ -59,6 +59,7 @@
             android:layout_weight="0.2"
             android:clickable="false"
             android:ems="10"
+            android:hint="Task Name"
             android:inputType="none|textMultiLine"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
@@ -118,13 +119,14 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/photoBtn"
+        <ImageView
+            android:id="@+id/photoView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            android:layout_weight="0.2"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_gallery" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -146,13 +148,14 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/locationBtn"
+        <ImageView
+            android:id="@+id/locationView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:background="@color/colorPrimary"
-            app:srcCompat="@android:drawable/ic_dialog_map" />
+            android:layout_weight="0.2"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_mylocation" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -179,6 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
+            android:clickable="false"
             android:text="REQUESTED"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
@@ -195,7 +199,7 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/addbtn"
+            android:id="@+id/addBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
