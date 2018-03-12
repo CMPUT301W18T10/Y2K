@@ -3,6 +3,7 @@ package com.example.syn_tax;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.widget.ArrayAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -26,18 +27,19 @@ public class Task {
     private String photoString;
 
     private ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
+    public static ArrayAdapter<Bid> bidAdapter; // For custom adapter to work
     private ArrayList<Bid> bids = new ArrayList<Bid>();
-    private User requester;
-    private User provider;
+    private String requester;
+    private String provider;
 
 
 
 
     //------------------------------CONSTRUCTOR-----------------------------------------
-    public Task(String title, String description, String status ) {
+    public Task(String title, String description,String requester, String status ) {
         this.title= title;
         this.description=description;
-        //this.requester= owner;
+        this.requester= requester;
         this.status=status;
     }
 
@@ -79,7 +81,7 @@ public class Task {
 
 
     //SETTERS AND GETTERS FOR THE USER REQUESTER OF THAT TASK
-    public User getRequester() {
+    public String getRequester() {
         return this.requester;
     }
     public void setRequester(User requester) {
@@ -88,7 +90,7 @@ public class Task {
 
 
     //SETTERS AND GETTERS FOR THE USER PROVIDER FOR A TASK
-    public User getProvider() {
+    public String getProvider() {
         return this.provider;
     }
     public void setProvider(User provider) {

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class Login extends AppCompatActivity {
-
+    public static String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +20,7 @@ public class Login extends AppCompatActivity {
     }
 
 
-    public void login(String password, String username) {
+    public void login(String username) {
     }
 
     public void loginBtn(View view) {

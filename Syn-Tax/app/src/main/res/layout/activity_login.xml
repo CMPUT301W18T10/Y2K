@@ -17,7 +17,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
+        android:layout_weight="3"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -40,7 +40,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.4"
+        android:layout_weight="1.1"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -54,27 +54,7 @@
             android:ems="10"
             android:hint="Username"
             android:inputType="textPersonName"
-            android:textColor="@color/colorAccent" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/loginButton"
-            android:layout_alignStart="@+id/title"
-            android:layout_weight="0.7"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPersonName"
+            android:textAlignment="center"
             android:textColor="@color/colorAccent" />
     </LinearLayout>
 
