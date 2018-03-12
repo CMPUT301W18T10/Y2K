@@ -39,7 +39,7 @@ public class Task {
     public Task(String title, String description,String requester, String status ) {
         this.title= title;
         this.description=description;
-        this.requester= requester;
+        this.requester= requester;//TODO:added in so that a task is associated with a username
         this.status=status;
     }
 
@@ -84,7 +84,7 @@ public class Task {
     public String getRequester() {
         return this.requester;
     }
-    public void setRequester(User requester) {
+    public void setRequester(String requester) {
         this.requester = requester;
     }
 
@@ -93,7 +93,7 @@ public class Task {
     public String getProvider() {
         return this.provider;
     }
-    public void setProvider(User provider) {
+    public void setProvider(String provider) {
         this.provider = provider;
     }
 

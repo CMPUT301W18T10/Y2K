@@ -8,6 +8,7 @@ public class  Bid {
 
     private double bidAmount;
     private String bidStatus = "Awaiting Response";
+    private String bidUserName;//TODO: added bid user name
 
     public  Bid(double bidAmount) {
 
@@ -29,6 +30,13 @@ public class  Bid {
 
     public String getBidStatus(){
         return bidStatus;
+    }
+    //TODO: added setters and getters for username
+    public void setBidUserName(String bidUserName){
+        this.bidUserName = bidUserName;
+    }
+    public String getBidUserName(){
+        return this.bidUserName;
     }
 
 

@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class Login extends AppCompatActivity {
-    public static String username;
+public class LoginActivity extends AppCompatActivity {
+    public static String username;// Aidan added this so that custom adapters would stop throwing errors
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

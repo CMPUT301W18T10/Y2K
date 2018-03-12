@@ -15,7 +15,7 @@ import android.util.Log;
 public class TestLogin extends ActivityInstrumentationTestCase2 {
 
     public TestLogin() {
-        super(Login.class);
+        super(LoginActivity.class);
     }
 
 
@@ -28,7 +28,7 @@ public class TestLogin extends ActivityInstrumentationTestCase2 {
         String username = "";
         String password = "";
 
-        Login testLogin = new Login();
+        LoginActivity testLogin = new LoginActivity();
         try {
             testLogin.login(username,password);
         }
@@ -48,7 +48,7 @@ public class TestLogin extends ActivityInstrumentationTestCase2 {
 
         String username = "Username";
         String password = "Password";
-        Login testLogin = new Login();
+        LoginActivity testLogin = new LoginActivity();
         try {
             testLogin.login(username, password);
         }
