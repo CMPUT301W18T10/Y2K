@@ -33,7 +33,7 @@ public class AdapterTask extends ArrayAdapter<Task> {
         String taskTitle = getItem(pos).getTitle();
         requester = getItem(pos).getRequester();
         String provider = getItem(pos).getProvider();
-        Double bid = (getItem(pos).returnBids().get(0)).getBidAmount();//probably an array list later
+        double bid = (getItem(pos).returnBids().get(0)).getBidAmount();//probably an array list later
         String descript = getItem(pos).getDescription();
 
         //Text views of a task item
@@ -48,7 +48,7 @@ public class AdapterTask extends ArrayAdapter<Task> {
         //setting the textviews of a list item
         task_title.setText(taskTitle);
         task_provider.setText(provider);
-        task_bid.setText(bid);//unsure here...
+        task_bid.setText(String.valueOf(bid));//unsure here...
         task_description.setText(descript);
 
         // click listener for a list item

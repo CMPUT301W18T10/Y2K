@@ -31,7 +31,7 @@ public class AdapterBid extends ArrayAdapter<Bid> {
 
         // getting the username and amount for a singular bid
         String bidUser = getItem(pos).getBidUserName();
-        Double amount = getItem(pos).getBidAmount();
+        double amount = getItem(pos).getBidAmount();
 
         // setting the textviews for a username and a bid
         TextView bid_bidUser = (TextView) data.findViewById(R.id.user);
@@ -42,14 +42,13 @@ public class AdapterBid extends ArrayAdapter<Bid> {
 
         //setting the text views of a bid item
         bid_bidUser.setText(bidUser);
-        bid_amount.setText(amount);
+        bid_amount.setText(String.valueOf(amount));
 
         //click listener for a bid item
         thisBidButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 bidClicked();
-
             }
         });
 
