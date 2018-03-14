@@ -19,6 +19,18 @@ import io.searchbox.core.*;
  */
 
 public class TestElasticSearchController extends ActivityInstrumentationTestCase2 {
+    public void testOnCreate() throws Exception {
+    }
+
+    public void testUpdateItem() throws Exception {
+    }
+
+    public void testUpdateUser() throws Exception {
+    }
+
+    public void testGetContext() throws Exception {
+    }
+
     // Test to make sure UserR’s offline changes to tasks, to be displayed when they regain connectivity.
     private static JestDroidClient client;
 

@@ -7,27 +7,30 @@ import java.util.ArrayList;
  */
 
 public class User {
-    private ArrayList<String> contactInfo = new ArrayList<String>();
+    private ArrayList<String> info = new ArrayList<String>();
+    private String id;
 
     public User(String username, String email, String phoneNumber){
-        contactInfo.add(username);
-        contactInfo.add(email);
-        contactInfo.add(phoneNumber);
+        info.add(username);
+        info.add(email);
+        info.add(phoneNumber);
     }
 
-    public ArrayList<String> retrieveContactInfo() {
-        return contactInfo;
-    }
-
-    public void editProfile(String username, String email, String phoneNumber){
-        contactInfo.add(0, username);
-        contactInfo.add(1, email);
-        contactInfo.add(2, phoneNumber);
+    public ArrayList<String> retrieveInfo() {
+        return info;
     }
 
     @Override
     public String toString(){
-        String message = contactInfo.get(0)+ contactInfo.get(1)+ contactInfo.get(2);
+        String message = "Username: "+ info.get(0)+ " Email: "+ info.get(1)+ " Phone Number: "+ info.get(2);
         return message;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
