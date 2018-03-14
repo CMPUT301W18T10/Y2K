@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -40,15 +41,41 @@ public class HomeActivity extends AppCompatActivity {
         //views for the 2 separate lists
         requestedListView = (ListView) findViewById(R.id.requestlist);
         distributedListView = (ListView) findViewById(R.id.distributelist);
+        requestedTasks = new ArrayList<Task>();
+        distributedTasks = new ArrayList<Task>();
     }
-//    protected void onStart(){
-//        super.onStart();
-//        // calling custom adapters and setting list views
-//        requestedAdapter = new AdapterTask(this,requestedTasks);
-//        distributedAdapter = new AdapterTask(this, distributedTasks);
-//        requestedListView.setAdapter(requestedAdapter);
-//        distributedListView.setAdapter(distributedAdapter);
-//    }
+    protected void onStart(){
+        super.onStart();
+        // calling custom adapters and setting list views
+        loadTaskListRequester();
+        requestedAdapter = new AdapterTask(this,requestedTasks);
+        distributedAdapter = new AdapterTask(this, distributedTasks);
+        requestedListView.setAdapter(requestedAdapter);
+        distributedListView.setAdapter(distributedAdapter);
+    }
+    private void loadTaskListRequester(){
+        ArrayList<Task> allTasksList;
+        ElasticSearchController.getTasks allTasks = new ElasticSearchController.getTasks();
+        allTasks.execute("");
+        try {
+            allTasksList = allTasks.get();
+        }
+        catch(Exception e){
+            allTasksList = new ArrayList<Task>();
+        }
+
+        int listSize = allTasksList.size();
+        if(listSize != 0) {
+            for (int i = 0; i < allTasksList.size(); i++) {
+                if (allTasksList.get(i).getRequester() == LoginActivity.thisuser) {
+                    requestedTasks.add(allTasksList.get(i));
+                }
+                else if (allTasksList.get(i).getProvider() == LoginActivity.thisuser){
+                    distributedTasks.add(allTasksList.get(i));
+                }
+            }
+        }
+    }
 
     public void addTaskBtn(View view){
         Intent intent = new Intent(this, AddTaskActivity.class);

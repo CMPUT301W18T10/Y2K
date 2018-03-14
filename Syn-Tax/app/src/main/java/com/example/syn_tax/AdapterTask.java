@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -18,7 +20,7 @@ import java.util.ArrayList;
  */
 public class AdapterTask extends ArrayAdapter<Task> {
     private ArrayList<Task> tasks;
-    private String requester;
+    private User requester;
     public AdapterTask(Context context, ArrayList<Task> tasks){
         super(context, R.layout.task_list_item, tasks);
     }
@@ -32,31 +34,25 @@ public class AdapterTask extends ArrayAdapter<Task> {
         // gets the data to be displayed for a list item based on its position in the array
         String taskTitle = getItem(pos).getTitle();
         requester = getItem(pos).getRequester();
-        String provider = getItem(pos).getProvider();
-        double bid = (getItem(pos).returnBids().get(0)).getBidAmount();//probably an array list later
-        String descript = getItem(pos).getDescription();
+        String taskStatus = getItem(pos).getStatus();
 
         //Text views of a task item
-        TextView task_title = (TextView) data.findViewById(R.id.tasktitle);
-        TextView task_provider = (TextView) data.findViewById(R.id.provider);
-        TextView task_bid = (TextView) data.findViewById(R.id.cost);
-        TextView task_description = (TextView) data.findViewById(R.id.description);
+        TextView task_title = (TextView) data.findViewById(R.id.task_name);
+        TextView task_stat = (TextView) data.findViewById(R.id.task_status);
 
         // layout for a singular task
         LinearLayout thisButton = (LinearLayout) data.findViewById(R.id.task_item);
 
         //setting the textviews of a list item
         task_title.setText(taskTitle);
-        task_provider.setText(provider);
-        task_bid.setText(String.valueOf(bid));//unsure here...
-        task_description.setText(descript);
+        task_stat.setText(taskStatus);
 
         // click listener for a list item
         thisButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 // for a task of a requester
-                if(LoginActivity.username == requester){
+                if(LoginActivity.thisuser == requester){
                     edit_or_view(pos,AddTaskActivity.class);
                 }
                 // for a task of a provider

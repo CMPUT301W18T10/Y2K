@@ -29,17 +29,17 @@ public class Task {
     private ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
     public static ArrayAdapter<Bid> bidAdapter; // For custom adapter to work
     private ArrayList<Bid> bids = new ArrayList<Bid>();
-    private String requester;
-    private String provider;
+    private User requester;
+    private User provider;
 
 
 
 
     //------------------------------CONSTRUCTOR-----------------------------------------
-    public Task(String title, String description,String requester, String status ) {
+    public Task(String title, String description,User requester, String status ) {
         this.title= title;
         this.description=description;
-        this.requester= requester;//TODO:added in so that a task is associated with a username
+        this.requester= requester;
         this.status=status;
     }
 
@@ -81,19 +81,19 @@ public class Task {
 
 
     //SETTERS AND GETTERS FOR THE USER REQUESTER OF THAT TASK
-    public String getRequester() {
+    public User getRequester() {
         return this.requester;
     }
-    public void setRequester(String requester) {
+    public void setRequester(User requester) {
         this.requester = requester;
     }
 
 
     //SETTERS AND GETTERS FOR THE USER PROVIDER FOR A TASK
-    public String getProvider() {
+    public User getProvider() {
         return this.provider;
     }
-    public void setProvider(String provider) {
+    public void setProvider(User provider) {
         this.provider = provider;
     }
 
@@ -128,14 +128,14 @@ public class Task {
         else
             return false;
     }
-    public void clearBids(){
-        for ( int i = (bids.size()-1); i >=0; i--) {
-            Bid bid = bids.get(i);
-            if (bid.getBidStatus() == "Declined"){
-                bids.remove(bid);
-            }
-        }
-    }
+//    public void clearBids(){
+//        for ( int i = (bids.size()-1); i >=0; i--) {
+//            Bid bid = bids.get(i);
+//            if (bid.getBidStatus() == "Declined"){
+//                bids.remove(bid);
+//            }
+//        }
+//    }
 
 
     //SETTERS AND GETTERS FOR THE A PHOTO OF A TASK

@@ -14,6 +14,9 @@ public class CreateAccount extends AppCompatActivity {
 
     private String id;
     private User newUser;
+    private TextView username, email, phoneNumber;
+    private String str_username, str_email, str_phoneNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,41 +26,40 @@ public class CreateAccount extends AppCompatActivity {
         //UNDERLINE Title
         TextView title = findViewById(R.id.title);
         title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        username = findViewById(R.id.username);
+        email = findViewById(R.id.email);
+        phoneNumber = findViewById(R.id.phonenumber);
+        str_username = String.valueOf(username);
+        str_email = String.valueOf(email);
+        str_phoneNumber = String.valueOf(phoneNumber);
+
+    }
+    private boolean makeUser(){
+        ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
+        allUsers.execute(String.valueOf(username));
+        ArrayList<User> userList;
+        try{
+            userList = allUsers.get();
+        }
+        catch (Exception e){
+            userList = new ArrayList<User>();
+        }
+        if(userList.size() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
-    public void createAccount(String name, String username, String email, String phonenumber, String password) {
-        ArrayList<String> newuser = new ArrayList<>();
-        ArrayList<String> contactinfo = new ArrayList<>();
-        newuser.add(name);
-        newuser.add(password);
-        newuser.add(id);
-        contactinfo.add(phonenumber);
-        contactinfo.add(email);
-    }
-
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-    //arraylist containing user contact information
-    private ArrayList<String> contactinfo = new ArrayList<>();
-
-    //arraylist containning user password and username
-    private ArrayList<String> newuser = new ArrayList<>();
-
-
-    public ArrayList<String> getContactInfo() {
-        return contactinfo;
-    }
-    public ArrayList<String> getNewUser() {
-        return newuser;
-    }
 
 
     public void createAccountBtn(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        if(makeUser() == true){
+            newUser = new User(str_username,str_email,str_phoneNumber );
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
     }
 }

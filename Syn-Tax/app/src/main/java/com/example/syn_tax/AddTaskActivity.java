@@ -117,7 +117,7 @@ public class AddTaskActivity extends AppCompatActivity{
                 if (isValid()) {
                     //Instantiate a object of type Task
                     // added in the username of the requester - Aidan
-                    Task task = new Task(stitle, sdescription,LoginActivity.username, sstatus);
+                    Task task = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus);
                     // Check to add a photo to the task
                     if (photoStatus == 1) {
                         task.setPhoto(photo);

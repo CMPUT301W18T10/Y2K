@@ -131,11 +131,6 @@ public class ElasticSearchController extends Application {
             // TODO Auto-generated catch block
             taskList= new ArrayList<Task>();
         }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
     }
 
     //If were not connected to the server write to a local file

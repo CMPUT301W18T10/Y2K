@@ -16,6 +16,14 @@ public class User {
         info.add(phoneNumber);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public ArrayList<String> retrieveInfo() {
         return info;
     }
@@ -26,11 +34,5 @@ public class User {
         return message;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 }
