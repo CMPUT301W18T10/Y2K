@@ -148,13 +148,21 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/locationView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/btnAddPlace"
+            android:layout_width="24dp"
+            android:layout_height="34dp"
             android:layout_weight="0.2"
-            android:clickable="true"
-            android:src="@android:drawable/ic_menu_mylocation" />
+            android:onClick="goLocationPicker"
+            android:text="+"
+            tools:ignore="OnClick" />
+
+        <TextView
+            android:id="@+id/tvlocation"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2" />
+
 
     </LinearLayout>
 

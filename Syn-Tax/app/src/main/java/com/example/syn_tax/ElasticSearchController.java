@@ -409,4 +409,12 @@ public class ElasticSearchController extends Application {
 
         return available;
     }
+
+    public static class addTask extends AsyncTask<Task, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Task... tasks) {
+            return null;
+        }
+    }
 }

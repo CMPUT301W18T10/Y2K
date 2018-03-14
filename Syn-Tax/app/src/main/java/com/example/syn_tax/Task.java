@@ -99,17 +99,18 @@ public class Task {
 
 
     //SETTERS AND GETTERS FOR THE LOCATION OF A TASK
-    public void setLocation(Double latitude, Double longitude){
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-    public double getLatitude(){
-        return this.latitude;
-    }
-    public double getLongitude(){
-        return this.longitude;
+    public void setLocation(Double lat, Double lng){
+        latitude = lat;
+        longitude = lng;
     }
 
+    public double getLat(){
+        return latitude;
+    }
+
+    public double getLong(){
+        return longitude;
+    }
 
     //SETTERS AND GETTERS FOR THE BIDS OF A TASK
     public ArrayList<Bid> returnBids(){

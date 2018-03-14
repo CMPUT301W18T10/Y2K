@@ -3,21 +3,28 @@
 
 
 package com.example.syn_tax;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -30,13 +37,18 @@ public class AddTaskActivity extends AppCompatActivity{
     private String pstatus;
     private String id;
 
+
+
+    //location
+    int PLACE_LOCATION_REQUESTED = 1;
+    TextView tvlocation;
+
     //Photo
     ImageView photoView;
     private Bitmap photo;
     private Integer photoStatus=0;
     //private so only this class knows of the id final cause its gonna remain the same
-    private static final int RESULT_GET_IMAGE = 1;
-    private static final int PERMISSION_LOCATION_REQUEST_CODE = 1 ;
+    private static final int RESULT_GET_IMAGE = 0;
 
 
     //Location
@@ -52,6 +64,9 @@ public class AddTaskActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
+        tvlocation  = (TextView) findViewById(R.id.tvlocation);
+
+
         //UNDERLINE TITLE
         TextView title = findViewById(R.id.title);
         title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -62,6 +77,9 @@ public class AddTaskActivity extends AppCompatActivity{
         pdescription= intent.getStringExtra("description");
         pstatus=intent.getStringExtra("status");
 
+
+
+
         //Add a photo from your gallary
         photoView=findViewById(R.id.photoView);
         photoView.setOnClickListener(new View.OnClickListener() {
@@ -70,20 +88,7 @@ public class AddTaskActivity extends AppCompatActivity{
                 addPhoto();
             }
         });
-
-        //Add a location to the task
-        location = findViewById(R.id.locationView);
-        location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addLocation();
-            }
-        });
-
-
-
-
-//        // Check to see if something is passed by the intent)
+              //k to see if something is passed by the intent)
 //        if (pstatus!=""){
 //            //Set the fields
 //            set();
@@ -204,7 +209,7 @@ public class AddTaskActivity extends AppCompatActivity{
         //make sure the gallery intent actually called our method
         //Make sure the result was okay
         //Make sure that we actually have an image
-        if(requestCode == RESULT_GET_IMAGE && resultCode == RESULT_OK && data != null) {
+        if (requestCode == RESULT_GET_IMAGE && resultCode == RESULT_OK && data != null) {
             //uniform resource indicator - shows us the address of the image tha has been selected
             Uri imageUri = data.getData();
             photoView.setImageURI(imageUri);
@@ -215,17 +220,24 @@ public class AddTaskActivity extends AppCompatActivity{
             try {
                 inputStream = getContentResolver().openInputStream(imageUri);
                 //getting a bitmap from the stream
-                photo =  BitmapFactory.decodeStream(inputStream);
+                photo = BitmapFactory.decodeStream(inputStream);
                 //show image to our user
                 photoView.setImageBitmap(photo);
-                photoStatus=1;
+                photoStatus = 1;
 
-            }catch (FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                Toast.makeText(this,"Unable to open image",Toast.LENGTH_LONG);
+                Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG);
+            }
+        }
+        if (requestCode == PLACE_LOCATION_REQUESTED) {
+            if (resultCode == RESULT_OK) {
+                Place location = PlacePicker.getPlace(AddTaskActivity.this, data);
+                tvlocation.setText(location.getAddress());
             }
         }
     }
+
 
 
 
@@ -253,8 +265,19 @@ public class AddTaskActivity extends AppCompatActivity{
 //    }
 
 
+    public void goLocationPicker(View view) {
+        //calling the place picker function
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
-    //Add Location to the task
-    public void addLocation() {
+        try {
+
+            startActivityForResult(builder.build(AddTaskActivity.this), PLACE_LOCATION_REQUESTED);
+
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        }
     }
+
 }
