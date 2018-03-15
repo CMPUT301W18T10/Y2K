@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -30,15 +31,19 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginBtn(View view) {
         TextView Usernm = findViewById(R.id.username);
-        if(getThisUser(String.valueOf(Usernm))) {
+        String str_username = Usernm.getText().toString();
+
+        if(getThisUser(str_username)) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
         else if (!ElasticSearchController.connected()){
-            Toast.makeText(LoginActivity.this,"no connection",Toast.LENGTH_SHORT).show();
+            Toast toasty = Toast.makeText(LoginActivity.this,"Cannot Login, No Internet Connection.",Toast.LENGTH_LONG);
+            toasty.setGravity(Gravity.CENTER,0,300);
+            toasty.show();
         }
         else{
-            Toast toasty = Toast.makeText(LoginActivity.this, "Invalid username has been entered.", Toast.LENGTH_SHORT);
+            Toast toasty = Toast.makeText(LoginActivity.this, "Invalid username has been entered.", Toast.LENGTH_LONG);
             toasty.setGravity(Gravity.CENTER,0,300);
             toasty.show();
         }
@@ -61,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         else{
+            thisuser = userList.get(0);
             return true;
         }
 
