@@ -306,7 +306,6 @@ public class ElasticSearchController extends Application {
                         // where is the client?
                         DocumentResult result = client.execute(index);
                         if (result.isSucceeded()) {
-                            Log.i("lookatme","here");
                             user.setId(result.getId());
                         } else {
                             Log.i("Error", "Elasticseach was not able to excute");
@@ -314,6 +313,8 @@ public class ElasticSearchController extends Application {
 
                     }
                     catch (Exception e) {
+                        e.printStackTrace();
+                        Log.i("error here",e.toString());
                         Log.i("Error", "The application failed to build and send the user");
                     }
                 }
