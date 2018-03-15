@@ -2,6 +2,7 @@ package com.example.syn_tax;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -56,7 +57,9 @@ public class CreateAccount extends AppCompatActivity {
 
     public void createAccountBtn(View view){
         if(makeUser() == true){
-            newUser = new User(str_username,str_email,str_phoneNumber );
+            newUser = new User(str_username,str_email,str_phoneNumber);
+            AsyncTask<User,Void,Void> execute = new ElasticSearchController.addUsers();
+            execute.execute(newUser);
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }

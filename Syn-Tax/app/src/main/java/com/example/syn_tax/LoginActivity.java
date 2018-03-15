@@ -34,6 +34,9 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
+        else if (ElasticSearchController.connected() == false){
+            Toast.makeText(LoginActivity.this,"no connection",Toast.LENGTH_SHORT).show();
+        }
         else{
             Toast toasty = Toast.makeText(LoginActivity.this, "Invalid username has been entered.", Toast.LENGTH_SHORT);
             toasty.setGravity(Gravity.CENTER,0,300);

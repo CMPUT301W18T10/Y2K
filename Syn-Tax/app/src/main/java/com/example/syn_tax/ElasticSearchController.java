@@ -14,6 +14,8 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -73,15 +75,15 @@ public class ElasticSearchController extends Application {
 
     private static final String fileTasks="file1";
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        context = this;
-    }
-
 
     //Constructor for the class
     //load from the local files and add to the database if we connect to the server
+    public void onCreate(){
+        super.onCreate();
+        context = getApplicationContext();
+
+    }
+
 
     public ElasticSearchController(){
 
@@ -119,7 +121,7 @@ public class ElasticSearchController extends Application {
     private static void loadFromFileTasks(String filename) {
         try {
             //Grab file
-            FileInputStream file = ElasticSearchController.getContext().openFileInput(filename);
+            FileInputStream file = ElasticSearchController.context.openFileInput(filename);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(file));
             Gson gson = new Gson();
@@ -137,7 +139,7 @@ public class ElasticSearchController extends Application {
     private static void saveInFileTasks(String filename) {
         try {
             //Grab file
-            FileOutputStream file1 = ElasticSearchController.getContext().openFileOutput(filename, 0);
+            FileOutputStream file1 = ElasticSearchController.context.openFileOutput(filename, 0);
 
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(file1));
 
@@ -211,7 +213,7 @@ public class ElasticSearchController extends Application {
             ArrayList<User> users = new ArrayList<User>();
 
             //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-            if(!connected()){
+            if(connected() == false){
                 return users;
             }
 
@@ -377,19 +379,17 @@ public class ElasticSearchController extends Application {
 
 
 
-    //Get the Context of the class
-    public static Context getContext() {
-        return context;
-    }
+
 
     //Check Connectivity
-    private static boolean connected(){
+    public static boolean connected(){
 
         //Boolean to return whether or not were connected to the server
         boolean available=false;
-        context=getContext();
 
-        if (context==null){
+
+
+        if (context == null){
             return false;
         }
 
