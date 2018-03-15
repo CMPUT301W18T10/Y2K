@@ -30,11 +30,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginBtn(View view) {
         TextView Usernm = findViewById(R.id.username);
-        if(getThisUser(String.valueOf(Usernm)) == true) {
+        if(getThisUser(String.valueOf(Usernm))) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
-        else if (ElasticSearchController.connected() == false){
+        else if (!ElasticSearchController.connected()){
             Toast.makeText(LoginActivity.this,"no connection",Toast.LENGTH_SHORT).show();
         }
         else{

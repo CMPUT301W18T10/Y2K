@@ -104,7 +104,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:background="@color/colorPrimaryDark"
-            android:onClick="createAccountBtn"
             android:text="Create Account"
             android:textColor="@android:color/background_light"
             android:textSize="24sp"

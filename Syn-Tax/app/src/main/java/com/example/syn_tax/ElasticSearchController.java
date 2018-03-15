@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.Tasks;
 import com.google.gson.Gson;
@@ -305,6 +306,7 @@ public class ElasticSearchController extends Application {
                         // where is the client?
                         DocumentResult result = client.execute(index);
                         if (result.isSucceeded()) {
+                            Log.i("lookatme","here");
                             user.setId(result.getId());
                         } else {
                             Log.i("Error", "Elasticseach was not able to excute");

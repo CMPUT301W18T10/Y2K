@@ -6,7 +6,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 
@@ -17,6 +20,7 @@ public class CreateAccount extends AppCompatActivity {
     private User newUser;
     private TextView username, email, phoneNumber;
     private String str_username, str_email, str_phoneNumber;
+    private Button newUserBtn;
 
 
     @Override
@@ -33,6 +37,25 @@ public class CreateAccount extends AppCompatActivity {
         str_username = String.valueOf(username);
         str_email = String.valueOf(email);
         str_phoneNumber = String.valueOf(phoneNumber);
+        newUserBtn = findViewById(R.id.saveBtn);
+
+    }
+    protected void onStart(){
+        super.onStart();
+        newUserBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(makeUser() && ElasticSearchController.connected() ){
+                    newUser = new User(str_username,str_email,str_phoneNumber);
+                    ElasticSearchController.addUsers uploadUser = new ElasticSearchController.addUsers();
+                    uploadUser.execute(newUser);
+                    createAccountBtn();
+                }
+                else{
+                    Toast.makeText(CreateAccount.this, "Cannot create user, internet connection lost.",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
     private boolean makeUser(){
@@ -54,15 +77,9 @@ public class CreateAccount extends AppCompatActivity {
     }
 
 
-
-    public void createAccountBtn(View view){
-        if(makeUser() == true){
-            newUser = new User(str_username,str_email,str_phoneNumber);
-            AsyncTask<User,Void,Void> execute = new ElasticSearchController.addUsers();
-            execute.execute(newUser);
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
+    private void createAccountBtn(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
 
     }
 }
