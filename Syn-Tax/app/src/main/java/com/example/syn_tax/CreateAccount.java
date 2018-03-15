@@ -5,14 +5,16 @@ import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 
 
 public class CreateAccount extends AppCompatActivity {
@@ -35,9 +37,7 @@ public class CreateAccount extends AppCompatActivity {
         username =  findViewById(R.id.username);
         email = findViewById(R.id.email);
         phoneNumber = findViewById(R.id.phonenumber);
-        str_username = username.getText().toString();
-        str_email = email.getText().toString();
-        str_phoneNumber = phoneNumber.getText().toString();
+
 
         newUserBtn = findViewById(R.id.saveBtn);
 
@@ -49,6 +49,9 @@ public class CreateAccount extends AppCompatActivity {
             public void onClick(View v){
                 if(ElasticSearchController.connected()){
                     if(makeUser()){
+                        str_username = username.getText().toString();
+                        str_email = email.getText().toString();
+                        str_phoneNumber = phoneNumber.getText().toString();
                         //TODO: OJ DO CHECKS HERE
                         newUser = new User(str_username, str_email, str_phoneNumber);
                         ElasticSearchController.addUsers uploadUser = new ElasticSearchController.addUsers();

@@ -126,7 +126,7 @@ public class AddTaskActivity extends AppCompatActivity{
                     if (locationStatus == 1) {
                         task.setLocation(latitude, longitude);
                     }
-                    AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTask();
+                    AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
                     execute.execute(task);
                     done();
                 }
