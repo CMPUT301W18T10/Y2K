@@ -30,7 +30,7 @@ public class User {
 
     @Override
     public String toString(){
-        String message = "Username: "+ info.get(0)+ " Email: "+ info.get(1)+ " Phone Number: "+ info.get(2);
+        String message = "Username:"+ info.get(0);
         return message;
     }
 
