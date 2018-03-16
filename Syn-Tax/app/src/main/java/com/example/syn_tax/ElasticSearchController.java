@@ -326,7 +326,6 @@ public class ElasticSearchController extends Application {
                         DocumentResult result = client.execute(index);
                         if (result.isSucceeded()) {
                             user.setId(result.getId());
-                            Log.e("index", "Added");
                         }
                         else {
                             Log.i("Error", "Elasticseach was not able to excute for (add)");

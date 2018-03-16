@@ -19,7 +19,6 @@ import java.util.Arrays;
 
 public class CreateAccount extends AppCompatActivity {
 
-    private String id;
     private User newUser;
     private TextView username, email, phoneNumber;
     private String str_username, str_email, str_phoneNumber;
@@ -37,24 +36,22 @@ public class CreateAccount extends AppCompatActivity {
         username =  findViewById(R.id.username);
         email = findViewById(R.id.email);
         phoneNumber = findViewById(R.id.phonenumber);
-
-
         newUserBtn = findViewById(R.id.saveBtn);
-
     }
+
     protected void onStart(){
         super.onStart();
         newUserBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                str_username = username.getText().toString();
+                str_email = email.getText().toString();
+                str_phoneNumber = phoneNumber.getText().toString();
+                //TODO: OJ DO CHECKS HERE: IF THE any of the fields are EMPTY, and
+                // TODO: check the right size for each one (ON ECLASS )
+                //TODO CHECKS FOR LOGIN AND CREATE ACCOUNT
                 if(ElasticSearchController.connected()){
-                    if(makeUser()){
-                        str_username = username.getText().toString();
-                        str_email = email.getText().toString();
-                        str_phoneNumber = phoneNumber.getText().toString();
-                        //TODO: OJ DO CHECKS HERE: IF THE any of the fields are EMPTY, and
-                        // TODO: check the right size for each one (ON ECLASS )
-                        //TODO CHECKS FOR LOGIN AND CREATE ACCOUNT
+                    if(makeUser(str_username)){
                         newUser = new User(str_username, str_email, str_phoneNumber);
                         ElasticSearchController.addUsers uploadUser = new ElasticSearchController.addUsers();
                         uploadUser.execute(newUser);
@@ -73,9 +70,9 @@ public class CreateAccount extends AppCompatActivity {
                 }
             }
         });
-
     }
-    private boolean makeUser(){
+
+    private boolean makeUser(String username){
         //Return true if authenticated and false if not authenticated
         Boolean authenticate=true;
         ArrayList<User> userList;
@@ -85,6 +82,7 @@ public class CreateAccount extends AppCompatActivity {
             ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
             allUsers.execute("");
             userList =allUsers.get();
+
 
             for (int i = 0; i < userList.size(); i++) {
                 //Check to see if the user entered a username in the system
