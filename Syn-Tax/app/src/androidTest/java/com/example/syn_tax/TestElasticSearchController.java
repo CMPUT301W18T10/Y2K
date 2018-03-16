@@ -10,6 +10,7 @@ import com.searchly.jestdroid.JestDroidClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import io.searchbox.core.*;
 
@@ -22,10 +23,58 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
     public void testOnCreate() throws Exception {
     }
 
-    public void testUpdateItem() throws Exception {
+    //Test the update Task
+    //Test to make sure were updating tasks in the database successfully
+    public void testUpdateTask() throws ExecutionException, InterruptedException {
+        User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
+        Task task= new Task("Assignment", "Complete a coding project", testuser, "requested");
+        ElasticSearchController.addTasks addtask = new ElasticSearchController.addTasks();
+        addtask.execute(task);
+
+        Task newTask= new Task("newAssignment", "", testuser, "requested");
+        ElasticSearchController.updateTask(task, newTask);
+
+        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
+        tasks.execute ("");
+        ArrayList<Task> allTasks;
+        allTasks=tasks.get();
+
+        boolean state=false;
+
+        for(int i=0; i< allTasks.size(); i++){
+            if(allTasks.get ( i).getTitle ().equals ( task.getTitle ()  )){
+                state=true;
+            }
+        }
+
+        //DO we have the task still in there
+        assertTrue(state);
     }
 
-    public void testUpdateUser() throws Exception {
+    //Test the update user
+    //Test to make sure were updating the user in the database successfully
+    public void testUpdateUser() throws ExecutionException, InterruptedException {
+        User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
+
+        ElasticSearchController.addUsers addUser = new ElasticSearchController.addUsers();
+        addUser.execute (testuser);
+
+        User testnewuser= new User("hamsemare", "hamse@g.com", "999-000-0000");
+        ElasticSearchController.updateUser ( testuser, testnewuser );
+
+        ElasticSearchController.getUsers users= new ElasticSearchController.getUsers();
+        users.execute ("");
+        ArrayList<User> allUsers;
+        allUsers=users.get();
+
+        boolean state=false;
+        for(int i=0; i< allUsers.size(); i++){
+            if(allUsers.get ( i).retrieveInfo ().get ( 0 ).equals ( testuser.retrieveInfo ().get ( 0 )  )){
+                state=true;
+            }
+        }
+
+        assertTrue (state);
     }
 
     public void testGetContext() throws Exception {
@@ -39,16 +88,55 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
     }
 
 
-
+    //Test the add Task
     //Test to make sure were adding tasks to the database successfully
-    public void testAddTask(){
+    //Also tests for the getTasks class
+    public void testAddTask() throws ExecutionException, InterruptedException {
         User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
-        Task task= new Task("Assignment", "Complete a coding project", testuser);
-        ElasticSearchController.addTask addtask = new ElasticSearchController.addTask();
+        Task task= new Task("Assignment", "Complete a coding project", testuser, "requested");
+        ElasticSearchController.addTasks addtask = new ElasticSearchController.addTasks();
         addtask.execute(task);
+
+        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
+        tasks.execute ("");
+        ArrayList<Task> allTasks;
+        allTasks=tasks.get();
+
+        boolean state=false;
+
+        for(int i=0; i< allTasks.size(); i++){
+            if(allTasks.get ( i).getTitle ().equals ( task.getTitle ()  )){
+                state=true;
+            }
+        }
+
+        //DO we have the task still in there
+        assertTrue(state);
     }
 
+    //Test the add User (Create account)
+    //Test to make sure were adding users to the database successfully
+    //Also tests for the get Users class
+    public void testAddUser() throws ExecutionException, InterruptedException {
+        User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
 
+        ElasticSearchController.addUsers addUser = new ElasticSearchController.addUsers();
+        addUser.execute (testuser);
+
+        ElasticSearchController.getUsers users= new ElasticSearchController.getUsers();
+        users.execute ("");
+        ArrayList<User> allUsers;
+        allUsers=users.get();
+
+        boolean state=false;
+        for(int i=0; i< allUsers.size(); i++){
+            if(allUsers.get ( i).retrieveInfo ().get ( 0 ).equals ( testuser.retrieveInfo ().get ( 0 )  )){
+                state=true;
+            }
+        }
+
+        assertTrue (state);
+    }
 
     //Test to make sure were getting tasks from the database successfully
     public class testGetTasks extends AsyncTask<String, Void, ArrayList<Task>>{
@@ -56,7 +144,13 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
         @Override
         protected ArrayList<Task> doInBackground(String... strings) {
             testverifySettings();
-            testAddTask();
+            try {
+                testAddTask();
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
             ArrayList<Task> tasks = new ArrayList<Task>();
 
             // TODO Build the query

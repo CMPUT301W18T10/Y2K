@@ -349,7 +349,7 @@ public class ElasticSearchController extends Application {
 
     //Update the Item
     //If connected to the database, delete the old task, and replace with the new task
-    public void updateItem(Task task1, Task task2){
+    public static void updateTask(Task task1, Task task2){
         //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
         if (connected()){
             ElasticSearchController.deleteTask delete = new ElasticSearchController.deleteTask();
