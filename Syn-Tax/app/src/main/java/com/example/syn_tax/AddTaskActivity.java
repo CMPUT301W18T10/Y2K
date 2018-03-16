@@ -263,6 +263,7 @@ public class AddTaskActivity extends AppCompatActivity{
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         }
+        
     }
 
 
