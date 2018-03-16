@@ -15,6 +15,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(ElasticSearchController.connected()){
                     TextView Usernm = findViewById(R.id.username);
                     String str_username = Usernm.getText().toString();
+                    //TODO OJ CHECK: if the username is not ""
                     if(getThisUser(str_username)) {
                         loginBtn();
                     }
@@ -67,25 +69,32 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateAccount.class);
         startActivity(intent);
     }
-    private boolean getThisUser(String username){
-        ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
-        allUsers.execute(username);
-        try{
-            userList = allUsers.get();
-            Log.e("users here", userList.toString());
-            if(userList.size() == 0){
-                return false;
-            }
-            if(userList.get(0).retrieveInfo().get(0) == username){
-                thisuser = userList.get(0);
-                return true;
-            }
 
+    //Check if username in database
+    private boolean getThisUser(String username) {
+        //Return true if authenticated and false if not authenticated
+        Boolean authenticate=false;
+
+        try {
+            //Grab everything in the database for users
+            ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
+            allUsers.execute("");
+            userList =allUsers.get();
+
+            for (int i = 0; i < userList.size(); i++) {
+                //Check to see if the user entered a username in the system
+                if (userList.get(i).retrieveInfo().get(0).equals(username)) {
+                    //If they did set thisuser to the username entered
+                    LoginActivity.thisuser = userList.get(i);
+                    authenticate = true;
+                }
+            }
         }
-        catch (Exception e){
-            userList = new ArrayList<User>();
+        catch (Exception e) {
+            e.printStackTrace();
         }
-        return false;
+
+        //Return if authenticated
+        return authenticate;
     }
-
 }

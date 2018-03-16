@@ -52,7 +52,9 @@ public class CreateAccount extends AppCompatActivity {
                         str_username = username.getText().toString();
                         str_email = email.getText().toString();
                         str_phoneNumber = phoneNumber.getText().toString();
-                        //TODO: OJ DO CHECKS HERE
+                        //TODO: OJ DO CHECKS HERE: IF THE any of the fields are EMPTY, and
+                        // TODO: check the right size for each one (ON ECLASS )
+                        //TODO CHECKS FOR LOGIN AND CREATE ACCOUNT
                         newUser = new User(str_username, str_email, str_phoneNumber);
                         ElasticSearchController.addUsers uploadUser = new ElasticSearchController.addUsers();
                         uploadUser.execute(newUser);
