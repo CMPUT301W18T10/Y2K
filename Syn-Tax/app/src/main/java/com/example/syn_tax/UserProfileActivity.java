@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,15 +18,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class UserProfileActivity extends AppCompatActivity {
 
     //Attributes
-    private User user;
-    private User tempUser;
-    public TextView username;
-    public Button saveBtn;
-
+    private ArrayList<String> info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,55 +34,80 @@ public class UserProfileActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.title);
         title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
+        //GET THE USER INFO
         Intent intent= getIntent();
-
-        //GET THE USER
-        //SET Temp USER as well
-        user= new User("1111kjj", "dwq", "ek");
-        tempUser=user;
-
-        //Get THE DATA FOR THAT USER
-        ArrayList<String> user_info=user.retrieveInfo();
+        info= intent.getStringArrayListExtra("userInfo");
 
         //SET THE DATA TO THEIR CORRESPONDING FIELDS
-        set(user_info);
+        set(info);
 
+        //Only if the username corresponds to the username of the LoginActivity username
+        if(Objects.equals(LoginActivity.thisuser.retrieveInfo().get(0), info.get(0))){
+            edit();
+        }
+        else{
+            view();
+        }
+    }
+
+    //USER CAN EDIT THEIR PROFILE BECAUSE ITS THEIR PROFILE
+    public void edit(){
+        final EditText email = findViewById(R.id.email);
+        final EditText phoneNumber = findViewById(R.id.phonenumber);
+        final Button username= findViewById(R.id.username);
 
         //SAVE BUTTON, Update User Data
-        saveBtn= findViewById(R.id.saveBtn);
+        Button saveBtn= findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Get Data
+                //Make sure user data is valid
+                if (isValid()){
+                    String sEmail = email.getText().toString();
+                    String sPhoneNumber = phoneNumber.getText().toString();
 
-                EditText email = findViewById(R.id.email);
-                String sEmail = email.getText().toString();
-
-                EditText phoneNumber = findViewById(R.id.phonenumber);
-                String sPhoneNumber = phoneNumber.getText().toString();
-
-                // Validate the user info
-                if (isValid()) {
-                    // UPDATE USER INFO
-                    ElasticSearchController elasticSearchController = new ElasticSearchController();
-                    //elasticSearchController.updateUser(tempUser, user);
-
+                    //Call update the data of the user
+                    User tempUser= new User(username.getText().toString(), sEmail, sPhoneNumber);
+                    ElasticSearchController.updateUser( LoginActivity.thisuser, tempUser );
+                    LoginActivity.thisuser=tempUser;
                     done();
                 }
             }
         });
     }
 
+    //USER CAN NOT EDIT THE PROFILE BECAUSE ITS NOT THEIR PROFILE
+    public void view(){
+        //Get Data
+        EditText email = findViewById(R.id.email);
+        EditText phoneNumber = findViewById(R.id.phonenumber);
+
+        email.setFocusable(false);
+        email.setClickable(false);
+
+        phoneNumber.setClickable(false);
+        phoneNumber.setFocusable(false);
+
+        Button saveBtn= findViewById(R.id.saveBtn);
+        saveBtn.setText("DONE");
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                done();
+            }
+        });
+    }
 
     //SET THE DATA TO THEIR CORRESPONDING FIELDS
     public void set(ArrayList<String> info){
         //SET THE USERNAME
-        username= findViewById(R.id.username);
-        username.setText(info.get(0));
+        Button userButton = findViewById(R.id.username);
+        userButton.setText(info.get(0));
 
         //SET THE EMAIL
         EditText email= findViewById(R.id.email);
         email.setText(info.get(1));
+
 
         //SET THE PHONE NUMBER
         EditText phoneNumber= findViewById(R.id.phonenumber);
@@ -136,7 +159,6 @@ public class UserProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     //GO TO SEARCH ACTIVITY
     public void searchBtn(View view){
         Intent intent= new Intent(this, SearchActivity.class);
@@ -152,6 +174,7 @@ public class UserProfileActivity extends AppCompatActivity {
     //GO TO USER PROFILE ACTIVITY
     public void userProfileBtn(View view){
         Intent intent= new Intent(this, UserProfileActivity.class);
+        intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
         startActivity(intent);
     }
 }

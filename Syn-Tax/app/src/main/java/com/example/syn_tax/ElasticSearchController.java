@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -363,17 +364,18 @@ public class ElasticSearchController extends Application {
 
     //Update the user
     //If connected to the database, delete the old user, and replace with the new user
-    public void updateUser(User user1, User user2){
+    public static void updateUser(User user1, User user2){
         //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
         if (connected()){
-            //ElasticSearchController.deleteUsers delete = new ElasticSearchController().deleteUsers();
-            //delete.execute(user1);
+            //Delete old one
+            ElasticSearchController.deleteUser delete = new ElasticSearchController.deleteUser();
+            delete.execute(user1.retrieveInfo().get(0));
 
+            //Add new one
             AsyncTask<User, Void, Void> execute = new ElasticSearchController.addUsers();
             execute.execute(user2);
         }
     }
-
 
 
     //*************************************************************************************************************************/
@@ -383,7 +385,32 @@ public class ElasticSearchController extends Application {
     //Delete a task
 
     //Delete a user
+    //Get the user
+    // TODO we need a function which gets task from elastic search
+    public static class deleteUser extends AsyncTask<String, Void, ArrayList<User>> {
+        @Override
+        protected ArrayList<User> doInBackground(String... search_parameters) {
 
+            verifySettings();
+            //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
+            if(!connected()){
+                //String for the search
+                String searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
+
+                // TODO Build the delete by query
+                DeleteByQuery user = new DeleteByQuery.Builder(searchString).addIndex("syn-tax").addType("users").build();
+
+                try {
+                    // TODO delete the user
+                    client.execute(user);
+                }
+                catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+            }
+            return null;
+        }
+    }
 
 
     //*************************************************************************************************************************/
@@ -399,9 +426,6 @@ public class ElasticSearchController extends Application {
             client = (JestDroidClient) factory.getObject();
         }
     }
-
-
-
 
 
     //Check Connectivity

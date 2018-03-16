@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         distributedListView = (ListView) findViewById(R.id.distributelist);
         requestedTasks = new ArrayList<Task>();
         distributedTasks = new ArrayList<Task>();
+
     }
     protected void onStart(){
         super.onStart();
@@ -93,8 +96,9 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void userProfileBtn(View view){
+    public void userInfo(View view){
         Intent intent= new Intent(this, UserProfileActivity.class);
+        intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
         startActivity(intent);
     }
 }

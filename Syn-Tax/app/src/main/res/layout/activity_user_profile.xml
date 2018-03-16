@@ -43,16 +43,15 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <TextView
+        <Button
             android:id="@+id/username"
-            android:layout_width="wrap_content"
+            android:layout_width="226dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="USERNAME"
             android:onClick="userProfileBtn"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
+            android:text="Username"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp"
             android:textStyle="bold" />
     </LinearLayout>
 

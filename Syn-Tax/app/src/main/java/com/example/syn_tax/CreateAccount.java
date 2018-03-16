@@ -76,21 +76,30 @@ public class CreateAccount extends AppCompatActivity {
 
     }
     private boolean makeUser(){
-        ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
-        allUsers.execute(str_username);
+        //Return true if authenticated and false if not authenticated
+        Boolean authenticate=true;
         ArrayList<User> userList;
-        try{
-            userList = allUsers.get();
+
+        try {
+            //Grab everything in the database for users
+            ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
+            allUsers.execute("");
+            userList =allUsers.get();
+
+            for (int i = 0; i < userList.size(); i++) {
+                //Check to see if the user entered a username in the system
+                if (userList.get(i).retrieveInfo().get(0).equals(username)) {
+                    //If they did set thisuser to the username entered
+                    authenticate = false;
+                }
+            }
         }
-        catch (Exception e){
-            userList = new ArrayList<User>();
+        catch (Exception e) {
+            e.printStackTrace();
         }
-        if(userList.size() == 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+
+        //Return if authenticated
+        return authenticate;
     }
 
 

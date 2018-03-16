@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 
@@ -36,8 +37,9 @@ public class SearchActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void userProfileBtn(View view){
+    public void userInfo(View view){
         Intent intent= new Intent(this, UserProfileActivity.class);
+        intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
         startActivity(intent);
     }
 }
