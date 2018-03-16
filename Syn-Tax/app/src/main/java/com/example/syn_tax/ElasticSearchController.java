@@ -407,9 +407,7 @@ public class ElasticSearchController extends Application {
         }
     }
 
-
     //Delete a user
-    //Get the user
     // TODO we need a function which gets task from elastic search
     public static class deleteUser extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
