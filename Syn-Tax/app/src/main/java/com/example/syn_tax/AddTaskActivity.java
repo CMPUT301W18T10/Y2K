@@ -53,8 +53,8 @@ public class AddTaskActivity extends AppCompatActivity{
 
     //Location
     ImageView location;
-    private double latitude;
     private double longitude;
+    private double latitude;
     private Integer locationStatus=0;
 
 
@@ -88,11 +88,14 @@ public class AddTaskActivity extends AppCompatActivity{
                 addPhoto();
             }
         });
-              //k to see if something is passed by the intent)
+        //k to see if something is passed by the intent)
 //        if (pstatus!=""){
 //            //Set the fields
 //            set();
 //        }
+
+
+
 
         //ADD BUTTON
         Button addButton = (Button) findViewById(R.id.addBtn);
@@ -110,6 +113,9 @@ public class AddTaskActivity extends AppCompatActivity{
                 TextView status = findViewById(R.id.status);
                 String sstatus = status.getText().toString();
 
+                TextView location = findViewById(R.id.tvlocation);
+                String slocation = location.getText().toString();
+
                 //Check to see if the task already exists
                 //find(this.id);
 
@@ -117,17 +123,18 @@ public class AddTaskActivity extends AppCompatActivity{
                 if (isValid()) {
                     //Instantiate a object of type Task
                     // added in the username of the requester - Aidan
-                    Task task = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus);
+                    Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus);
                     // Check to add a photo to the task
                     if (photoStatus == 1) {
-                        task.setPhoto(photo);
+                        newtask.setPhoto(photo);
                     }
                     //Check to add a location to a task
                     if (locationStatus == 1) {
-                        task.setLocation(latitude, longitude);
+                        newtask.setLocation(latitude, longitude);
                     }
                     AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
-                    execute.execute(task);
+                    execute.execute(newtask);
+
                     done();
                 }
             }
@@ -135,10 +142,15 @@ public class AddTaskActivity extends AppCompatActivity{
     }
 
 
+
+
+
+
     //Go To The HomePage
     public void done(){
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+
     }
 
 
@@ -239,38 +251,11 @@ public class AddTaskActivity extends AppCompatActivity{
     }
 
 
-
-
-
-//    /**
-//     * Set the following fields to the tasks attributes, so title, description, photos, location, and status
-//     */
-//    private void set() {
-//        //Set the fields to the previous data passed by the intent
-//        //Title
-//        TextView tasktitle= findViewById(R.id.taskTitle);
-//        tasktitle.setText(ptaskTitle);
-//
-//        //Description
-//        TextView description=findViewById(R.id.description);
-//        description.setText(pdescription);
-//
-//        //Status
-//        TextView status=findViewById(R.id.status);
-//        status.setText(pstatus);
-//
-//        //Photos
-//
-//        //Location
-//    }
-
-
     public void goLocationPicker(View view) {
         //calling the place picker function
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
         try {
-
             startActivityForResult(builder.build(AddTaskActivity.this), PLACE_LOCATION_REQUESTED);
 
         } catch (GooglePlayServicesNotAvailableException e) {
@@ -279,5 +264,6 @@ public class AddTaskActivity extends AppCompatActivity{
             e.printStackTrace();
         }
     }
+
 
 }
