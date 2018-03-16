@@ -17,12 +17,11 @@ public class TestUserProfileActivity extends ActivityInstrumentationTestCase2 {
     public void testEditInfo() {
         User user= new User("hamda","test@g.ca", "000-0000-0000");
 
-
         user.editProfile("hamse", "test1@g.ca", "000-999-0000");
 
-        assertEquals(user.retrieveContactInfo().get(0), "hamse");
-        assertEquals(user.retrieveContactInfo().get(1), "test1@g.ca");
-        assertEquals(user.retrieveContactInfo().get(2), "000-999-0000");
+        assertEquals(user.retrieveInfo().get(0), "hamse");
+        assertEquals(user.retrieveInfo().get(1), "test1@g.ca");
+        assertEquals(user.retrieveInfo().get(2), "000-999-0000");
     }
    
 }

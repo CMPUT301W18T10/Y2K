@@ -35,4 +35,9 @@ public class User {
     }
 
 
+    public void editProfile(String name, String email, String phoneNumber) {
+        info.set(0, name);
+        info.set(1, email);
+        info.set(2,phoneNumber);
+    }
 }
