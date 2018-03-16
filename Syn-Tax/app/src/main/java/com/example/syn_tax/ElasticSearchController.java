@@ -6,7 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.Tasks;
 import com.google.gson.Gson;
@@ -353,8 +352,8 @@ public class ElasticSearchController extends Application {
     public void updateItem(Task task1, Task task2){
         //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
         if (connected()){
-            //ElasticSearchController.deleteTasks delete = new ElasticSearchController().deleteTasks();
-            //delete.execute(task1);
+            ElasticSearchController.deleteTask delete = new ElasticSearchController.deleteTask();
+            delete.execute(task1.getTitle());
 
             AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
             execute.execute(task2);
@@ -382,6 +381,32 @@ public class ElasticSearchController extends Application {
     // DELETE METHODS TO DELETE TASKS AND BIDS
 
     //Delete a task
+    // TODO we need a function which gets task from elastic search
+    public static class deleteTask extends AsyncTask<String, Void, ArrayList<Task>> {
+        @Override
+        protected ArrayList<Task> doInBackground(String... search_parameters) {
+
+            verifySettings();
+            //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
+            if(!connected()){
+                //String for the search
+                String searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
+
+                // TODO Build the delete by query
+                DeleteByQuery task= new DeleteByQuery.Builder(searchString).addIndex("syn-tax").addType("tasks").build();
+
+                try {
+                    // TODO delete the user
+                    client.execute(task);
+                }
+                catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+            }
+            return null;
+        }
+    }
+
 
     //Delete a user
     //Get the user
