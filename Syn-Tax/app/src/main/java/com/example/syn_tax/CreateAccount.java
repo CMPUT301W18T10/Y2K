@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +49,7 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if(ElasticSearchController.connected()){
-                    if(makeUser()){
+                    if(makeUser()&& validUser()){
                         str_username = username.getText().toString();
                         str_email = email.getText().toString();
                         str_phoneNumber = phoneNumber.getText().toString();
@@ -57,6 +58,7 @@ public class CreateAccount extends AppCompatActivity {
                         ElasticSearchController.addUsers uploadUser = new ElasticSearchController.addUsers();
                         uploadUser.execute(newUser);
                         createAccountBtn();
+
                     }
                     else{
                         Toast toasty = Toast.makeText(CreateAccount.this,"Username already exists!",Toast.LENGTH_LONG);
@@ -89,6 +91,40 @@ public class CreateAccount extends AppCompatActivity {
         else{
             return false;
         }
+    }
+
+    private boolean validUser(){
+        str_username = username.getText().toString();
+        str_email = email.getText().toString();
+        str_phoneNumber = phoneNumber.getText().toString();
+        if (str_username.length() > 8 | str_username.length() == 0){
+            Toast toasty = Toast.makeText(CreateAccount.this,"Username must have less than 8 characters",Toast.LENGTH_LONG);
+            toasty.setGravity(Gravity.CENTER,0,0);
+            toasty.show();
+            return false;
+        }
+        if (!validEmail(str_email)){
+            Toast toasty = Toast.makeText(CreateAccount.this,"Invalid Email",Toast.LENGTH_LONG);
+            toasty.setGravity(Gravity.CENTER,0,0);
+            toasty.show();
+            return false;
+        }
+        if (!validPhone(str_phoneNumber)){
+            Toast toasty = Toast.makeText(CreateAccount.this,"Invalid Phone number",Toast.LENGTH_LONG);
+            toasty.setGravity(Gravity.CENTER,0,0);
+            toasty.show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validEmail(String str_email){
+        return Patterns.EMAIL_ADDRESS.matcher(str_email).matches();
+    }
+
+    private boolean validPhone(String str_phoneNumber){
+        return Patterns.PHONE.matcher(str_phoneNumber).matches();
     }
 
 

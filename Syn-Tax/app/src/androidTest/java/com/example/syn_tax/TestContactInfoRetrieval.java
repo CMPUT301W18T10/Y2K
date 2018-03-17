@@ -23,7 +23,7 @@ public class TestContactInfoRetrieval extends ActivityInstrumentationTestCase2 {
         contactInfo.add(username);
         contactInfo.add(email);
         contactInfo.add(phoneNumber);
-        assertEquals(testUser.retrieveContactInfo().get(0), contactInfo.get(0));
+        assertEquals(testUser.retrieveInfo().get(0), contactInfo.get(0));
 
 
         ArrayList<String> contactInfo2 = new ArrayList<String>();
@@ -34,7 +34,7 @@ public class TestContactInfoRetrieval extends ActivityInstrumentationTestCase2 {
         contactInfo2.add(username);
         contactInfo2.add(email);
         contactInfo2.add(phoneNumber);
-        assertEquals(testUser2.retrieveContactInfo().get(0), contactInfo2.get(0));
+        assertEquals(testUser2.retrieveInfo().get(0), contactInfo2.get(0));
 
 
         ArrayList<String> contactInfo3 = new ArrayList<String>();
@@ -45,6 +45,6 @@ public class TestContactInfoRetrieval extends ActivityInstrumentationTestCase2 {
         contactInfo3.add(username);
         contactInfo3.add(email);
         contactInfo3.add(phoneNumber);
-        assertEquals(testUser3.retrieveContactInfo().get(0), contactInfo3.get(0));
+        assertEquals(testUser3.retrieveInfo().get(0), contactInfo3.get(0));
     }
 }
