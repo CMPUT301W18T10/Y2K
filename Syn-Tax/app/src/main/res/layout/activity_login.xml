@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/syn_tax"
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
@@ -22,19 +22,6 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/title"
-            android:layout_alignStart="@+id/title"
-            android:layout_weight="0.8"
-            android:text="SYN-TAX"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            tools:ignore="DuplicateIds" />
     </LinearLayout>
 
     <LinearLayout

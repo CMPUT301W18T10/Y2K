@@ -77,8 +77,8 @@ public class AddTaskActivity extends AppCompatActivity{
 
 
         //UNDERLINE TITLE
-        TextView title = findViewById(R.id.title);
-        title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        //TextView title = findViewById(R.id.title);
+        //title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         //Grab the extras passed with the intent
         Intent intent= getIntent();

@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:weightSum="10"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/syn_taxsearch"
     tools:context=".SearchActivity">
 
     <LinearLayout

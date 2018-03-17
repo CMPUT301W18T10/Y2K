@@ -29,8 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //UNDERLINE Titles
-        TextView title = findViewById(R.id.title);
-        title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        //TextView title = findViewById(R.id.title);
+        //title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         thisButton = findViewById(R.id.loginButton);
     }
 
