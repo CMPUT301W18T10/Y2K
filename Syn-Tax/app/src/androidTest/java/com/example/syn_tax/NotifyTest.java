@@ -10,6 +10,9 @@ import android.test.ActivityInstrumentationTestCase2;
  */
 
 public class NotifyTest extends ActivityInstrumentationTestCase2{
+    /**
+     * Constructor, calls the construtor of Task Class
+     */
     public NotifyTest(){
         super(Task.class);
     }

@@ -1,5 +1,8 @@
 package com.example.syn_tax;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -15,16 +18,32 @@ import java.util.concurrent.ExecutionException;
 import io.searchbox.core.*;
 
 
+/*
+Citations:
+https://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html (March 16, 2018)
+*/
+
 /**
  * Created by Hamsemare on 2018-02-21.
  */
 
 public class TestElasticSearchController extends ActivityInstrumentationTestCase2 {
+    private static Context mContext;
+
+    /**
+     * Gets the context of ElasticSearchController.getContext
+     * @throws Exception
+     */
     public void testOnCreate() throws Exception {
+        mContext= ElasticSearchController.getContext();
     }
 
-    //Test the update Task
-    //Test to make sure were updating tasks in the database successfully
+    /**
+     * Test the update Task
+     * Test to make sure were updating tasks in the database successfully
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void testUpdateTask() throws ExecutionException, InterruptedException {
         User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
         Task task= new Task("Assignment", "Complete a coding project", testuser, "requested");
@@ -51,8 +70,12 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
         assertTrue(state);
     }
 
-    //Test the update user
-    //Test to make sure were updating the user in the database successfully
+    /**
+     * Test the update user
+     * Test to make sure were updating the user in the database successfully
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void testUpdateUser() throws ExecutionException, InterruptedException {
         User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
 
@@ -77,20 +100,32 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
         assertTrue (state);
     }
 
+    /**
+     * @throws Exception
+     */
     public void testGetContext() throws Exception {
     }
 
     // Test to make sure UserR’s offline changes to tasks, to be displayed when they regain connectivity.
     private static JestDroidClient client;
 
+
+    /**
+     * Constructor, calls the the constructor of the ElasticSearchController class
+     */
     public TestElasticSearchController(){
         super(ElasticSearchController.class);
     }
 
 
-    //Test the add Task
-    //Test to make sure were adding tasks to the database successfully
-    //Also tests for the getTasks class
+
+    /**
+     * Test the add Task
+     * Test to make sure were adding tasks to the database successfully
+     * Also tests for the getTasks class
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void testAddTask() throws ExecutionException, InterruptedException {
         User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
         Task task= new Task("Assignment", "Complete a coding project", testuser, "requested");
@@ -114,9 +149,13 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
         assertTrue(state);
     }
 
-    //Test the add User (Create account)
-    //Test to make sure were adding users to the database successfully
-    //Also tests for the get Users class
+    /**
+     * Test the add User (Create account)
+     * Test to make sure were adding users to the database successfully
+     * Also tests for the get Users class
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void testAddUser() throws ExecutionException, InterruptedException {
         User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
 
@@ -138,7 +177,9 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
         assertTrue (state);
     }
 
-    //Test to make sure were getting tasks from the database successfully
+    /**
+     * Test to make sure were getting tasks from the database successfully
+     */
     public class testGetTasks extends AsyncTask<String, Void, ArrayList<Task>>{
 
         @Override
@@ -176,7 +217,9 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
         }
     }
 
-    // Test to make sure were successfully connected to the Database
+    /**
+     * Test to make sure were successfully connected to the Database
+     */
     public static void testverifySettings() {
         // TODO: Test the connection to the server
         if (client == null) {
@@ -186,6 +229,27 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
             factory.setDroidClientConfig(config);
             client = (JestDroidClient) factory.getObject();
         }
+    }
+
+    /**
+     * Test for Connectivity
+     */
+    public void testConnectivity(){
+
+        Boolean available = false;
+
+        if (mContext == null){
+            return;
+        }
+
+        ConnectivityManager manager= (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert manager != null;
+        NetworkInfo network=manager.getActiveNetworkInfo();
+
+        if(network!= null && network.isConnected()){
+            available=true;
+        }
+        assertEquals ( available.toString (), ElasticSearchController.connected () );
     }
 
 }

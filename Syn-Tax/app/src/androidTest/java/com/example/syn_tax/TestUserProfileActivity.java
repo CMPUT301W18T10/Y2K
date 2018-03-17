@@ -10,10 +10,16 @@ import java.util.ArrayList;
 
 public class TestUserProfileActivity extends ActivityInstrumentationTestCase2 {
 
+    /**
+     * Constructor, calls the constructor of the User class
+     */
     public TestUserProfileActivity() {
         super(User.class);
     }
 
+    /**
+     * Tests the Edit Info Method for a user
+     */
     public void testEditInfo() {
         User user= new User("hamda","test@g.ca", "000-0000-0000");
 

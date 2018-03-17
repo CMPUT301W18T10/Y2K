@@ -11,11 +11,19 @@ import java.util.concurrent.ExecutionException;
  */
 public class AddTaskTest extends ActivityInstrumentationTestCase2 {
 
+    /**
+     * Constructor, calls the constructor of AddTaskActivity
+     */
     public AddTaskTest() {
         super(AddTaskActivity.class);
     }
 
-    //Test to make sure user, we can add tasks
+
+    /**
+     * Test to make sure user, we can add tasks
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void testAddTask() throws ExecutionException, InterruptedException {
         String title = "test";
         String description = "testdesc";
@@ -47,7 +55,11 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
     }
 
 
-    //Test to make sure that user, we can get their tasks
+    /**
+     * Test to make sure that user, we can get their tasks
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void testGetTask() throws ExecutionException, InterruptedException {
         User testUser = new User("hamda", "test@g.ca", "000-000-0000");
         Task testtaskR1 = new Task("hamda", "desc", testUser, "requested");
@@ -73,7 +85,11 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
         assertTrue(state);
     }
 
-    //EDIT A TASK
+    /**
+     * EDIT A TASK
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void testEditTask() throws ExecutionException, InterruptedException {
         User testUser = new User("hamda", "test@g.ca", "000-000-0000");
         Task testtask = new Task("hamda", "desc", testUser, "requested");
@@ -105,8 +121,9 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
     }
 
 
-    // Test the status change of each of the task. options are "Bidded", "Assigned", "Done"
-    // and "Requested"
+    /**
+     * Test the status change of each of the task. options are "Bidded", "Assigned", "Done" and "Requested"
+     */
     public void testStatus(){
 
         User testUser = new User("Oj","test@gmail.com", "999-999-999");

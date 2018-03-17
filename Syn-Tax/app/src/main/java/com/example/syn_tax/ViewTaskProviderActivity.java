@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * Allows a provider to view a task
+ */
 public class ViewTaskProviderActivity extends AppCompatActivity {
 
     @Override
@@ -19,6 +22,10 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
+    /**
+     * User is directed to the HomeActivity
+     * @param view
+     */
     public void homeBtn(View view){
         Intent intent= new Intent(this, HomeActivity.class);
         startActivity(intent);

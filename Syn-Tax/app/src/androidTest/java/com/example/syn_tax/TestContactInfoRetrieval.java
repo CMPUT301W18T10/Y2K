@@ -9,11 +9,16 @@ import java.util.ArrayList;
  */
 
 public class TestContactInfoRetrieval extends ActivityInstrumentationTestCase2 {
+    /**
+     * Constructor, Calls the constructor of the UserProfileActivity Class
+     */
     public TestContactInfoRetrieval(){
         super(UserProfileActivity.class);
     }
 
-    // Test to make sure user successfully retrieves and can see the contact information of a username.
+    /**
+     * Test to make sure user successfully retrieves and can see the contact information of a username.
+     */
     public void testContactInfoRetrieval(){
         ArrayList<String> contactInfo = new ArrayList<String>();
         String username = "testUser";

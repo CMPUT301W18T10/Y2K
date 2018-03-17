@@ -12,15 +12,17 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 
+/**
+ * ALLOWS the user to choose a location for a task of there's
+ */
 public class LocationPickerActivity extends AppCompatActivity {
 
 
-        int PLACE_LOCATION_REQUESTED = 1;
+    int PLACE_LOCATION_REQUESTED = 1;
 
-        TextView tvlocation;
+    TextView tvlocation;
 
-
-        @Override
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_add_task);
@@ -28,7 +30,11 @@ public class LocationPickerActivity extends AppCompatActivity {
 
         }
 
-        public void goLocationPicker(View view) {
+    /**
+     * Allow the user to pick a location
+     * @param view
+     */
+    public void goLocationPicker(View view) {
             //calling the place picker function
             PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
@@ -43,6 +49,12 @@ public class LocationPickerActivity extends AppCompatActivity {
             }
         }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
         @Override
         protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
             if(requestCode == PLACE_LOCATION_REQUESTED) {

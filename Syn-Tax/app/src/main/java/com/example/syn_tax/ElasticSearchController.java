@@ -38,10 +38,12 @@ import io.searchbox.core.SearchResult;
 
 
 
+/*
+Citations: Used
+https://stackoverflow.com/questions/30343011/how-to-check-if-an-android-device-is-online  ( March 14,2018)
+https://developer.android.com/reference/java/io/FileOutputStream.html (March 14,2018)
 
-//Citations: Used
-// https://stackoverflow.com/questions/30343011/how-to-check-if-an-android-device-is-online  ( March 14,2018)
-// https://developer.android.com/reference/java/io/FileOutputStream.html (March 14,2018)
+*/
 
 /**
  * Created by Hamsemare on 2018-02-22.
@@ -64,7 +66,15 @@ import io.searchbox.core.SearchResult;
  limitations under the License.
  */
 
-//Controls access to the database.
+
+/**
+ * Controls access to the database.
+ *
+ * @see Gson
+ * @see User
+ * @see Task
+ *
+ */
 public class ElasticSearchController extends Application {
 
     //Attributes
@@ -78,8 +88,9 @@ public class ElasticSearchController extends Application {
     private static final String fileTasks="file1";
 
 
-    //Constructor for the class
-    //load from the local files and add to the database if we connect to the server
+    /**
+     * load from the local files and add to the database if we connect to the server
+     */
     public void onCreate(){
         super.onCreate();
         context = getApplicationContext();
@@ -87,6 +98,9 @@ public class ElasticSearchController extends Application {
     }
 
 
+    /**
+     * Constructor for the class
+     */
     public ElasticSearchController(){
 
         if (connected()==true){
@@ -117,9 +131,13 @@ public class ElasticSearchController extends Application {
     //*************************************************************************************************************************/
     //*************************************************************************************************************************/
 
-    //TASKS
 
-    //If were not connected to the server load from the local file
+    /**
+     * TASKS
+     * SAVING TO AND LOADING FROM LOCAL FILES
+     * If were not connected to the server load from the local file
+     * @param filename
+     */
     private static void loadFromFileTasks(String filename) {
         try {
             //Grab file
@@ -137,7 +155,10 @@ public class ElasticSearchController extends Application {
         }
     }
 
-    //If were not connected to the server write to a local file
+    /**
+     * If were not connected to the server write to a local file
+     * @param filename
+     */
     private static void saveInFileTasks(String filename) {
         try {
             //Grab file
@@ -168,9 +189,11 @@ public class ElasticSearchController extends Application {
 
     //*************************************************************************************************************************/
     //*************************************************************************************************************************/
-    //GETTER METHODS:
 
-    //Get the tasks
+    /**
+     * GETTER METHODS:
+     * Get the tasks
+     */
     // TODO we need a function which gets task from elastic search
     public static class getTasks extends AsyncTask<String, Void, ArrayList<Task>> {
         @Override
@@ -214,7 +237,9 @@ public class ElasticSearchController extends Application {
         }
     }
 
-    //Get the user
+    /**
+     * Get the user
+     */
     // TODO we need a function which gets task from elastic search
     public static class getUsers extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
@@ -263,9 +288,11 @@ public class ElasticSearchController extends Application {
 
     //*************************************************************************************************************************/
     //*************************************************************************************************************************/
-    //ADD METHODS:
 
-    //ADD TASK
+    /**
+     * ADD METHODS:
+     *ADD TASK
+     */
     // TODO we need a function which adds a Task to elastic search
     public static class addTasks extends AsyncTask<Task, Void, Void> {
 
@@ -307,7 +334,9 @@ public class ElasticSearchController extends Application {
         }
     }
 
-    //ADD USER
+    /**
+     * ADD USER
+     */
     // TODO we need a function which adds a User to elastic search
     public static class addUsers extends AsyncTask<User, Void, Void> {
 
@@ -347,8 +376,13 @@ public class ElasticSearchController extends Application {
     //*************************************************************************************************************************/
     //UPDATE METHODS:
 
-    //Update the Item
-    //If connected to the database, delete the old task, and replace with the new task
+    /**
+     * Update the Item
+     * If connected to the database, delete the old task, and replace with the new task
+     *
+     * @param task1 oldTask
+     * @param task2 newTask
+     */
     public static void updateTask(Task task1, Task task2){
         //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
         if (connected()){
@@ -360,8 +394,13 @@ public class ElasticSearchController extends Application {
         }
     }
 
-    //Update the user
-    //If connected to the database, delete the old user, and replace with the new user
+    /**
+     * Update the user
+     * If connected to the database, delete the old user, and replace with the new user
+
+     * @param user1 oldUser
+     * @param user2 newUser
+     */
     public static void updateUser(User user1, User user2){
         //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
         if (connected()){
@@ -378,9 +417,11 @@ public class ElasticSearchController extends Application {
 
     //*************************************************************************************************************************/
     //*************************************************************************************************************************/
-    // DELETE METHODS TO DELETE TASKS AND BIDS
 
-    //Delete a task
+    /**
+     * DELETE METHOD TO DELETE TASKS
+     * Delete's a task
+     */
     // TODO we need a function which gets task from elastic search
     public static class deleteTask extends AsyncTask<String, Void, ArrayList<Task>> {
         @Override
@@ -407,7 +448,9 @@ public class ElasticSearchController extends Application {
         }
     }
 
-    //Delete a user
+    /**
+     * Delete's a user
+     */
     // TODO we need a function which gets task from elastic search
     public static class deleteUser extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
@@ -437,7 +480,10 @@ public class ElasticSearchController extends Application {
 
     //*************************************************************************************************************************/
     //*************************************************************************************************************************/
-    //Connect to the database
+
+    /**
+     * Connect's to the database
+     */
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
@@ -450,13 +496,14 @@ public class ElasticSearchController extends Application {
     }
 
 
-    //Check Connectivity
+    /**
+     * Check's Connectivity
+     * @return true if were connected to the network and false if were not
+     */
     public static boolean connected(){
 
         //Boolean to return whether or not were connected to the server
         boolean available=false;
-
-
 
         if (context == null){
             return false;
@@ -472,5 +519,12 @@ public class ElasticSearchController extends Application {
         }
 
         return available;
+    }
+
+    /**
+     * @return the context
+     */
+    public static Context getContext(){
+        return context;
     }
 }

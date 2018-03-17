@@ -8,6 +8,9 @@ import android.test.ActivityInstrumentationTestCase2;
 
 public class TestHomepage extends ActivityInstrumentationTestCase2 {
 
+    /**
+     * Constructor, calls the constructor of the HomeActivity Class
+     */
     public TestHomepage() {
         super(HomeActivity.class);
     }
