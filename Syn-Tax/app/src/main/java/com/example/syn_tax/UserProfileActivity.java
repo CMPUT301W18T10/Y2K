@@ -20,11 +20,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * User Profile of the user is shown
+ * If the user is the Login user then your able to edit the profile
+ * Else, You can only view the user profile
+ *
+ * @see User
+ * @see LoginActivity
+ *
+ */
 public class UserProfileActivity extends AppCompatActivity {
 
     //Attributes
     private ArrayList<String> info;
 
+    /**
+     * Set The fields to the data passed and depending on if the user passed is the Login User
+     * you can edit it or you can only view it.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +64,10 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
-    //USER CAN EDIT THEIR PROFILE BECAUSE ITS THEIR PROFILE
+    /**
+     * USER CAN EDIT THEIR PROFILE BECAUSE ITS THEIR PROFILE
+     *
+     */
     public void edit(){
         final EditText email = findViewById(R.id.email);
         final EditText phoneNumber = findViewById(R.id.phonenumber);
@@ -76,7 +93,9 @@ public class UserProfileActivity extends AppCompatActivity {
         });
     }
 
-    //USER CAN NOT EDIT THE PROFILE BECAUSE ITS NOT THEIR PROFILE
+    /**
+     * USER CAN NOT EDIT THE PROFILE BECAUSE ITS NOT THEIR PROFILE
+     */
     public void view(){
         //Get Data
         EditText email = findViewById(R.id.email);
@@ -98,7 +117,10 @@ public class UserProfileActivity extends AppCompatActivity {
         });
     }
 
-    //SET THE DATA TO THEIR CORRESPONDING FIELDS
+    /**
+     * SET THE DATA TO THEIR CORRESPONDING FIELDS
+     * @param info is the ifo passed by the user, so we set the fields to the data passed
+     */
     public void set(ArrayList<String> info){
         //SET THE USERNAME
         Button userButton = findViewById(R.id.username);
@@ -113,7 +135,6 @@ public class UserProfileActivity extends AppCompatActivity {
         EditText phoneNumber= findViewById(R.id.phonenumber);
         phoneNumber.setText(info.get(2));
     }
-
 
 
     /**
@@ -152,26 +173,40 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
 
-
-    //Go To The Home ACTIVITY
+    /**
+     * Directs the user to the HomeActivity
+     */
     public void done(){
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
-    //GO TO SEARCH ACTIVITY
+
+    /**
+     * Directs the user to the SearchActivity
+     * @param view
+     */
     public void searchBtn(View view){
         Intent intent= new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
 
-    //GO TO HOME ACTIVITY
+
+    /**
+     * Directs the user to the HomeActivity
+     * @param view
+     */
     public void homeBtn(View view){
         Intent intent= new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
-    //GO TO USER PROFILE ACTIVITY
+
+    /**
+     * Directs the user to the UserProfileActivity
+     * Also passes in the user information of the user
+     * @param view
+     */
     public void userProfileBtn(View view){
         Intent intent= new Intent(this, UserProfileActivity.class);
         intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
