@@ -16,7 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
+        android:layout_weight="8"
         android:gravity="center_horizontal|center"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -51,9 +51,10 @@
             android:ems="10"
             android:hint="Task Name"
             android:inputType="none|textMultiLine"
+            android:maxLength="30"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -84,9 +85,10 @@
             android:ems="10"
             android:hint="Description of the Task"
             android:inputType="textMultiLine"
+            android:maxLength="300"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -184,7 +186,7 @@
             android:text="REQUESTED"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 
