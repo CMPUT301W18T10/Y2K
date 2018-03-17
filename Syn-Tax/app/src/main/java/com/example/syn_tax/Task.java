@@ -14,8 +14,24 @@ import java.util.Collections;
  */
 
 /**
+ * Task Class
+ *
+ * Feb 21, 2018
+ *
  * Task Object, has a title, description, id, status, latitude, longitude, photo, list of bids
  * Also has a requester and provider.
+ *
+ * Copyright GNU GENERAL PUBLIC LICENSE
+ Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+ Permissions of this strong copyleft license are conditioned on making available complete
+ source code of licensed works and modifications, which include larger works using a licensed work,
+ under the same license. Copyright and license notices must be preserved. Contributors provide an
+ express grant of patent rights.
  */
 public class Task {
 

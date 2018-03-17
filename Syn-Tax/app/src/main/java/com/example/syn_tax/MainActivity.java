@@ -9,9 +9,26 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+
 /**
+ * MainActivity Class
+ *
+ * Feb 22, 2018
+ *
  * This Class displays buttons to the user, directing the user to either
  * add a task, search for a task to do, go to homeActivity, or go to their userProfile
+ *
+ * Copyright GNU GENERAL PUBLIC LICENSE
+ Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+ Permissions of this strong copyleft license are conditioned on making available complete
+ source code of licensed works and modifications, which include larger works using a licensed work,
+ under the same license. Copyright and license notices must be preserved. Contributors provide an
+ express grant of patent rights.
  */
 public class MainActivity extends AppCompatActivity {
 

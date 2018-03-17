@@ -50,29 +50,29 @@ https://developer.android.com/reference/java/io/FileOutputStream.html (March 14,
  */
 
 
-/**
- * Copyright Version 2.0, January 2004  http://www.apache.org/licenses/
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
 
 /**
+ * ElasticSearchController Class
+ *
+ * Feb 22, 2018
+ *
  * Controls access to the database.
  *
  * @see Gson
  * @see User
  * @see Task
+ *
+ * Copyright GNU GENERAL PUBLIC LICENSE
+    Version 3, 29 June 2007
+
+    Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+    Everyone is permitted to copy and distribute verbatim copies
+    of this license document, but changing it is not allowed.
+
+    Permissions of this strong copyleft license are conditioned on making available complete
+    source code of licensed works and modifications, which include larger works using a licensed work,
+    under the same license. Copyright and license notices must be preserved. Contributors provide an
+    express grant of patent rights.
  *
  */
 public class ElasticSearchController extends Application {

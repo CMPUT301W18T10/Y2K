@@ -20,7 +20,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+
 /**
+ * UserProfileActivity Class
+ *
+ * March 14, 2018
+ *
  * User Profile of the user is shown
  * If the user is the Login user then your able to edit the profile
  * Else, You can only view the user profile
@@ -28,6 +33,17 @@ import java.util.Objects;
  * @see User
  * @see LoginActivity
  *
+ * Copyright GNU GENERAL PUBLIC LICENSE
+    Version 3, 29 June 2007
+
+    Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+    Everyone is permitted to copy and distribute verbatim copies
+    of this license document, but changing it is not allowed.
+
+    Permissions of this strong copyleft license are conditioned on making available complete
+    source code of licensed works and modifications, which include larger works using a licensed work,
+    under the same license. Copyright and license notices must be preserved. Contributors provide an
+    express grant of patent rights.
  */
 public class UserProfileActivity extends AppCompatActivity {
 
