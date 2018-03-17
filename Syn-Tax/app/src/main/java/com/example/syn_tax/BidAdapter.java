@@ -18,9 +18,9 @@ import java.util.ArrayList;
  * Created by aapae on 3/11/2018.
  */
 
-public class AdapterBid extends ArrayAdapter<Bid> {
+public class BidAdapter extends ArrayAdapter<Bid> {
     private ArrayList<Bid> bids;
-    public AdapterBid(Context context, ArrayList<Bid> bids){
+    public BidAdapter(Context context, ArrayList<Bid> bids){
         super(context, R.layout.bid_list_item, bids);
     }
 

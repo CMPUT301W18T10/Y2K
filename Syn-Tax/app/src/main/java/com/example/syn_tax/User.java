@@ -30,9 +30,14 @@ public class User {
 
     @Override
     public String toString(){
-        String message = "Username: "+ info.get(0)+ " Email: "+ info.get(1)+ " Phone Number: "+ info.get(2);
+        String message = "Username: "+ info.get(0);
         return message;
     }
 
 
+    public void editProfile(String name, String email, String phoneNumber) {
+        info.set(0, name);
+        info.set(1, email);
+        info.set(2,phoneNumber);
+    }
 }

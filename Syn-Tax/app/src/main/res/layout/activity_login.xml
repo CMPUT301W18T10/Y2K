@@ -77,7 +77,6 @@
 
             android:layout_weight="0.64"
             android:background="@color/colorPrimaryDark"
-            android:onClick="loginBtn"
             android:text="Login"
             android:textColor="@android:color/background_light"
             android:textSize="30sp"

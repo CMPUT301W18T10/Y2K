@@ -47,7 +47,7 @@
             android:layout_width="226dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
-            android:onClick="userProfileBtn"
+            android:onClick="userInfo"
             android:text="Username"
             android:textColor="@android:color/background_light"
             android:textSize="30sp"
@@ -119,11 +119,11 @@
             app:srcCompat="@drawable/ic_home_black_24dp" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/userBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.33"
-            android:onClick="userProfileBtn"
+            android:onClick="userInfo"
             android:tint="@android:color/black"
             app:srcCompat="@android:drawable/ic_menu_info_details" />
     </LinearLayout>

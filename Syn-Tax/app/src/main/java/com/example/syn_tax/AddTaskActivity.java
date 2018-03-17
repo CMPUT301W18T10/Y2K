@@ -29,6 +29,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+/**
+ * Adds a task to the database if the fields are valid
+ * Inorder to add task you must have a title for it, and a description
+ * @see ElasticSearchController
+ */
 public class AddTaskActivity extends AppCompatActivity{
 
     // Set Attributes to private
@@ -53,11 +58,15 @@ public class AddTaskActivity extends AppCompatActivity{
 
     //Location
     ImageView location;
-    private double latitude;
     private double longitude;
+    private double latitude;
     private Integer locationStatus=0;
 
 
+    /**
+     * OnCreate Method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -78,8 +87,6 @@ public class AddTaskActivity extends AppCompatActivity{
         pstatus=intent.getStringExtra("status");
 
 
-
-
         //Add a photo from your gallary
         photoView=findViewById(R.id.photoView);
         photoView.setOnClickListener(new View.OnClickListener() {
@@ -88,11 +95,6 @@ public class AddTaskActivity extends AppCompatActivity{
                 addPhoto();
             }
         });
-              //k to see if something is passed by the intent)
-//        if (pstatus!=""){
-//            //Set the fields
-//            set();
-//        }
 
         //ADD BUTTON
         Button addButton = (Button) findViewById(R.id.addBtn);
@@ -110,6 +112,9 @@ public class AddTaskActivity extends AppCompatActivity{
                 TextView status = findViewById(R.id.status);
                 String sstatus = status.getText().toString();
 
+                TextView location = findViewById(R.id.tvlocation);
+                String slocation = location.getText().toString();
+
                 //Check to see if the task already exists
                 //find(this.id);
 
@@ -117,28 +122,31 @@ public class AddTaskActivity extends AppCompatActivity{
                 if (isValid()) {
                     //Instantiate a object of type Task
                     // added in the username of the requester - Aidan
-                    Task task = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus);
+                    Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus);
                     // Check to add a photo to the task
                     if (photoStatus == 1) {
-                        task.setPhoto(photo);
+                        newtask.setPhoto(photo);
                     }
                     //Check to add a location to a task
                     if (locationStatus == 1) {
-                        task.setLocation(latitude, longitude);
+                        newtask.setLocation(latitude, longitude);
                     }
                     AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
-                    execute.execute(task);
+                    execute.execute(newtask);
+
                     done();
                 }
             }
         });
     }
 
-
-    //Go To The HomePage
+    /**
+     * Go to the Homepage
+     */
     public void done(){
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+
     }
 
 
@@ -181,10 +189,9 @@ public class AddTaskActivity extends AppCompatActivity{
     }
 
 
-
-
-
-    //invoke gallery when user clicks
+    /**
+     * invoke gallery when user clicks
+     */
     public void addPhoto() {
         //invoke image gallery using an implicit intent
         Intent galleryIntent = new Intent(Intent.ACTION_PICK);
@@ -202,8 +209,13 @@ public class AddTaskActivity extends AppCompatActivity{
     }
 
 
-    //method called when user has selected a picture from the gallery
-    //here we set the image the user has uploaded
+    /**
+     * method called when user has selected a picture from the gallery
+     * here we set the image the user has uploaded
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //make sure the gallery intent actually called our method
@@ -239,38 +251,15 @@ public class AddTaskActivity extends AppCompatActivity{
     }
 
 
-
-
-
-//    /**
-//     * Set the following fields to the tasks attributes, so title, description, photos, location, and status
-//     */
-//    private void set() {
-//        //Set the fields to the previous data passed by the intent
-//        //Title
-//        TextView tasktitle= findViewById(R.id.taskTitle);
-//        tasktitle.setText(ptaskTitle);
-//
-//        //Description
-//        TextView description=findViewById(R.id.description);
-//        description.setText(pdescription);
-//
-//        //Status
-//        TextView status=findViewById(R.id.status);
-//        status.setText(pstatus);
-//
-//        //Photos
-//
-//        //Location
-//    }
-
-
+    /**
+     * Pick a location
+     * @param view
+     */
     public void goLocationPicker(View view) {
         //calling the place picker function
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
         try {
-
             startActivityForResult(builder.build(AddTaskActivity.this), PLACE_LOCATION_REQUESTED);
 
         } catch (GooglePlayServicesNotAvailableException e) {
@@ -278,6 +267,6 @@ public class AddTaskActivity extends AppCompatActivity{
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         }
+        
     }
-
 }

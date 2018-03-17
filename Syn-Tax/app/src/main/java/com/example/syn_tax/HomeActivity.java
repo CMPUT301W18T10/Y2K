@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -43,13 +40,14 @@ public class HomeActivity extends AppCompatActivity {
         distributedListView = (ListView) findViewById(R.id.distributelist);
         requestedTasks = new ArrayList<Task>();
         distributedTasks = new ArrayList<Task>();
+
     }
     protected void onStart(){
         super.onStart();
         // calling custom adapters and setting list views
         loadTaskListRequester();
-        requestedAdapter = new AdapterTask(this,requestedTasks);
-        distributedAdapter = new AdapterTask(this, distributedTasks);
+        requestedAdapter = new TaskAdapter(this,requestedTasks);
+        distributedAdapter = new TaskAdapter(this, distributedTasks);
         requestedListView.setAdapter(requestedAdapter);
         distributedListView.setAdapter(distributedAdapter);
     }
@@ -93,8 +91,9 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void userProfileBtn(View view){
+    public void userInfo(View view){
         Intent intent= new Intent(this, UserProfileActivity.class);
+        intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
         startActivity(intent);
     }
 }

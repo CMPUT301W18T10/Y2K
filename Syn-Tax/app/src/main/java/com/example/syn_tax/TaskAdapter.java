@@ -18,10 +18,10 @@ import java.util.ArrayList;
  * @author Aidan Paetsch
  * @date 03/11/2018
  */
-public class AdapterTask extends ArrayAdapter<Task> {
+public class TaskAdapter extends ArrayAdapter<Task> {
     private ArrayList<Task> tasks;
     private User requester;
-    public AdapterTask(Context context, ArrayList<Task> tasks){
+    public TaskAdapter(Context context, ArrayList<Task> tasks){
         super(context, R.layout.task_list_item, tasks);
     }
 

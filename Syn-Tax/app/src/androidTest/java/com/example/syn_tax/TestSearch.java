@@ -16,13 +16,17 @@ USED FEB 25,2018
 */
 
 public class TestSearch extends ActivityInstrumentationTestCase2{
+    /**
+     * Constructor, calls the constructor of the SearchActivity Class
+     */
     public TestSearch(){
         super(SearchActivity.class);
     }
 
 
-
-    //Test when no keywords entered to search for tasks.
+    /**
+     * Test when no keywords entered to search for tasks.
+     */
     public void testWithNoWords(){
         if (Looper.myLooper() == null){
             Looper.prepare();
@@ -44,8 +48,9 @@ public class TestSearch extends ActivityInstrumentationTestCase2{
     }
 
 
-
-    //Test when keywords are entered to search for tasks.
+    /**
+     * Test when keywords are entered to search for tasks.
+     */
     public void testWithKeyword() {
         if (Looper.myLooper() == null){
             Looper.prepare();

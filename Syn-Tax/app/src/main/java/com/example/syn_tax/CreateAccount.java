@@ -20,7 +20,6 @@ import java.util.Arrays;
 
 public class CreateAccount extends AppCompatActivity {
 
-    private String id;
     private User newUser;
     private TextView username, email, phoneNumber;
     private String str_username, str_email, str_phoneNumber;
@@ -38,22 +37,30 @@ public class CreateAccount extends AppCompatActivity {
         username =  findViewById(R.id.username);
         email = findViewById(R.id.email);
         phoneNumber = findViewById(R.id.phonenumber);
-
-
         newUserBtn = findViewById(R.id.saveBtn);
-
     }
+
     protected void onStart(){
         super.onStart();
         newUserBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                str_username = username.getText().toString();
+                str_email = email.getText().toString();
+                str_phoneNumber = phoneNumber.getText().toString();
+                //TODO: OJ DO CHECKS HERE: IF THE any of the fields are EMPTY, and
+                // TODO: check the right size for each one (ON ECLASS )
+                //TODO CHECKS FOR LOGIN AND CREATE ACCOUNT
                 if(ElasticSearchController.connected()){
+<<<<<<< HEAD
                     if(makeUser()&& validUser()){
                         str_username = username.getText().toString();
                         str_email = email.getText().toString();
                         str_phoneNumber = phoneNumber.getText().toString();
                         //TODO: OJ DO CHECKS HERE
+=======
+                    if(makeUser(str_username)){
+>>>>>>> 2ff02a249770e134a9c47ecbf9060a44d21a863e
                         newUser = new User(str_username, str_email, str_phoneNumber);
                         ElasticSearchController.addUsers uploadUser = new ElasticSearchController.addUsers();
                         uploadUser.execute(newUser);
@@ -73,24 +80,34 @@ public class CreateAccount extends AppCompatActivity {
                 }
             }
         });
-
     }
-    private boolean makeUser(){
-        ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
-        allUsers.execute(str_username);
+
+    private boolean makeUser(String username){
+        //Return true if authenticated and false if not authenticated
+        Boolean authenticate=true;
         ArrayList<User> userList;
-        try{
-            userList = allUsers.get();
+
+        try {
+            //Grab everything in the database for users
+            ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
+            allUsers.execute("");
+            userList =allUsers.get();
+
+
+            for (int i = 0; i < userList.size(); i++) {
+                //Check to see if the user entered a username in the system
+                if (userList.get(i).retrieveInfo().get(0).equals(username)) {
+                    //If they did set thisuser to the username entered
+                    authenticate = false;
+                }
+            }
         }
-        catch (Exception e){
-            userList = new ArrayList<User>();
+        catch (Exception e) {
+            e.printStackTrace();
         }
-        if(userList.size() == 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+
+        //Return if authenticated
+        return authenticate;
     }
 
     private boolean validUser(){

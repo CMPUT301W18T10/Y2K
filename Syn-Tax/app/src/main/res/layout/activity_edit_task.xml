@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:weightSum="20"
     android:background="@color/colorPrimary"
-    tools:context=".AddTaskActivity">
+    tools:context=".EditTask">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/taskTitle"
+            android:id="@+id/editTaskTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
@@ -86,7 +86,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/description"
+            android:id="@+id/editDescription"
             android:layout_width="189dp"
             android:layout_height="87dp"
             android:layout_weight="1"
@@ -120,9 +120,9 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/photoView"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:id="@+id/editPhotoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:clickable="true"
             android:src="@android:drawable/ic_menu_gallery" />
@@ -149,7 +149,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnAddPlace"
+            android:id="@+id/editLocation"
             android:layout_width="24dp"
             android:layout_height="34dp"
             android:layout_weight="0.2"
@@ -207,12 +207,12 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/addBtn"
+            android:id="@+id/updateBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:background="@color/colorPrimaryDark"
-            android:text="ADD"
+            android:text="update"
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
             android:textSize="30sp" />

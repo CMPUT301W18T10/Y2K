@@ -132,7 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.33"
-            android:onClick="userProfileBtn"
+            android:onClick="userInfo"
             android:tint="@android:color/black"
             app:srcCompat="@android:drawable/ic_menu_info_details" />
     </LinearLayout>
