@@ -128,7 +128,11 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
      */
     public void testAddTask() throws ExecutionException, InterruptedException {
         User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
+<<<<<<< HEAD
+        Task task= new Task("Assignment", "Complete a coding project", testuser, "Requested");
+=======
         Task task= new Task("Assignment", "Complete a coding project", testuser, "requested");
+>>>>>>> 2ff02a249770e134a9c47ecbf9060a44d21a863e
         ElasticSearchController.addTasks addtask = new ElasticSearchController.addTasks();
         addtask.execute(task);
 

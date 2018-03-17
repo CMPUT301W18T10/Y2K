@@ -112,7 +112,7 @@ public class ElasticSearchController extends Application {
                 execute.execute(task);
             }
 
-            //Empty the  list od tasks because we synced it to the database
+            //Empty the  list of tasks because we synced it to the database
             taskList.clear();
 
             for(int i = 0; i < usersList.size(); i++) {
