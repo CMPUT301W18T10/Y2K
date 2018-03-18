@@ -50,8 +50,9 @@ Citations: https://www.programcreek.com/java-api-examples/index.php?api=io.searc
  *
  * @see User
  * @see LoginActivity
- *
- *
+ * @see SearchActivity
+ * @see HomeActivity
+ * @see UserProfileActivity
  */
 public class UserProfileActivity extends AppCompatActivity {
 

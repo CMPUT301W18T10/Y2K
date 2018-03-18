@@ -26,11 +26,23 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
+ * HomeActivity Class
+ *
+ * Feb 21, 2018
+ *
  * This class is the home activity class, it displays
  * Two listviews with clickable list elements for the requested tasks
  * and distributed tasks of the logged in user
+ *
+ * @see Task
+ * @see TaskAdapter
+ * @see ElasticSearchController
+ * @see AddTaskActivity
+ * @see HomeActivity
+ * @see SearchActivity
+ * @see UserProfileActivity
+ * @see LoginActivity
  */
-
 public class HomeActivity extends AppCompatActivity {
     public static ArrayAdapter<Task> requestedAdapter;
     public static ArrayList<Task> requestedTasks;
@@ -42,6 +54,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
     @Override
+    /**
+     * onCreate we'll show the user the the list of tasks requested and provided and the title
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -61,6 +76,10 @@ public class HomeActivity extends AppCompatActivity {
         distributedTasks = new ArrayList<Task>();
 
     }
+
+    /**
+     * onStart, continuously update the list adapters
+     */
     protected void onStart(){
         super.onStart();
         // calling custom adapters and setting list views
@@ -71,6 +90,10 @@ public class HomeActivity extends AppCompatActivity {
         requestedListView.setAdapter(requestedAdapter);
         distributedListView.setAdapter(distributedAdapter);
     }
+
+    /**
+     * Grab the list of tasks we requested
+     */
     private static void loadTaskListRequester(){
         ArrayList<Task> allTasksList;
         ElasticSearchController.getTasks allTasks = new ElasticSearchController.getTasks();
@@ -90,22 +113,38 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Go to AddTaskActivity page
+     * @param view
+     */
     public void addTaskBtn(View view){
         Intent intent = new Intent(this, AddTaskActivity.class);
         intent.putExtra("status", "");
         startActivity(intent);
     }
 
+    /**
+     * Go to the SearchActivity page
+     * @param view
+     */
     public void searchBtn(View view){
         Intent intent= new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Go to the HomeActivity page
+     * @param view
+     */
     public void homeBtn(View view){
         Intent intent= new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Go to the UserProfileActivity
+     * @param view
+     */
     public void userInfo(View view){
         Intent intent= new Intent(this, UserProfileActivity.class);
         intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());

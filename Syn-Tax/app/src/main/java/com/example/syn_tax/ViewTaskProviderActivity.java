@@ -27,7 +27,7 @@ import android.widget.TextView;
  * Feb 22, 2018
  *
  * Allows a provider to view a task
- *
+ * @see HomeActivity
  *
  */
 public class ViewTaskProviderActivity extends AppCompatActivity {

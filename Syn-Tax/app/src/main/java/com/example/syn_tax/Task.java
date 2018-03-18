@@ -308,6 +308,13 @@ public class Task {
         return message;
     }
 
+    /**
+     * Be able to edit the title, description, the owner, and the status of a task
+     * @param title new title
+     * @param description new description
+     * @param requester new reqester
+     * @param status new status
+     */
     public void editTask(String title, String description,User requester, String status ){
         this.title= title;
         this.description=description;

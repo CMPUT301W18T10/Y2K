@@ -30,7 +30,9 @@ import android.widget.ListView;
  *
  * Search for a task
  *
- *
+ * @see SearchActivity
+ * @see HomeActivity
+ * @see UserProfileActivity
  */
 public class SearchActivity extends AppCompatActivity {
     private String keywords;

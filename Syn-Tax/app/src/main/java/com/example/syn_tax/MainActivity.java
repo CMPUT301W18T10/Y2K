@@ -31,7 +31,11 @@ import android.widget.TextView;
  * This Class displays buttons to the user, directing the user to either
  * add a task, search for a task to do, go to homeActivity, or go to their userProfile
  *
- *
+ * @see LoginActivity
+ * @see AddTaskActivity
+ * @see SearchActivity
+ * @see HomeActivity
+ * @see UserProfileActivity
  */
 public class MainActivity extends AppCompatActivity {
 
