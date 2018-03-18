@@ -25,6 +25,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * This class is the home activity class, it displays
+ * Two listviews with clickable list elements for the requested tasks
+ * and distributed tasks of the logged in user
+ */
 
 public class HomeActivity extends AppCompatActivity {
     public static ArrayAdapter<Task> requestedAdapter;
@@ -72,14 +77,14 @@ public class HomeActivity extends AppCompatActivity {
         try {
             allTasks.execute("");
             allTasksList = allTasks.get();
-//            requestedTasks = allTasksList;
+            requestedTasks = allTasksList;
             Log.e("task list",String.valueOf(allTasksList));
-            for(int i = 0; i < allTasksList.size();i++){
-                if(allTasksList.get(i).getRequester().equals(LoginActivity.thisuser)){
-                    Log.e("list item ", String.valueOf(allTasksList.get(i)));
-                    requestedTasks.add(allTasksList.get(i));
-                }
-            }
+//            for(int i = 0; i < allTasksList.size();i++){
+//                if(allTasksList.get(i).getRequester().equals(LoginActivity.thisuser)){
+//                    Log.e("list item ", String.valueOf(allTasksList.get(i)));
+//                    requestedTasks.add(allTasksList.get(i));
+//                }
+//            }
 
         }
         catch(Exception e){
