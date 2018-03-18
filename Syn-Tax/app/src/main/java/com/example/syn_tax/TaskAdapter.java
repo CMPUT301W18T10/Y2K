@@ -36,11 +36,22 @@ import java.util.ArrayList;
 public class TaskAdapter extends ArrayAdapter<Task> {
     private ArrayList<Task> tasks;
     private User requester;
+
+    /**
+     * Takes in a context and an array list of tasks and sets a list view of tasks
+     * @param context
+     * @param tasks
+     */
     public TaskAdapter(Context context, ArrayList<Task> tasks){
         super(context, R.layout.task_list_item, tasks);
     }
 
     @Override
+    /**
+     * Gets the view and sets all of its attributes
+     * @param pos position in the list of a click
+     *
+     */
     public View getView(final int pos, View convertView, ViewGroup parent){
         //layout inflater for a task item
         LayoutInflater inf = LayoutInflater.from(getContext());

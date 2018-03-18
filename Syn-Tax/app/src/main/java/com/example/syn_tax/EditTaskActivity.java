@@ -120,6 +120,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
                         task.editTask(stitle, sdesc,LoginActivity.thisuser, sstatus);
                         ElasticSearchController.updateTask ( tempTask, task );
+                        HomeActivity.requestedAdapter.notifyDataSetChanged();
                         updateButton();
                     }
                 }
@@ -170,6 +171,7 @@ public class EditTaskActivity extends AppCompatActivity {
                         }
 
                         ElasticSearchController.updateTask ( tempTask, task );
+                        HomeActivity.requestedAdapter.notifyDataSetChanged();
                         updateButton();
                     }
                 }

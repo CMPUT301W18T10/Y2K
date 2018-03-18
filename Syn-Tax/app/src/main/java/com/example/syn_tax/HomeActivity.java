@@ -63,14 +63,17 @@ public class HomeActivity extends AppCompatActivity {
     }
     protected void onStart(){
         super.onStart();
-        // calling custom adapters and setting list views
-        loadTaskListRequester();
 
+        loadTaskListRequester();
         requestedAdapter = new TaskAdapter(this,requestedTasks);
         distributedAdapter = new TaskAdapter(this, distributedTasks);
         requestedListView.setAdapter(requestedAdapter);
         distributedListView.setAdapter(distributedAdapter);
     }
+
+    /**
+     * Loads in the tasks for a user
+     */
     private static void loadTaskListRequester(){
         ArrayList<Task> allTasksList;
         ElasticSearchController.getTasks allTasks = new ElasticSearchController.getTasks();
@@ -90,22 +93,38 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Button click for adding a new task
+     * @param view is the current view
+     */
     public void addTaskBtn(View view){
         Intent intent = new Intent(this, AddTaskActivity.class);
         intent.putExtra("status", "");
         startActivity(intent);
     }
 
+    /**
+     * Button click for going to search activity
+     * @param view is the current view
+     */
     public void searchBtn(View view){
         Intent intent= new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * button click for going to the home activity
+     * @param view is the current view
+     */
     public void homeBtn(View view){
         Intent intent= new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * button click for a user profile
+     * @param view is the current view
+     */
     public void userInfo(View view){
         Intent intent= new Intent(this, UserProfileActivity.class);
         intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
