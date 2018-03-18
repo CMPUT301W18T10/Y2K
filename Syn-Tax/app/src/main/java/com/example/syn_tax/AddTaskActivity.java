@@ -154,7 +154,7 @@ public class AddTaskActivity extends AppCompatActivity{
                     }
                     AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
                     execute.execute(newtask);
-
+                    HomeActivity.requestedAdapter.notifyDataSetChanged();
                     done();
                 }
             }
