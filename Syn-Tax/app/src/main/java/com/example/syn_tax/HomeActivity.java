@@ -71,20 +71,18 @@ public class HomeActivity extends AppCompatActivity {
         requestedListView.setAdapter(requestedAdapter);
         distributedListView.setAdapter(distributedAdapter);
     }
-    private void loadTaskListRequester(){
+    private static void loadTaskListRequester(){
         ArrayList<Task> allTasksList;
         ElasticSearchController.getTasks allTasks = new ElasticSearchController.getTasks();
         try {
             allTasks.execute("");
             allTasksList = allTasks.get();
-            requestedTasks = allTasksList;
-            Log.e("task list",String.valueOf(allTasksList));
-//            for(int i = 0; i < allTasksList.size();i++){
-//                if(allTasksList.get(i).getRequester().equals(LoginActivity.thisuser)){
-//                    Log.e("list item ", String.valueOf(allTasksList.get(i)));
-//                    requestedTasks.add(allTasksList.get(i));
-//                }
-//            }
+
+            for(int i = 0; i < allTasksList.size();i++){
+                if(allTasksList.get(i).getRequester().getUsername ().equals(LoginActivity.thisuser.getUsername ())){
+                    requestedTasks.add(allTasksList.get(i));
+                }
+            }
 
         }
         catch(Exception e){
