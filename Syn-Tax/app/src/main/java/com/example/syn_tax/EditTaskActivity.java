@@ -17,11 +17,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,18 +35,27 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
 //this activity allows a user to view a task and edit it
 
+/**
+ * EditTaskActivity Class
+ *March 18 2018
+ *
+ * Edits a task that the user has already created and adds the editied
+ * task to the database if the fields are valid
+ * inorder to edit a task there must be an already existing task
+ * And in must have a unique title and description
+ * @see ElasticSearchController
+ *
+ */
+
 
 public class EditTaskActivity extends AppCompatActivity {
     public static int pos;
     int PLACE_LOCATION_REQUESTED = 1;
-
-    //Photo
 
 
     private Integer photoStatus=0;
@@ -63,7 +70,10 @@ public class EditTaskActivity extends AppCompatActivity {
     private Double longitude;
     private String Otitle;
 
-
+    /**
+     * OnCreate Method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +190,11 @@ public class EditTaskActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * prints the Old task information on the edittaskactivity
+     * @param task
+     *
+     */
 
     //print the old user information on this activity
     private void printTask(Task task) {
@@ -209,6 +224,9 @@ public class EditTaskActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * invoke gallery when user clicks
+     */
 
     public void editPhoto() {
         //invoke image gallery using an implicit intent
@@ -227,6 +245,10 @@ public class EditTaskActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @return true if user input is valid
+     */
 
 
     //validates that user enterd the correct information
@@ -298,11 +320,22 @@ public class EditTaskActivity extends AppCompatActivity {
         return valid;
     }
 
+    /**
+     * intent to go back to the HomeActivity
+     */
 
     private void updateButton() {
         Intent intent = new Intent(EditTaskActivity.this,HomeActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * method called when user selects a picture from the gallery here,
+     * we set the image the user has uploaded
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -340,7 +373,10 @@ public class EditTaskActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * pic a location
+     * @param view
+     */
     //method is called when user selects to pick a location
     public void goLocationPicker(View view) {
         //calling the place picker function
