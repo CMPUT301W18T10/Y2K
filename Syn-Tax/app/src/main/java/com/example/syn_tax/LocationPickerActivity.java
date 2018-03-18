@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2018 Term Winter 2018 . CMPUT 301. Team 43. University of Alberta. All Rights Reserved .
+ * You may use , distribute, or modify the code under terms and conditions of the code of Students
+ * Behaviour at University of Alberta.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version. This program is distributed in the hope that it
+ * will be useful, but WITHOUT ANY WARRANTY; Without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Last Modified 3/17/18 4:38 PM
+ */
+
 package com.example.syn_tax;
 
 import android.content.Intent;
@@ -18,17 +31,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
  *
  * ALLOWS the user to choose a location for a task of there's
  *
- * Copyright GNU GENERAL PUBLIC LICENSE
- Version 3, 29 June 2007
-
- Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
-
- Permissions of this strong copyleft license are conditioned on making available complete
- source code of licensed works and modifications, which include larger works using a licensed work,
- under the same license. Copyright and license notices must be preserved. Contributors provide an
- express grant of patent rights.
+ *
  */
 public class LocationPickerActivity extends AppCompatActivity {
 
