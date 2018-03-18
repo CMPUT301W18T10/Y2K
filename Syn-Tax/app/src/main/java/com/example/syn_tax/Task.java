@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by Hamsemare on 2018-02-21.
@@ -39,12 +38,12 @@ import java.util.Collections;
 public class Task {
 
     //Private Attributes for a Task
-    private String title;
-    private String description;
+    public String title;
+    public String description;
     private String id;
-    private String status;
-    private double latitude;
-    private double longitude;
+    public String status;
+    public double latitude;
+    public double longitude;
 
     private transient Bitmap photo;
     private String photoString;
@@ -54,7 +53,6 @@ public class Task {
     private ArrayList<Bid> bids = new ArrayList<Bid>();
     private User requester;
     private User provider;
-
 
 
 
@@ -308,6 +306,13 @@ public class Task {
     public String toString(){
         String message = this.title +  this.description + this.requester.toString();
         return message;
+    }
+
+    public void removeTask(int pos) {
+        HomeActivity.requestedTasks.remove(pos);
+        HomeActivity.requestedAdapter.notifyDataSetChanged();
+
+
     }
 }
 
