@@ -48,26 +48,28 @@ public class CreateAccount extends AppCompatActivity {
                 str_username = username.getText().toString();
                 str_email = email.getText().toString();
                 str_phoneNumber = phoneNumber.getText().toString();
-                //TODO: OJ DO CHECKS HERE: IF THE any of the fields are EMPTY, and
-                // TODO: check the right size for each one (ON ECLASS )
-                //TODO CHECKS FOR LOGIN AND CREATE ACCOUNT
-                if (ElasticSearchController.connected()) {
+                if (validUser(str_username, str_email, str_phoneNumber)){
+                    //TODO: OJ DO CHECKS HERE: IF THE any of the fields are EMPTY, and
+                    // TODO: check the right size for each one (ON ECLASS )
+                    //TODO CHECKS FOR LOGIN AND CREATE ACCOUNT
+                    if (ElasticSearchController.connected()) {
 
-                    if (makeUser(str_username) && validUser(str_username,str_email,str_phoneNumber)) {
-                        newUser = new User(str_username, str_email, str_phoneNumber);
-                        ElasticSearchController.addUsers uploadUser = new ElasticSearchController.addUsers();
-                        uploadUser.execute(newUser);
-                        createAccountBtn();
+                        if (makeUser(str_username) && validUser(str_username,str_email,str_phoneNumber)) {
+                            newUser = new User(str_username, str_email, str_phoneNumber);
+                            ElasticSearchController.addUsers uploadUser = new ElasticSearchController.addUsers();
+                            uploadUser.execute(newUser);
+                            createAccountBtn();
 
+                        } else {
+                            Toast toasty = Toast.makeText(CreateAccount.this, "Username already exists!", Toast.LENGTH_LONG);
+                            toasty.setGravity(Gravity.CENTER, 0, 0);
+                            toasty.show();
+                        }
                     } else {
-                        Toast toasty = Toast.makeText(CreateAccount.this, "Username already exists!", Toast.LENGTH_LONG);
+                        Toast toasty = Toast.makeText(CreateAccount.this, "Cannot create user, internet connection lost.", Toast.LENGTH_LONG);
                         toasty.setGravity(Gravity.CENTER, 0, 0);
                         toasty.show();
                     }
-                } else {
-                    Toast toasty = Toast.makeText(CreateAccount.this, "Cannot create user, internet connection lost.", Toast.LENGTH_LONG);
-                    toasty.setGravity(Gravity.CENTER, 0, 0);
-                    toasty.show();
                 }
             }
         });
@@ -77,24 +79,22 @@ public class CreateAccount extends AppCompatActivity {
         //Return true if authenticated and false if not authenticated
         Boolean authenticate=true;
         ArrayList<User> userList;
-        if (validUser(str_username, str_email, str_phoneNumber)) {
-            try {
-                //Grab everything in the database for users
-                ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
-                allUsers.execute("");
-                userList = allUsers.get();
 
+        try {
+            //Grab everything in the database for users
+            ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
+            allUsers.execute("");
+            userList = allUsers.get();
 
-                for (int i = 0; i < userList.size(); i++) {
-                    //Check to see if the user entered a username in the system
-                    if (userList.get(i).retrieveInfo().get(0).equals(username)) {
-                        //If they did set thisuser to the username entered
-                        authenticate = false;
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            //Check to see if the user entered a username in the system
+            if (userList.get ( 0 ).getUsername ().equals ( username )){
+                //If they did set thisuser to the username entered
+                authenticate = false;
             }
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         //Return if authenticated

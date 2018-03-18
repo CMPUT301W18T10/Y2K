@@ -215,7 +215,7 @@ public class ElasticSearchController extends Application {
                 searchString = "{\"from\" : 0, \"size\" : 500}";
             }
             else {
-                searchString = "{\"query\":{\"match\":{\"task\":\"" + search_parameters[0] + "\"}}}";
+                searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
             }
             // TODO Build the query
             Search search = new Search.Builder(searchString).addIndex("syn-tax").addType("tasks").build();
@@ -406,7 +406,7 @@ public class ElasticSearchController extends Application {
         if (connected()){
             //Delete old one
             ElasticSearchController.deleteUser delete = new ElasticSearchController.deleteUser();
-            delete.execute(user1.retrieveInfo().get(0));
+            delete.execute(user1.getUsername ());
 
             //Add new one
             AsyncTask<User, Void, Void> execute = new ElasticSearchController.addUsers();

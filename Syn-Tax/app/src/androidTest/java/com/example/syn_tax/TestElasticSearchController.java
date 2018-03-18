@@ -92,7 +92,7 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
 
         boolean state=false;
         for(int i=0; i< allUsers.size(); i++){
-            if(allUsers.get ( i).retrieveInfo ().get ( 0 ).equals ( testuser.retrieveInfo ().get ( 0 )  )){
+            if(allUsers.get ( i).getUsername ().equals ( testuser.getUsername () )){
                 state=true;
             }
         }
@@ -171,7 +171,7 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
 
         boolean state=false;
         for(int i=0; i< allUsers.size(); i++){
-            if(allUsers.get ( i).retrieveInfo ().get ( 0 ).equals ( testuser.retrieveInfo ().get ( 0 )  )){
+            if(allUsers.get ( i).getUsername ().equals ( testuser.getUsername ()  )){
                 state=true;
             }
         }

@@ -78,18 +78,19 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 //Grab everything in the database for users
                 ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
-                allUsers.execute("");
+                allUsers.execute(username);
+
                 userList = allUsers.get();
 
-                for (int i = 0; i < userList.size(); i++) {
-                    //Check to see if the user entered a username in the system
-                    if (userList.get(i).retrieveInfo().get(0).equals(username)) {
-                        //If they did set thisuser to the username entered
-                        LoginActivity.thisuser = userList.get(i);
-                        authenticate = true;
-                    }
+                //Check to see if the user entered a username in the system
+                if (userList.get ( 0 ).getUsername ().equals ( username )){
+                    //If they did set thisuser to the username entered
+                    LoginActivity.thisuser = userList.get(0);
+                    authenticate = true;
                 }
-            } catch (Exception e) {
+
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
         }

@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
+import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,7 +74,7 @@ public class UserProfileActivity extends AppCompatActivity {
         set(info);
 
         //Only if the username corresponds to the username of the LoginActivity username
-        if(Objects.equals(LoginActivity.thisuser.retrieveInfo().get(0), info.get(0))){
+        if(Objects.equals(LoginActivity.thisuser.getUsername (), info.get(0))){
             edit();
         }
         else{
@@ -169,13 +171,18 @@ public class UserProfileActivity extends AppCompatActivity {
         String sPhoneNumber = phoneNumber.getText().toString();
 
         //**********************CHECKS*****************************************
-
         //CHECK EMAIL
         if (sEmail.isEmpty()){
             email.setError("Enter Email");
             Toast.makeText(UserProfileActivity.this, "Enter Email.", Toast.LENGTH_SHORT).show();
             valid=false;
         }
+        else if(!validEmail(sEmail)) {
+            Toast.makeText(UserProfileActivity.this,"Invalid Email",Toast.LENGTH_LONG).show();
+            valid = false;
+
+        }
+
 
         //CHECK PHONE NUMBER
         else if (sPhoneNumber.isEmpty()){
@@ -183,9 +190,22 @@ public class UserProfileActivity extends AppCompatActivity {
             Toast.makeText(UserProfileActivity.this, "Enter Phone Number.", Toast.LENGTH_SHORT).show();
             valid=false;
         }
+        else if (sPhoneNumber.length()< 6 || sPhoneNumber.length() > 11){
+            Toast.makeText(UserProfileActivity.this,"Invalid Phone number",Toast.LENGTH_LONG).show();
+            valid = false;
+        }
 
         //If checks are all good, it will return true
         return valid;
+    }
+
+    /**
+     * Check if email is valid
+     * @param str_email email is type string is passed
+     * @return is true if valid and false if not valid
+     */
+    private boolean validEmail(String str_email){
+        return Patterns.EMAIL_ADDRESS.matcher(str_email).matches();
     }
 
 

@@ -26,7 +26,9 @@ import java.util.ArrayList;
  express grant of patent rights.
  */
 public class User {
+    private String username;
     private ArrayList<String> info = new ArrayList<String>();
+
     private String id;
 
     /**
@@ -36,9 +38,14 @@ public class User {
      * @param phoneNumber passing in the phoneNumber
      */
     public User(String username, String email, String phoneNumber){
+        this.username=username;
         info.add(username);
         info.add(email);
         info.add(phoneNumber);
+    }
+
+    public String getUsername(){
+        return this.username;
     }
 
     /**
