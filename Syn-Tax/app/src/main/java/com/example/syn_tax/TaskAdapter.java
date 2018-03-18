@@ -16,6 +16,7 @@ package com.example.syn_tax;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         // gets the data to be displayed for a list item based on its position in the array
         String taskTitle = getItem(pos).getTitle();
         requester = getItem(pos).getRequester();
+        final String taskUsername= requester.getUsername ();
+        final String loginUsername= LoginActivity.thisuser.getUsername ();
         String taskStatus = getItem(pos).getStatus();
 
         //Text views of a task item
@@ -66,8 +69,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             @Override
             public void onClick(View v){
                 // for a task of a requester
-                if(LoginActivity.thisuser == requester){
-                    edit_or_view(pos,AddTaskActivity.class);
+                if(loginUsername.equals ( taskUsername )){
+                    edit_or_view(pos,EditTaskActivity.class);
                 }
                 // for a task of a provider
                 else{

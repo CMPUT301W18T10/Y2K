@@ -177,17 +177,21 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
+            android:layout_weight="0.2"
             android:clickable="false"
+            android:ems="10"
+            android:hint="Task Name"
+            android:inputType="none|textMultiLine"
+            android:maxLength="30"
             android:text="REQUESTED"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
+
     </LinearLayout>
 
     <LinearLayout

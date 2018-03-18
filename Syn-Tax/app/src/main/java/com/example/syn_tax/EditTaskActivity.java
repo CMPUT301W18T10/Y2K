@@ -21,6 +21,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,8 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 //this activity allows a user to view a task and edit it
 
@@ -57,39 +60,29 @@ public class EditTaskActivity extends AppCompatActivity {
     private Integer locationStatus=0;
     private Double latitude;
     private Double longitude;
-
-
-    TextView editlocation;
-    TextView editstatus;
-    ImageView editphoto;
-    EditText editdescription;
-    EditText edittitle;
-
-
-
+    private String Otitle;
+    private String Ostatus;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
+
         //get the data from the homeactivity
         Intent intent = getIntent();
         pos = Integer.parseInt(intent.getStringExtra(HomeActivity.POINTER));
         Task task = HomeActivity.requestedTasks.get(pos);
 
         //print the old task info
-        printTask(task, pos);
-
-
-
-
-        task.removeTask(pos);
+        printTask(task);
+        Log.e("staus", task.getStatus ());
+        //if (task.getStatus ()== "REQUESTED")
 
 
 
         //add a photo from the fallery
-        editphoto = (ImageView) findViewById(R.id.editPhotoView);
+        ImageView editphoto = findViewById(R.id.editPhotoView);
         editphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,10 +96,9 @@ public class EditTaskActivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edittitle = (EditText) findViewById(R.id.editTaskTitle);
-                editdescription = (EditText) findViewById(R.id.editDescription);
-                editstatus = (TextView) findViewById(R.id.status);
-
+                EditText edittitle = findViewById(R.id.editTaskTitle);
+                EditText editdescription = findViewById(R.id.editDescription);
+                EditText editstatus = findViewById(R.id.status);
 
                 String stitle = edittitle.getText().toString();
                 String sdesc = editdescription.getText().toString();
@@ -139,26 +131,29 @@ public class EditTaskActivity extends AppCompatActivity {
 
 
     //print the old user information on this activity
-    private void printTask(Task task, int pos) {
-        String Otitle = task.title;
-        String Odesc = task.description;
+    private void printTask(Task task) {
+        String Otitle = task.getTitle ();
+        String Odesc = task.getDescription ();
         Bitmap Ophoto = task.getPhoto();
         Double Olocation = task.getLat()+task.getLong();
         String str_Olocation  = Olocation.toString();
+        String Ostatus= task.getStatus ();
 
 
         //set the title and description
-        EditText edittitle = (EditText) findViewById(R.id.editTaskTitle);
+        EditText edittitle =  findViewById(R.id.editTaskTitle);
         edittitle.setText(Otitle);
-        EditText editdesc = (EditText) findViewById(R.id.editDescription);
+        EditText editdesc = findViewById(R.id.editDescription);
         editdesc.setText(Odesc);
+        EditText editStatus= findViewById ( R.id.status );
+        editStatus.setText ( Ostatus);
 
         //set the photo
-        ImageView editphoto = (ImageView) findViewById(R.id.editPhotoView);
+        ImageView editphoto = findViewById(R.id.editPhotoView);
         editphoto.setImageBitmap(Ophoto);
 
         //set the Location
-        TextView editlocation = (TextView) findViewById(R.id.editLocation);
+        TextView editlocation = findViewById(R.id.editLocation);
         editlocation.setText(str_Olocation);
     }
 
@@ -187,22 +182,43 @@ public class EditTaskActivity extends AppCompatActivity {
     public boolean isValid(){
         boolean valid=true;
         //title
-        EditText taskTitle = (EditText) findViewById(R.id.editTaskTitle);
+        EditText taskTitle = findViewById(R.id.editTaskTitle);
         String stitle= taskTitle.getText().toString();
+
+        EditText status= findViewById ( R.id.status );
+        String sstatus= status.getText ().toString ();
 
         //description
         //set the title and description
 
-        EditText description = (EditText) findViewById(R.id.editDescription);
+        EditText description = findViewById(R.id.editDescription);
         String sdescription= description.getText().toString();
 
         //**********************CHECKS*****************************************
+        ArrayList<Task> allTasks;
+        try{
+            ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks ();
+            tasks.execute ( "" );
+            allTasks= tasks.get();
+            Integer count= 0;
+            for(int i = 0; i < allTasks.size();i++){
+                if(allTasks.get(i).getTitle ().equals(stitle) && stitle!= Otitle){
+                    Toast.makeText(EditTaskActivity.this, "Title is Taken.", Toast.LENGTH_SHORT).show();
+                    valid= false;
+                }
+            }
+        }
+        catch (Exception e){
+            allTasks= new ArrayList<Task> (  );
+        }
+
         //Check Title
         if (stitle.isEmpty()){
             taskTitle.setError("Enter Title");
             Toast.makeText(EditTaskActivity.this, "Enter a Title.", Toast.LENGTH_SHORT).show();
             valid=false;
         }
+
         //Check description
         else if(sdescription.isEmpty()){
             description.setError("Enter Description");
@@ -210,7 +226,20 @@ public class EditTaskActivity extends AppCompatActivity {
             valid=false;
         }
 
-        //Check duplicate as well
+        //Check status
+        else if (sstatus.isEmpty()){
+            taskTitle.setError("Enter status");
+            Toast.makeText(EditTaskActivity.this, "Enter a status.", Toast.LENGTH_SHORT).show();
+            valid=false;
+        }
+        else if(Ostatus=="Requester"){
+
+        }
+        else if (Ostatus==""){
+        }
+
+
+
 
         //If checks are all good, it will return true
         return valid;
@@ -229,6 +258,8 @@ public class EditTaskActivity extends AppCompatActivity {
         //make sure the gallery intent actually called our method
         //Make sure the result was okay
         //Make sure that we actually have an image
+        ImageView editphoto= findViewById ( R.id.editPhotoView );
+        Button editlocation= findViewById ( R.id.editLocation );
         if (requestCode == RESULT_GET_IMAGE && resultCode == RESULT_OK && data != null) {
             //uniform resource indicator - shows us the address of the image tha has been selected
             Uri imageUri = data.getData();
