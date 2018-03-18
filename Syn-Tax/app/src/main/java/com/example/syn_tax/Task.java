@@ -308,11 +308,11 @@ public class Task {
         return message;
     }
 
-    public void removeTask(int pos) {
-        HomeActivity.requestedTasks.remove(pos);
-        HomeActivity.requestedAdapter.notifyDataSetChanged();
-
-
+    public void editTask(String title, String description,User requester, String status ){
+        this.title= title;
+        this.description=description;
+        this.requester= requester;
+        this.status=status;
     }
 }
 

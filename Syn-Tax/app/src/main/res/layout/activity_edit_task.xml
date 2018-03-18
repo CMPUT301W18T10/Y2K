@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:weightSum="20"
     android:background="@drawable/syn_taxpages"
-    tools:context=".EditTask">
+    tools:context=".EditTaskActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -184,10 +184,9 @@
             android:layout_weight="0.2"
             android:clickable="false"
             android:ems="10"
-            android:hint="Task Name"
+            android:hint="Task status"
             android:inputType="none|textMultiLine"
             android:maxLength="30"
-            android:text="REQUESTED"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textSize="18sp" />
