@@ -1,9 +1,23 @@
+/*
+ * Copyright (c) 2018 Term Winter 2018 . CMPUT 301. Team 43. University of Alberta. All Rights Reserved .
+ * You may use , distribute, or modify the code under terms and conditions of the code of Students
+ * Behaviour at University of Alberta.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version. This program is distributed in the hope that it
+ * will be useful, but WITHOUT ANY WARRANTY; Without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Last Modified 3/17/18 4:58 PM
+ */
+
 package com.example.syn_tax;
 
 import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -11,6 +25,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * This class is the home activity class, it displays
+ * Two listviews with clickable list elements for the requested tasks
+ * and distributed tasks of the logged in user
+ */
 
 public class HomeActivity extends AppCompatActivity {
     public static ArrayAdapter<Task> requestedAdapter;
@@ -46,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onStart();
         // calling custom adapters and setting list views
         loadTaskListRequester();
+
         requestedAdapter = new TaskAdapter(this,requestedTasks);
         distributedAdapter = new TaskAdapter(this, distributedTasks);
         requestedListView.setAdapter(requestedAdapter);
@@ -54,24 +74,21 @@ public class HomeActivity extends AppCompatActivity {
     private void loadTaskListRequester(){
         ArrayList<Task> allTasksList;
         ElasticSearchController.getTasks allTasks = new ElasticSearchController.getTasks();
-        allTasks.execute("");
         try {
+            allTasks.execute("");
             allTasksList = allTasks.get();
+            requestedTasks = allTasksList;
+            Log.e("task list",String.valueOf(allTasksList));
+//            for(int i = 0; i < allTasksList.size();i++){
+//                if(allTasksList.get(i).getRequester().equals(LoginActivity.thisuser)){
+//                    Log.e("list item ", String.valueOf(allTasksList.get(i)));
+//                    requestedTasks.add(allTasksList.get(i));
+//                }
+//            }
+
         }
         catch(Exception e){
             allTasksList = new ArrayList<Task>();
-        }
-
-        int listSize = allTasksList.size();
-        if(listSize != 0) {
-            for (int i = 0; i < allTasksList.size(); i++) {
-                if (allTasksList.get(i).getRequester() == LoginActivity.thisuser) {
-                    requestedTasks.add(allTasksList.get(i));
-                }
-                else if (allTasksList.get(i).getProvider() == LoginActivity.thisuser){
-                    distributedTasks.add(allTasksList.get(i));
-                }
-            }
         }
     }
 
