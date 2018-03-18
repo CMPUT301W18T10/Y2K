@@ -26,11 +26,23 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
+ * HomeActivity Class
+ *
+ * Feb 21, 2018
+ *
  * This class is the home activity class, it displays
  * Two listviews with clickable list elements for the requested tasks
  * and distributed tasks of the logged in user
+ *
+ * @see Task
+ * @see TaskAdapter
+ * @see ElasticSearchController
+ * @see AddTaskActivity
+ * @see HomeActivity
+ * @see SearchActivity
+ * @see UserProfileActivity
+ * @see LoginActivity
  */
-
 public class HomeActivity extends AppCompatActivity {
     public static ArrayAdapter<Task> requestedAdapter;
     public static ArrayList<Task> requestedTasks;
@@ -42,6 +54,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
     @Override
+    /**
+     * onCreate we'll show the user the the list of tasks requested and provided and the title
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -61,6 +76,10 @@ public class HomeActivity extends AppCompatActivity {
         distributedTasks = new ArrayList<Task>();
 
     }
+
+    /**
+     * onStart, continuously update the list adapters
+     */
     protected void onStart(){
         super.onStart();
 
@@ -72,7 +91,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
+<<<<<<< HEAD
      * Loads in the tasks for a user
+=======
+     * Grab the list of tasks we requested
+>>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     private static void loadTaskListRequester(){
         ArrayList<Task> allTasksList;
@@ -94,8 +117,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
+<<<<<<< HEAD
      * Button click for adding a new task
      * @param view is the current view
+=======
+     * Go to AddTaskActivity page
+     * @param view
+>>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     public void addTaskBtn(View view){
         Intent intent = new Intent(this, AddTaskActivity.class);
@@ -104,8 +132,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
+<<<<<<< HEAD
      * Button click for going to search activity
      * @param view is the current view
+=======
+     * Go to the SearchActivity page
+     * @param view
+>>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     public void searchBtn(View view){
         Intent intent= new Intent(this, SearchActivity.class);
@@ -113,8 +146,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
+<<<<<<< HEAD
      * button click for going to the home activity
      * @param view is the current view
+=======
+     * Go to the HomeActivity page
+     * @param view
+>>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     public void homeBtn(View view){
         Intent intent= new Intent(this, HomeActivity.class);
@@ -122,8 +160,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
+<<<<<<< HEAD
      * button click for a user profile
      * @param view is the current view
+=======
+     * Go to the UserProfileActivity
+     * @param view
+>>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     public void userInfo(View view){
         Intent intent= new Intent(this, UserProfileActivity.class);
