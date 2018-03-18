@@ -35,6 +35,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+/*
+Citations: https://www.programcreek.com/java-api-examples/index.php?api=io.searchbox.core.DeleteByQuery (March 17,2018)
+*/
 
 /**
  * UserProfileActivity Class
@@ -104,10 +107,10 @@ public class UserProfileActivity extends AppCompatActivity {
                     String sEmail = email.getText().toString();
                     String sPhoneNumber = phoneNumber.getText().toString();
 
-                    //Call update the data of the user
-                    User tempUser= new User(username.getText().toString(), sEmail, sPhoneNumber);
-                    ElasticSearchController.updateUser( LoginActivity.thisuser, tempUser );
-                    LoginActivity.thisuser=tempUser;
+                    User tempUser = LoginActivity.thisuser;
+                    LoginActivity.thisuser.editProfile (LoginActivity.thisuser.getUsername (), sEmail, sPhoneNumber);
+                    ElasticSearchController.updateUser (tempUser, LoginActivity.thisuser);
+
                     done();
                 }
             }

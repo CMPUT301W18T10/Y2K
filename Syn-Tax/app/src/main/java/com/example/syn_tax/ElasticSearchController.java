@@ -55,7 +55,7 @@ import io.searchbox.core.SearchResult;
 Citations: Used
 https://stackoverflow.com/questions/30343011/how-to-check-if-an-android-device-is-online  ( March 14,2018)
 https://developer.android.com/reference/java/io/FileOutputStream.html (March 14,2018)
-
+Citations: https://www.programcreek.com/java-api-examples/index.php?api=io.searchbox.core.DeleteByQuery (March 17,2018)
 */
 
 /**
@@ -408,8 +408,11 @@ public class ElasticSearchController extends Application {
         //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
         if (connected()){
             //Delete old one
+
+            String username= user1.getUsername ();
             ElasticSearchController.deleteUser delete = new ElasticSearchController.deleteUser();
-            delete.execute(user1.getUsername ());
+            delete.execute(username);
+
 
             //Add new one
             AsyncTask<User, Void, Void> execute = new ElasticSearchController.addUsers();
@@ -432,7 +435,7 @@ public class ElasticSearchController extends Application {
 
             verifySettings();
             //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-            if(!connected()){
+            if(connected()){
                 //String for the search
                 String searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
 
@@ -461,16 +464,16 @@ public class ElasticSearchController extends Application {
 
             verifySettings();
             //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-            if(!connected()){
+            if(connected()){
                 //String for the search
                 String searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
 
                 // TODO Build the delete by query
-                DeleteByQuery user = new DeleteByQuery.Builder(searchString).addIndex("syn-tax").addType("users").build();
+                DeleteByQuery olduser = new DeleteByQuery.Builder(searchString).addIndex("syn-tax").addType("users").build();
 
                 try {
                     // TODO delete the user
-                    client.execute(user);
+                    client.execute(olduser);
                 }
                 catch (Exception e) {
                     Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
@@ -478,6 +481,16 @@ public class ElasticSearchController extends Application {
             }
             return null;
         }
+    }
+
+    /**
+     * Deletes a task from from our list of tasks for that user
+     * @param task a task is passed to be deleted
+     */
+    public static void deleteATask(Task task){
+        String title= task.getTitle ();
+        ElasticSearchController.deleteTask delete= new ElasticSearchController.deleteTask ();
+        delete.execute ( title );
     }
 
 
