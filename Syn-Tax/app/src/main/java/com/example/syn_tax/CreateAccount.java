@@ -31,6 +31,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
+/**
+*
+* CreateAccount activity class
+*
+* March 18, 2018
+*
+* First validates the user inputs then checks if the username
+* is in the database, then creates an account if the username is unused
+*
+ * @see ElasticSearchController
+ * @see
+ *
+ *
+* */
+
 public class CreateAccount extends AppCompatActivity {
 
     private User newUser;
@@ -38,7 +53,11 @@ public class CreateAccount extends AppCompatActivity {
     private String str_username, str_email, str_phoneNumber;
     private Button newUserBtn;
 
-
+    /**
+     * onCreate Method
+     *  @param savedInstanceState
+     *
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +72,12 @@ public class CreateAccount extends AppCompatActivity {
         newUserBtn = findViewById(R.id.saveBtn);
     }
 
+
+    /**
+     * onStart, continuously listen to the create account button and
+     * check the connection and valid parameters. If the connection, username,
+     * email and phone numbers are valid then create the account
+     * */
     protected void onStart() {
         super.onStart();
         newUserBtn.setOnClickListener(new View.OnClickListener() {
@@ -62,9 +87,6 @@ public class CreateAccount extends AppCompatActivity {
                 str_email = email.getText().toString();
                 str_phoneNumber = phoneNumber.getText().toString();
                 if (validUser(str_username, str_email, str_phoneNumber)){
-                    //TODO: OJ DO CHECKS HERE: IF THE any of the fields are EMPTY, and
-                    // TODO: check the right size for each one (ON ECLASS )
-                    //TODO CHECKS FOR LOGIN AND CREATE ACCOUNT
                     if (ElasticSearchController.connected()) {
 
                         if (makeUser(str_username) && validUser(str_username,str_email,str_phoneNumber)) {
@@ -88,7 +110,15 @@ public class CreateAccount extends AppCompatActivity {
         });
     }
 
-    private boolean makeUser(String username){
+    /**
+     * authenticate the username in the database
+     *
+     * @returns true if the username has been authenticated meaning
+     * it is unique and unused and false if the username is taken
+     *
+     * */
+
+    protected boolean makeUser(String username){
         //Return true if authenticated and false if not authenticated
         Boolean authenticate=true;
         ArrayList<User> userList;
@@ -114,7 +144,16 @@ public class CreateAccount extends AppCompatActivity {
         return authenticate;
     }
 
-    private boolean validUser(String str_username, String str_email, String str_phoneNumber){
+    /**
+     * @param str_email
+     * @param str_phoneNumber
+     * @param str_username
+     *
+     * Validates the usernmame, email and phone number that are input by
+     * the user
+     * */
+
+    protected boolean validUser(String str_username, String str_email, String str_phoneNumber){
         str_username = username.getText().toString();
         str_email = email.getText().toString();
         str_phoneNumber = phoneNumber.getText().toString();
@@ -139,11 +178,21 @@ public class CreateAccount extends AppCompatActivity {
 
         return true;
     }
+    /**
+     * @param str_email
+     *
+     * validates the email format
+     * */
 
     private boolean validEmail(String str_email){
         return Patterns.EMAIL_ADDRESS.matcher(str_email).matches();
     }
 
+    /**
+     * @param str_phoneNumber
+     *
+     * validates the phone number given by the user
+     * */
     private boolean validPhone(String str_phoneNumber){
         boolean valid = false;
         if (str_phoneNumber.length()< 6 || str_phoneNumber.length() > 11){
@@ -156,7 +205,10 @@ public class CreateAccount extends AppCompatActivity {
       return valid;
     }
 
-
+    /**
+     * starts the intent to go back to the login activity where user
+     * can then log in
+     * */
     private void createAccountBtn(){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

@@ -33,12 +33,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * LoginActivity class
+ *
+ * Marcg 18, 2018
+ *
+ *
+ * Searches the database for the username input, if the username does not exist
+ * it prompts a pop up. If the username exists it opens the mainActivity
+ * related to the username
+ *
+ * @see ElasticSearchController
+ * @see CreateAccount
+ * @see MainActivity
+ *
+ * */
+
 
 public class LoginActivity extends AppCompatActivity {
     public static User thisuser;
     private ArrayList<User> userList;
     private Button thisButton;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState
+     *
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +71,11 @@ public class LoginActivity extends AppCompatActivity {
         thisButton = findViewById(R.id.loginButton);
     }
 
+    /**
+     * onStart it listens for the login button and checks for the connection to the database
+     * If the phone is connected it checks if the username is in use
+     *
+     * */
     protected void onStart() {
         super.onStart();
         thisButton.setOnClickListener(new View.OnClickListener() {
@@ -74,19 +100,29 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+    /**
+     * starts the mainActivity related to the username
+     * */
 
     private void loginBtn() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Starts the createAccount activity
+     * */
     public void createAccountBtn(View view) {
         Intent intent = new Intent(this, CreateAccount.class);
         startActivity(intent);
     }
 
-    //Check if username in database
-    private boolean getThisUser(String username) {
+    /**
+     * @param username
+     *
+     *checks the database to see if there is a username match
+     * */
+    protected boolean getThisUser(String username) {
         //Return true if authenticated and false if not authenticated
         Boolean authenticate = false;
         if (validUser(username)) {
@@ -114,7 +150,13 @@ public class LoginActivity extends AppCompatActivity {
         return authenticate;
     }
 
-    private boolean validUser(String str_username) {
+    /**
+     * @param str_username
+     *
+     * checks for a valid username (empty field)
+     * @returns true if the field is not empty and false if it is empty
+     * */
+    protected boolean validUser(String str_username) {
         boolean valid = false;
         if (str_username.length() == 0) {
             valid = false;
