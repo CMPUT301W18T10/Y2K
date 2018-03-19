@@ -35,7 +35,7 @@ public class Bid {
      * @param bidAmount Amount bidded
      * @param bidUserName The person that made the bid
      */
-    public  Bid(double bidAmount, String bidUserName) {
+    public Bid(double bidAmount, String bidUserName) {
     }
 
 
