@@ -87,23 +87,24 @@ public class CreateAccount extends AppCompatActivity {
                 str_email = email.getText().toString();
                 str_phoneNumber = phoneNumber.getText().toString();
                 if (validUser(str_username, str_email, str_phoneNumber)){
-                    if (ElasticSearchController.connected()) {
-
+                    if (!ElasticSearchController.connected()) {
+                        Toast toasty = Toast.makeText(CreateAccount.this, "Cannot create user, internet connection lost.", Toast.LENGTH_LONG);
+                        toasty.setGravity(Gravity.CENTER, 0, 0);
+                        toasty.show();
+                    }
+                    else{
                         if (makeUser(str_username) && validUser(str_username,str_email,str_phoneNumber)) {
                             newUser = new User(str_username, str_email, str_phoneNumber);
                             ElasticSearchController.addUsers uploadUser = new ElasticSearchController.addUsers();
                             uploadUser.execute(newUser);
                             createAccountBtn();
 
-                        } else {
+                        }
+                        else {
                             Toast toasty = Toast.makeText(CreateAccount.this, "Username already exists!", Toast.LENGTH_LONG);
                             toasty.setGravity(Gravity.CENTER, 0, 0);
                             toasty.show();
                         }
-                    } else {
-                        Toast toasty = Toast.makeText(CreateAccount.this, "Cannot create user, internet connection lost.", Toast.LENGTH_LONG);
-                        toasty.setGravity(Gravity.CENTER, 0, 0);
-                        toasty.show();
                     }
                 }
             }
@@ -126,11 +127,11 @@ public class CreateAccount extends AppCompatActivity {
         try {
             //Grab everything in the database for users
             ElasticSearchController.getUsers allUsers = new ElasticSearchController.getUsers();
-            allUsers.execute("");
+            allUsers.execute(username);
             userList = allUsers.get();
 
             //Check to see if the user entered a username in the system
-            if (userList.get ( 0 ).getUsername ().equals ( username )){
+            if(userList.size ()>=1){
                 //If they did set thisuser to the username entered
                 authenticate = false;
             }
@@ -195,7 +196,7 @@ public class CreateAccount extends AppCompatActivity {
      * */
     private boolean validPhone(String str_phoneNumber){
         boolean valid = false;
-        if (str_phoneNumber.length()< 6 || str_phoneNumber.length() > 11){
+        if (str_phoneNumber.length()< 9 || str_phoneNumber.length() > 13){
             valid = false;
         }
         else{

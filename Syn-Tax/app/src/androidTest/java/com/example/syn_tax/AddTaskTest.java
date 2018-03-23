@@ -1,6 +1,7 @@
 package com.example.syn_tax;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -82,13 +83,13 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
 
         //Get it
         ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
-        tasks.execute ("");
+        tasks.execute (testtaskR1.getTitle ());
         ArrayList<Task> allTasks;
         allTasks=tasks.get();
-        boolean state=false;
 
-        for(int i=0; i< allTasks.size(); i++){
-            if(allTasks.get ( i).getTitle ().equals ( testtaskR1.getTitle ()  )){
+        Boolean state=false;
+        for(int i=0; i<allTasks.size (); i++){
+            if(allTasks.get(i).getRequester ().getUsername ().equals ( testUser.getUsername () )){
                 state=true;
             }
         }

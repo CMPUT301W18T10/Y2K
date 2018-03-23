@@ -42,6 +42,8 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -136,9 +138,6 @@ public class AddTaskActivity extends AppCompatActivity{
                 TextView location = findViewById(R.id.tvlocation);
                 String slocation = location.getText().toString();
 
-                //Check to see if the task already exists
-                //find(this.id);
-
                 // Validate the user info
                 if (isValid()) {
                     //Instantiate a object of type Task
@@ -154,11 +153,34 @@ public class AddTaskActivity extends AppCompatActivity{
                     }
                     AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
                     execute.execute(newtask);
-                    HomeActivity.requestedAdapter.notifyDataSetChanged();
                     done();
                 }
             }
         });
+    }
+
+    /**
+     *  Check to see if the task already exists
+     * @param title the title name of the task (String)
+     * @return Boolean true if theres no duplicates and false if there is duplicates
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    private boolean checkName(String title) throws ExecutionException, InterruptedException {
+        Boolean check= true;
+
+        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
+        tasks.execute (title, "");
+        ArrayList<Task> allTasks;
+        allTasks=tasks.get();
+
+        for(int i=0; i<allTasks.size (); i++){
+            if(allTasks.get(i).getRequester ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
+                check=false;
+            }
+        }
+
+        return check;
     }
 
     /**
@@ -167,7 +189,6 @@ public class AddTaskActivity extends AppCompatActivity{
     public void done(){
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
-
     }
 
 
@@ -190,6 +211,20 @@ public class AddTaskActivity extends AppCompatActivity{
         String sdescription= description.getText().toString();
 
         //**********************CHECKS*****************************************
+        //Check to see if the task already exists
+        try {
+            if(!checkName(stitle)){
+                taskTitle.setError("Title is Taken. ");
+                Toast.makeText(AddTaskActivity.this, ".", Toast.LENGTH_SHORT).show();
+                valid=false;
+            }
+        }
+        catch (ExecutionException e) {
+            e.printStackTrace ();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
         //Check Title
         if (stitle.isEmpty()){
             taskTitle.setError("Enter Title");
@@ -203,7 +238,6 @@ public class AddTaskActivity extends AppCompatActivity{
             valid=false;
         }
 
-        //Check duplicate as well
 
         //If checks are all good, it will return true
         return valid;

@@ -37,6 +37,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 //this activity allows a user to view a task and edit it
 
@@ -249,9 +250,7 @@ public class EditTaskActivity extends AppCompatActivity {
      *
      * @return true if user input is valid
      */
-
-
-    //validates that user enterd the correct information
+    //validates that user entered the correct information
     public boolean isValid(){
         boolean valid=true;
         //title
@@ -268,27 +267,24 @@ public class EditTaskActivity extends AppCompatActivity {
         String sdescription= description.getText().toString();
 
         //**********************CHECKS*****************************************
-        //Check Title
+        //Check Title if dublicates
         if (!stitle.equals ( Otitle )){
             ArrayList<Task> allTasks;
-            try{
-                ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks ();
-                tasks.execute ( "" );
-                allTasks= tasks.get();
-                Integer count= 0;
-                for(int i = 0; i < allTasks.size();i++){
-                    if(allTasks.get(i).getTitle ().equals(stitle)){
-                        taskTitle.setError("Enter Title");
-                        Toast.makeText(EditTaskActivity.this, "Title is Taken.", Toast.LENGTH_SHORT).show();
-                        valid= false;
-                    }
+            try {
+                if (!checkName ( stitle )) {
+                    taskTitle.setError ( "Title is Taken." );
+                    Toast.makeText ( EditTaskActivity.this, "Title is Taken.", Toast.LENGTH_SHORT ).show ();
+                    valid = false;
                 }
-            }
-            catch (Exception e){
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
             }
         }
+
         //Check Title
-        if (stitle.isEmpty()){
+        else if (stitle.isEmpty()){
             taskTitle.setError("Enter Title");
             Toast.makeText(EditTaskActivity.this, "Enter a Title.", Toast.LENGTH_SHORT).show();
             valid=false;
@@ -320,10 +316,34 @@ public class EditTaskActivity extends AppCompatActivity {
         return valid;
     }
 
+
+    /**
+     *  Check to see if the task already exists
+     * @param title the title name of the task (String)
+     * @return Boolean true if theres no duplicates and false if there is duplicates
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    private boolean checkName(String title) throws ExecutionException, InterruptedException {
+        Boolean check= true;
+
+        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
+        tasks.execute (title, "");
+        ArrayList<Task> allTasks;
+        allTasks=tasks.get();
+
+        for(int i=0; i<allTasks.size (); i++){
+            if(allTasks.get(i).getRequester ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
+                check=false;
+            }
+        }
+        return check;
+    }
+
+
     /**
      * intent to go back to the HomeActivity
      */
-
     private void updateButton() {
         Intent intent = new Intent(EditTaskActivity.this,HomeActivity.class);
         startActivity(intent);
@@ -336,7 +356,6 @@ public class EditTaskActivity extends AppCompatActivity {
      * @param resultCode
      * @param data
      */
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //make sure the gallery intent actually called our method

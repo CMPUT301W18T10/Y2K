@@ -197,7 +197,7 @@ public class UserProfileActivity extends AppCompatActivity {
             Toast.makeText(UserProfileActivity.this, "Enter Phone Number.", Toast.LENGTH_SHORT).show();
             valid=false;
         }
-        else if (sPhoneNumber.length()< 6 || sPhoneNumber.length() > 11){
+        else if (sPhoneNumber.length()< 9 || sPhoneNumber.length() > 13){
             Toast.makeText(UserProfileActivity.this,"Invalid Phone number",Toast.LENGTH_LONG).show();
             valid = false;
         }

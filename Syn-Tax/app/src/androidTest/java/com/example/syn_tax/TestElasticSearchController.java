@@ -32,72 +32,75 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
 
     /**
      * Gets the context of ElasticSearchController.getContext
+     *
      * @throws Exception
      */
     public void testOnCreate() throws Exception {
-        mContext= ElasticSearchController.getContext();
+        mContext = ElasticSearchController.getContext ();
     }
 
     /**
      * Test the update Task
      * Test to make sure were updating tasks in the database successfully
+     *
      * @throws ExecutionException
      * @throws InterruptedException
      */
     public void testUpdateTask() throws ExecutionException, InterruptedException {
-        User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
-        Task task= new Task("Assignment", "Complete a coding project", testuser, "requested");
-        ElasticSearchController.addTasks addtask = new ElasticSearchController.addTasks();
-        addtask.execute(task);
+        User testuser = new User ( "hamsemare", "test@g.com", "000-0000-0000" );
+        Task task = new Task ( "Assignment", "Complete a coding project", testuser, "requested" );
+        ElasticSearchController.addTasks addtask = new ElasticSearchController.addTasks ();
+        addtask.execute ( task );
 
-        Task newTask= new Task("newAssignment", "", testuser, "requested");
-        ElasticSearchController.updateTask(task, newTask);
+        Task newTask = new Task ( "newAssignment", "", testuser, "requested" );
+        ElasticSearchController.updateTask ( task, newTask );
 
-        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
-        tasks.execute ("");
+        ElasticSearchController.getTasks tasks = new ElasticSearchController.getTasks ();
+        tasks.execute ( "" );
         ArrayList<Task> allTasks;
-        allTasks=tasks.get();
+        allTasks = tasks.get ();
 
-        boolean state=false;
+        boolean state = false;
 
-        for(int i=0; i< allTasks.size(); i++){
-            if(allTasks.get ( i).getTitle ().equals ( task.getTitle ()  )){
-                state=true;
+        for (int i = 0; i < allTasks.size (); i++) {
+            if (allTasks.get ( i ).getTitle ().equals ( task.getTitle () )) {
+                state = true;
             }
         }
 
         //DO we have the task still in there
-        assertTrue(state);
+        assertTrue ( state );
     }
 
     /**
      * Test the update user
      * Test to make sure were updating the user in the database successfully
+     *
      * @throws ExecutionException
      * @throws InterruptedException
      */
     public void testUpdateUser() throws ExecutionException, InterruptedException {
-        User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
+        User testuser = new User ( "hamsemare", "test@g.com", "000-0000-0000" );
 
-        ElasticSearchController.addUsers addUser = new ElasticSearchController.addUsers();
-        addUser.execute (testuser);
+        ElasticSearchController.addUsers addUser = new ElasticSearchController.addUsers ();
+        addUser.execute ( testuser );
 
-        User testnewuser= new User("hamsemare", "hamse@g.com", "999-000-0000");
+        User testnewuser = new User ( "hamsemare", "hamse@g.com", "999-000-0000" );
         ElasticSearchController.updateUser ( testuser, testnewuser );
 
-        ElasticSearchController.getUsers users= new ElasticSearchController.getUsers();
-        users.execute ("");
+        ElasticSearchController.getUsers users = new ElasticSearchController.getUsers ();
+        users.execute ( "" );
         ArrayList<User> allUsers;
-        allUsers=users.get();
+        allUsers = users.get ();
 
-        boolean state=false;
-        for(int i=0; i< allUsers.size(); i++){
-            if(allUsers.get ( i).getUsername ().equals ( testuser.getUsername () )){
-                state=true;
+        boolean state = false;
+        for (int i = 0; i < allUsers.size (); i++) {
+            if (allUsers.get ( i ).getUsername ().equals ( testuser.getUsername () )) {
+                state = true;
             }
         }
 
-        assertTrue (state);
+        assertTrue ( state );
     }
 
     /**
@@ -113,106 +116,105 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
     /**
      * Constructor, calls the the constructor of the ElasticSearchController class
      */
-    public TestElasticSearchController(){
-        super(ElasticSearchController.class);
+    public TestElasticSearchController() {
+        super ( ElasticSearchController.class );
     }
-
 
 
     /**
      * Test the add Task
      * Test to make sure were adding tasks to the database successfully
      * Also tests for the getTasks class
+     *
      * @throws ExecutionException
      * @throws InterruptedException
      */
     public void testAddTask() throws ExecutionException, InterruptedException {
-        User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
+        User testuser = new User ( "hamsemare", "test@g.com", "000-0000-0000" );
 
-        Task task= new Task("Assignment", "Complete a coding project", testuser, "requested");
+        Task task = new Task ( "Assignment", "Complete a coding project", testuser, "requested" );
 
-        ElasticSearchController.addTasks addtask = new ElasticSearchController.addTasks();
-        addtask.execute(task);
+        ElasticSearchController.addTasks addtask = new ElasticSearchController.addTasks ();
+        addtask.execute ( task );
 
-        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
-        tasks.execute ("");
+        ElasticSearchController.getTasks tasks = new ElasticSearchController.getTasks ();
+        tasks.execute ( "" );
         ArrayList<Task> allTasks;
-        allTasks=tasks.get();
+        allTasks = tasks.get ();
 
-        boolean state=false;
+        boolean state = false;
 
-        for(int i=0; i< allTasks.size(); i++){
-            if(allTasks.get ( i).getTitle ().equals ( task.getTitle ()  )){
-                state=true;
+        for (int i = 0; i < allTasks.size (); i++) {
+            if (allTasks.get ( i ).getTitle ().equals ( task.getTitle () )) {
+                state = true;
             }
         }
 
         //DO we have the task still in there
-        assertTrue(state);
+        assertTrue ( state );
     }
 
     /**
      * Test the add User (Create account)
      * Test to make sure were adding users to the database successfully
      * Also tests for the get Users class
+     *
      * @throws ExecutionException
      * @throws InterruptedException
      */
     public void testAddUser() throws ExecutionException, InterruptedException {
-        User testuser= new User("hamsemare", "test@g.com", "000-0000-0000");
+        User testuser = new User ( "hamsemare", "test@g.com", "000-0000-0000" );
 
-        ElasticSearchController.addUsers addUser = new ElasticSearchController.addUsers();
-        addUser.execute (testuser);
+        ElasticSearchController.addUsers addUser = new ElasticSearchController.addUsers ();
+        addUser.execute ( testuser );
 
-        ElasticSearchController.getUsers users= new ElasticSearchController.getUsers();
-        users.execute ("");
+        ElasticSearchController.getUsers users = new ElasticSearchController.getUsers ();
+        users.execute ( "" );
         ArrayList<User> allUsers;
-        allUsers=users.get();
+        allUsers = users.get ();
 
-        boolean state=false;
-        for(int i=0; i< allUsers.size(); i++){
-            if(allUsers.get ( i).getUsername ().equals ( testuser.getUsername ()  )){
-                state=true;
+        boolean state = false;
+        for (int i = 0; i < allUsers.size (); i++) {
+            if (allUsers.get ( i ).getUsername ().equals ( testuser.getUsername () )) {
+                state = true;
             }
         }
 
-        assertTrue (state);
+        assertTrue ( state );
     }
 
     /**
      * Test to make sure were getting tasks from the database successfully
      */
-    public class testGetTasks extends AsyncTask<String, Void, ArrayList<Task>>{
+    public class testGetTasks extends AsyncTask<String, Void, ArrayList<Task>> {
 
         @Override
         protected ArrayList<Task> doInBackground(String... strings) {
-            testverifySettings();
+            testverifySettings ();
             try {
-                testAddTask();
+                testAddTask ();
             } catch (ExecutionException e) {
                 e.printStackTrace ();
             } catch (InterruptedException e) {
                 e.printStackTrace ();
             }
-            ArrayList<Task> tasks = new ArrayList<Task>();
+            ArrayList<Task> tasks = new ArrayList<Task> ();
 
             // TODO Build the query
-            String keywords= "{\" from\" : 0, \"size\" : 10}";
-            io.searchbox.core.Search search = new io.searchbox.core.Search.Builder(keywords).addIndex("test").addType("task").build();
+            String keywords = "{\" from\" : 0, \"size\" : 10}";
+            io.searchbox.core.Search search = new io.searchbox.core.Search.Builder ( keywords ).addIndex ( "test" ).addType ( "task" ).build ();
 
             try {
                 // TODO get the results of the query
-                SearchResult result = client.execute(search);
-                if(result.isSucceeded()){
-                    List<Task> foundTask= result.getSourceAsObjectList(Task.class);
-                    tasks.addAll(foundTask);
-                    }
-                else{
-                    Log.i("Error", "Failed when searching for tasks");
+                SearchResult result = client.execute ( search );
+                if (result.isSucceeded ()) {
+                    List<Task> foundTask = result.getSourceAsObjectList ( Task.class );
+                    tasks.addAll ( foundTask );
+                } else {
+                    Log.i ( "Error", "Failed when searching for tasks" );
                 }
-            }
-            catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            } catch (Exception e) {
+                Log.i ( "Error", "Something went wrong when we tried to communicate with the elasticsearch server!" );
 
             }
             return tasks;
@@ -225,33 +227,32 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
     public static void testverifySettings() {
         // TODO: Test the connection to the server
         if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
-            DroidClientConfig config = builder.build();
-            JestClientFactory factory = new JestClientFactory();
-            factory.setDroidClientConfig(config);
-            client = (JestDroidClient) factory.getObject();
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder ( "http://cmput301.softwareprocess.es:8080" );
+            DroidClientConfig config = builder.build ();
+            JestClientFactory factory = new JestClientFactory ();
+            factory.setDroidClientConfig ( config );
+            client = (JestDroidClient) factory.getObject ();
         }
     }
 
     /**
      * Test for Connectivity
      */
-    public void testConnectivity(){
+    public void testConnectivity() {
 
         Boolean available = false;
 
-        if (mContext == null){
+        if (mContext == null) {
             return;
         }
 
-        ConnectivityManager manager= (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager manager = (ConnectivityManager) mContext.getSystemService ( Context.CONNECTIVITY_SERVICE );
         assert manager != null;
-        NetworkInfo network=manager.getActiveNetworkInfo();
+        NetworkInfo network = manager.getActiveNetworkInfo ();
 
-        if(network!= null && network.isConnected()){
-            available=true;
+        if (network != null && network.isConnected ()) {
+            available = true;
         }
         assertEquals ( available.toString (), ElasticSearchController.connected () );
     }
-
 }

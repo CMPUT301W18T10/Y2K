@@ -196,17 +196,19 @@ public class ElasticSearchController extends Application {
     /**
      * GETTER METHODS:
      * Get the tasks
+     * search parameters[0] name
+     * search parameters[1] username associated
      */
     // TODO we need a function which gets task from elastic search
     public static class getTasks extends AsyncTask<String, Void, ArrayList<Task>> {
         @Override
         protected ArrayList<Task> doInBackground(String... search_parameters) {
 
-            verifySettings();
-            ArrayList<Task> tasks = new ArrayList<Task>();
+            verifySettings ();
+            ArrayList<Task> tasks = new ArrayList<Task> ();
 
             //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-            if(!connected()){
+            if (!connected ()) {
                 return tasks;
             }
 
@@ -214,333 +216,334 @@ public class ElasticSearchController extends Application {
             //String for the search
             String searchString;
 
-            if(Objects.equals(search_parameters[0], "")) {
+            //Get all
+            if (Objects.equals ( search_parameters[0], "" ) && Objects.equals ( search_parameters[1], "" )) {
                 searchString = "{\"from\" : 0, \"size\" : 500}";
             }
+
+            //Get the tasks of a particular task
+            else if (Objects.equals ( search_parameters[0], "" )) {
+                searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[1] + "\"}}}";
+            }
+
+            //Get the tasks of a task
             else {
                 searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
             }
+
             // TODO Build the query
-            Search search = new Search.Builder(searchString).addIndex("syn-tax").addType("tasks").build();
+            Search search = new Search.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "tasks" ).build ();
 
             try {
                 // TODO get the results of the query
-                SearchResult result = client.execute(search);
-                if (result.isSucceeded()) {
-                    List<Task> foundTask = result.getSourceAsObjectList(Task.class);
-                    tasks.addAll(foundTask);
+                SearchResult result = client.execute ( search );
+                if (result.isSucceeded ()) {
+                    List<Task> foundTask = result.getSourceAsObjectList ( Task.class );
+                    tasks.addAll ( foundTask );
                 } else {
-                    Log.i("Error", "Elasticseach was not able to excute (get)");
-                }
-            } catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-            }
-            return tasks;
-
-        }
-    }
-
-    /**
-     * Get the user
-     */
-    // TODO we need a function which gets task from elastic search
-    public static class getUsers extends AsyncTask<String, Void, ArrayList<User>> {
-        @Override
-        protected ArrayList<User> doInBackground(String... search_parameters) {
-
-            verifySettings();
-            ArrayList<User> users = new ArrayList<User>();
-
-            //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-            if(!connected()){
-                return users;
-            }
-
-            //String for the search
-            String searchString;
-            if(search_parameters[0] == "") {
-                searchString = "{\"from\" : 0, \"size\" : 500}";
-            }
-
-            else {
-                searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
-            }
-            // TODO Build the query
-            Search search = new Search.Builder(searchString).addIndex("syn-tax").addType("users").build();
-
-            try {
-                // TODO get the results of the query
-                SearchResult result = client.execute(search);
-                if(result.isSucceeded()){
-                    List<User> foundUsers= result.getSourceAsObjectList(User.class);
-                    users.addAll(foundUsers);
-                }
-                else{
-                    Log.i("Error", "Elasticseach was not able to excute (get)");
+                    Log.i ( "Error", "Elasticseach was not able to excute (get)" );
                 }
             }
             catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                Log.i ( "Error", "Something went wrong when we tried to communicate with the elasticsearch server!" );
             }
-            return users;
+
+            return tasks;
+            }
         }
-    }
 
 
+        /**
+         * Get the user
+         */
+        // TODO we need a function which gets task from elastic search
+        public static class getUsers extends AsyncTask<String, Void, ArrayList<User>> {
+            @Override
+            protected ArrayList<User> doInBackground(String... search_parameters) {
 
+                verifySettings ();
+                ArrayList<User> users = new ArrayList<User> ();
 
-    //*************************************************************************************************************************/
-    //*************************************************************************************************************************/
-
-    /**
-     * ADD METHODS:
-     *ADD TASK
-     */
-    // TODO we need a function which adds a Task to elastic search
-    public static class addTasks extends AsyncTask<Task, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Task... tasks) {
-
-            //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-            if (connected()){
-
-                verifySettings();
-                for (Task task : tasks) {
-                    Index index = new Index.Builder(task).index("syn-tax").type("tasks").build();
-
-                    try {
-
-                        // where is the client?
-                        DocumentResult result= client.execute(index);
-                        if(result.isSucceeded()){
-                            task.setId(result.getId());
-                        }
-                        else{
-                            Log.i("Error", "Elasticseach was not able to excute (add)");
-                        }
-
-                    }
-                    catch (Exception e) {
-                        Log.i("Error", "The application failed to build and send the tasks");
-                    }
+                //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
+                if (!connected ()) {
+                    return users;
                 }
 
+                //String for the search
+                String searchString;
+                if (search_parameters[0] == "") {
+                    searchString = "{\"from\" : 0, \"size\" : 500}";
+                } else {
+                    searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
+                }
+                // TODO Build the query
+                Search search = new Search.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "users" ).build ();
+
+                try {
+                    // TODO get the results of the query
+                    SearchResult result = client.execute ( search );
+                    if (result.isSucceeded ()) {
+                        List<User> foundUsers = result.getSourceAsObjectList ( User.class );
+                        users.addAll ( foundUsers );
+                    } else {
+                        Log.i ( "Error", "Elasticseach was not able to excute (get)" );
+                    }
+                } catch (Exception e) {
+                    Log.i ( "Error", "Something went wrong when we tried to communicate with the elasticsearch server!" );
+                }
+                return users;
+            }
+        }
+
+
+        //*************************************************************************************************************************/
+        //*************************************************************************************************************************/
+
+        /**
+         * ADD METHODS:
+         * ADD TASK
+         */
+        // TODO we need a function which adds a Task to elastic search
+        public static class addTasks extends AsyncTask<Task, Void, Void> {
+
+            @Override
+            protected Void doInBackground(Task... tasks) {
+
+                //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
+                if (connected ()) {
+
+                    verifySettings ();
+                    for (Task task : tasks) {
+                        Index index = new Index.Builder ( task ).index ( "syn-tax" ).type ( "tasks" ).build ();
+
+                        try {
+
+                            // where is the client?
+                            DocumentResult result = client.execute ( index );
+                            if (result.isSucceeded ()) {
+                                task.setId ( result.getId () );
+                            } else {
+                                Log.i ( "Error", "Elasticseach was not able to excute (add)" );
+                            }
+
+                        } catch (Exception e) {
+                            Log.i ( "Error", "The application failed to build and send the tasks" );
+                        }
+                    }
+
+                    return null;
+                }
+
+                // ELSE WERE NOT CONNECTED WRITE TO LOCAL FILE
+                taskList.addAll ( Arrays.asList ( tasks ) );
+                //Call to save to file of tasks
+                saveInFileTasks ( fileTasks );
                 return null;
             }
-
-            // ELSE WERE NOT CONNECTED WRITE TO LOCAL FILE
-            taskList.addAll(Arrays.asList(tasks));
-            //Call to save to file of tasks
-            saveInFileTasks(fileTasks);
-            return null;
         }
-    }
 
-    /**
-     * ADD USER
-     */
-    // TODO we need a function which adds a User to elastic search
-    public static class addUsers extends AsyncTask<User, Void, Void> {
+        /**
+         * ADD USER
+         */
+        // TODO we need a function which adds a User to elastic search
+        public static class addUsers extends AsyncTask<User, Void, Void> {
 
-        @Override
-        protected Void doInBackground(User... users) {
+            @Override
+            protected Void doInBackground(User... users) {
 
+                //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
+                if (connected ()) {
+                    verifySettings ();
+                    for (User user : users) {
+                        Index index = new Index.Builder ( user ).index ( "syn-tax" ).type ( "users" ).build ();
+
+                        try {
+                            // where is the client?
+                            DocumentResult result = client.execute ( index );
+                            if (result.isSucceeded ()) {
+                                user.setId ( result.getId () );
+                            } else {
+                                Log.i ( "Error", "Elasticseach was not able to excute for (add)" );
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace ();
+
+                            Log.i ( "Error", "The application failed to build and send the user" );
+                        }
+                    }
+                }
+                return null;
+            }
+        }
+
+
+        //*************************************************************************************************************************/
+        //*************************************************************************************************************************/
+        //UPDATE METHODS:
+
+        /**
+         * Update the Item
+         * If connected to the database, delete the old task, and replace with the new task
+         *
+         * @param task1 oldTask
+         * @param task2 newTask
+         */
+        public static void updateTask(Task task1, Task task2) {
             //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-            if (connected()) {
-                verifySettings();
-                for (User user : users) {
-                    Index index = new Index.Builder(user).index("syn-tax").type("users").build();
+            if (connected ()) {
+                ElasticSearchController.deleteTask delete = new ElasticSearchController.deleteTask ();
+                delete.execute ( task1.getTitle () );
+
+                AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks ();
+                execute.execute ( task2 );
+            }
+        }
+
+        /**
+         * Update the user
+         * If connected to the database, delete the old user, and replace with the new user
+         *
+         * @param user1 oldUser
+         * @param user2 newUser
+         */
+        public static void updateUser(User user1, User user2) {
+            //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
+            if (connected ()) {
+                //Delete old one
+
+                String username = user1.getUsername ();
+                ElasticSearchController.deleteUser delete = new ElasticSearchController.deleteUser ();
+                delete.execute ( username );
+
+
+                //Add new one
+                AsyncTask<User, Void, Void> execute = new ElasticSearchController.addUsers ();
+                execute.execute ( user2 );
+            }
+        }
+
+
+        //*************************************************************************************************************************/
+        //*************************************************************************************************************************/
+
+        /**
+         * DELETE METHOD TO DELETE TASKS
+         * Delete's a task
+         */
+        // TODO we need a function which gets task from elastic search
+        public static class deleteTask extends AsyncTask<String, Void, ArrayList<Task>> {
+            @Override
+            protected ArrayList<Task> doInBackground(String... search_parameters) {
+
+                verifySettings ();
+                //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
+                if (connected ()) {
+                    //String for the search
+                    String searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
+
+                    // TODO Build the delete by query
+                    DeleteByQuery task = new DeleteByQuery.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "tasks" ).build ();
 
                     try {
-                        // where is the client?
-                        DocumentResult result = client.execute(index);
-                        if (result.isSucceeded()) {
-                            user.setId(result.getId());
-                        }
-                        else {
-                            Log.i("Error", "Elasticseach was not able to excute for (add)");
-                        }
-
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-
-                        Log.i("Error", "The application failed to build and send the user");
+                        // TODO delete the user
+                        client.execute ( task );
+                    } catch (Exception e) {
+                        Log.i ( "Error", "Something went wrong when we tried to communicate with the elasticsearch server!" );
                     }
                 }
+                return null;
             }
-            return null;
         }
-    }
 
+        /**
+         * Delete's a user
+         */
+        // TODO we need a function which gets task from elastic search
+        public static class deleteUser extends AsyncTask<String, Void, ArrayList<User>> {
+            @Override
+            protected ArrayList<User> doInBackground(String... search_parameters) {
 
-    //*************************************************************************************************************************/
-    //*************************************************************************************************************************/
-    //UPDATE METHODS:
+                verifySettings ();
+                //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
+                if (connected ()) {
+                    //String for the search
+                    String searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
 
-    /**
-     * Update the Item
-     * If connected to the database, delete the old task, and replace with the new task
-     *
-     * @param task1 oldTask
-     * @param task2 newTask
-     */
-    public static void updateTask(Task task1, Task task2){
-        //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-        if (connected()){
-            ElasticSearchController.deleteTask delete = new ElasticSearchController.deleteTask();
-            delete.execute(task1.getTitle());
+                    // TODO Build the delete by query
+                    DeleteByQuery olduser = new DeleteByQuery.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "users" ).build ();
 
-            AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
-            execute.execute(task2);
-        }
-    }
-
-    /**
-     * Update the user
-     * If connected to the database, delete the old user, and replace with the new user
-
-     * @param user1 oldUser
-     * @param user2 newUser
-     */
-    public static void updateUser(User user1, User user2){
-        //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-        if (connected()){
-            //Delete old one
-
-            String username= user1.getUsername ();
-            ElasticSearchController.deleteUser delete = new ElasticSearchController.deleteUser();
-            delete.execute(username);
-
-
-            //Add new one
-            AsyncTask<User, Void, Void> execute = new ElasticSearchController.addUsers();
-            execute.execute(user2);
-        }
-    }
-
-
-    //*************************************************************************************************************************/
-    //*************************************************************************************************************************/
-
-    /**
-     * DELETE METHOD TO DELETE TASKS
-     * Delete's a task
-     */
-    // TODO we need a function which gets task from elastic search
-    public static class deleteTask extends AsyncTask<String, Void, ArrayList<Task>> {
-        @Override
-        protected ArrayList<Task> doInBackground(String... search_parameters) {
-
-            verifySettings();
-            //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-            if(connected()){
-                //String for the search
-                String searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
-
-                // TODO Build the delete by query
-                DeleteByQuery task= new DeleteByQuery.Builder(searchString).addIndex("syn-tax").addType("tasks").build();
-
-                try {
-                    // TODO delete the user
-                    client.execute(task);
+                    try {
+                        // TODO delete the user
+                        client.execute ( olduser );
+                    } catch (Exception e) {
+                        Log.i ( "Error", "Something went wrong when we tried to communicate with the elasticsearch server!" );
+                    }
                 }
-                catch (Exception e) {
-                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-                }
+                return null;
             }
-            return null;
         }
-    }
 
-    /**
-     * Delete's a user
-     */
-    // TODO we need a function which gets task from elastic search
-    public static class deleteUser extends AsyncTask<String, Void, ArrayList<User>> {
-        @Override
-        protected ArrayList<User> doInBackground(String... search_parameters) {
+        /**
+         * Deletes a task from from our list of tasks for that user
+         *
+         * @param task a task is passed to be deleted
+         */
+        public static void deleteATask(Task task) {
+            String title = task.getTitle ();
+            ElasticSearchController.deleteTask delete = new ElasticSearchController.deleteTask ();
+            delete.execute ( title );
+        }
 
-            verifySettings();
-            //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
-            if(connected()){
-                //String for the search
-                String searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
 
-                // TODO Build the delete by query
-                DeleteByQuery olduser = new DeleteByQuery.Builder(searchString).addIndex("syn-tax").addType("users").build();
+        //*************************************************************************************************************************/
+        //*************************************************************************************************************************/
 
-                try {
-                    // TODO delete the user
-                    client.execute(olduser);
-                }
-                catch (Exception e) {
-                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-                }
+        /**
+         * Connect's to the database
+         */
+        public static void verifySettings() {
+            if (client == null) {
+                DroidClientConfig.Builder builder = new DroidClientConfig.Builder ( "http://cmput301.softwareprocess.es:8080" );
+                DroidClientConfig config = builder.build ();
+
+                JestClientFactory factory = new JestClientFactory ();
+                factory.setDroidClientConfig ( config );
+                client = (JestDroidClient) factory.getObject ();
             }
-            return null;
-        }
-    }
-
-    /**
-     * Deletes a task from from our list of tasks for that user
-     * @param task a task is passed to be deleted
-     */
-    public static void deleteATask(Task task){
-        String title= task.getTitle ();
-        ElasticSearchController.deleteTask delete= new ElasticSearchController.deleteTask ();
-        delete.execute ( title );
-    }
-
-
-    //*************************************************************************************************************************/
-    //*************************************************************************************************************************/
-
-    /**
-     * Connect's to the database
-     */
-    public static void verifySettings() {
-        if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
-            DroidClientConfig config = builder.build();
-
-            JestClientFactory factory = new JestClientFactory();
-            factory.setDroidClientConfig(config);
-            client = (JestDroidClient) factory.getObject();
-        }
-    }
-
-
-    /**
-     * Check's Connectivity
-     * @return true if were connected to the network and false if were not
-     */
-    public static boolean connected(){
-
-        //Boolean to return whether or not were connected to the server
-        boolean available=false;
-
-        if (context == null){
-            return false;
         }
 
-        ConnectivityManager manager= (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
-        assert manager != null;
-        NetworkInfo network=manager.getActiveNetworkInfo();
+
+        /**
+         * Check's Connectivity
+         *
+         * @return true if were connected to the network and false if were not
+         */
+        public static boolean connected() {
+
+            //Boolean to return whether or not were connected to the server
+            boolean available = false;
+
+            if (context == null) {
+                return false;
+            }
+
+            ConnectivityManager manager = (ConnectivityManager) context.getSystemService ( CONNECTIVITY_SERVICE );
+            assert manager != null;
+            NetworkInfo network = manager.getActiveNetworkInfo ();
 
 
-        if(network!= null && network.isConnected()){
-            available=true;
+            if (network != null && network.isConnected ()) {
+                available = true;
+            }
+
+            return available;
         }
 
-        return available;
-    }
-
-    /**
-     * @return the context
-     */
-    public static Context getContext(){
-        return context;
-    }
+        /**
+         * @return the context
+         */
+        public static Context getContext() {
+            return context;
+        }
 }

@@ -304,7 +304,7 @@ public class Task {
      */
     @Override
     public String toString(){
-        String message = this.title +  this.description + this.requester.toString();
+        String message = this.title +','+  this.description +','+ this.requester.toString();
         return message;
     }
 

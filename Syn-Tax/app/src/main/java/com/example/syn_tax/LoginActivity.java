@@ -81,20 +81,23 @@ public class LoginActivity extends AppCompatActivity {
         thisButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ElasticSearchController.connected()) {
+                if (!(ElasticSearchController.connected())) {
+                    Toast toasty = Toast.makeText ( LoginActivity.this, "Cannot Login, No Internet Connection.", Toast.LENGTH_LONG );
+                    toasty.setGravity ( Gravity.CENTER, 0, 300 );
+                    toasty.show ();
+                }
+
+                else{
                     TextView Usernm = findViewById(R.id.username);
                     String str_username = Usernm.getText().toString();
                     if (getThisUser(str_username)) {
                         loginBtn();
-                    } else {
+                    }
+                    else {
                         Toast toasty = Toast.makeText(LoginActivity.this, "Invalid username has been entered.", Toast.LENGTH_LONG);
                         toasty.setGravity(Gravity.CENTER, 0, 300);
                         toasty.show();
                     }
-                } else {
-                    Toast toasty = Toast.makeText(LoginActivity.this, "Cannot Login, No Internet Connection.", Toast.LENGTH_LONG);
-                    toasty.setGravity(Gravity.CENTER, 0, 300);
-                    toasty.show();
                 }
             }
         });
@@ -134,8 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                 userList = allUsers.get();
 
                 //Check to see if the user entered a username in the system
-                if (userList.get ( 0 ).getUsername ().equals ( username )){
-                    //If they did set thisuser to the username entered
+                if(userList.size ()>=1){
                     LoginActivity.thisuser = userList.get(0);
                     authenticate = true;
                 }

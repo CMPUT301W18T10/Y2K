@@ -95,7 +95,7 @@ public class User {
      */
     @Override
     public String toString(){
-        String message = "Username: "+ info.get(0);
+        String message = info.get(0);
         return message;
     }
 }

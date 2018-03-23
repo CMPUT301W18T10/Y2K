@@ -91,23 +91,22 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-<<<<<<< HEAD
      * Loads in the tasks for a user
-=======
      * Grab the list of tasks we requested
->>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     private static void loadTaskListRequester(){
         ArrayList<Task> allTasksList;
-        ElasticSearchController.getTasks allTasks = new ElasticSearchController.getTasks();
+        ElasticSearchController.getTasks allTasks = new ElasticSearchController.getTasks ();
         try {
-            allTasks.execute("");
+            allTasks.execute("", LoginActivity.thisuser.getUsername ());
             allTasksList = allTasks.get();
+            Log.e("list", allTasksList.toString ());
 
-            for(int i = 0; i < allTasksList.size();i++){
-                if(allTasksList.get(i).getRequester().getUsername ().equals(LoginActivity.thisuser.getUsername ())){
-                    requestedTasks.add(allTasksList.get(i));
-                }
+            if(allTasksList.size()>0){
+                requestedTasks.addAll (allTasksList);
+            }
+            else{
+                requestedTasks= new ArrayList<Task> (  );
             }
 
         }
@@ -117,13 +116,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-<<<<<<< HEAD
      * Button click for adding a new task
      * @param view is the current view
-=======
      * Go to AddTaskActivity page
-     * @param view
->>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     public void addTaskBtn(View view){
         Intent intent = new Intent(this, AddTaskActivity.class);
@@ -132,13 +127,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-<<<<<<< HEAD
      * Button click for going to search activity
      * @param view is the current view
-=======
      * Go to the SearchActivity page
-     * @param view
->>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     public void searchBtn(View view){
         Intent intent= new Intent(this, SearchActivity.class);
@@ -146,13 +137,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-<<<<<<< HEAD
      * button click for going to the home activity
      * @param view is the current view
-=======
      * Go to the HomeActivity page
-     * @param view
->>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     public void homeBtn(View view){
         Intent intent= new Intent(this, HomeActivity.class);
@@ -160,13 +147,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-<<<<<<< HEAD
      * button click for a user profile
      * @param view is the current view
-=======
      * Go to the UserProfileActivity
-     * @param view
->>>>>>> e46bfb2318fce21c0df77c30141493e565383056
      */
     public void userInfo(View view){
         Intent intent= new Intent(this, UserProfileActivity.class);
