@@ -16,12 +16,15 @@ package com.example.syn_tax;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -58,7 +61,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         final View data = inf.inflate(R.layout.task_list_item, parent, false);
 
         // gets the data to be displayed for a list item based on its position in the array
-        String taskTitle = getItem(pos).getTitle();
+        final String taskTitle = getItem(pos).getTitle();
         requester = getItem(pos).getRequester();
         final String taskUsername= requester.getUsername ();
         final String loginUsername= LoginActivity.thisuser.getUsername ();
@@ -81,11 +84,11 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             public void onClick(View v){
                 // for a task of a requester
                 if(loginUsername.equals ( taskUsername )){
-                    edit_or_view(pos,EditTaskActivity.class);
+                    edit_or_view(v,pos,EditTaskActivity.class, taskTitle);
                 }
                 // for a task of a provider
                 else{
-                    edit_or_view(pos,ViewTaskProviderActivity.class);
+                    edit_or_view(v,pos,ViewTaskProviderActivity.class, taskTitle);
                 }
             }
         });
@@ -95,9 +98,23 @@ public class TaskAdapter extends ArrayAdapter<Task> {
      * @param pos position of a list item
      * @param c class for the intent
      */
-    private void edit_or_view(int pos, Class c){
-        Intent intent = new Intent(getContext(),c);
-        intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
-        ((Activity)getContext()).startActivityForResult(intent,0);
+    private void edit_or_view(View v,int pos, Class c,String title){
+//        Intent intent = new Intent(getContext(),c);
+//        intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
+//        ((Activity)getContext()).startActivityForResult(intent,0);
+        initPopup(v,title);
     }
+    private void initPopup(View v, String popupText){
+        final LayoutInflater inflater = LayoutInflater.from(getContext());
+        final View pop = inflater.inflate(R.layout.popup, null);
+
+        final PopupWindow window = new PopupWindow(pop, 850,680,true);
+        window.showAtLocation(v, Gravity.CENTER,0,0);
+        window.setAnimationStyle(R.style.Animation);
+        TextView ptext = (TextView) pop.findViewById(R.id.popup_text);
+        window.setFocusable(true);
+        window.update();
+        ptext.setText(popupText);
+    }
+
 }
