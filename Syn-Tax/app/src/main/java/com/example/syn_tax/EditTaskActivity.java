@@ -118,7 +118,6 @@ public class EditTaskActivity extends AppCompatActivity {
                     if (isValid ()) {
                         //Instantiate a object of type Task
                         // added in the username of the requester - Aidan
-                        //TODO delete the task from the elastic search then add this one
                         Task tempTask = task;
 
                         EditText title = findViewById(R.id.editTaskTitle);

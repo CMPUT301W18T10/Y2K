@@ -44,6 +44,7 @@ public class Task {
     public String status;
     public double latitude;
     public double longitude;
+    public double lowestBid;
 
     private transient Bitmap photo;
     private String photoString;
@@ -320,6 +321,23 @@ public class Task {
         this.description=description;
         this.requester= requester;
         this.status=status;
+    }
+
+    //gets the lowest bids
+    public Bid getLowestBid() {
+        Bid bid = bids.get(0);
+        for (int i = 0; i < bids.size(); i++) {
+            if (bids.indexOf(i) < bids.indexOf(i+1)) {
+                bid  = bids.get(i);
+            }
+            else if(bids.indexOf(i+1)< bids.indexOf(i)){
+                bid = bids.get(i+1);
+
+            }
+
+        }
+
+        return bid;
     }
 }
 

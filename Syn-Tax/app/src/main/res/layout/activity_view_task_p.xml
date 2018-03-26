@@ -116,8 +116,8 @@
 
         <ImageButton
             android:id="@+id/photoBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             app:srcCompat="@android:drawable/ic_menu_camera" />
@@ -142,13 +142,13 @@
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/locationBtn"
+        <EditText
+            android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:background="@color/colorPrimary"
-            app:srcCompat="@android:drawable/ic_dialog_map" />
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <LinearLayout
