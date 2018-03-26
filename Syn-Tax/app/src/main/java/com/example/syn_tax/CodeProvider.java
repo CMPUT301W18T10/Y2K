@@ -11,6 +11,7 @@
  * Last Modified 24/03/18 2:41 PM
  */
 
+
 package com.example.syn_tax;
 
 import android.os.Bundle;
@@ -28,11 +29,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class CodeProvider extends AppCompatActivity {
+    //this allows the user to write code in an edittext then save it
+    //todo get the task requester to get this saved "code"
     private static final String FILE_NAME = "code.txt";
 
     EditText codes;
     Button save,load;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
