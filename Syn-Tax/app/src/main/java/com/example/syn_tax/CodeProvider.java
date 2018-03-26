@@ -11,9 +11,11 @@
  * Last Modified 24/03/18 2:41 PM
  */
 
+/*Citations: https://www.youtube.com/watch?v=EcfUkjlL9RI
+            March 25 2018
+ */
 
 package com.example.syn_tax;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
