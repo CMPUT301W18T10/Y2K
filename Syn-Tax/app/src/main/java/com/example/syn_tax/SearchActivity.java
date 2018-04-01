@@ -22,38 +22,113 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.ui.PlacePicker;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 
 /**
  * SearchActivity Class
  *
  * Feb 22, 2018
  *
- * Search for a task
+ * Search for a particular task
  *
  * @see SearchActivity
  * @see HomeActivity
  * @see UserProfileActivity
  */
 public class SearchActivity extends AppCompatActivity {
+    int PLACE_LOCATION_REQUESTED = 1;
     private String keywords;
+    private ListView listOfTasks;
+    private ArrayList<Task> specificTasks= new ArrayList<Task> (  );
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        ListView listOfTasks = findViewById(R.id.searches);
-        EditText keywords= findViewById(R.id.keywords);
+        listOfTasks = findViewById(R.id.searches);
         Button search = (Button) findViewById(R.id.search);
+
+        //Initially grab all the tasks from ELastic search, by passing in nothing(Empty string)
+        try {
+            searching ( "" );
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
+        //When the user selects the searchBtn then call searching to return the list of tasks
+        //Match the keywords entered
+        search.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                EditText keywords= findViewById(R.id.keywords);
+                String words= keywords.getText().toString ();
+                //Pass in the keywords to searching to get tasks that match
+                try {
+                    searching(words);
+                } catch (ExecutionException e) {
+                    e.printStackTrace ();
+                } catch (InterruptedException e) {
+                    e.printStackTrace ();
+                }
+            }
+        } );
     }
+
 
     /**
      * User searches passing in a keyword to match a task title
      * @param keywords String
      */
-    public void searching(String keywords) {
+    public void searching(String keywords) throws ExecutionException, InterruptedException {
         //DO SOMETHING
+        if (ElasticSearchController.connected ()){
+            //Get all the tasks with the keywords entered
+            ElasticSearchController.searchingTasks search= new ElasticSearchController.searchingTasks ();
+            search.execute ( keywords );
+
+            ArrayList<Task> tasks= new ArrayList<Task> (  );
+            tasks= search.get ();
+            //Filter through the tasks we got to make sure status== "requested" or "bidded"
+            for(int i=0; i< tasks.size (); i++){
+                if(tasks.get(i).getStatus ()=="requested" || tasks.get(i).getStatus ()=="bidded"){
+                    specificTasks.add(tasks.get ( i ));
+                }
+            }
+
+            //CALL TO SET THE ADAPTER FOR THE LIST VIEW
+        }
     }
+
+
+    /**
+     * Pick a location
+     * @param view
+     */
+    public void goLocationPicker(View view) {
+        //calling the place picker function
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        try {
+            startActivityForResult(builder.build(SearchActivity.this), PLACE_LOCATION_REQUESTED);
+
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     /**
      * User directed to the searchActivity

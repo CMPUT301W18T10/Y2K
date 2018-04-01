@@ -29,14 +29,37 @@ public class Bid {
 
     private double bidAmount;
     private String bidUserName;
+    private Task task;
+    private String id;
 
     /**
      * Constructor for a bid
      * @param bidAmount Amount bidded
      * @param bidUserName The person that made the bid
      */
-    public Bid(double bidAmount, String bidUserName) {
+    public Bid(String bidUserName, double bidAmount, Task task) {
+        bidUserName=bidUserName;
+        bidAmount=bidAmount;
+        task=task;
     }
+
+    //SETTERS AND GETTERS FOR ID
+    /**
+     * Set the id of a bid
+     * @param id
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the id of a bid
+     * @return the id of the bid
+     */
+    public String getId() {
+        return id;
+    }
+
 
 
     /**
@@ -70,7 +93,5 @@ public class Bid {
     public String getBidUserName(){
         return this.bidUserName;
     }
-
-
 
 }

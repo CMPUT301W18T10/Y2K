@@ -13,10 +13,12 @@
     android:background="@drawable/syn_taxsearch"
     tools:context=".SearchActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity ="bottom|center_horizontal"
+        android:layout_height="match_parent"
+        android:layout_weight="7.7"
+        android:gravity="bottom|center_horizontal"
         android:orientation="horizontal">
 
         <EditText
@@ -24,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint=" Enter Keyword"
+            android:hint=" Enter Keywords"
             android:textColor="@color/colorPrimaryDark" />
 
         <Button
@@ -35,18 +37,19 @@
             android:text="Search" />
     </LinearLayout>
 
-
     <ListView
         android:id="@+id/searches"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="8.5"
-        android:scrollbars="vertical" />
+        android:layout_weight="2.3"
+        android:scrollbars="vertical">
+
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -54,15 +57,15 @@
         <ImageButton
             android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
             android:layout_weight="0.33"
             android:onClick="searchBtn"
-            app:srcCompat="?android:attr/actionModeWebSearchDrawable"/>
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
         <ImageButton
             android:id="@+id/homeBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
             android:layout_weight="0.33"
             android:onClick="homeBtn"
             app:srcCompat="@drawable/ic_home_black_24dp" />
@@ -75,6 +78,28 @@
             android:onClick="userInfo"
             android:tint="@android:color/black"
             app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="goLocationPicker"
+            android:text="MAP"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

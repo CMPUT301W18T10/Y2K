@@ -59,66 +59,66 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task_p);
-
-        //printing the task information
-        Task task;
-
-
-        //UNDERLINE Titles
-        TextView title = findViewById(R.id.title);
-        title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
-        Intent intent = getIntent();
-        //need to get the location of where the user clicks on search
-        pos = Integer.parseInt(intent.getStringExtra(SearchActivity.POINTER));
-        //some function in search that loads the tasks and adds it to a list
-        //todo change Tasks to the name of the provided list instead
-        final Task task = HomeActivity.providedTasks.get(pos);
-
-        printTask(task);
-        Title = task.getTitle();
-        Descriptions = task.getDescription();
-
-        //getData
-        EditText username = findViewById(R.id.username);
-        EditText description = findViewById(R.id.description);
-        ImageView photo = findViewById(R.id.photoBtn);
-        EditText location = findViewById(R.id.location);
-        EditText status = findViewById(R.id.status);
-        EditText bid = findViewById(R.id.lowestBid);
-        final Button saveBtn = (Button) findViewById(R.id.savebutton);
-
-        title.setFocusable(false);
-        description.setFocusable(false);
-        location.setFocusable(false);
-        bid.setFocusable(false);
-
-        description.setClickable(false);
-        title.setClickable(false);
-        location.setClickable(false);
-        bid.setClickable(false);
-        photo.setClickable(false);
-
-
-        //get user bid and add it to our bidlist
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText mybids = (EditText) findViewById(R.id.bid);
-                String mybid_a = mybids.getText().toString();
-                Double my_bid_amount = Double.parseDouble(mybid_a);
-
-                String str_username = LoginActivity.thisuser.toString();
-
-
-                Bid mybid_amounts = new Bid(my_bid_amount,str_username);
-                task.addBid(mybid_amounts);
-                saveBtn();
-                //todo check if user can have more than one bid on a task
-                //todo if not change bids to only add if username is not there already
-
-            }
-        });
+//
+//        //printing the task information
+//        Task task;
+//
+//
+//        //UNDERLINE Titles
+//        TextView title = findViewById(R.id.title);
+//        title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//
+//        Intent intent = getIntent();
+//        //need to get the location of where the user clicks on search
+//        pos = Integer.parseInt(intent.getStringExtra(SearchActivity.POINTER));
+//        //some function in search that loads the tasks and adds it to a list
+//        //todo change Tasks to the name of the provided list instead
+//        final Task task = HomeActivity.providedTasks.get(pos);
+//
+//        printTask(task);
+//        Title = task.getTitle();
+//        Descriptions = task.getDescription();
+//
+//        //getData
+//        EditText username = findViewById(R.id.username);
+//        EditText description = findViewById(R.id.description);
+//        ImageView photo = findViewById(R.id.photoBtn);
+//        EditText location = findViewById(R.id.location);
+//        EditText status = findViewById(R.id.status);
+//        EditText bid = findViewById(R.id.lowestBid);
+//        final Button saveBtn = (Button) findViewById(R.id.savebutton);
+//
+//        title.setFocusable(false);
+//        description.setFocusable(false);
+//        location.setFocusable(false);
+//        bid.setFocusable(false);
+//
+//        description.setClickable(false);
+//        title.setClickable(false);
+//        location.setClickable(false);
+//        bid.setClickable(false);
+//        photo.setClickable(false);
+//
+//
+//        //get user bid and add it to our bidlist
+//        saveBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                EditText mybids = (EditText) findViewById(R.id.bid);
+//                String mybid_a = mybids.getText().toString();
+//                Double my_bid_amount = Double.parseDouble(mybid_a);
+//
+//                String str_username = LoginActivity.thisuser.toString();
+//
+//
+//                Bid mybid_amounts = new Bid(my_bid_amount,str_username);
+//                task.addBid(mybid_amounts);
+//                saveBtn();
+//                //todo check if user can have more than one bid on a task
+//                //todo if not change bids to only add if username is not there already
+//
+//            }
+//        });
     }
 
     private void saveBtn() {

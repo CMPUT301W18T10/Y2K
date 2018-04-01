@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -130,7 +131,6 @@ public class EditTaskActivity extends AppCompatActivity {
 
                         task.editTask(stitle, sdesc,LoginActivity.thisuser, sstatus);
                         ElasticSearchController.updateTask ( tempTask, task );
-                        HomeActivity.requestedAdapter.notifyDataSetChanged();
                         updateButton();
                     }
                 }
@@ -151,7 +151,6 @@ public class EditTaskActivity extends AppCompatActivity {
             });
 
             //Update Button
-
             Button updateButton  = (Button) findViewById(R.id.updateBtn);
             updateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -169,19 +168,18 @@ public class EditTaskActivity extends AppCompatActivity {
                         //Instantiate a object of type Task
                         // added in the username of the requester - Aidan
                         //TODO delete the task from the elastic search then add this one
-                        Task tempTask = task;
-                        task.editTask(stitle, sdesc,LoginActivity.thisuser, sstatus);
+
+                        Task tempTask= new Task(stitle, sdesc,LoginActivity.thisuser, sstatus);
                         // Check to add a photo to the task
                         if (photoStatus == 1) {
-                            task.setPhoto(photo);
+                            tempTask.setPhoto(photo);
                         }
                         //Check to add a location to a task
                         if (locationStatus == 1) {
-                            task.setLocation(latitude,longitude);
+                            tempTask.setLocation(latitude,longitude);
                         }
 
-                        ElasticSearchController.updateTask ( tempTask, task );
-                        HomeActivity.requestedAdapter.notifyDataSetChanged();
+                        ElasticSearchController.updateTask ( task, tempTask );
                         updateButton();
                     }
                 }
@@ -325,18 +323,32 @@ public class EditTaskActivity extends AppCompatActivity {
      */
     private boolean checkName(String title) throws ExecutionException, InterruptedException {
         Boolean check= true;
-
-        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
-        tasks.execute (title, "");
         ArrayList<Task> allTasks;
-        allTasks=tasks.get();
+        ElasticSearchController.getTasks tasks = new ElasticSearchController.getTasks ();
 
-        for(int i=0; i<allTasks.size (); i++){
-            if(allTasks.get(i).getRequester ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
-                check=false;
+        if(ElasticSearchController.connected ()) {
+            tasks.execute ( title, "" );
+            allTasks = tasks.get ();
+
+            for (int i = 0; i < allTasks.size (); i++) {
+                if (allTasks.get ( i ).getRequester ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )) {
+                    check = false;
+                }
             }
         }
+
+        else{
+            tasks.execute ("");
+            allTasks=tasks.get();
+            for(int i=0; i<allTasks.size (); i++){
+                if(allTasks.get(i).getTitle ().equals ( title)){
+                    check=false;
+                }
+            }
+        }
+
         return check;
+
     }
 
 

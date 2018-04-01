@@ -27,6 +27,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -168,18 +169,30 @@ public class AddTaskActivity extends AppCompatActivity{
      */
     private boolean checkName(String title) throws ExecutionException, InterruptedException {
         Boolean check= true;
-
-        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
-        tasks.execute (title, "");
         ArrayList<Task> allTasks;
-        allTasks=tasks.get();
+        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks();
 
-        for(int i=0; i<allTasks.size (); i++){
-            if(allTasks.get(i).getRequester ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
-                check=false;
+        if(ElasticSearchController.connected ()){
+            tasks.execute (title, "");
+            allTasks=tasks.get();
+
+            for(int i=0; i<allTasks.size (); i++){
+                if(allTasks.get(i).getRequester ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
+                    check=false;
+                }
             }
         }
 
+        else{
+            tasks.execute ("");
+
+            allTasks=tasks.get();
+            for(int i=0; i<allTasks.size (); i++){
+                if(allTasks.get(i).getTitle ().equals ( title)){
+                    check=false;
+                }
+            }
+        }
         return check;
     }
 

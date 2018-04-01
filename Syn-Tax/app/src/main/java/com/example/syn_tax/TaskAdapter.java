@@ -14,7 +14,9 @@
 package com.example.syn_tax;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Layout;
 import android.util.Log;
@@ -84,11 +86,11 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             public void onClick(View v){
                 // for a task of a requester
                 if(loginUsername.equals ( taskUsername )){
-                    edit_or_view(v,pos,EditTaskActivity.class, taskTitle);
+                    edit_or_view(v,pos,EditTaskActivity.class, taskTitle, "edit");
                 }
                 // for a task of a provider
                 else{
-                    edit_or_view(v,pos,ViewTaskProviderActivity.class, taskTitle);
+                    edit_or_view(v,pos,ViewTaskProviderActivity.class, taskTitle, "view");
                 }
             }
         });
@@ -98,23 +100,58 @@ public class TaskAdapter extends ArrayAdapter<Task> {
      * @param pos position of a list item
      * @param c class for the intent
      */
-    private void edit_or_view(View v,int pos, Class c,String title){
-//        Intent intent = new Intent(getContext(),c);
-//        intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
-//        ((Activity)getContext()).startActivityForResult(intent,0);
-        initPopup(v,title);
-    }
-    private void initPopup(View v, String popupText){
-        final LayoutInflater inflater = LayoutInflater.from(getContext());
-        final View pop = inflater.inflate(R.layout.popup, null);
+    private void edit_or_view(final View v,final int pos, final Class c, final String title, String todo){
+        //USER CAN only view/edit a task that they have bidded on
+        if (todo== "view"){
+            Intent intent = new Intent(getContext(),c);
+            intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
+            ((Activity)getContext()).startActivityForResult(intent,0);
+        }
 
-        final PopupWindow window = new PopupWindow(pop, 850,680,true);
-        window.showAtLocation(v, Gravity.CENTER,0,0);
-        window.setAnimationStyle(R.style.Animation);
-        TextView ptext = (TextView) pop.findViewById(R.id.popup_text);
-        window.setFocusable(true);
-        window.update();
-        ptext.setText(popupText);
-    }
+        //USER CAN EDIT AND DELETE ITS OWN TASK
+        else{
 
+            /**
+             * DELETE or EDIT From the list of tasks when a task is CLicked on
+             */
+
+            AlertDialog.Builder btn = new AlertDialog.Builder(getContext ());
+            btn.setMessage("DELETE OR EDIT A TASK");
+
+            //Set the integer position1 to be constant so it can not be reassigned
+            final int position1=pos;
+
+            //DELETE the Task
+            btn.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                @Override
+                /**
+                 * DELETE the Task
+                 */
+                public void onClick(DialogInterface dialog, int which) {
+                    ElasticSearchController.deleteTask delete= new ElasticSearchController.deleteTask();
+                    delete.execute ( title);
+                    Intent intent= new Intent(getContext (), HomeActivity.class);
+                    ((Activity)getContext()).startActivityForResult(intent,0);
+                }
+            });
+
+            //EDIT the Task
+            btn.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+                @Override
+                /**
+                 * EDIT the task
+                 */
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(getContext(),c);
+                    intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
+                    ((Activity)getContext()).startActivityForResult(intent,0);
+                }
+            });
+
+            // Call to show the Alert Message
+            btn.show();
+
+
+        }
+    }
 }

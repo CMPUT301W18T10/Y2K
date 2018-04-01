@@ -221,6 +221,8 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
         }
     }
 
+
+
     /**
      * Test to make sure were successfully connected to the Database
      */

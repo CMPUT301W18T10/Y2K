@@ -13,6 +13,7 @@
 
 package com.example.syn_tax;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +46,7 @@ import java.util.ArrayList;
  */
 public class HomeActivity extends AppCompatActivity {
     public static ArrayAdapter<Task> requestedAdapter;
-    public static ArrayList<Task> requestedTasks;
+    public static ArrayList<Task> requestedTasks=  new ArrayList<Task>();;
     public static ArrayAdapter<Task> distributedAdapter;
     public static ArrayList<Task> distributedTasks;
     public static final String POINTER = "Task_Position";
@@ -72,7 +73,6 @@ public class HomeActivity extends AppCompatActivity {
         //views for the 2 separate lists
         requestedListView = (ListView) findViewById(R.id.requestlist);
         distributedListView = (ListView) findViewById(R.id.distributelist);
-        requestedTasks = new ArrayList<Task>();
         distributedTasks = new ArrayList<Task>();
 
     }
@@ -97,23 +97,27 @@ public class HomeActivity extends AppCompatActivity {
     private static void loadTaskListRequester(){
         ArrayList<Task> allTasksList;
         ElasticSearchController.getTasks allTasks = new ElasticSearchController.getTasks ();
+
         try {
             allTasks.execute("", LoginActivity.thisuser.getUsername ());
             allTasksList = allTasks.get();
-            Log.e("list", allTasksList.toString ());
-
+            //IF CONNECTED THEN UPDATE
+            //ELSE add the new tasks to the requested tasks
             if(allTasksList.size()>0){
-                requestedTasks.addAll (allTasksList);
+                requestedTasks=allTasksList;
             }
+
             else{
                 requestedTasks= new ArrayList<Task> (  );
             }
-
+            Log.e("sss", requestedTasks.toString ());
         }
+
         catch(Exception e){
             allTasksList = new ArrayList<Task>();
         }
     }
+
 
     /**
      * Button click for adding a new task

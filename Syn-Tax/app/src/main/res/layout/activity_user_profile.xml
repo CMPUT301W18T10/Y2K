@@ -122,7 +122,7 @@
         <ImageButton
             android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
             android:layout_weight="0.33"
             android:onClick="searchBtn"
             app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
@@ -130,7 +130,7 @@
         <ImageButton
             android:id="@+id/homeBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
             android:layout_weight="0.33"
             android:onClick="homeBtn"
             app:srcCompat="@drawable/ic_home_black_24dp" />
@@ -138,7 +138,7 @@
         <ImageButton
             android:id="@+id/userInfoBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
             android:layout_weight="0.33"
             android:onClick="userProfileBtn"
             android:tint="@android:color/black"
