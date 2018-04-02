@@ -13,7 +13,6 @@
 
 package com.example.syn_tax;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
@@ -63,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //UNDERLINE Titles
-        TextView title = findViewById(R.id.title);
+        TextView title = findViewById(R.id.title );
         TextView requestTitle = findViewById(R.id.requestCodeTitle);
         TextView distributeTitle = findViewById(R.id.distributeCodeTitle);
 

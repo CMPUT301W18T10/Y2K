@@ -19,7 +19,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //UNDERLINE Titles
-        TextView title = findViewById(R.id.title);
+        TextView title = findViewById(R.id.title );
         title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         Button userButton = findViewById(R.id.usernameBtn);
         userButton.setText(LoginActivity.thisuser.retrieveInfo().get(0));

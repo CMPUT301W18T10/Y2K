@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Hamsemare on 2018-02-21.
@@ -51,7 +52,6 @@ public class Task {
 
     private ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
     public static ArrayAdapter<Bid> bidAdapter; // For custom adapter to work
-    private ArrayList<Bid> bids = new ArrayList<Bid>();
     private User requester;
     private User provider;
 
@@ -217,53 +217,22 @@ public class Task {
 
     //SETTERS AND GETTERS FOR THE BIDS OF A TASK
 
-    /**
-     * Get the List of bids
-     * @return a arrayList of bids
-     */
-    public ArrayList<Bid> returnBids(){
-        return bids;
-    }
 
     /**
      * Add a bid for the task
      * @param newBid
      */
     public void addBid(Bid newBid){
-        bids.add(newBid);
+        ElasticSearchController.addBids add= new ElasticSearchController.addBids ();
+        add.execute ( newBid );
     }
 
     /**
      * Delete a bid for the task
-     * @param pos
+     * @param oldBid old bid to be deleted
      */
-    public void deleteBid(int pos){
-        bids.remove(pos);
+    public void deleteBid(Bid oldBid){
     }
-
-    /**
-     * Check if a bid is already bidded
-     * @param bid
-     * @return
-     */
-    public boolean hasBid(Bid bid){
-        if (bids.contains(bid))
-            return true;
-        else
-            return false;
-    }
-
-    /**
-     * Clear the list of bids of task
-     */
-//    public void clearBids(){
-//        for ( int i = (bids.size()-1); i >=0; i--) {
-//            Bid bid = bids.get(i);
-//            if (bid.getBidStatus() == "Declined"){
-//                bids.remove(bid);
-//            }
-//        }
-//    }
 
 
     //SETTERS AND GETTERS FOR THE A PHOTO OF A TASK
@@ -305,7 +274,13 @@ public class Task {
      */
     @Override
     public String toString(){
-        String message = this.title +','+  this.description +','+ this.requester.toString();
+        String message;
+        if (this.requester!=null) {
+            message = this.title + ',' + this.description + ',' + this.requester.toString ();
+        }
+        else{
+            message = this.title + ',' + this.description;
+        }
         return message;
     }
 
@@ -323,18 +298,20 @@ public class Task {
         this.status=status;
     }
 
-    //gets the lowest bids
-    public Bid getLowestBid() {
-        Bid bid = bids.get(0);
-        for (int i = 0; i < bids.size(); i++) {
-            if (bids.indexOf(i) < bids.indexOf(i+1)) {
-                bid  = bids.get(i);
-            }
-            else if(bids.indexOf(i+1)< bids.indexOf(i)){
-                bid = bids.get(i+1);
+    //gets the lowest bid
+    public Bid getLowestBid() throws ExecutionException, InterruptedException {
+        ElasticSearchController.getBids get= new ElasticSearchController.getBids ();
+        get.execute ( title );
+        ArrayList<Bid> bids= get.get ();
+        if (bids.size ()==0){
+            return null;
+        }
 
+        Bid bid= bids.get ( 0 );
+        for(int i=1; i<bids.size ();i++){
+            if(bids.get ( i ).getBidAmount ()>bid.getBidAmount ()){
+                bid=bids.get ( i );
             }
-
         }
 
         return bid;

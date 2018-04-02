@@ -15,9 +15,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="8"
-        android:gravity="center_horizontal|center"
+        android:layout_height="match_parent"
+        android:layout_weight="2.5"
+        android:gravity="left|center"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -25,8 +25,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_height="243dp"
+        android:layout_weight="1.1"
         android:gravity="left|center"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -61,7 +61,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="1"
+        android:layout_weight=".25"
         android:gravity="left|center"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -94,8 +94,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:layout_weight="2.7"
         android:gravity="left|center"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -123,8 +123,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:layout_weight="2.7"
         android:gravity="left|center"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -160,8 +160,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:layout_weight="2.7"
         android:gravity="left|center"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -195,22 +195,74 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_weight="2.7"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="LOWEST AMOUNT: "
+            android:textAlignment="textStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="NONE"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.7"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/bids"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#0b6694"
+            android:text="BIDS"
+            android:textAlignment="center"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.7"
+        android:gravity="left|center"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <Button
             android:id="@+id/updateBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:background="@color/colorPrimaryDark"
             android:text="update"
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
-            android:textSize="30sp" />
+            android:textSize="36sp" />
     </LinearLayout>
 
 </LinearLayout>

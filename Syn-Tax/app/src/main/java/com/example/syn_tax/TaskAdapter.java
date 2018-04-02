@@ -122,7 +122,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             final int position1=pos;
 
             //DELETE the Task
-            btn.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+            btn.setNeutralButton ("Delete", new DialogInterface.OnClickListener() {
                 @Override
                 /**
                  * DELETE the Task
@@ -143,6 +143,21 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                  */
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(getContext(),c);
+                    intent.putExtra ("state", "edit");
+                    intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
+                    ((Activity)getContext()).startActivityForResult(intent,0);
+                }
+            });
+
+            //EDIT the Task
+            btn.setNegativeButton ("View", new DialogInterface.OnClickListener() {
+                @Override
+                /**
+                 * EDIT the task
+                 */
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(getContext(),c);
+                    intent.putExtra ("state", "view");
                     intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
                     ((Activity)getContext()).startActivityForResult(intent,0);
                 }

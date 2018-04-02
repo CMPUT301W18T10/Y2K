@@ -154,6 +154,13 @@ public class AddTaskActivity extends AppCompatActivity{
                     }
                     AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
                     execute.execute(newtask);
+
+                    long num=300;
+                    try {
+                        Thread.sleep(num);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace ();
+                    }
                     done();
                 }
             }

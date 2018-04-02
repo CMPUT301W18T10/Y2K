@@ -332,7 +332,7 @@ public class ElasticSearchController extends Application {
                 searchString = "{\"from\" : 0, \"size\" : 500}";
             }
             else {
-                searchString = "{\"query\":{\"match\":{\"task\":\"" + search_parameters[0] + "\"}}}";
+                searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
             }
             // TODO Build the query
             Search search = new Search.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "bids" ).build ();

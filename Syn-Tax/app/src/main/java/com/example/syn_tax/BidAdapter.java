@@ -13,6 +13,7 @@
 
 package com.example.syn_tax;
 
+import android.app.Activity;
 import android.content.Context;
 
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +38,8 @@ import java.util.ArrayList;
 
 public class BidAdapter extends ArrayAdapter<Bid> {
     private ArrayList<Bid> bids;
+    private Task task;
+
     public BidAdapter(Context context, ArrayList<Bid> bids){
         super(context, R.layout.bid_list_item, bids);
     }
@@ -44,6 +48,24 @@ public class BidAdapter extends ArrayAdapter<Bid> {
     public View getView(final int pos, View convertView, ViewGroup parent){
         LayoutInflater inf = LayoutInflater.from(getContext());
         final View data = inf.inflate(R.layout.bid_list_item, parent, false);
+
+        //FLAG TO TELL US IF WE ARE THE OWNER OF A THE TASK
+        Boolean owner= true;
+
+
+        //Get the task its self
+        task= getItem ( pos ).getTask ();
+
+        //IF THE USER IS NOT THE OWNER OF THE TASK HIDE THE ACCEPT BUTTON AND DECLINE BUTTON
+        String usernameOFTask= task.getRequester ().getUsername ();
+        if(!LoginActivity.thisuser.getUsername ().equals ( usernameOFTask )){
+            owner=false;
+            Button accept= data.findViewById ( R.id.accept );
+            Button decline= data.findViewById ( R.id.decline);
+            accept.setVisibility ( View.GONE );
+            decline.setVisibility ( View.GONE );
+        }
+
 
         // getting the username and amount for a singular bid
         String bidUser = getItem(pos).getBidUserName();
@@ -56,32 +78,48 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         // layout for a singular bid
         LinearLayout thisBidButton = (LinearLayout) data.findViewById(R.id.bid_item);
 
+
         //setting the text views of a bid item
         bid_bidUser.setText(bidUser);
         bid_amount.setText(String.valueOf(amount));
 
+
+
         //click listener for a bid item
-        thisBidButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                bidClicked();
-            }
-        });
-
-
-
+        if(!owner) {
+            thisBidButton.setOnClickListener ( new View.OnClickListener () {
+                @Override
+                public void onClick(View v) {
+                    bidClicked ();
+                }
+            } );
+        }
 
         return data;
     }
+
+
     public void acceptBtn(View v){
         //TODO: stuff for accepting a bid
-
+        //SET THE TASK STATUS TO ASSIGN AND REMOVE EVERY OTHER BID ON THAT TASK
+        //WHEN WE REMOVE A BID NOTIFY THAT USER
+        // Elasticsearch ....
     }
+
+
     public void declineBtn(View v){
         //TODO: stuff for declining a bid
-
+        //REMOVE THE BID FROM THE TASK
+        //ELasticsearch.....
     }
+
+
     private void bidClicked(){
         //TODO: figure out where a bid click is supposed to go
+        //GO TO VIEW TASK PROVIDER PAGE SO THEY CAN EDIT THE TASK
+        Intent intent= new Intent(getContext (), ViewTaskProviderActivity.class);
+        intent.putExtra("title", task.getTitle ());
+        intent.putExtra ( "username", task.getRequester ().getUsername () );
+        ((Activity)getContext()).startActivityForResult(intent,0);
     }
 }

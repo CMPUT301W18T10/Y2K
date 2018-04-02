@@ -20,7 +20,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +70,8 @@ public class EditTaskActivity extends AppCompatActivity {
     private Double latitude;
     private Double longitude;
     private String Otitle;
+    private String state;
+    private String OriginalStatus;
 
     /**
      * OnCreate Method
@@ -81,109 +82,187 @@ public class EditTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
-        //get the data from the homeactivity
+        //get the data from the homeActivity
         Intent intent = getIntent();
+        state= intent.getStringExtra ( "state" );
         pos = Integer.parseInt(intent.getStringExtra(HomeActivity.POINTER));
         final Task task = HomeActivity.requestedTasks.get(pos);
 
         Otitle= task.getTitle ();
         //print the old task info
 
-        if (!Objects.equals ( task.getStatus (), "requested" )){
+
+
+        if(state.equals ( "view" )){
+            try {
+                printTask(task);
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
             Button saveBtn= findViewById(R.id.updateBtn);
-            saveBtn.setText("DONE");
-            printTask(task);
+            saveBtn.setText("BACK");
+
             //Get Data
-            EditText title = findViewById(R.id.editTaskTitle);
-            EditText description = findViewById(R.id.editDescription);
-            ImageView photo= findViewById ( R.id.editPhotoView );
-            Button location= findViewById ( R.id.editLocation );
-            EditText status= findViewById ( R.id.status );
+            EditText title = findViewById ( R.id.editTaskTitle );
+            EditText description = findViewById ( R.id.editDescription );
+            ImageView photo = findViewById ( R.id.editPhotoView );
+            Button location = findViewById ( R.id.editLocation );
+            EditText status = findViewById ( R.id.status );
 
 
-            title.setFocusable(false);
-            description.setClickable(false);
+            title.setFocusable ( false );
+            description.setClickable ( false );
 
-            description.setClickable(false);
-            description.setFocusable(false);
+            description.setClickable ( false );
+            description.setFocusable ( false );
 
-            photo.setClickable(false);
-            photo.setFocusable(false);
+            photo.setClickable ( false );
+            photo.setFocusable ( false );
 
-            location.setClickable(false);
-            location.setFocusable(false);
+            location.setClickable ( false );
+            location.setFocusable ( false );
+
+            status.setClickable ( false );
+            status.setFocusable ( false );
+
+            //Bids pressed pass the task title and fill out the bids page
+            Button bids= findViewById ( R.id.bids );
+            bids.setOnClickListener ( new View.OnClickListener () {
+                @Override
+                public void onClick(View v) {
+                    Intent intent= new Intent(EditTaskActivity.this, BidActivity.class);
+                    intent.putExtra ( "title", task.getTitle () );
+                    startActivity ( intent );
+                }
+            } );
 
             saveBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (isValid ()) {
-                        //Instantiate a object of type Task
-                        // added in the username of the requester - Aidan
-                        Task tempTask = task;
-
-                        EditText title = findViewById(R.id.editTaskTitle);
-                        EditText description = findViewById(R.id.editDescription);
-                        EditText status= findViewById ( R.id.status );
-
-                        String stitle = title.getText().toString();
-                        String sdesc = description.getText().toString();
-                        String sstatus = status.getText().toString();
-
-                        task.editTask(stitle, sdesc,LoginActivity.thisuser, sstatus);
-                        ElasticSearchController.updateTask ( tempTask, task );
-                        updateButton();
-                    }
-                }
+                                           @Override
+                                           public void onClick(View v) {
+                                               Intent intent= new Intent(EditTaskActivity.this, HomeActivity.class);
+                                               startActivity ( intent );
+                                           }
             });
+
         }
 
-        else{
+        else {
+            //Bids pressed pass the task title and fill out the bids page
+            Button bids= findViewById ( R.id.bids );
+            bids.setVisibility ( View.GONE );
 
-            printTask(task);
 
-            //add a photo from the fallery
-            ImageView editphoto = findViewById(R.id.editPhotoView);
-            editphoto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    editPhoto();
+            if (!Objects.equals ( task.getStatus (), "requested" )) {
+                Button saveBtn = findViewById ( R.id.updateBtn );
+                saveBtn.setText ( "DONE" );
+                try {
+                    printTask ( task );
+                } catch (ExecutionException e) {
+                    e.printStackTrace ();
+                } catch (InterruptedException e) {
+                    e.printStackTrace ();
                 }
-            });
+                //Get Data
+                EditText title = findViewById ( R.id.editTaskTitle );
+                EditText description = findViewById ( R.id.editDescription );
+                ImageView photo = findViewById ( R.id.editPhotoView );
+                Button location = findViewById ( R.id.editLocation );
+                EditText status = findViewById ( R.id.status );
 
-            //Update Button
-            Button updateButton  = (Button) findViewById(R.id.updateBtn);
-            updateButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    EditText edittitle = findViewById(R.id.editTaskTitle);
-                    EditText editdescription = findViewById(R.id.editDescription);
-                    EditText editstatus = findViewById(R.id.status);
 
-                    String stitle = edittitle.getText().toString();
-                    String sdesc = editdescription.getText().toString();
-                    String sstatus = editstatus.getText().toString();
+                title.setFocusable ( false );
+                description.setClickable ( false );
 
-                    //valiidate user info
-                    if(isValid()) {
-                        //Instantiate a object of type Task
-                        // added in the username of the requester - Aidan
-                        //TODO delete the task from the elastic search then add this one
+                description.setClickable ( false );
+                description.setFocusable ( false );
 
-                        Task tempTask= new Task(stitle, sdesc,LoginActivity.thisuser, sstatus);
-                        // Check to add a photo to the task
-                        if (photoStatus == 1) {
-                            tempTask.setPhoto(photo);
+                photo.setClickable ( false );
+                photo.setFocusable ( false );
+
+                location.setClickable ( false );
+                location.setFocusable ( false );
+
+                saveBtn.setOnClickListener ( new View.OnClickListener () {
+                    @Override
+                    public void onClick(View v) {
+                        if (isValid ()) {
+                            //Instantiate a object of type Task
+                            // added in the username of the requester - Aidan
+                            Task tempTask = task;
+
+                            EditText title = findViewById ( R.id.editTaskTitle );
+                            EditText description = findViewById ( R.id.editDescription );
+                            EditText status = findViewById ( R.id.status );
+
+                            String stitle = title.getText ().toString ();
+                            String sdesc = description.getText ().toString ();
+                            String sstatus = status.getText ().toString ();
+
+                            task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus );
+                            ElasticSearchController.updateTask ( tempTask, task );
+                            HomeActivity.requestedAdapter.notifyDataSetChanged ();
+                            updateButton ();
                         }
-                        //Check to add a location to a task
-                        if (locationStatus == 1) {
-                            tempTask.setLocation(latitude,longitude);
-                        }
-
-                        ElasticSearchController.updateTask ( task, tempTask );
-                        updateButton();
                     }
+                } );
+            }
+            else {
+
+                try {
+                    printTask ( task );
+                } catch (ExecutionException e) {
+                    e.printStackTrace ();
+                } catch (InterruptedException e) {
+                    e.printStackTrace ();
                 }
-            });
+
+                //add a photo from the fallery
+                ImageView editphoto = findViewById ( R.id.editPhotoView );
+                editphoto.setOnClickListener ( new View.OnClickListener () {
+                    @Override
+                    public void onClick(View v) {
+                        editPhoto ();
+                    }
+                } );
+
+                //Update Button
+                Button updateButton = (Button) findViewById ( R.id.updateBtn );
+                updateButton.setOnClickListener ( new View.OnClickListener () {
+                    @Override
+                    public void onClick(View v) {
+                        EditText edittitle = findViewById ( R.id.editTaskTitle );
+                        EditText editdescription = findViewById ( R.id.editDescription );
+                        EditText editstatus = findViewById ( R.id.status );
+
+                        String stitle = edittitle.getText ().toString ();
+                        String sdesc = editdescription.getText ().toString ();
+                        String sstatus = editstatus.getText ().toString ();
+
+                        //valiidate user info
+                        if (isValid ()) {
+                            //Instantiate a object of type Task
+                            // added in the username of the requester - Aidan
+                            //TODO delete the task from the elastic search then add this one
+
+                            Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus );
+                            // Check to add a photo to the task
+                            if (photoStatus == 1) {
+                                tempTask.setPhoto ( photo );
+                            }
+                            //Check to add a location to a task
+                            if (locationStatus == 1) {
+                                tempTask.setLocation ( latitude, longitude );
+                            }
+
+                            ElasticSearchController.updateTask ( task, tempTask );
+                            HomeActivity.requestedAdapter.notifyDataSetChanged ();
+                            updateButton ();
+                        }
+                    }
+                } );
+            }
         }
     }
 
@@ -195,13 +274,29 @@ public class EditTaskActivity extends AppCompatActivity {
      */
 
     //print the old user information on this activity
-    private void printTask(Task task) {
+    private void printTask(Task task) throws ExecutionException, InterruptedException {
         String Otitle = task.getTitle ();
         String Odesc = task.getDescription ();
         Bitmap Ophoto = task.getPhoto();
         Double Olocation = task.getLat()+task.getLong();
         String str_Olocation  = Olocation.toString();
         String Ostatus= task.getStatus ();
+        OriginalStatus=Ostatus;
+
+        Bid bid= task.getLowestBid ();
+        String Olowest;
+
+        if(bid== null){
+            Olowest= "NONE";
+        }
+
+        else{
+           Double d= bid.getBidAmount ();
+           Olowest= d.toString ();
+        }
+
+        TextView lowest= findViewById ( R.id.amount );
+        lowest.setText ( Olowest );
 
 
         //set the title and description
@@ -356,6 +451,12 @@ public class EditTaskActivity extends AppCompatActivity {
      * intent to go back to the HomeActivity
      */
     private void updateButton() {
+        long num=200;
+        try {
+            Thread.sleep(num);
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
         Intent intent = new Intent(EditTaskActivity.this,HomeActivity.class);
         startActivity(intent);
     }

@@ -63,7 +63,8 @@
             android:name=".Map"
             android:label="@string/title_activity_map" />
         <activity android:name=".EditTask" />
-        <activity android:name=".CodeProvider"></activity>
+        <activity android:name=".CodeProvider" />
+        <activity android:name=".BidActivity"></activity>
     </application>
 
 </manifest>

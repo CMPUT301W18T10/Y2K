@@ -16,6 +16,7 @@ package com.example.syn_tax;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import android.widget.ListView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.tasks.Tasks;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -91,19 +93,32 @@ public class SearchActivity extends AppCompatActivity {
      */
     public void searching(String keywords) throws ExecutionException, InterruptedException {
         //DO SOMETHING
+        Log.e("s", keywords);
+
         if (ElasticSearchController.connected ()){
             //Get all the tasks with the keywords entered
             ElasticSearchController.searchingTasks search= new ElasticSearchController.searchingTasks ();
             search.execute ( keywords );
 
-            ArrayList<Task> tasks= new ArrayList<Task> (  );
-            tasks= search.get ();
+            ArrayList<Task> tasks = search.get ();
+
             //Filter through the tasks we got to make sure status== "requested" or "bidded"
             for(int i=0; i< tasks.size (); i++){
-                if(tasks.get(i).getStatus ()=="requested" || tasks.get(i).getStatus ()=="bidded"){
-                    specificTasks.add(tasks.get ( i ));
+                String taskname= tasks.get ( i ).getRequester ().getUsername ();
+                String myname= LoginActivity.thisuser.getUsername ();
+
+                if(!taskname.equals ( myname )){
+
+                    if (tasks.get(i).getStatus ().equals ( "requested" )){
+                        specificTasks.add(tasks.get ( i ));
+                    }
+                    else if (tasks.get ( i ).getStatus ().equals ( "bidded" )){
+                        specificTasks.add(tasks.get ( i ));
+                    }
                 }
             }
+
+            Log.e("dkk", specificTasks.toString ());
 
             //CALL TO SET THE ADAPTER FOR THE LIST VIEW
         }

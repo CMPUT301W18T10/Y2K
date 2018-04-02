@@ -25,6 +25,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
 
 /**
  * ViewTaskProviderActivity Class
@@ -128,14 +130,28 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
     }
 
 
-    private void printTask(Task task) {
+    private void printTask(Task task) throws ExecutionException, InterruptedException {
         String username = LoginActivity.thisuser.toString();
         String desc = task.getDescription();
         Bitmap photo = task.getPhoto();
         Double location = task.getLat()+task.getLong();
         String str_location = location.toString();
-        Bid lowestbid = task.getLowestBid();
-        String str_lowestbid = lowestbid.toString();
+
+        Bid bid= task.getLowestBid ();
+        String Olowest;
+
+        if(bid== null){
+            Olowest= "NONE";
+        }
+
+        else{
+            Double d= bid.getBidAmount ();
+            Olowest= d.toString ();
+        }
+
+        TextView lowest= findViewById ( R.id.lowestBid );
+        lowest.setText ( Olowest );
+
 
         ImageView photoview = findViewById(R.id.photoBtn);
         photoview.setImageBitmap(photo);
