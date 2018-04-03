@@ -53,7 +53,7 @@ public class Task {
     private ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
     public static ArrayAdapter<Bid> bidAdapter; // For custom adapter to work
     private User requester;
-    private User provider;
+    private User provider=null;
 
 
 

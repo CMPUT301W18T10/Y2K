@@ -32,6 +32,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author Aidan Paetsch
@@ -65,9 +66,81 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         // gets the data to be displayed for a list item based on its position in the array
         final String taskTitle = getItem(pos).getTitle();
         requester = getItem(pos).getRequester();
+
         final String taskUsername= requester.getUsername ();
         final String loginUsername= LoginActivity.thisuser.getUsername ();
         final String taskStatus = getItem(pos).getStatus();
+
+        //If assigned show the username and the amount for that task
+        if(taskStatus.equals ( "assigned" )){
+            TextView title1 = data.findViewById(R.id.usernameTitle);
+            TextView title2= data.findViewById(R.id.bidTitle);
+            title1.setVisibility ( View.VISIBLE );
+            title2.setVisibility ( View.VISIBLE );
+
+            TextView task_username= data.findViewById(R.id.username);
+            TextView task_bid= data.findViewById ( R.id.bid );
+            task_bid.setVisibility ( View.VISIBLE );
+            task_username.setVisibility ( View.VISIBLE );
+
+            //Set the fields
+            if(taskUsername.equals ( LoginActivity.thisuser.getUsername () )){
+                task_username.setText ( taskUsername );
+            }
+            else{
+                task_username.setText ( getItem(pos).getProvider().getUsername () );
+            }
+
+            try {
+                if(getItem(pos).getLowestBid ()==null){
+                    task_bid.setText ("NONE");
+                }
+
+                else{
+                    Double amount= getItem(pos).getLowestBid ().getBidAmount ();
+                    task_bid.setText (amount.toString ());
+                }
+
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
+        }
+
+        //Check if task status is  bidded and were provider
+        else if (taskStatus.equals ( "bidded" ) && !taskUsername.equals ( LoginActivity.thisuser.getUsername () )){
+            TextView title1 = data.findViewById(R.id.usernameTitle);
+            TextView title2= data.findViewById(R.id.bidTitle);
+            title1.setVisibility ( View.VISIBLE );
+            title2.setVisibility ( View.VISIBLE );
+
+            TextView task_username= data.findViewById(R.id.username);
+            TextView task_bid= data.findViewById ( R.id.bid );
+            task_bid.setVisibility ( View.VISIBLE );
+            task_username.setVisibility ( View.VISIBLE );
+
+            task_username.setText ( taskUsername );
+            try {
+                if(getItem(pos).getLowestBid ()==null){
+                    task_bid.setText ("NONE");
+                }
+
+                else{
+                    Double amount= getItem(pos).getLowestBid ().getBidAmount ();
+                    task_bid.setText (amount.toString ());
+                }
+
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
+
+            //set my bid also
+        }
+
+
 
         //Text views of a task item
         TextView task_title = (TextView) data.findViewById(R.id.task_name);
