@@ -73,21 +73,14 @@ public class LocationPickerActivity extends AppCompatActivity {
      * @param resultCode
      * @param data
      */
-        @Override
-        protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
-            if(requestCode == PLACE_LOCATION_REQUESTED) {
-                if(resultCode == RESULT_OK) {
-                   Place location = PlacePicker.getPlace(LocationPickerActivity.this,data);
-                    tvlocation.setText(location.getAddress());
-
-                }
+    @Override
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == PLACE_LOCATION_REQUESTED) {
+            if(resultCode == RESULT_OK) {
+               Place location = PlacePicker.getPlace(LocationPickerActivity.this,data);
+                tvlocation.setText(location.getAddress());
 
             }
-
-
         }
-
-
-
-
+    }
 }

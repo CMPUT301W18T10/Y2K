@@ -67,7 +67,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         requester = getItem(pos).getRequester();
         final String taskUsername= requester.getUsername ();
         final String loginUsername= LoginActivity.thisuser.getUsername ();
-        String taskStatus = getItem(pos).getStatus();
+        final String taskStatus = getItem(pos).getStatus();
 
         //Text views of a task item
         TextView task_title = (TextView) data.findViewById(R.id.task_name);
@@ -86,11 +86,11 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             public void onClick(View v){
                 // for a task of a requester
                 if(loginUsername.equals ( taskUsername )){
-                    edit_or_view(v,pos,EditTaskActivity.class, taskTitle, "edit");
+                    edit_or_view(v,pos,EditTaskActivity.class, taskTitle, "edit", taskStatus);
                 }
                 // for a task of a provider
                 else{
-                    edit_or_view(v,pos,ViewTaskProviderActivity.class, taskTitle, "view");
+                    edit_or_view(v,pos,ViewTaskProviderActivity.class, taskTitle, "view", taskStatus);
                 }
             }
         });
@@ -100,7 +100,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
      * @param pos position of a list item
      * @param c class for the intent
      */
-    private void edit_or_view(final View v,final int pos, final Class c, final String title, String todo){
+    private void edit_or_view(final View v,final int pos, final Class c, final String title, String todo, final String status){
         //USER CAN only view/edit a task that they have bidded on
         if (todo== "view"){
             Intent intent = new Intent(getContext(),c);
@@ -144,6 +144,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(getContext(),c);
                     intent.putExtra ("state", "edit");
+                    intent.putExtra ( "status", status );
                     intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
                     ((Activity)getContext()).startActivityForResult(intent,0);
                 }
@@ -158,6 +159,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(getContext(),c);
                     intent.putExtra ("state", "view");
+                    intent.putExtra ( "status",  status);
                     intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
                     ((Activity)getContext()).startActivityForResult(intent,0);
                 }

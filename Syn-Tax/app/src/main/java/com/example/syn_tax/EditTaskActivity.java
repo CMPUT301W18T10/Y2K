@@ -72,6 +72,8 @@ public class EditTaskActivity extends AppCompatActivity {
     private String Otitle;
     private String state;
     private String OriginalStatus;
+    private String status;
+    private Task task;
 
     /**
      * OnCreate Method
@@ -85,13 +87,24 @@ public class EditTaskActivity extends AppCompatActivity {
         //get the data from the homeActivity
         Intent intent = getIntent();
         state= intent.getStringExtra ( "state" );
+        status=intent.getStringExtra ( "status" );
         pos = Integer.parseInt(intent.getStringExtra(HomeActivity.POINTER));
-        final Task task = HomeActivity.requestedTasks.get(pos);
+
+        if (status.equals ( "requested" )){
+            task = HomeActivity.requestedRtasks.get(pos);
+        }
+
+        else if (status.equals ( "bidded" )){
+            task = HomeActivity.biddedRtasks.get(pos);
+        }
+
+        else {
+            task = HomeActivity.assignedRtasks.get(pos);
+        }
+
 
         Otitle= task.getTitle ();
         //print the old task info
-
-
 
         if(state.equals ( "view" )){
             try {
@@ -202,7 +215,6 @@ public class EditTaskActivity extends AppCompatActivity {
 
                             task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus );
                             ElasticSearchController.updateTask ( tempTask, task );
-                            HomeActivity.requestedAdapter.notifyDataSetChanged ();
                             updateButton ();
                         }
                     }
@@ -241,7 +253,8 @@ public class EditTaskActivity extends AppCompatActivity {
                         String sstatus = editstatus.getText ().toString ();
 
                         //valiidate user info
-                        if (isValid ()) {
+                        //Check to add a location to a task
+                        if (isValid() && locationStatus == 1) {
                             //Instantiate a object of type Task
                             // added in the username of the requester - Aidan
                             //TODO delete the task from the elastic search then add this one
@@ -251,14 +264,15 @@ public class EditTaskActivity extends AppCompatActivity {
                             if (photoStatus == 1) {
                                 tempTask.setPhoto ( photo );
                             }
-                            //Check to add a location to a task
-                            if (locationStatus == 1) {
-                                tempTask.setLocation ( latitude, longitude );
-                            }
+
+                            tempTask.setLocation ( latitude, longitude );
 
                             ElasticSearchController.updateTask ( task, tempTask );
-                            HomeActivity.requestedAdapter.notifyDataSetChanged ();
                             updateButton ();
+                        }
+
+                        else if(locationStatus != 1 && isValid ()){
+                            Toast.makeText(EditTaskActivity.this, "Enter a Location.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } );

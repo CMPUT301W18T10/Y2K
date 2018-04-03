@@ -4,65 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e68a8484"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/syn_taxpages"
     tools:context=".HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_vertical|center_horizontal"
+        android:layout_height="match_parent"
+        android:layout_weight="32"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:id="@+id/title1"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
+            android:text="PROVIDER"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="45sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="REQUESTER"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
+        android:layout_height="match_parent"
+        android:layout_weight="33"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/distributeCodeTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/pBidded"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Provided Code"
+            android:text="BIDDED CODE"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/requestCodeTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/rRequested"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Requested code"
+            android:text="REQUESTED CODE"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:layout_weight="27"
         android:divider="?android:attr/dividerVertical"
         android:gravity="bottom"
         android:orientation="horizontal"
@@ -70,16 +83,83 @@
         android:weightSum="1">
 
         <ListView
-            android:id="@+id/distributelist"
+            android:id="@+id/biddedPList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"
+            android:divider="#2e2e2e"
+            android:dividerHeight="2dp"
+            android:scrollbars="vertical" />
 
         <ListView
-            android:id="@+id/requestlist"
+            android:id="@+id/requestedRList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.5">
+            android:layout_weight="0.5"
+            android:divider="#2e2e2e"
+            android:dividerHeight="2dp"
+            android:scrollbars="vertical">
+
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="33"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/pAssigned"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="ASSIGNED CODE"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rBidded"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="BIDDED CODE"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="27"
+        android:divider="?android:attr/dividerVertical"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:weightSum="1">
+
+        <ListView
+            android:id="@+id/assignedPList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:divider="#2e2e2e"
+            android:dividerHeight="2dp"
+            android:scrollbars="vertical" />
+
+        <ListView
+            android:id="@+id/biddedRList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:divider="#2e2e2e"
+            android:dividerHeight="2dp"
+            android:scrollbars="vertical">
 
         </ListView>
     </LinearLayout>
@@ -87,7 +167,66 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/none"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rAssigned"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="ASSIGNED CODE"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
         android:layout_weight="1"
+        android:divider="?android:attr/dividerVertical"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:weightSum="1">
+
+        <ListView
+            android:id="@+id/noneList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:divider="#2e2e2e"
+            android:dividerHeight="2dp"/>
+
+        <ListView
+            android:id="@+id/assignedRList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:divider="#2e2e2e"
+            android:dividerHeight="2dp"
+            android:scrollbars="vertical">
+
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="1">

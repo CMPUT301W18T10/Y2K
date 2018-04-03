@@ -140,7 +140,8 @@ public class AddTaskActivity extends AppCompatActivity{
                 String slocation = location.getText().toString();
 
                 // Validate the user info
-                if (isValid()) {
+                //Check to add a location to a task
+                if (isValid() && locationStatus == 1) {
                     //Instantiate a object of type Task
                     // added in the username of the requester - Aidan
                     Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus);
@@ -148,10 +149,9 @@ public class AddTaskActivity extends AppCompatActivity{
                     if (photoStatus == 1) {
                         newtask.setPhoto(photo);
                     }
-                    //Check to add a location to a task
-                    if (locationStatus == 1) {
-                        newtask.setLocation(latitude, longitude);
-                    }
+
+                    newtask.setLocation(latitude, longitude);
+
                     AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
                     execute.execute(newtask);
 
@@ -162,6 +162,10 @@ public class AddTaskActivity extends AppCompatActivity{
                         e.printStackTrace ();
                     }
                     done();
+                }
+
+                else if(locationStatus != 1 && isValid ()){
+                    Toast.makeText(AddTaskActivity.this, "Enter a Location.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

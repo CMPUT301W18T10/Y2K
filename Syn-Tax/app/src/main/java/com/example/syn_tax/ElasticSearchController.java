@@ -194,10 +194,10 @@ public class ElasticSearchController extends Application {
 
             //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
             if (!connected ()) {
-                HomeActivity.requestedTasks.addAll ( taskList );
+                HomeActivity.tasksR.addAll ( taskList );
                 taskList = new ArrayList<Task> ();
 
-                return HomeActivity.requestedTasks;
+                return HomeActivity.tasksR;
             }
 
             //If there was a change when offline then update tasks in the server
@@ -209,8 +209,8 @@ public class ElasticSearchController extends Application {
                 String username= LoginActivity.thisuser.getUsername ();
                 old.execute (username);
 
-                for(int i=0; i< HomeActivity.requestedTasks.size ();i++){
-                    Task task= HomeActivity.requestedTasks.get(i);
+                for(int i=0; i< HomeActivity.tasksR.size ();i++){
+                    Task task= HomeActivity.tasksR.get(i);
 
                     ElasticSearchController.addTasks add= new ElasticSearchController.addTasks ();
                     add.execute ( task );
@@ -631,9 +631,9 @@ public class ElasticSearchController extends Application {
             }
             else {
                 // ELSE WERE NOT CONNECTED WRITE TO LOCAL FILE
-                for (int i = 0; i < HomeActivity.requestedTasks.size (); i++) {
-                    if (HomeActivity.requestedTasks.get ( i ).getTitle () == search_parameters[0]) {
-                        HomeActivity.requestedTasks.remove ( i );
+                for (int i = 0; i < HomeActivity.tasksR.size (); i++) {
+                    if (HomeActivity.tasksR.get ( i ).getTitle () == search_parameters[0]) {
+                        HomeActivity.tasksR.remove ( i );
                     }
                 }
                 taskChange=true;

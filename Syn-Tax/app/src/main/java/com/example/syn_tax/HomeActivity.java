@@ -44,13 +44,32 @@ import java.util.ArrayList;
  * @see LoginActivity
  */
 public class HomeActivity extends AppCompatActivity {
-    public static ArrayAdapter<Task> requestedAdapter;
-    public static ArrayList<Task> requestedTasks=  new ArrayList<Task>();;
-    public static ArrayAdapter<Task> distributedAdapter;
-    public static ArrayList<Task> distributedTasks;
+    public static ArrayAdapter<Task> requestedRAdapter;
+    public static ArrayAdapter<Task> biddedRAdapter;
+    public static ArrayAdapter<Task> assignedRAdapter;
+    public static ArrayAdapter<Task> biddedPAdapter;
+    public static ArrayAdapter<Task> assignedPAdapter;
+
+
+    public static ArrayList<Task> tasksR=  new ArrayList<Task>();;
+    public static ArrayList<Task> requestedRtasks;
+    public static ArrayList<Task> biddedRtasks;
+    public static ArrayList<Task> assignedRtasks;
+    public static ArrayList<Task> biddedPtasks;
+    public static ArrayList<Task> assignedPtasks;
+
+
     public static final String POINTER = "Task_Position";
-    private ListView requestedListView;
-    private ListView distributedListView;
+
+    //Provider ListViews
+    private ListView biddedPListView;
+    private ListView assignedPListView;
+
+    //Requester ListViews
+    private ListView requestedRListView;
+    private ListView biddedRListView;
+    private ListView assignedRListView;
+
 
 
     @Override
@@ -62,18 +81,32 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //UNDERLINE Titles
-        TextView title = findViewById(R.id.title );
-        TextView requestTitle = findViewById(R.id.requestCodeTitle);
-        TextView distributeTitle = findViewById(R.id.distributeCodeTitle);
 
-        title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        requestTitle.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        distributeTitle.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        //views for the 2 separate lists
-        requestedListView = (ListView) findViewById(R.id.requestlist);
-        distributedListView = (ListView) findViewById(R.id.distributelist);
-        distributedTasks = new ArrayList<Task>();
+        TextView requestTitle = findViewById(R.id.title2);
+        TextView distributeTitle = findViewById(R.id.title1);
+        TextView title1 = findViewById(R.id.rRequested);
+        TextView  title2= findViewById(R.id.rBidded);
+        TextView title3 = findViewById(R.id.rAssigned);
+        TextView title4 = findViewById(R.id.pBidded);
+        TextView title5= findViewById(R.id.pAssigned);
 
+        requestTitle.setPaintFlags(requestTitle.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        distributeTitle.setPaintFlags(distributeTitle.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        title1.setPaintFlags(title1.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        title2.setPaintFlags(title2.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        title3.setPaintFlags(title3.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        title4.setPaintFlags(title4.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        title5.setPaintFlags(title5.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+
+
+        //views for the lists
+        requestedRListView = findViewById(R.id.requestedRList);
+        biddedRListView = findViewById ( R.id.biddedRList );
+        assignedRListView = findViewById ( R.id.assignedRList );
+
+        biddedPListView = findViewById(R.id.biddedPList);
+        assignedPListView = findViewById ( R.id.assignedPList );
     }
 
     /**
@@ -82,11 +115,44 @@ public class HomeActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
+        //REQUESTER
         loadTaskListRequester();
-        requestedAdapter = new TaskAdapter(this,requestedTasks);
-        distributedAdapter = new TaskAdapter(this, distributedTasks);
-        requestedListView.setAdapter(requestedAdapter);
-        distributedListView.setAdapter(distributedAdapter);
+        requestedRtasks= new ArrayList<Task> (  );
+        biddedRtasks= new ArrayList<Task> (  );
+        assignedRtasks = new ArrayList<Task> (  );
+
+        for(int i=0; i < tasksR.size (); i++) {
+            if (tasksR.get ( i ).getStatus ().equals ( "requested" )) {
+                requestedRtasks.add ( tasksR.get ( i ) );
+            } else if (tasksR.get ( i ).getStatus ().equals ( "bidded" )) {
+                biddedRtasks.add ( tasksR.get ( i ) );
+            } else if (tasksR.get ( i ).getStatus ().equals ( "assigned" )) {
+                assignedRtasks.add ( tasksR.get ( i ) );
+            }
+        }
+
+        //Provider
+        biddedPtasks= new ArrayList<Task> (  );
+        assignedPtasks = new ArrayList<Task> (  );
+
+
+
+        //Set the adapter
+        requestedRAdapter= new TaskAdapter ( this, requestedRtasks );
+        biddedRAdapter= new TaskAdapter ( this, biddedRtasks );
+        assignedRAdapter= new TaskAdapter ( this, assignedRtasks );
+
+        biddedPAdapter= new TaskAdapter ( this, biddedPtasks );
+        assignedPAdapter= new TaskAdapter ( this, assignedPtasks );
+
+
+        //Set the list views
+        requestedRListView.setAdapter ( requestedRAdapter );
+        biddedRListView.setAdapter ( biddedRAdapter );
+        assignedRListView.setAdapter ( assignedRAdapter );
+
+        biddedPListView.setAdapter ( biddedPAdapter );
+        assignedPListView.setAdapter ( biddedPAdapter );
     }
 
     /**
@@ -103,13 +169,14 @@ public class HomeActivity extends AppCompatActivity {
             //IF CONNECTED THEN UPDATE
             //ELSE add the new tasks to the requested tasks
             if(allTasksList.size()>0){
-                requestedTasks=allTasksList;
+                tasksR=allTasksList;
             }
 
             else{
-                requestedTasks= new ArrayList<Task> (  );
+                tasksR= new ArrayList<Task> (  );
             }
-            Log.e("sss", requestedTasks.toString ());
+
+            Log.e("sss", tasksR.toString ());
         }
 
         catch(Exception e){
