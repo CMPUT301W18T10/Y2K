@@ -48,12 +48,12 @@ public class SearchAdapter extends ArrayAdapter<Task> {
         final String taskUsername = getItem(pos).getRequester().getUsername();
         final String taskStatus = getItem(pos).getStatus();
         final String taskTitle = getItem(pos).getTitle();
-        if (taskStatus.equals("bidded")){
-            lowestbid = "get the lowest bid here";
+        try {
+            lowestbid = String.valueOf(getItem(pos).getLowestBid());
+        }catch (Exception e){
+            lowestbid = "None";
         }
-        else{
-            lowestbid = "NONE";
-        }
+
 
         TextView tTitle = data.findViewById(R.id.task_title);
         TextView tUser = data.findViewById(R.id.task_user);

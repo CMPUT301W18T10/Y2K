@@ -40,7 +40,9 @@ public class BidAdapter extends ArrayAdapter<Bid> {
     private ArrayList<Bid> bids;
     private Task task;
 
+
     public BidAdapter(Context context, ArrayList<Bid> bids){
+
         super(context, R.layout.bid_list_item, bids);
     }
 
@@ -55,20 +57,20 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
         //Get the task its self
         task= getItem ( pos ).getTask ();
+        final Button accept= data.findViewById ( R.id.accept );
+        Button decline= data.findViewById ( R.id.decline);
 
         //IF THE USER IS NOT THE OWNER OF THE TASK HIDE THE ACCEPT BUTTON AND DECLINE BUTTON
         String usernameOFTask= task.getRequester ().getUsername ();
         if(!LoginActivity.thisuser.getUsername ().equals ( usernameOFTask )){
             owner=false;
-            Button accept= data.findViewById ( R.id.accept );
-            Button decline= data.findViewById ( R.id.decline);
             accept.setVisibility ( View.GONE );
             decline.setVisibility ( View.GONE );
         }
 
 
         // getting the username and amount for a singular bid
-        String bidUser = getItem(pos).getBidUserName();
+        final String bidUser = getItem(pos).getBidUserName();
         double amount = getItem(pos).getBidAmount();
 
         // setting the textviews for a username and a bid
@@ -94,23 +96,54 @@ public class BidAdapter extends ArrayAdapter<Bid> {
                 }
             } );
         }
+        else {
+            accept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    acceptBtn(v, pos, bids);
+                }
+            });
+            decline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    declineBtn(v, bidUser);
+                }
+            });
+        }
+
 
         return data;
     }
 
 
-    public void acceptBtn(View v){
-        //TODO: stuff for accepting a bid
+    private void acceptBtn(View v, int pos, ArrayList<Bid> bids){
+
         //SET THE TASK STATUS TO ASSIGN AND REMOVE EVERY OTHER BID ON THAT TASK
         //WHEN WE REMOVE A BID NOTIFY THAT USER
         // Elasticsearch ....
+        String acceptedUser = getItem(pos).getBidUserName();
+        ArrayList<String> allBidUsers = new ArrayList<String>();
+        for(int i = 0; i < bids.size(); i++){
+            allBidUsers.add(getItem(i).getBidUserName());
+        }
+        for(int i = 0; i < allBidUsers.size(); i++){
+            if( allBidUsers.get(i) != acceptedUser) {
+                ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid();
+                delete.execute(allBidUsers.get(i));
+            }
+        }
+        //TODO: set status of task to assigned
+
+
     }
 
 
-    public void declineBtn(View v){
+    private void declineBtn(View v, String bidUser){
         //TODO: stuff for declining a bid
         //REMOVE THE BID FROM THE TASK
         //ELasticsearch.....
+        ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid();
+        delete.execute(bidUser);
     }
 
 
