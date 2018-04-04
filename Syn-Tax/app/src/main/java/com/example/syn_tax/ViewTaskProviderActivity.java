@@ -25,6 +25,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 
@@ -50,124 +52,181 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
     private Integer locationStatus =0 ;
     private Double latitude;
     private Double longitude;
-
-    private String Title;
-    private String Descriptions;
-
-
+    private Double lowestAmount;
+    private String title;
+    private String status;
+    private String state;
+    private Task task;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task_p);
-//
-//        //printing the task information
-//        Task task;
-//
-//
-//        //UNDERLINE Titles
-//        TextView title = findViewById(R.id.title);
-//        title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-//
-//        Intent intent = getIntent();
-//        //need to get the location of where the user clicks on search
-//        pos = Integer.parseInt(intent.getStringExtra(SearchActivity.POINTER));
-//        //some function in search that loads the tasks and adds it to a list
-//        //todo change Tasks to the name of the provided list instead
-//        final Task task = HomeActivity.providedTasks.get(pos);
-//
-//        printTask(task);
-//        Title = task.getTitle();
-//        Descriptions = task.getDescription();
-//
-//        //getData
-//        EditText username = findViewById(R.id.username);
-//        EditText description = findViewById(R.id.description);
-//        ImageView photo = findViewById(R.id.photoBtn);
-//        EditText location = findViewById(R.id.location);
-//        EditText status = findViewById(R.id.status);
-//        EditText bid = findViewById(R.id.lowestBid);
-//        final Button saveBtn = (Button) findViewById(R.id.savebutton);
-//
-//        title.setFocusable(false);
-//        description.setFocusable(false);
-//        location.setFocusable(false);
-//        bid.setFocusable(false);
-//
-//        description.setClickable(false);
-//        title.setClickable(false);
-//        location.setClickable(false);
-//        bid.setClickable(false);
-//        photo.setClickable(false);
-//
-//
-//        //get user bid and add it to our bidlist
-//        saveBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EditText mybids = (EditText) findViewById(R.id.bid);
-//                String mybid_a = mybids.getText().toString();
-//                Double my_bid_amount = Double.parseDouble(mybid_a);
-//
-//                String str_username = LoginActivity.thisuser.toString();
-//
-//
-//                Bid mybid_amounts = new Bid(my_bid_amount,str_username);
-//                task.addBid(mybid_amounts);
-//                saveBtn();
-//                //todo check if user can have more than one bid on a task
-//                //todo if not change bids to only add if username is not there already
-//
-//            }
-//        });
-    }
 
-    private void saveBtn() {
-        Intent intent = new Intent(ViewTaskProviderActivity.this,HomeActivity.class);
-        startActivity(intent);
-        //todo bids should get mybid amount
-    }
+        Intent intent = getIntent();
+        //need to get the location of where the user clicks on search
+        //status=intent.getStringExtra ( "status" );
+        //state= intent.getStringExtra ( "state" );
+        //title= intent.getStringExtra ( "title" );
+        //pos = Integer.parseInt(intent.getStringExtra(SearchActivity.POINTER));
 
+        //From the Home Page get the task
+        if(!state.equals ( "fromSearch" )) {
+            //set bidMyTitle to "my bid"
+            TextView bidTitle = findViewById ( R.id.bidMyTitle );
+            bidTitle.setText ( "My Bid:" );
 
-    private void printTask(Task task) throws ExecutionException, InterruptedException {
-        String username = LoginActivity.thisuser.toString();
-        String desc = task.getDescription();
-        Bitmap photo = task.getPhoto();
-        Double location = task.getLat()+task.getLong();
-        String str_location = location.toString();
+            if (status.equals ( "assigned" )) {
+                task = HomeActivity.assignedPtasks.get ( pos );
+                //Set the code button to visible
+                Button code= findViewById ( R.id.codeBtn );
+                code.setVisibility ( View.VISIBLE );
+            }
+            else if (status.equals ( "bidded" )) {
+                task = HomeActivity.biddedPtasks.get ( pos );
+            }
 
-        Bid bid= task.getLowestBid ();
-        String Olowest;
-
-        if(bid== null){
-            Olowest= "NONE";
+            //Get my Bid on the task
+            EditText amount= findViewById ( R.id.myAmount );
+            ArrayList<Bid> allBids= new ArrayList<Bid> (  );
+            ElasticSearchController.getBids bids= new ElasticSearchController.getBids ();
+            bids.execute ( "", LoginActivity.thisuser.getUsername () );
+            try {
+                allBids=bids.get ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            }
+            for(int i=0;i<allBids.size ();i++){
+                if(allBids.get(i).getTask ().getTitle ().equals ( task.getTitle () )){
+                    Double cost= allBids.get(i).getBidAmount ();
+                    amount.setText(cost.toString ());
+                    break;
+                }
+            }
         }
 
         else{
-            Double d= bid.getBidAmount ();
-            Olowest= d.toString ();
+            //From the search page find
         }
 
-        TextView lowest= findViewById ( R.id.lowestBid );
-        lowest.setText ( Olowest );
 
 
-        ImageView photoview = findViewById(R.id.photoBtn);
-        photoview.setImageBitmap(photo);
 
-        TextView getlocation = findViewById(R.id.location);
-        getlocation.setText(str_location);
+        //Get the lowest bid
+        try {
+            lowestAmount= task.getLowestBid ().getBidAmount ();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
+        try {
+            printTask();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
+
+        Button saveBtn=findViewById ( R.id.saveBtn );
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isValid()){
+                    //add bid
+                    //or update the bid
+                    homeBtn ();
+                }
+            }
+        });
+    }
+
+
+
+
+    /**
+     * Set the following for the the fields
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    private void printTask() throws ExecutionException, InterruptedException {
+
+        Bitmap photo = task.getPhoto ();
+        Double location = task.getLat () + task.getLong ();
+        String str_location = location.toString ();
+
+        //set title
+        TextView taskTitle = findViewById ( R.id.title );
+        taskTitle.setText ( title );
+
+        //Set the username
+        TextView username = findViewById ( R.id.username );
+        username.setText ( task.getRequester ().getUsername () );
+
+        //Set the description
+        TextView description = findViewById ( R.id.description );
+        description.setText ( task.getDescription () );
+
+        //Set the photo
+        ImageView photoview = findViewById ( R.id.photoBtn );
+        photoview.setImageBitmap ( photo );
+
+        //Set the location
+        //Also allow user to view the task on a map
+        TextView getlocation = findViewById ( R.id.location );
+        getlocation.setText ( str_location );
+
+        //Set the status
+        TextView taskStatus = findViewById ( R.id.status );
+        taskStatus.setText ( status );
+
+        //Set the lowest amount
+        TextView lowest = findViewById ( R.id.lowest );
+        String amount= lowestAmount.toString ();
+        lowest.setText ( amount);
     }
 
     /**
-     * User is directed to the HomeActivity
-     * @param view
+     * Checks if the user entered a correct value for the amount
+     * @return
      */
-    public void homeBtn(View view){
+    public Boolean isValid(){
+        Boolean valid=true;
+        EditText amount= findViewById ( R.id.myAmount );
+        String sAmount= amount.getText ().toString ();
+        int dAmount= Integer.parseInt ( sAmount );
+
+        if (dAmount<=0){
+            valid=false;
+        }
+
+        return valid;
+    }
+
+
+
+
+    /**
+     * User is directed to the HomeActivity
+     */
+    public void homeBtn(){
         Intent intent= new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
 
+    /**
+     * User is directed to the code page to write code
+     * @param view
+     */
+    public void codeBtn(View view){
+        Intent intent= new Intent(this, CodeProvider.class);
+        startActivity(intent);
+    }
 }

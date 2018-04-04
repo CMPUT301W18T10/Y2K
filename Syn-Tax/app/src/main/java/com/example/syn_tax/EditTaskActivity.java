@@ -265,7 +265,10 @@ public class EditTaskActivity extends AppCompatActivity {
                                 tempTask.setPhoto ( photo );
                             }
 
+
                             tempTask.setLocation ( latitude, longitude );
+
+
 
                             ElasticSearchController.updateTask ( task, tempTask );
                             updateButton ();

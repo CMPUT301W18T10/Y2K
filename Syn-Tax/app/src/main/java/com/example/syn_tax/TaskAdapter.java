@@ -78,18 +78,28 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             title1.setVisibility ( View.VISIBLE );
             title2.setVisibility ( View.VISIBLE );
 
-            TextView task_username= data.findViewById(R.id.username);
+            final TextView task_username= data.findViewById(R.id.username);
             TextView task_bid= data.findViewById ( R.id.bid );
             task_bid.setVisibility ( View.VISIBLE );
             task_username.setVisibility ( View.VISIBLE );
 
             //Set the fields
             if(taskUsername.equals ( LoginActivity.thisuser.getUsername () )){
-                task_username.setText ( taskUsername );
+                title1.setText ( "Provider Username:" );
+                if(getItem(pos).getProvider()==null){
+                    task_username.setText ("NONE");
+                }
+                else{
+                    task_username.setText ( getItem(pos).getProvider().getUsername () );
+                }
             }
+
             else{
-                task_username.setText ( getItem(pos).getProvider().getUsername () );
+                title2.setText("My Accecpted Bid:");
+                title1.setText ( "Requester Username:" );
+                task_username.setText ( getItem(pos).getRequester ().getUsername ()  );
             }
+
 
             try {
                 if(getItem(pos).getLowestBid ()==null){
@@ -112,14 +122,21 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         else if (taskStatus.equals ( "bidded" ) && !taskUsername.equals ( LoginActivity.thisuser.getUsername () )){
             TextView title1 = data.findViewById(R.id.usernameTitle);
             TextView title2= data.findViewById(R.id.bidTitle);
+            TextView myBid= data.findViewById ( R.id.myBid );
             title1.setVisibility ( View.VISIBLE );
             title2.setVisibility ( View.VISIBLE );
+            myBid.setVisibility ( View.VISIBLE );
 
             TextView task_username= data.findViewById(R.id.username);
             TextView task_bid= data.findViewById ( R.id.bid );
+            TextView myBidAmount= data.findViewById ( R.id.myBidAmount );
+
             task_bid.setVisibility ( View.VISIBLE );
             task_username.setVisibility ( View.VISIBLE );
+            myBidAmount.setVisibility ( View.VISIBLE );
 
+            title1.setText("Requester Username:");
+            title2.setText("Lowest Bid So Far: ");
             task_username.setText ( taskUsername );
             try {
                 if(getItem(pos).getLowestBid ()==null){
@@ -136,8 +153,25 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             } catch (InterruptedException e) {
                 e.printStackTrace ();
             }
+            ArrayList<Bid> allBids= new ArrayList<Bid> (  );
+            ElasticSearchController.getBids bids= new ElasticSearchController.getBids ();
+            bids.execute("",LoginActivity.thisuser.getUsername ());
+            try {
+                allBids=bids.get ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            }
 
-            //set my bid also
+            for(int i=0;i<allBids.size ();i++){
+                if(allBids.get ( i ).getTask ().getTitle ().equals ( taskTitle )){
+                    Double myAmount= allBids.get ( i ).getBidAmount ();
+                    myBidAmount.setText(myAmount.toString ());
+                    break;
+                }
+            }
+
         }
 
 

@@ -149,7 +149,6 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-
     /**
      * User directed to the searchActivity
      * @param view
