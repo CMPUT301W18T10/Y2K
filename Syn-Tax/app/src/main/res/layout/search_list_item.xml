@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018 Term Winter 2018 . CMPUT 301. Team 43. University of Alberta. All Rights Reserved .
+  ~ You may use , distribute, or modify the code under terms and conditions of the code of Students
+  ~ Behaviour at University of Alberta.
+  ~ This program is free software: you can redistribute it and/or modify it under the terms of the GNU
+  ~ General Public License as published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version. This program is distributed in the hope that it
+  ~ will be useful, but WITHOUT ANY WARRANTY; Without even the implied warranty of MERCHANTABILITY
+  ~ or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  ~ Last Modified 4/3/18 8:51 PM
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_search_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/task_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/task_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/task_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/task_lowest_bid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
+</LinearLayout>
