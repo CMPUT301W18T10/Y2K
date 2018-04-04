@@ -328,12 +328,23 @@ public class ElasticSearchController extends Application {
 
             //String for the search
             String searchString;
-            if (search_parameters[0] == "") {
+
+            //Get all
+            if (Objects.equals ( search_parameters[0], "" ) && Objects.equals ( search_parameters[1], "" )) {
                 searchString = "{\"from\" : 0, \"size\" : 500}";
             }
+
+            //Get the tasks of a particular task
+            else if (Objects.equals ( search_parameters[0], "" )) {
+                searchString = "{\"query\":{\"match\":{\"usernameP\":\"" + search_parameters[1] + "\"}}}";
+            }
+
+            //Get the tasks of a task
             else {
                 searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
             }
+
+
             // TODO Build the query
             Search search = new Search.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "bids" ).build ();
 

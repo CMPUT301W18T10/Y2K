@@ -31,6 +31,10 @@ import com.google.android.gms.tasks.Tasks;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+/*
+Citations:
+https://stackoverflow.com/questions/30416322/android-not-auto-select-an-edittext-field
+*/
 
 /**
  * SearchActivity Class
@@ -101,6 +105,7 @@ public class SearchActivity extends AppCompatActivity {
             search.execute ( keywords );
 
             ArrayList<Task> tasks = search.get ();
+            ArrayList<Task> results = new ArrayList<Task> (  );
 
             //Filter through the tasks we got to make sure status== "requested" or "bidded"
             for(int i=0; i< tasks.size (); i++){
@@ -110,14 +115,14 @@ public class SearchActivity extends AppCompatActivity {
                 if(!taskname.equals ( myname )){
 
                     if (tasks.get(i).getStatus ().equals ( "requested" )){
-                        specificTasks.add(tasks.get ( i ));
+                        results.add(tasks.get ( i ));
                     }
                     else if (tasks.get ( i ).getStatus ().equals ( "bidded" )){
-                        specificTasks.add(tasks.get ( i ));
+                        results.add(tasks.get ( i ));
                     }
                 }
             }
-
+            specificTasks=results;
             Log.e("dkk", specificTasks.toString ());
 
             //CALL TO SET THE ADAPTER FOR THE LIST VIEW

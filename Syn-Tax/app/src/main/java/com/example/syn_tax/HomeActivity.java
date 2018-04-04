@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * HomeActivity Class
@@ -99,7 +100,6 @@ public class HomeActivity extends AppCompatActivity {
         title5.setPaintFlags(title5.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 
-
         //views for the lists
         requestedRListView = findViewById(R.id.requestedRList);
         biddedRListView = findViewById ( R.id.biddedRList );
@@ -130,12 +130,9 @@ public class HomeActivity extends AppCompatActivity {
                 assignedRtasks.add ( tasksR.get ( i ) );
             }
         }
-
         //Provider
-        biddedPtasks= new ArrayList<Task> (  );
-        assignedPtasks = new ArrayList<Task> (  );
-
-
+        loadTaskListProviderBidded ();
+        loadTaskListProviderAssigned ();
 
         //Set the adapter
         requestedRAdapter= new TaskAdapter ( this, requestedRtasks );
@@ -182,6 +179,60 @@ public class HomeActivity extends AppCompatActivity {
         catch(Exception e){
             allTasksList = new ArrayList<Task>();
         }
+    }
+
+
+    /**
+     * Loads in the tasks for a user
+     * Grab the list of tasks we provided that we bidded on
+     */
+    private static void loadTaskListProviderBidded(){
+        ArrayList<Task> allTasksList = new ArrayList<Task> (  );
+        ArrayList<Bid> allBids = new ArrayList<Bid> (  );
+        ElasticSearchController.getBids bids = new ElasticSearchController.getBids ();
+
+        try {
+            bids.execute("", LoginActivity.thisuser.getUsername ());
+            allBids= bids.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
+        }
+
+        for (int i=0;i<allBids.size ();i++){
+            allTasksList.add (  allBids.get ( i ).getTask ());
+        }
+        //Set the bidded Provider tasks
+        biddedPtasks=allTasksList;
+    }
+
+
+    /**
+     * Loads in the tasks for a user
+     * Grab the list of tasks we provided that were assigned
+     */
+    private static void loadTaskListProviderAssigned(){
+        ArrayList<Task> allTasksList = new ArrayList<Task> (  );
+        ArrayList<Bid> allBids = new ArrayList<Bid> (  );
+        ElasticSearchController.getBids bids = new ElasticSearchController.getBids ();
+
+        try {
+            bids.execute("", LoginActivity.thisuser.getUsername ());
+            allBids= bids.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
+        }
+
+        for (int i=0;i<allBids.size ();i++){
+            if(allBids.get ( i ).getTask ().getProvider ().getUsername (  ).equals ( LoginActivity.thisuser.getUsername () )){
+                allTasksList.add (  allBids.get ( i ).getTask ());
+            }
+        }
+        //Set the Assigned Provider tasks
+        assignedPtasks=allTasksList;
     }
 
 
