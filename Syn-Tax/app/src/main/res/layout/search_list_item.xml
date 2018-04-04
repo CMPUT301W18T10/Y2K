@@ -16,19 +16,39 @@
     android:id="@+id/my_search_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="10">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.06"
+            android:text="Requester:"
+            android:textColor="?attr/colorAccent"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/task_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="12345678"
+            android:textColor="?attr/colorAccent"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.009"
             android:text="Task Name:"
             android:textColor="?attr/colorAccent"
             android:textSize="14sp" />
@@ -37,73 +57,25 @@
             android:id="@+id/task_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2.8"
             android:text="TextView"
             android:textColor="?attr/colorAccent"
             android:textSize="14sp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Requester Username:"
-            android:textColor="?attr/colorAccent"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/task_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textColor="?attr/colorAccent"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Status:"
-            android:textColor="?attr/colorAccent"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/task_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textColor="?attr/colorAccent"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:orientation="horizontal"
+        android:weightSum="5">
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.09"
             android:text="Lowest Bid:"
             android:textColor="?attr/colorAccent"
             android:textSize="14sp" />
@@ -112,10 +84,29 @@
             android:id="@+id/task_lowest_bid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2.2"
             android:text="TextView"
             android:textColor="?attr/colorAccent"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.009"
+            android:text="Status:"
+            android:textColor="?attr/colorAccent"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/task_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.6"
+            android:text="TextView"
+            android:textColor="?attr/colorAccent"
+            android:textSize="14sp" />
+
     </LinearLayout>
 
 </LinearLayout>
