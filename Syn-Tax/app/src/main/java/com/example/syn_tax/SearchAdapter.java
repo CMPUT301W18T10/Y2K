@@ -13,7 +13,9 @@
 
 package com.example.syn_tax;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +71,14 @@ public class SearchAdapter extends ArrayAdapter<Task> {
             @Override
             public void onClick(View v){
                 //TODO: where the click goes
+                // for a task of a requester
+
+                Intent intent = new Intent(getContext(),ViewTaskProviderActivity.class);
+                intent.putExtra(SearchActivity.POINTER,String.valueOf(pos));
+                intent.putExtra("state", "fromSearch");
+                intent.putExtra ( "status", taskStatus );
+                intent.putExtra ( "title", taskTitle );
+                ((Activity)getContext()).startActivityForResult(intent,0);
             }
         });
 

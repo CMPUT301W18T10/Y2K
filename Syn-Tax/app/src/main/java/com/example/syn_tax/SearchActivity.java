@@ -51,7 +51,9 @@ public class SearchActivity extends AppCompatActivity {
     int PLACE_LOCATION_REQUESTED = 1;
     private String keywords;
     private ListView listOfTasks;
-    private ArrayList<Task> specificTasks= new ArrayList<Task> (  );
+    public static ArrayList<Task> specificTasks= new ArrayList<Task> (  );
+    private SearchAdapter searchAdapter;
+    public static final String POINTER = "Task_Position";
 
 
     @Override
@@ -71,6 +73,8 @@ public class SearchActivity extends AppCompatActivity {
             e.printStackTrace ();
         }
 
+
+
         //When the user selects the searchBtn then call searching to return the list of tasks
         //Match the keywords entered
         search.setOnClickListener ( new View.OnClickListener () {
@@ -88,6 +92,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         } );
+
     }
 
 
@@ -126,6 +131,10 @@ public class SearchActivity extends AppCompatActivity {
             Log.e("dkk", specificTasks.toString ());
 
             //CALL TO SET THE ADAPTER FOR THE LIST VIEW
+            //Set the adapter
+            searchAdapter= new SearchAdapter ( this, specificTasks);
+            //Set the list views
+            listOfTasks.setAdapter ( searchAdapter );
         }
     }
 
@@ -146,7 +155,6 @@ public class SearchActivity extends AppCompatActivity {
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         }
-
     }
 
     /**

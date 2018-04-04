@@ -128,7 +128,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/editPhotoView"
+            android:id="@+id/photoBtn"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_weight="0.2"
@@ -159,7 +159,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/editLocation"
+            android:id="@+id/location"
             android:layout_width="24dp"
             android:layout_height="34dp"
             android:layout_weight="0.2"
@@ -245,7 +245,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_weight="2.7"
+        android:layout_weight="2.54"
         android:gravity="left|center"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -278,7 +278,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_weight="2.4"
+        android:layout_weight="2.7"
         android:gravity="left|center"
         android:orientation="horizontal"
         android:weightSum="1">

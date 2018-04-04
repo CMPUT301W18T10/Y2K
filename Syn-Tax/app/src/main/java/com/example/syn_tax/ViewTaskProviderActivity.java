@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -66,13 +67,14 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         //need to get the location of where the user clicks on search
-        //status=intent.getStringExtra ( "status" );
-        //state= intent.getStringExtra ( "state" );
-        //title= intent.getStringExtra ( "title" );
-        //pos = Integer.parseInt(intent.getStringExtra(SearchActivity.POINTER));
+        status=intent.getStringExtra ( "status" );
+        state= intent.getStringExtra ( "state" );
+        title= intent.getStringExtra ( "title" );
+
 
         //From the Home Page get the task
         if(!state.equals ( "fromSearch" )) {
+            pos = Integer.parseInt(intent.getStringExtra(HomeActivity.POINTER));
             //set bidMyTitle to "my bid"
             TextView bidTitle = findViewById ( R.id.bidMyTitle );
             bidTitle.setText ( "My Bid:" );
@@ -110,14 +112,19 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
         else{
             //From the search page find
+            pos = Integer.parseInt(intent.getStringExtra(SearchActivity.POINTER));
+            task= SearchActivity.specificTasks.get ( pos );
         }
-
-
 
 
         //Get the lowest bid
         try {
-            lowestAmount= task.getLowestBid ().getBidAmount ();
+            if(task.getLowestBid ()!=null){
+                lowestAmount= task.getLowestBid ().getBidAmount ();
+            }
+            else{
+                lowestAmount=null;
+            }
         } catch (ExecutionException e) {
             e.printStackTrace ();
         } catch (InterruptedException e) {
@@ -188,8 +195,13 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
         //Set the lowest amount
         TextView lowest = findViewById ( R.id.lowest );
-        String amount= lowestAmount.toString ();
-        lowest.setText ( amount);
+        if (lowestAmount==null){
+            lowest.setText ( "0");
+        }
+        else {
+            String amount = lowestAmount.toString ();
+            lowest.setText ( amount );
+        }
     }
 
     /**
@@ -203,6 +215,8 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         int dAmount= Integer.parseInt ( sAmount );
 
         if (dAmount<=0){
+            amount.setError("Invalid Bid. ");
+            Toast.makeText(ViewTaskProviderActivity.this, ".", Toast.LENGTH_SHORT).show();
             valid=false;
         }
 
