@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,28 +89,27 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
 
         //click listener for a bid item
-        if(!owner) {
-            thisBidButton.setOnClickListener ( new View.OnClickListener () {
+        thisBidButton.setOnClickListener ( new View.OnClickListener () {
                 @Override
                 public void onClick(View v) {
                     bidClicked ();
                 }
             } );
-        }
-        else {
-            accept.setOnClickListener(new View.OnClickListener() {
+
+
+        accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
                     acceptBtn(v, pos, bids);
                 }
             });
-            decline.setOnClickListener(new View.OnClickListener() {
+        decline.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     declineBtn(v, bidUser);
                 }
             });
-        }
+
 
 
         return data;
@@ -117,7 +117,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
 
     private void acceptBtn(View v, int pos, ArrayList<Bid> bids){
-
+        Log.e("accept","accept button click");
         //SET THE TASK STATUS TO ASSIGN AND REMOVE EVERY OTHER BID ON THAT TASK
         //WHEN WE REMOVE A BID NOTIFY THAT USER
         // Elasticsearch ....
@@ -139,20 +139,23 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
 
     private void declineBtn(View v, String bidUser){
+        Log.e("Decline","Decline button clicked");
+
         //TODO: stuff for declining a bid
         //REMOVE THE BID FROM THE TASK
         //ELasticsearch.....
-        ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid();
-        delete.execute(bidUser);
+//        ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid();
+//        delete.execute(bidUser);
     }
 
 
     private void bidClicked(){
+        Log.e("Bid","Bid button clicked");
         //TODO: figure out where a bid click is supposed to go
         //GO TO VIEW TASK PROVIDER PAGE SO THEY CAN EDIT THE TASK
-        Intent intent= new Intent(getContext (), ViewTaskProviderActivity.class);
-        intent.putExtra("title", task.getTitle ());
-        intent.putExtra ( "username", task.getRequester ().getUsername () );
+        Intent intent= new Intent(getContext(), ViewTaskProviderActivity.class);
+        intent.putExtra("title", task.getTitle());
+        intent.putExtra ( "username", task.getRequester().getUsername());
         ((Activity)getContext()).startActivityForResult(intent,0);
     }
 }
