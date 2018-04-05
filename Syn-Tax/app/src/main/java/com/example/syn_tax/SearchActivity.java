@@ -117,6 +117,7 @@ public class SearchActivity extends AppCompatActivity {
                 String taskname= tasks.get ( i ).getRequester ().getUsername ();
                 String myname= LoginActivity.thisuser.getUsername ();
 
+                Log.e("s", tasks.get ( i ).getStatus ());
                 if(!taskname.equals ( myname )){
 
                     if (tasks.get(i).getStatus ().equals ( "requested" )){

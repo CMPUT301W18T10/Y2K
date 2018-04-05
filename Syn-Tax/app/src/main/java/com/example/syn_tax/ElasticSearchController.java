@@ -592,16 +592,18 @@ public class ElasticSearchController extends Application {
      * Update the Bid
      * If connected to the database, delete the old bid, and replace with the new bid
      *
-     * @param usernameP username of the provider I want to delete for my task
+     * @param bid1 the old bid
      * @param bid2 newUBid
      */
-    public static void updateBid(String usernameP, Bid bid2) {
+    public static void updateBid(Bid bid1, Bid bid2) {
         //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
         if (connected ()) {
 
+            //Get the old bid
+
             //Delete old one
             ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid ();
-            delete.execute ( usernameP );
+            delete.execute ( bid1.getTask ().getTitle (), bid1.getBidUserName () );
 
             //Add new one
             AsyncTask<Bid, Void, Void> execute = new ElasticSearchController.addBids ();
@@ -722,7 +724,8 @@ public class ElasticSearchController extends Application {
             //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
             if (connected ()) {
                 //String for the search
-                String searchString = "{\"query\":{\"match\":{\"usernameP\":\"" + search_parameters[1] + "\"}}}";
+                String searchString= "{\"query\":{\"match\":{\"taskname\":\"" + search_parameters[0] + "\"}}}";
+                //searchString= "{\"query\":{\"bool\":{\"must\":{\"match\":{\"bidUserName\":\"" + search_parameters[1] + "\"}},\":{\"match\":{\"taskname\":\"" + search_parameters[0] + "\"}}}}}";
 
                 // TODO Build the delete by query
                 DeleteByQuery oldBid = new DeleteByQuery.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "bids" ).build ();

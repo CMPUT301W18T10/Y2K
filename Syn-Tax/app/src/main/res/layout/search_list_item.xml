@@ -42,12 +42,13 @@
             android:layout_weight="0.2"
             android:text="12345678"
             android:textColor="?attr/colorAccent"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_weight="0.009"
             android:text="Task Name:"
             android:textColor="?attr/colorAccent"
@@ -60,7 +61,7 @@
             android:layout_weight="2.8"
             android:text="TextView"
             android:textColor="?attr/colorAccent"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -105,7 +106,7 @@
             android:layout_weight="2.6"
             android:text="TextView"
             android:textColor="?attr/colorAccent"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 

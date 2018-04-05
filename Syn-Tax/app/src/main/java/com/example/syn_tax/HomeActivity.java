@@ -116,22 +116,29 @@ public class HomeActivity extends AppCompatActivity {
         super.onStart();
 
         //REQUESTER
-        loadTaskListRequester();
         requestedRtasks= new ArrayList<Task> (  );
         biddedRtasks= new ArrayList<Task> (  );
         assignedRtasks = new ArrayList<Task> (  );
 
+        //Provider
         biddedPtasks= new ArrayList<Task> (  );
         assignedPtasks= new ArrayList<Task> (  );
+
+        //Call to initlalize taskR array
+        loadTaskListRequester ();
 
         //Update the bidded tasks and assigned tasks
         try {
             update();
         } catch (ExecutionException e) {
+
             e.printStackTrace ();
         } catch (InterruptedException e) {
             e.printStackTrace ();
         }
+
+        //Set taskR for the Requester
+        loadTaskListRequester ();
 
         for(int i=0; i < tasksR.size (); i++) {
             if (tasksR.get ( i ).getStatus ().equals ( "requested" )) {
@@ -142,9 +149,12 @@ public class HomeActivity extends AppCompatActivity {
                 assignedRtasks.add ( tasksR.get ( i ) );
             }
         }
+
         //Provider
         loadTaskListProviderBidded ();
         loadTaskListProviderAssigned ();
+
+        Log.e("e", biddedPtasks.toString ());
 
         //Set the adapter
         requestedRAdapter= new TaskAdapter ( this, requestedRtasks );
@@ -154,14 +164,13 @@ public class HomeActivity extends AppCompatActivity {
         biddedPAdapter= new TaskAdapter ( this, biddedPtasks );
         assignedPAdapter= new TaskAdapter ( this, assignedPtasks );
 
-
         //Set the list views
         requestedRListView.setAdapter ( requestedRAdapter );
         biddedRListView.setAdapter ( biddedRAdapter );
         assignedRListView.setAdapter ( assignedRAdapter );
 
         biddedPListView.setAdapter ( biddedPAdapter );
-        assignedPListView.setAdapter ( biddedPAdapter );
+        assignedPListView.setAdapter ( assignedPAdapter );
     }
 
     /**
@@ -213,7 +222,9 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         for (int i=0;i<allBids.size ();i++){
-            allTasksList.add (  allBids.get ( i ).getTask ());
+            if (allBids.get ( i ).getTask ().getStatus ().equals ( "bidded" )){
+                allTasksList.add (  allBids.get ( i ).getTask ());
+            }
         }
         //Set the bidded Provider tasks
         biddedPtasks=allTasksList;
@@ -240,7 +251,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         for(int i=0; i<allTasksList.size ();i++){
-            if(allTasksList.get ( i ).getProvider ()!= null){
+            if(allTasksList.get ( i ).getProvider ()!= null && allTasksList.get ( i ).getStatus ().equals ( "assigned" )){
                 if(allTasksList.get ( i ).getProvider ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
                     taskList.add(allTasksList.get ( i ));
                 }
@@ -265,7 +276,8 @@ public class HomeActivity extends AppCompatActivity {
             if(allBids.size ()!=0 && tasksR.get ( i ).getStatus ().equals ( "requested" )){
                 for(int j=0; j<allBids.size ();j++){
                     if(allBids.get ( j ).getBidOwner ().equals ( LoginActivity.thisuser.getUsername () )){
-                        tasksR.get ( i ).setStatus ("bidded");
+                        Task tempTask = new Task ( tasksR.get ( i ).getTitle (), tasksR.get (i).getDescription (), LoginActivity.thisuser, "bidded" );
+                        ElasticSearchController.updateTask ( tasksR.get (i), tempTask );
                     }
                 }
             }
@@ -273,13 +285,12 @@ public class HomeActivity extends AppCompatActivity {
             //Change to assigned
             if(tasksR.get ( i ).getStatus ().equals ( "bidded" )){
                 if(!(tasksR.get ( i ).getProvider() == null )){
-                    tasksR.get ( i ).setStatus ("assigned");
+                    Task tempTask = new Task ( tasksR.get ( i ).getTitle (), tasksR.get (i).getDescription (), LoginActivity.thisuser, "assigned" );
+                    ElasticSearchController.updateTask ( tasksR.get (i), tempTask );
                 }
             }
-
             //Find a way to make it change to done, and back to requested and bidded
         }
-
     }
 
 

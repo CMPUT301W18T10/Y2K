@@ -70,147 +70,131 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         final String taskUsername= requester.getUsername ();
         final String loginUsername= LoginActivity.thisuser.getUsername ();
         final String taskStatus = getItem(pos).getStatus();
+//
+//        Log.e("e",taskStatus);
+//        Log.e("ee", taskUsername);
+//        Log.e("eee", LoginActivity.thisuser.getUsername ());
 
+                //If assigned show the username and the amount for that task
+        if (taskStatus.equals ( "assigned" )) {
+            TextView title1 = data.findViewById ( R.id.usernameTitle );
+            TextView title2 = data.findViewById ( R.id.bidTitle );
+            title1.setVisibility ( View.VISIBLE );
+            title2.setVisibility ( View.VISIBLE );
 
-        if(loginUsername.equals ( taskUsername )) {
+            final TextView task_username = data.findViewById ( R.id.username );
+            TextView task_bid = data.findViewById ( R.id.bid );
+            task_bid.setVisibility ( View.VISIBLE );
+            task_username.setVisibility ( View.VISIBLE );
 
-            //If assigned show the username and the amount for that task
-            if (taskStatus.equals ( "assigned" )) {
-                TextView title1 = data.findViewById ( R.id.usernameTitle );
-                TextView title2 = data.findViewById ( R.id.bidTitle );
-                title1.setVisibility ( View.VISIBLE );
-                title2.setVisibility ( View.VISIBLE );
-
-                final TextView task_username = data.findViewById ( R.id.username );
-                TextView task_bid = data.findViewById ( R.id.bid );
-                task_bid.setVisibility ( View.VISIBLE );
-                task_username.setVisibility ( View.VISIBLE );
-
-                //Set the fields
-                if (taskUsername.equals ( LoginActivity.thisuser.getUsername () )) {
-                    title1.setText ( "Provider Username:" );
-                    if (getItem ( pos ).getProvider () == null) {
-                        task_username.setText ( "NONE" );
-                    } else {
-                        task_username.setText ( getItem ( pos ).getProvider ().getUsername () );
-                    }
+            //Set the fields
+            if (taskUsername.equals ( LoginActivity.thisuser.getUsername () )) {
+                title1.setText ( "Provider Username:" );
+                if (getItem ( pos ).getProvider () == null) {
+                    task_username.setText ( "NONE" );
                 } else {
-                    title2.setText ( "My Accecpted Bid:" );
-                    title1.setText ( "Requester Username:" );
-                    task_username.setText ( getItem ( pos ).getRequester ().getUsername () );
+                    task_username.setText ( getItem ( pos ).getProvider ().getUsername () );
                 }
-
-
-                try {
-                    if (getItem ( pos ).getLowestBid () == null) {
-                        task_bid.setText ( "NONE" );
-                    } else {
-                        Double amount = getItem ( pos ).getLowestBid ().getBidAmount ();
-                        task_bid.setText ( amount.toString () );
-                    }
-
-                } catch (ExecutionException e) {
-                    e.printStackTrace ();
-                } catch (InterruptedException e) {
-                    e.printStackTrace ();
-                }
-            }
-
-            //Check if task status is  bidded and were provider
-            else if (taskStatus.equals ( "bidded" ) && !taskUsername.equals ( LoginActivity.thisuser.getUsername () )) {
-                TextView title1 = data.findViewById ( R.id.usernameTitle );
-                TextView title2 = data.findViewById ( R.id.bidTitle );
-                TextView myBid = data.findViewById ( R.id.myBid );
-                title1.setVisibility ( View.VISIBLE );
-                title2.setVisibility ( View.VISIBLE );
-                myBid.setVisibility ( View.VISIBLE );
-
-                TextView task_username = data.findViewById ( R.id.username );
-                TextView task_bid = data.findViewById ( R.id.bid );
-                TextView myBidAmount = data.findViewById ( R.id.myBidAmount );
-
-                task_bid.setVisibility ( View.VISIBLE );
-                task_username.setVisibility ( View.VISIBLE );
-                myBidAmount.setVisibility ( View.VISIBLE );
-
+            } else {
+                title2.setText ( "My Accecpted Bid:" );
                 title1.setText ( "Requester Username:" );
-                title2.setText ( "Lowest Bid So Far: " );
-                task_username.setText ( taskUsername );
-                try {
-                    if (getItem ( pos ).getLowestBid () == null) {
-                        task_bid.setText ( "NONE" );
-                    } else {
-                        Double amount = getItem ( pos ).getLowestBid ().getBidAmount ();
-                        task_bid.setText ( amount.toString () );
-                    }
-
-                } catch (ExecutionException e) {
-                    e.printStackTrace ();
-                } catch (InterruptedException e) {
-                    e.printStackTrace ();
-                }
-                ArrayList<Bid> allBids = new ArrayList<Bid> ();
-                ElasticSearchController.getBids bids = new ElasticSearchController.getBids ();
-                bids.execute ( "", LoginActivity.thisuser.getUsername () );
-                try {
-                    allBids = bids.get ();
-                } catch (InterruptedException e) {
-                    e.printStackTrace ();
-                } catch (ExecutionException e) {
-                    e.printStackTrace ();
-                }
-
-                for (int i = 0; i < allBids.size (); i++) {
-                    if (allBids.get ( i ).getTask ().getTitle ().equals ( taskTitle )) {
-                        Double myAmount = allBids.get ( i ).getBidAmount ();
-                        myBidAmount.setText ( myAmount.toString () );
-                        break;
-                    }
-                }
+                task_username.setText ( getItem ( pos ).getRequester ().getUsername () );
             }
 
-            //Text views of a task item
-            TextView task_title = (TextView) data.findViewById ( R.id.task_name );
-            TextView task_stat = (TextView) data.findViewById ( R.id.task_status );
 
-            // layout for a singular task
-            LinearLayout thisButton = (LinearLayout) data.findViewById ( R.id.task_item );
-
-            //setting the textviews of a list item
-            task_title.setText ( taskTitle );
-            task_stat.setText ( taskStatus );
-
-            // click listener for a list item
-            thisButton.setOnClickListener ( new View.OnClickListener () {
-                @Override
-                public void onClick(View v) {
-                    // for a task of a requester
-                    edit_or_view ( v, pos, EditTaskActivity.class, taskTitle, "edit", taskStatus );
+            try {
+                if (getItem ( pos ).getLowestBid () == null) {
+                    task_bid.setText ( "NONE" );
+                } else {
+                    Double amount = getItem ( pos ).getLowestBid ().getBidAmount ();
+                    task_bid.setText ( amount.toString () );
                 }
 
-            } );
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
         }
 
-        else{
-            // layout for a singular task
-            LinearLayout thisButton = (LinearLayout) data.findViewById ( R.id.task_item );
+        //Check if task status is  bidded and were provider
+        else if (taskStatus.equals ( "bidded" ) && !taskUsername.equals ( LoginActivity.thisuser.getUsername () )) {
+            TextView title1 = data.findViewById ( R.id.usernameTitle );
+            TextView title2 = data.findViewById ( R.id.bidTitle );
+            TextView myBid = data.findViewById ( R.id.myBid );
+            title1.setVisibility ( View.VISIBLE );
+            title2.setVisibility ( View.VISIBLE );
+            myBid.setVisibility ( View.VISIBLE );
 
-            //Text views of a task item
-            TextView task_title = (TextView) data.findViewById ( R.id.task_name );
-            TextView task_stat = (TextView) data.findViewById ( R.id.task_status );
-            //setting the textviews of a list item
-            task_title.setText ( taskTitle );
-            task_stat.setText ( taskStatus );
+            TextView task_username = data.findViewById ( R.id.username );
+            TextView task_bid = data.findViewById ( R.id.bid );
+            TextView myBidAmount = data.findViewById ( R.id.myBidAmount );
 
-            thisButton.setOnClickListener ( new View.OnClickListener () {
-                @Override
-                public void onClick(View v) {
+            task_bid.setVisibility ( View.VISIBLE );
+            task_username.setVisibility ( View.VISIBLE );
+            myBidAmount.setVisibility ( View.VISIBLE );
+
+            title1.setText ( "Requester Username:" );
+            title2.setText ( "Lowest Bid So Far: " );
+            task_username.setText ( taskUsername );
+            try {
+                if (getItem ( pos ).getLowestBid () == null) {
+                    task_bid.setText ( "NONE" );
+                } else {
+                    Double amount = getItem ( pos ).getLowestBid ().getBidAmount ();
+                    task_bid.setText ( amount.toString () );
+                }
+
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
+            ArrayList<Bid> allBids = new ArrayList<Bid> ();
+            ElasticSearchController.getBids bids = new ElasticSearchController.getBids ();
+            bids.execute ( "", LoginActivity.thisuser.getUsername () );
+            try {
+                allBids = bids.get ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            }
+
+            for (int i = 0; i < allBids.size (); i++) {
+                if (allBids.get ( i ).getTask ().getTitle ().equals ( taskTitle )) {
+                    Double myAmount = allBids.get ( i ).getBidAmount ();
+                    myBidAmount.setText ( myAmount.toString () );
+                    break;
+                }
+            }
+        }
+
+        //Text views of a task item
+        TextView task_title = (TextView) data.findViewById ( R.id.task_name );
+        TextView task_stat = (TextView) data.findViewById ( R.id.task_status );
+
+        // layout for a singular task
+        LinearLayout thisButton = (LinearLayout) data.findViewById ( R.id.task_item );
+
+        //setting the textviews of a list item
+        task_title.setText ( taskTitle );
+        task_stat.setText ( taskStatus );
+
+        // click listener for a list item
+        thisButton.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                // for a task of a requester
+                if(loginUsername.equals ( taskUsername )) {
+                    edit_or_view ( v, pos, EditTaskActivity.class, taskTitle, "edit", taskStatus );
+                }
+                else{
                     // for a task of a Provider
                     edit_or_view(v,pos,ViewTaskProviderActivity.class, taskTitle, "view", taskStatus);
                 }
-            });
-        }
-
+            }
+        });
         return data;
     }
 

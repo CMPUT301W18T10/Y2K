@@ -143,10 +143,12 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         for(int i=0;i<allBids.size ();i++){
             if(allBids.get(i).getTask ().getTitle ().equals ( task.getTitle () )){
                 oldBid= allBids.get ( i );
+                EditText amount= findViewById ( R.id.myAmount );
+                Double damount=oldBid.getBidAmount ();
+                amount.setText ( damount.toString ());
                 break;
             }
         }
-
 
 
 
@@ -198,7 +200,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
                     //or update the bid
                     if (oldBid!=null){
-                        ElasticSearchController.updateBid ( oldBid.getBidUserName (), newBid );
+                        ElasticSearchController.updateBid ( oldBid, newBid );
                     }
 
                     //add bid because i have never bidded on this task before

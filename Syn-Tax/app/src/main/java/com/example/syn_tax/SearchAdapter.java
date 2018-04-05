@@ -27,6 +27,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by aapae on 4/3/2018.
@@ -50,7 +51,14 @@ public class SearchAdapter extends ArrayAdapter<Task> {
         final String taskStatus = getItem(pos).getStatus();
         final String taskTitle = getItem(pos).getTitle();
         if (taskStatus.equals("bidded")){
-            lowestbid = "get the lowest bid here";
+            try {
+                Double amount= getItem ( pos ).getLowestBid ().getBidAmount ();
+                lowestbid= amount.toString ();
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
         }
         else{
             lowestbid = "NONE";
