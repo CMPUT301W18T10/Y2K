@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,9 +72,8 @@ public class EditTaskActivity extends AppCompatActivity {
     private Double longitude;
     private String Otitle;
     private String state;
-    private String OriginalStatus;
     private String status;
-    private Task task;
+    private static Task task;
 
     /**
      * OnCreate Method
@@ -200,28 +200,34 @@ public class EditTaskActivity extends AppCompatActivity {
                 saveBtn.setOnClickListener ( new View.OnClickListener () {
                     @Override
                     public void onClick(View v) {
-                        if (isValid ()) {
-                            //Instantiate a object of type Task
-                            // added in the username of the requester - Aidan
-                            Task tempTask = task;
+                        try {
+                            if (isValid ()) {
+                                //Instantiate a object of type Task
+                                // added in the username of the requester - Aidan
+                                Task tempTask = task;
 
-                            EditText title = findViewById ( R.id.editTaskTitle );
-                            EditText description = findViewById ( R.id.editDescription );
-                            EditText status = findViewById ( R.id.status );
+                                EditText title = findViewById ( R.id.editTaskTitle );
+                                EditText description = findViewById ( R.id.editDescription );
+                                EditText status = findViewById ( R.id.status );
 
-                            String stitle = title.getText ().toString ();
-                            String sdesc = description.getText ().toString ();
-                            String sstatus = status.getText ().toString ();
+                                String stitle = title.getText ().toString ();
+                                String sdesc = description.getText ().toString ();
+                                String sstatus = status.getText ().toString ();
 
-                            task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus );
-                            ElasticSearchController.updateTask ( tempTask, task );
-                            updateButton ();
+                                task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus );
+                                ElasticSearchController.updateTask ( tempTask, task );
+                                updateButton ();
+                            }
+                        } catch (ExecutionException e) {
+                            e.printStackTrace ();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace ();
                         }
                     }
                 } );
             }
-            else {
 
+            else {
                 try {
                     printTask ( task );
                 } catch (ExecutionException e) {
@@ -254,28 +260,39 @@ public class EditTaskActivity extends AppCompatActivity {
 
                         //valiidate user info
                         //Check to add a location to a task
-                        if (isValid() && locationStatus == 1) {
-                            //Instantiate a object of type Task
-                            // added in the username of the requester - Aidan
-                            //TODO delete the task from the elastic search then add this one
+                        try {
+                            if (isValid() && locationStatus == 1) {
+                                //Instantiate a object of type Task
+                                // added in the username of the requester - Aidan
+                                //TODO delete the task from the elastic search then add this one
 
-                            Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus );
-                            // Check to add a photo to the task
-                            if (photoStatus == 1) {
-                                tempTask.setPhoto ( photo );
+                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus );
+                                // Check to add a photo to the task
+                                if (photoStatus == 1) {
+                                    tempTask.setPhoto ( photo );
+                                }
+
+                                tempTask.setLocation ( latitude, longitude );
+
+                                ElasticSearchController.updateTask ( task, tempTask );
+                                updateButton ();
                             }
 
-
-                            tempTask.setLocation ( latitude, longitude );
-
-
-
-                            ElasticSearchController.updateTask ( task, tempTask );
-                            updateButton ();
-                        }
-
-                        else if(locationStatus != 1 && isValid ()){
-                            Toast.makeText(EditTaskActivity.this, "Enter a Location.", Toast.LENGTH_SHORT).show();
+                            else {
+                                try {
+                                    if(locationStatus != 1 && isValid ()){
+                                        Toast.makeText(EditTaskActivity.this, "Enter a Location.", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace ();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace ();
+                                }
+                            }
+                        } catch (ExecutionException e) {
+                            e.printStackTrace ();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace ();
                         }
                     }
                 } );
@@ -298,7 +315,6 @@ public class EditTaskActivity extends AppCompatActivity {
         Double Olocation = task.getLat()+task.getLong();
         String str_Olocation  = Olocation.toString();
         String Ostatus= task.getStatus ();
-        OriginalStatus=Ostatus;
 
         Bid bid= task.getLowestBid ();
         String Olowest;
@@ -352,7 +368,6 @@ public class EditTaskActivity extends AppCompatActivity {
         //set the data and type(get all image types)
         galleryIntent.setDataAndType(data,"image/*");
         startActivityForResult(galleryIntent, RESULT_GET_IMAGE);
-
     }
 
     /**
@@ -360,7 +375,7 @@ public class EditTaskActivity extends AppCompatActivity {
      * @return true if user input is valid
      */
     //validates that user entered the correct information
-    public boolean isValid(){
+    public boolean isValid() throws ExecutionException, InterruptedException {
         boolean valid=true;
         //title
         EditText taskTitle = findViewById(R.id.editTaskTitle);
@@ -414,13 +429,26 @@ public class EditTaskActivity extends AppCompatActivity {
         }
 
 
-        else if ( !(sstatus.equals ( "requested" )) && !(sstatus.equals ( "bidded" )) &&
-                !(sstatus.equals ( "done" )) && !(sstatus.equals ( "assigned" ))){
-            status.setError ( "Enter status" );
+
+        //Check if theres a bid on my task
+        ArrayList<Bid> bids= new ArrayList<Bid> (  );
+        ElasticSearchController.getBids allBids= new ElasticSearchController.getBids ();
+        allBids.execute ( "", stitle );
+        bids= allBids.get ();
+        boolean check=false;
+        for(int i=0; i<bids.size (); i++){
+            if(bids.get(i).getBidOwner().equals ( LoginActivity.thisuser.getUsername () )){
+                check=true;
+            }
+        }
+
+        //Check if valid status
+        if ( !(sstatus.equals ( "done" )) && !(sstatus.equals ( "assigned" )) && !(sstatus.equals ( "requested" )) &&
+                !(sstatus.equals ( "bidded" ))){
+            status.setError ( "Enter status." );
             Toast.makeText(EditTaskActivity.this, "Invalid status.", Toast.LENGTH_SHORT).show();
             valid=false;
         }
-
         //If checks are all good, it will return true
         return valid;
     }

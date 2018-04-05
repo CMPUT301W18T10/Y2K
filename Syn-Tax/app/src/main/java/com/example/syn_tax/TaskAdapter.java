@@ -171,10 +171,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                     break;
                 }
             }
-
         }
-
-
 
         //Text views of a task item
         TextView task_title = (TextView) data.findViewById(R.id.task_name);
@@ -212,7 +209,11 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         if (todo== "view"){
             Intent intent = new Intent(getContext(),c);
             intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
+            intent.putExtra ( "status", status );
+            intent.putExtra ( "title", title );
+            intent.putExtra ( "sss", "Home" );
             ((Activity)getContext()).startActivityForResult(intent,0);
+
         }
 
         //USER CAN EDIT AND DELETE ITS OWN TASK
@@ -252,6 +253,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                     Intent intent = new Intent(getContext(),c);
                     intent.putExtra ("state", "edit");
                     intent.putExtra ( "status", status );
+                    intent.putExtra ( "sss", "Home" );
                     intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
                     ((Activity)getContext()).startActivityForResult(intent,0);
                 }
@@ -267,6 +269,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                     Intent intent = new Intent(getContext(),c);
                     intent.putExtra ("state", "view");
                     intent.putExtra ( "status",  status);
+                    intent.putExtra ( "sss", "Home" );
                     intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
                     ((Activity)getContext()).startActivityForResult(intent,0);
                 }

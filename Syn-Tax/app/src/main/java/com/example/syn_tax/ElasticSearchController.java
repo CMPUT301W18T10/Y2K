@@ -336,12 +336,12 @@ public class ElasticSearchController extends Application {
 
             //Get the tasks of a particular task
             else if (Objects.equals ( search_parameters[0], "" )) {
-                searchString = "{\"query\":{\"match\":{\"usernameP\":\"" + search_parameters[1] + "\"}}}";
+                searchString = "{\"query\":{\"match\":{\"bidUserName\":\"" + search_parameters[1] + "\"}}}";
             }
 
             //Get the tasks of a task
             else {
-                searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
+                searchString = "{\"query\":{\"match\":{\"taskname\":\"" + search_parameters[0] + "\"}}}";
             }
 
 
@@ -592,21 +592,20 @@ public class ElasticSearchController extends Application {
      * Update the Bid
      * If connected to the database, delete the old bid, and replace with the new bid
      *
-     * @param bid1 oldBid
+     * @param usernameP username of the provider I want to delete for my task
      * @param bid2 newUBid
      */
-    public static void updateBid(Bid bid1, Bid bid2) {
+    public static void updateBid(String usernameP, Bid bid2) {
         //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
         if (connected ()) {
 
             //Delete old one
-            String username= bid1.getBidUserName ();
             ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid ();
-            delete.execute ( username );
+            delete.execute ( usernameP );
 
-             //Add new one
-             AsyncTask<Bid, Void, Void> execute = new ElasticSearchController.addBids ();
-             execute.execute ( bid2 );
+            //Add new one
+            AsyncTask<Bid, Void, Void> execute = new ElasticSearchController.addBids ();
+            execute.execute ( bid2 );
         }
     }
 
@@ -723,7 +722,7 @@ public class ElasticSearchController extends Application {
             //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
             if (connected ()) {
                 //String for the search
-                String searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
+                String searchString = "{\"query\":{\"match\":{\"usernameP\":\"" + search_parameters[1] + "\"}}}";
 
                 // TODO Build the delete by query
                 DeleteByQuery oldBid = new DeleteByQuery.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "bids" ).build ();

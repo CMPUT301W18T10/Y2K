@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2018 Term Winter 2018 . CMPUT 301. Team 43. University of Alberta. All Rights Reserved .
  * You may use , distribute, or modify the code under terms and conditions of the code of Students
@@ -48,12 +49,12 @@ public class SearchAdapter extends ArrayAdapter<Task> {
         final String taskUsername = getItem(pos).getRequester().getUsername();
         final String taskStatus = getItem(pos).getStatus();
         final String taskTitle = getItem(pos).getTitle();
-        try {
-            lowestbid = String.valueOf(getItem(pos).getLowestBid());
-        }catch (Exception e){
-            lowestbid = "None";
+        if (taskStatus.equals("bidded")){
+            lowestbid = "get the lowest bid here";
         }
-
+        else{
+            lowestbid = "NONE";
+        }
 
         TextView tTitle = data.findViewById(R.id.task_title);
         TextView tUser = data.findViewById(R.id.task_user);
@@ -75,14 +76,13 @@ public class SearchAdapter extends ArrayAdapter<Task> {
 
                 Intent intent = new Intent(getContext(),ViewTaskProviderActivity.class);
                 intent.putExtra(SearchActivity.POINTER,String.valueOf(pos));
-                intent.putExtra("state", "fromSearch");
                 intent.putExtra ( "status", taskStatus );
                 intent.putExtra ( "title", taskTitle );
+                intent.putExtra ( "sss", "search" );
                 ((Activity)getContext()).startActivityForResult(intent,0);
             }
         });
 
         return data;
     }
-
 }

@@ -121,6 +121,18 @@ public class HomeActivity extends AppCompatActivity {
         biddedRtasks= new ArrayList<Task> (  );
         assignedRtasks = new ArrayList<Task> (  );
 
+        biddedPtasks= new ArrayList<Task> (  );
+        assignedPtasks= new ArrayList<Task> (  );
+
+        //Update the bidded tasks and assigned tasks
+        try {
+            update();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
         for(int i=0; i < tasksR.size (); i++) {
             if (tasksR.get ( i ).getStatus ().equals ( "requested" )) {
                 requestedRtasks.add ( tasksR.get ( i ) );
@@ -214,25 +226,60 @@ public class HomeActivity extends AppCompatActivity {
      */
     private static void loadTaskListProviderAssigned(){
         ArrayList<Task> allTasksList = new ArrayList<Task> (  );
-        ArrayList<Bid> allBids = new ArrayList<Bid> (  );
-        ElasticSearchController.getBids bids = new ElasticSearchController.getBids ();
+        ArrayList<Task> taskList = new ArrayList<Task> (  );
+        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks ();
 
         try {
-            bids.execute("", LoginActivity.thisuser.getUsername ());
-            allBids= bids.get();
+            tasks.execute("", "");
+            allTasksList= tasks.get ();
         } catch (InterruptedException e) {
             e.printStackTrace ();
         } catch (ExecutionException e) {
             e.printStackTrace ();
         }
 
-        for (int i=0;i<allBids.size ();i++){
-            if(allBids.get ( i ).getTask ().getProvider ().getUsername (  ).equals ( LoginActivity.thisuser.getUsername () )){
-                allTasksList.add (  allBids.get ( i ).getTask ());
+
+        for(int i=0; i<allTasksList.size ();i++){
+            if(allTasksList.get ( i ).getProvider ()!= null){
+                if(allTasksList.get ( i ).getProvider ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
+                    taskList.add(allTasksList.get ( i ));
+                }
             }
         }
+
         //Set the Assigned Provider tasks
-        assignedPtasks=allTasksList;
+        assignedPtasks=taskList;
+    }
+
+    /**
+     * updates the status of a task
+     */
+    public void update() throws ExecutionException, InterruptedException {
+        for(int i=0; i < tasksR.size (); i++) {
+            ArrayList <Bid> allBids= new ArrayList<Bid> (  );
+            ElasticSearchController.getBids bids= new ElasticSearchController.getBids ();
+            bids.execute ( tasksR.get ( i ).getTitle (), "" );
+
+            allBids= bids.get();
+            //Change to bidded
+            if(allBids.size ()!=0 && tasksR.get ( i ).getStatus ().equals ( "requested" )){
+                for(int j=0; j<allBids.size ();j++){
+                    if(allBids.get ( j ).getBidOwner ().equals ( LoginActivity.thisuser.getUsername () )){
+                        tasksR.get ( i ).setStatus ("bidded");
+                    }
+                }
+            }
+
+            //Change to assigned
+            if(tasksR.get ( i ).getStatus ().equals ( "bidded" )){
+                if(!(tasksR.get ( i ).getProvider() == null )){
+                    tasksR.get ( i ).setStatus ("assigned");
+                }
+            }
+
+            //Find a way to make it change to done, and back to requested and bidded
+        }
+
     }
 
 

@@ -17,8 +17,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,8 +58,9 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
     private Double lowestAmount;
     private String title;
     private String status;
-    private String state;
+    private String  state;
     private Task task;
+    private Bid oldBid;
 
 
     @Override
@@ -68,12 +71,12 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         //need to get the location of where the user clicks on search
         status=intent.getStringExtra ( "status" );
-        state= intent.getStringExtra ( "state" );
         title= intent.getStringExtra ( "title" );
+        state= intent.getStringExtra ( "sss");
 
 
         //From the Home Page get the task
-        if(!state.equals ( "fromSearch" )) {
+        if(!state.equals("search")) {
             pos = Integer.parseInt(intent.getStringExtra(HomeActivity.POINTER));
             //set bidMyTitle to "my bid"
             TextView bidTitle = findViewById ( R.id.bidMyTitle );
@@ -92,6 +95,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             //Get my Bid on the task
             EditText amount= findViewById ( R.id.myAmount );
             ArrayList<Bid> allBids= new ArrayList<Bid> (  );
+
             ElasticSearchController.getBids bids= new ElasticSearchController.getBids ();
             bids.execute ( "", LoginActivity.thisuser.getUsername () );
             try {
@@ -101,20 +105,49 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace ();
             }
-            for(int i=0;i<allBids.size ();i++){
-                if(allBids.get(i).getTask ().getTitle ().equals ( task.getTitle () )){
-                    Double cost= allBids.get(i).getBidAmount ();
-                    amount.setText(cost.toString ());
-                    break;
+
+            try{
+                for(int i=0;i<allBids.size ();i++){
+                    if(allBids.get(i).getTask ().getTitle ().equals ( task.getTitle () )){
+                        Double cost= allBids.get(i).getBidAmount ();
+                        amount.setText(cost.toString ());
+                        break;
+                    }
                 }
             }
+            catch (NullPointerException e){
+                Log.e("e", "title errror");
+            }
         }
+
 
         else{
             //From the search page find
             pos = Integer.parseInt(intent.getStringExtra(SearchActivity.POINTER));
             task= SearchActivity.specificTasks.get ( pos );
         }
+
+
+        //Get the old bid if it exists
+        ArrayList<Bid> allBids= new ArrayList<Bid> (  );
+        ElasticSearchController.getBids bids= new ElasticSearchController.getBids ();
+        bids.execute ( "", LoginActivity.thisuser.getUsername () );
+        try {
+            allBids=bids.get ();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
+        }
+
+        for(int i=0;i<allBids.size ();i++){
+            if(allBids.get(i).getTask ().getTitle ().equals ( task.getTitle () )){
+                oldBid= allBids.get ( i );
+                break;
+            }
+        }
+
+
 
 
         //Get the lowest bid
@@ -130,6 +163,9 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace ();
         }
+        catch (NullPointerException e){
+            Log.e("e", "error lowest bid");
+        }
 
         try {
             printTask();
@@ -141,14 +177,42 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
 
         Button saveBtn=findViewById ( R.id.saveBtn );
-
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isValid()){
+                //Convert the string to a Double if the string is not empty else set it to 0
+                EditText amount= findViewById ( R.id.myAmount );
+                String sAmount= amount.getText ().toString ();
+
+                Double dAmount;
+                if(sAmount.length()>0){
+                    dAmount= Double.parseDouble(sAmount);
+                }
+                else {
+                    dAmount=0.0;
+                }
+                if (isValid() && dAmount>0){
+
                     //add bid
+                    Bid newBid= new Bid ( LoginActivity.thisuser.getUsername (),dAmount, task,task.getTitle (),task.getRequester ().getUsername () );
+
                     //or update the bid
+                    if (oldBid!=null){
+                        ElasticSearchController.updateBid ( oldBid.getBidUserName (), newBid );
+                    }
+
+                    //add bid because i have never bidded on this task before
+                    else{
+                        AsyncTask<Bid, Void, Void> execute = new ElasticSearchController.addBids ();
+                        execute.execute ( newBid );
+                    }
+
                     homeBtn ();
+                }
+
+                else if (dAmount<=0){
+                    amount.setError("Invalid Bid. ");
+                    Toast.makeText(ViewTaskProviderActivity.this, "Enter a Bid.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -162,45 +226,52 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    private void printTask() throws ExecutionException, InterruptedException {
+    private void printTask() throws ExecutionException, InterruptedException  {
 
-        Bitmap photo = task.getPhoto ();
-        Double location = task.getLat () + task.getLong ();
-        String str_location = location.toString ();
+        try{
+            Bitmap photo = task.getPhoto ();
 
-        //set title
-        TextView taskTitle = findViewById ( R.id.title );
-        taskTitle.setText ( title );
+            Double location = task.getLat () + task.getLong ();
+            String str_location = location.toString ();
 
-        //Set the username
-        TextView username = findViewById ( R.id.username );
-        username.setText ( task.getRequester ().getUsername () );
+            //set title
+            TextView taskTitle = findViewById ( R.id.title );
+            taskTitle.setText ( title );
 
-        //Set the description
-        TextView description = findViewById ( R.id.description );
-        description.setText ( task.getDescription () );
+            //Set the username
+            TextView username = findViewById ( R.id.username );
+            username.setText ( task.getRequester ().getUsername () );
 
-        //Set the photo
-        ImageView photoview = findViewById ( R.id.photoBtn );
-        photoview.setImageBitmap ( photo );
+            //Set the description
+            TextView description = findViewById ( R.id.description );
+            description.setText ( task.getDescription () );
 
-        //Set the location
-        //Also allow user to view the task on a map
-        TextView getlocation = findViewById ( R.id.location );
-        getlocation.setText ( str_location );
+            //Set the photo
+            ImageView photoview = findViewById ( R.id.photoBtn );
+            photoview.setImageBitmap ( photo );
 
-        //Set the status
-        TextView taskStatus = findViewById ( R.id.status );
-        taskStatus.setText ( status );
+            //Set the location
+            //Also allow user to view the task on a map
+            TextView getlocation = findViewById ( R.id.location );
+            getlocation.setText ( str_location );
 
-        //Set the lowest amount
-        TextView lowest = findViewById ( R.id.lowest );
-        if (lowestAmount==null){
-            lowest.setText ( "0");
+            //Set the status
+            TextView taskStatus = findViewById ( R.id.status );
+            taskStatus.setText ( status );
+
+            //Set the lowest amount
+            TextView lowest = findViewById ( R.id.lowest );
+            if (lowestAmount==null){
+                lowest.setText ( "NONE");
+            }
+            else {
+                String amount = lowestAmount.toString ();
+                lowest.setText ( amount );
+            }
         }
-        else {
-            String amount = lowestAmount.toString ();
-            lowest.setText ( amount );
+
+        catch (NullPointerException e){
+            Log.e("e","Error loading");
         }
     }
 
@@ -212,14 +283,12 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         Boolean valid=true;
         EditText amount= findViewById ( R.id.myAmount );
         String sAmount= amount.getText ().toString ();
-        int dAmount= Integer.parseInt ( sAmount );
-
-        if (dAmount<=0){
-            amount.setError("Invalid Bid. ");
-            Toast.makeText(ViewTaskProviderActivity.this, ".", Toast.LENGTH_SHORT).show();
+        //Check amount
+        if(sAmount.isEmpty()){
+            amount.setError("Invalid Bid.");
+            Toast.makeText(ViewTaskProviderActivity.this, "Enter a Bid.", Toast.LENGTH_SHORT).show();
             valid=false;
         }
-
         return valid;
     }
 

@@ -46,6 +46,7 @@ public class Task {
     public double latitude;
     public double longitude;
     public double lowestBid;
+    private Boolean complete=false;
 
     private transient Bitmap photo;
     private String photoString;
@@ -309,12 +310,28 @@ public class Task {
 
         Bid bid= bids.get ( 0 );
         for(int i=1; i<bids.size ();i++){
-            if(bids.get ( i ).getBidAmount ()>bid.getBidAmount ()){
+            if(bids.get ( i ).getBidAmount ()<bid.getBidAmount ()){
                 bid=bids.get ( i );
             }
         }
 
         return bid;
+    }
+
+    /**
+     * Return a boolean to tell us if a task is completed yet
+     * @return a boolean to tell us if a task is completed yet
+     */
+    public Boolean getComplete(){
+        return complete;
+    }
+
+    /**
+     * sets a boolean to a task tto tell us if its completed yet
+     * @param state a boolean to set complete of a task
+     */
+    public void setComplete(Boolean state){
+        this.complete= state;
     }
 }
 

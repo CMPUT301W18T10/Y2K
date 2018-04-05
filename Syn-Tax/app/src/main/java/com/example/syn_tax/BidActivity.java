@@ -71,17 +71,26 @@ public class BidActivity extends AppCompatActivity {
         ElasticSearchController.getBids bids = new ElasticSearchController.getBids ();
 
         try {
-            bids.execute("", taskTitle);
+            bids.execute(taskTitle, "");
             allBids= bids.get();
+
+            ArrayList<Bid> myBids= new ArrayList<Bid> (  );
+
+            for(int i=0;i<allBids.size ();i++){
+                if(allBids.get ( i ).getBidOwner ().equals ( LoginActivity.thisuser.getUsername () )){
+                    myBids.add ( allBids.get ( i ) );
+                }
+            }
 
             //IF CONNECTED THEN UPDATE
             //ELSE add the new tasks to the requested tasks
-            if(allBids.size()>0){
-                bidList=allBids;
+            if(myBids.size()>0){
+                bidList=myBids;
             }
             else{
                 bidList= new ArrayList<Bid> (  );
             }
+
             Log.e("sss", bidList.toString ());
         }
 
