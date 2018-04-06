@@ -16,6 +16,8 @@
  */
 
 package com.example.syn_tax;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,7 +34,6 @@ import java.io.InputStreamReader;
 
 public class CodeProvider extends AppCompatActivity {
     //this allows the user to write code in an edittext then save it
-    //todo get the task requester to get this saved "code"
     private static final String FILE_NAME = "code.txt";
 
     EditText codes;
@@ -101,6 +102,13 @@ public class CodeProvider extends AppCompatActivity {
                 }
             }
         }
+
+    }
+    public void send(View view) {
+        Intent intent = new Intent();
+        intent.putExtra(FILE_NAME,FinishedCodesRequester.class);
+        startActivity(intent);
+        Toast.makeText(CodeProvider.this,"CODE SENT!",Toast.LENGTH_SHORT);
 
     }
 

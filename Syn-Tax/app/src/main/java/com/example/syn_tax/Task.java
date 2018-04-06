@@ -299,7 +299,7 @@ public class Task {
      * @param requester new reqester
      * @param status new status
      */
-    public void editTask(String title, String description,User requester, String status,Double latitude, Double longitude){
+    public void editTask(String title, String description,User requester, String status){
         this.title= title;
         this.description=description;
         this.requester= requester;

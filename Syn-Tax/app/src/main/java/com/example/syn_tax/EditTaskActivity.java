@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +57,7 @@ import java.util.concurrent.ExecutionException;
 
 
 public class EditTaskActivity extends AppCompatActivity {
+    private static final Object DEBUGTAG = "jwp";
     public static int pos;
     int PLACE_LOCATION_REQUESTED = 1;
 
@@ -95,11 +97,15 @@ public class EditTaskActivity extends AppCompatActivity {
         }
 
         else if (status.equals ( "bidded" )){
-            task = HomeActivity.biddedRtasks.get(pos);
+            try {task = HomeActivity.biddedRtasks.get(pos);}
+            catch (Exception e) {
+                Log.d((String) DEBUGTAG, "Unable to get location");
+            }
         }
 
-        else {
+        else if (status.equals("assigned")){
             task = HomeActivity.assignedRtasks.get(pos);
+
         }
 
 
@@ -220,7 +226,7 @@ public class EditTaskActivity extends AppCompatActivity {
                                 String location = tvlocation.getText().toString();
                                 Double locations = Double.parseDouble(location);
 
-                                task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus,latitude,longitude);
+                                task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus);
                                 ElasticSearchController.updateTask ( tempTask, task, latitude, longitude);
                                 updateButton ();
                             }

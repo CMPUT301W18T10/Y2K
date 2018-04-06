@@ -65,7 +65,8 @@
             android:label="@string/title_activity_map" />
         <activity android:name=".CodeProvider" />
         <activity android:name=".BidActivity" />
-        <activity android:name=".MyLocation"></activity>
+        <activity android:name=".MyLocation" />
+        <activity android:name=".FinishedCodesRequester"></activity>
     </application>
 
 </manifest>

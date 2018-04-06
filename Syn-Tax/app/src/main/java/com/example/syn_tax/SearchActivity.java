@@ -9,6 +9,9 @@
  * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Last Modified 3/17/18 4:38 PM
+ *
+ * CITATIONS https://stackoverflow.com/questions/22063842/check-if-a-latitude-and-longitude-is-within-a-circle?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+ * April 6 2018
  */
 
 package com.example.syn_tax;
@@ -222,13 +225,13 @@ public class SearchActivity extends AppCompatActivity {
                     Toast.makeText(SearchActivity.this, "This Task is too far away", Toast.LENGTH_SHORT).show();
 
 
-                    /*
+
                     if (tasks.get(i).getStatus().equals("requested")) {
                         results.add(tasks.get(i));
                     } else if (tasks.get(i).getStatus().equals("bidded")) {
                         results.add(tasks.get(i));
                     }
-                    */
+
                 }
 
 
