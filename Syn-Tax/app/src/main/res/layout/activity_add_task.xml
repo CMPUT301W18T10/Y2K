@@ -133,13 +133,6 @@
             android:layout_weight="0.2"
             android:src="@android:drawable/ic_menu_gallery" />
 
-        <ImageView
-            android:id="@+id/photoView4"
-            android:layout_width="8dp"
-            android:layout_height="43dp"
-            android:layout_weight="0.2"
-            android:src="@android:drawable/ic_menu_gallery" />
-
     </LinearLayout>
 
     <LinearLayout

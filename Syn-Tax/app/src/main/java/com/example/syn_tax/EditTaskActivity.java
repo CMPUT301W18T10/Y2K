@@ -92,32 +92,37 @@ public class EditTaskActivity extends AppCompatActivity {
         status=intent.getStringExtra ( "status" );
         pos = Integer.parseInt(intent.getStringExtra(HomeActivity.POINTER));
 
-        if (status.equals ( "requested" )){
-            task = HomeActivity.requestedRtasks.get(pos);
-        }
 
-        else if (status.equals ( "bidded" )){
-            try {task = HomeActivity.biddedRtasks.get(pos);}
-            catch (Exception e) {
-                Log.d((String) DEBUGTAG, "Unable to get location");
+
+
+        //if this task is a requested task we get the task
+        if (status.equals ( "requested" )){
+            try {
+                task = HomeActivity.requestedRtasks.get(pos);
+            }catch(Exception e) {
+                Log.d((String) DEBUGTAG, "Unable to get the requested task");
             }
         }
 
+
+        //if this task is a bidded task we get the task
+        else if (status.equals ( "bidded" )){
+            try {task = HomeActivity.biddedRtasks.get(pos);}
+            catch (Exception e) {
+                Log.d((String) DEBUGTAG, "Unable to get bidded task");
+            }
+        }
+
+
+        //if this task is an assigned task we get the task
         else if (status.equals("assigned")){
-            task = HomeActivity.assignedRtasks.get(pos);
+            try {
+                task = HomeActivity.assignedRtasks.get(pos);
+            }catch(Exception e) {
+                Log.d((String) DEBUGTAG, "Unable to get assigned task");
 
+            }
         }
-
-
-        Otitle= task.getTitle ();
-        //print the old task info
-
-        if(Objects.equals ( task.getStatus (), "assigned" )){
-            //Bids pressed pass the task title and fill out the bids page
-            Button bids= findViewById ( R.id.bids );
-            bids.setVisibility ( View.GONE );
-        }
-
 
         if(state.equals ( "view" )){
             try {
@@ -155,6 +160,9 @@ public class EditTaskActivity extends AppCompatActivity {
 
             //Bids pressed pass the task title and fill out the bids page
             Button bids= findViewById ( R.id.bids );
+
+
+
             bids.setOnClickListener ( new View.OnClickListener () {
                 @Override
                 public void onClick(View v) {
@@ -174,9 +182,9 @@ public class EditTaskActivity extends AppCompatActivity {
 
         }
 
+
         else {
             if (!Objects.equals ( task.getStatus (), "requested" )) {
-
                 Button saveBtn = findViewById ( R.id.updateBtn );
                 saveBtn.setText ( "DONE" );
                 try {
@@ -226,6 +234,7 @@ public class EditTaskActivity extends AppCompatActivity {
                                 String location = tvlocation.getText().toString();
                                 Double locations = Double.parseDouble(location);
 
+                                //update our new editted task
                                 task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus);
                                 ElasticSearchController.updateTask ( tempTask, task, latitude, longitude);
                                 updateButton ();
@@ -241,12 +250,14 @@ public class EditTaskActivity extends AppCompatActivity {
 
             else {
                 try {
-                    printTask ( task );
+                    printTask (task );
                 } catch (ExecutionException e) {
                     e.printStackTrace ();
                 } catch (InterruptedException e) {
                     e.printStackTrace ();
                 }
+
+
 
                 //add a photo from the fallery
                 final ImageView editphoto = findViewById ( R.id.editPhotoView );
@@ -338,7 +349,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
     //print the old user information on this activity
     private void printTask(Task task) throws ExecutionException, InterruptedException {
-        String Otitle = task.getTitle ();
+        try{String Otitle = task.getTitle ();
         String Odesc = task.getDescription ();
         Bitmap Ophoto = task.getPhoto();
         Double Olocation = task.getLat()+task.getLong();
@@ -382,6 +393,8 @@ public class EditTaskActivity extends AppCompatActivity {
         //set the Location
         TextView editlocation = findViewById(R.id.tvlocations);
         editlocation.setText(str_Olocation);
+    }catch (Exception e) {
+            Log.d((String) DEBUGTAG, "Error");}
     }
 
 
