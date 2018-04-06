@@ -220,8 +220,8 @@ public class EditTaskActivity extends AppCompatActivity {
                                 String location = tvlocation.getText().toString();
                                 Double locations = Double.parseDouble(location);
 
-                                task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus,locations);
-                                ElasticSearchController.updateTask ( tempTask, task );
+                                task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus,latitude,longitude);
+                                ElasticSearchController.updateTask ( tempTask, task, latitude, longitude);
                                 updateButton ();
                             }
                         } catch (ExecutionException e) {
@@ -290,14 +290,14 @@ public class EditTaskActivity extends AppCompatActivity {
                                 //TODO delete the task from the elastic search then add this one
                                 Double location = latitude+longitude;
 
-                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus, null,location);
+                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus, null,latitude,longitude);
                                 // Check to add a photo to the task
                                 if (photoStatus == 1) {
                                     tempTask.setPhoto ( photo );
                                 }
 
 
-                                ElasticSearchController.updateTask ( task, tempTask );
+                                ElasticSearchController.updateTask ( task, tempTask, latitude, longitude);
                                 updateButton ();
                             }
 

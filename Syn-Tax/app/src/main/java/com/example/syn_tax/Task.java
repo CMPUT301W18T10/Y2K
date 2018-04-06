@@ -69,13 +69,14 @@ public class Task {
      * @param requester the user that requested the task to be done
      * @param status the status of the task: requested, done, completed, or assigned
      */
-    public Task(String title, String description,User requester, String status, User provider,Double locations ) {
+    public Task(String title, String description,User requester, String status, User provider,Double latitude,Double longitude ) {
         this.title= title;
         this.description=description;
         this.requester= requester;
         this.status=status;
         this.provider= provider;
-        this.locations = locations;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
 
@@ -209,7 +210,6 @@ public class Task {
      * @return the latitude
      */
     public double getLat(){
-        System.out.println(latitude);
         return latitude;
     }
 
@@ -299,12 +299,13 @@ public class Task {
      * @param requester new reqester
      * @param status new status
      */
-    public void editTask(String title, String description,User requester, String status,Double locations){
+    public void editTask(String title, String description,User requester, String status,Double latitude, Double longitude){
         this.title= title;
         this.description=description;
         this.requester= requester;
         this.status=status;
-        this.locations = locations;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     //gets the lowest bid

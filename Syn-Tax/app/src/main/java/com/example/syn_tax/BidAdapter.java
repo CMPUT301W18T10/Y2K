@@ -136,10 +136,11 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         String title= getItem ( pos ).getTask ().getTitle ();
         String desc= getItem ( pos ).getTask ().getDescription ();
         String status= "assigned";
-        Double locations = getItem(pos).getTask().getLocations();
+        Double latitudde = getItem(pos).getTask().getLat();
+        Double longitude = getItem(pos).getTask().getLong();
         User req= getItem ( pos ).getTask ().getRequester ();
-        Task newTask= new Task(title, desc, req, status, userList.get ( 0 ),locations);
-        ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask);
+        Task newTask= new Task(title, desc, req, status, userList.get ( 0 ),latitudde,longitude);
+        ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask,latitudde,longitude);
 
         long num=300;
         try {

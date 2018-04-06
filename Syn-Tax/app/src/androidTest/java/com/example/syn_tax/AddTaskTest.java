@@ -1,7 +1,6 @@
 package com.example.syn_tax;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -113,7 +112,7 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
 
         //update it
         Task testtaskR1= new Task("Hamse", "", testUser, "requested");
-        ElasticSearchController.updateTask (testtask, testtaskR1);
+        ElasticSearchController.updateTask (testtask, testtaskR1, latitudde, longitude);
 
 
         //Check if its not in there

@@ -13,20 +13,26 @@
 
 package com.example.syn_tax;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.tasks.Tasks;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -50,103 +56,198 @@ https://stackoverflow.com/questions/30416322/android-not-auto-select-an-edittext
 public class SearchActivity extends AppCompatActivity {
     int PLACE_LOCATION_REQUESTED = 1;
     private String keywords;
+    private Double latti;
+    private Double longi;
     private ListView listOfTasks;
-    public static ArrayList<Task> specificTasks= new ArrayList<Task> (  );
+    public static ArrayList<Task> specificTasks = new ArrayList<Task>();
     private SearchAdapter searchAdapter;
     public static final String POINTER = "Task_Position";
+    static final int REQUEST_LOCATION = 1;
 
+
+
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        getLatitude();
+        //getLongitude();
 
         listOfTasks = findViewById(R.id.searches);
         Button search = (Button) findViewById(R.id.search);
 
         try {
-            HomeActivity.update ();
+            HomeActivity.update();
         } catch (ExecutionException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         } catch (InterruptedException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
 
         //Initially grab all the tasks from ELastic search, by passing in nothing(Empty string)
         try {
-            searching ( "" );
+            searching("");
         } catch (ExecutionException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         } catch (InterruptedException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
+
+
 
         //When the user selects the searchBtn then call searching to return the list of tasks
         //Match the keywords entered
-        search.setOnClickListener ( new View.OnClickListener () {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText keywords= findViewById(R.id.keywords);
-                String words= keywords.getText().toString ();
+                EditText keywords = findViewById(R.id.keywords);
+                String words = keywords.getText().toString();
                 //Pass in the keywords to searching to get tasks that match
                 try {
                     searching(words);
                 } catch (ExecutionException e) {
-                    e.printStackTrace ();
+                    e.printStackTrace();
                 } catch (InterruptedException e) {
-                    e.printStackTrace ();
+                    e.printStackTrace();
                 }
             }
-        } );
+        });
     }
+
+    //get our current locations latitude
+    double getLatitude() {
+        Double latti = 0.0;
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_LOCATION);
+        }
+
+        else{
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location != null) {
+                latti = location.getLatitude();
+            } else {
+                System.out.println("Cannot find current location");
+
+            }
+        }
+
+        return latti;
+    }
+
+    //get our current locations longitude
+    double getLongitude() {
+        Double latti = 0.0;
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_LOCATION);
+        }
+
+        else{
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location != null) {
+                longi = location.getLongitude();
+            } else {
+                System.out.println("Cannot find current location");
+
+            }
+        }
+
+        return latti;
+    }
+
+
+
+
+
 
 
     /**
      * User searches passing in a keyword to match a task title
+     *
      * @param keywords String
      */
     public void searching(String keywords) throws ExecutionException, InterruptedException {
+
         //DO SOMETHING
         Log.e("s", keywords);
 
-        if (ElasticSearchController.connected ()){
+        if (ElasticSearchController.connected()) {
             //Get all the tasks with the keywords entered
-            ElasticSearchController.searchingTasks search= new ElasticSearchController.searchingTasks ();
-            search.execute ( keywords );
+            ElasticSearchController.searchingTasks search = new ElasticSearchController.searchingTasks();
+            search.execute(keywords);
 
-            ArrayList<Task> tasks = search.get ();
-            ArrayList<Task> results = new ArrayList<Task> (  );
+            ArrayList<Task> tasks = search.get();
+            ArrayList<Task> results = new ArrayList<Task>();
 
-            String myname= LoginActivity.thisuser.getUsername ();
+            String myname = LoginActivity.thisuser.getUsername();
             //Filter through the tasks we got to make sure status== "requested" or "bidded"
-            for(int i=0; i< tasks.size (); i++){
-                String taskname= tasks.get ( i ).getRequester ().getUsername ();
+            for (int i = 0; i < tasks.size(); i++) {
 
-                Log.e("s", tasks.get ( i ).getStatus ());
-                if(!taskname.equals ( myname )){
+                String taskname = tasks.get(i).getRequester().getUsername();
 
-                    if (tasks.get(i).getStatus ().equals ( "requested" )){
-                        results.add(tasks.get ( i ));
-                    }
-                    else if (tasks.get ( i ).getStatus ().equals ( "bidded" )){
-                        results.add(tasks.get ( i ));
-                    }
+                //check if a task is within 5 km
+                //initially we set this to false
+                boolean isWithin5km = false;
+
+                //first we need our task location and our current location
+                Double taskLongi = tasks.get(i).getLong();
+                Double taskLatti = tasks.get(i).getLat();
+
+                Double myLongi = getLongitude();
+                Double myLatti = getLatitude();
+
+                //then we compare our location with our task location
+                float[] locationResults = new float[1];
+                Location.distanceBetween(myLatti, myLongi, taskLatti, taskLongi, locationResults);
+                float distanceInMeters = locationResults[0];
+
+                if (distanceInMeters < 5000) {
+                    isWithin5km = true;
                 }
-            }
-            specificTasks=results;
-            Log.e("dkk", specificTasks.toString ());
 
-            //CALL TO SET THE ADAPTER FOR THE LIST VIEW
-            //Set the adapter
-            searchAdapter= new SearchAdapter ( this, specificTasks);
-            //Set the list views
-            listOfTasks.setAdapter ( searchAdapter );
+                Log.e("s", tasks.get(i).getStatus());
+                if (!taskname.equals(myname)) {
+                    if(isWithin5km == true) {
+                        if (tasks.get(i).getStatus().equals("requested")) {
+                            results.add(tasks.get(i));
+                        } else if (tasks.get(i).getStatus().equals("bidded")) {
+                            results.add(tasks.get(i));
+                        }
+                    }
+
+                }
+                else {
+                    Toast.makeText(SearchActivity.this, "This Task is too far away", Toast.LENGTH_SHORT).show();
+
+
+                    /*
+                    if (tasks.get(i).getStatus().equals("requested")) {
+                        results.add(tasks.get(i));
+                    } else if (tasks.get(i).getStatus().equals("bidded")) {
+                        results.add(tasks.get(i));
+                    }
+                    */
+                }
+
+
+                specificTasks = results;
+                Log.e("dkk", specificTasks.toString());
+
+                //CALL TO SET THE ADAPTER FOR THE LIST VIEW
+                //Set the adapter
+                searchAdapter = new SearchAdapter(this, specificTasks);
+                //Set the list views
+                listOfTasks.setAdapter(searchAdapter);
+            }
         }
     }
 
 
     /**
      * Pick a location
+     *
      * @param view
      */
     public void goLocationPicker(View view) {
@@ -165,30 +266,46 @@ public class SearchActivity extends AppCompatActivity {
 
     /**
      * User directed to the searchActivity
+     *
      * @param view
      */
-    public void searchBtn(View view){
-        Intent intent= new Intent(this, SearchActivity.class);
+    public void searchBtn(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
 
     /**
      * User directed to the HomeActivity
+     *
      * @param view
      */
-    public void homeBtn(View view){
-        Intent intent= new Intent(this, HomeActivity.class);
+    public void homeBtn(View view) {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
     /**
      * User directed to the UserProfileActivity
      * Also passes in the user information of the user
+     *
      * @param view
      */
-    public void userInfo(View view){
-        Intent intent= new Intent(this, UserProfileActivity.class);
+    public void userInfo(View view) {
+        Intent intent = new Intent(this, UserProfileActivity.class);
         intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
         startActivity(intent);
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch(requestCode) {
+            case REQUEST_LOCATION:
+                //getLocation();
+                getLatitude();
+                getLongitude();
+                break;
+        }
+    }
+
 }
+

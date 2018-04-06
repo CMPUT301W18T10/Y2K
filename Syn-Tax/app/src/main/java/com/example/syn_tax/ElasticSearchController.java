@@ -30,8 +30,6 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -40,13 +38,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
@@ -553,11 +549,12 @@ public class ElasticSearchController extends Application {
     /**
      * Update the Item
      * If connected to the database, delete the old task, and replace with the new task
-     *
-     * @param task1 oldTask
+     *  @param task1 oldTask
      * @param task2 newTask
+     * @param latitudde
+     * @param longitude
      */
-    public static void updateTask(Task task1, Task task2) {
+    public static void updateTask(Task task1, Task task2, Double latitudde, Double longitude) {
         ElasticSearchController.deleteTask delete = new ElasticSearchController.deleteTask ();
         delete.execute ( task1.getTitle () );
 

@@ -143,10 +143,6 @@ public class AddTaskActivity extends AppCompatActivity{
             }
         });
 
-
-
-
-
         //ADD BUTTON
         Button addButton = (Button) findViewById(R.id.addBtn);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -171,8 +167,13 @@ public class AddTaskActivity extends AppCompatActivity{
                 if (isValid() && locationStatus == 1) {
                     //Instantiate a object of type Task
                     // added in the username of the requester - Aidan
-                    Double locations = latitude+longitude;
-                    Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus, null,locations);
+
+                    Double lat = latitude;
+                    Double log = longitude;
+
+                    Task.setLocation(latitude,longitude);
+
+                    Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus, null,lat,log);
                     // Check to add a photo to the task
                     if (photoStatus == 1) {
                         newtask.setPhoto(photo);
