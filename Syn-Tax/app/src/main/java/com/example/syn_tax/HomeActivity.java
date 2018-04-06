@@ -202,13 +202,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
 
-        //for (int i=0;i<allBids.size ();i++){
-        //            if (allBids.get ( i ).getTask ().getStatus ().equals ( "bidded" ) && allBids.get ( i ).getBidUserName ().equals ( LoginActivity.thisuser.getUsername () )){
-        //                allTasks.add (  allBids.get ( i ).getTask ());
-        //            }
-        //
-        //        }
-
         Log.e("bidsP", allBids.toString ());
         //Set the bidded Provider tasks
         biddedPtasks=allTasks;
