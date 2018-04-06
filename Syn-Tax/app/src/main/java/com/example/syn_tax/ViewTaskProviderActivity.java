@@ -15,8 +15,6 @@ package com.example.syn_tax;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +26,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.ui.PlacePicker;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -258,10 +259,19 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             ImageView photoview = findViewById ( R.id.photoBtn );
             photoview.setImageBitmap ( photo );
 
+            ImageView photoview2 = findViewById(R.id.photoBtn2);
+            photoview2.setImageBitmap(photo);
+
+            ImageView photoview3 = findViewById(R.id.photoBtn3);
+            photoview3.setImageBitmap(photo);
+
             //Set the location
             //Also allow user to view the task on a map
             TextView getlocation = findViewById ( R.id.location );
             getlocation.setText ( str_location );
+
+            TextView tvlocation = findViewById(R.id.tvlocation);
+            tvlocation.setText(str_location);
 
             //Set the status
             TextView taskStatus = findViewById ( R.id.status );
@@ -318,6 +328,21 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
         Intent intent= new Intent(this, HomeActivity.class);
         startActivity(intent);
+    }
+
+
+    public void goLocationPicker(View view) {
+        //calling the place picker function
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        try {
+            startActivityForResult(builder.build(ViewTaskProviderActivity.this), PLACE_LOCATION_REQUESTED);
+
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        }
     }
 
 

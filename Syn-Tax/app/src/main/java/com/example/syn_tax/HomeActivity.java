@@ -15,15 +15,14 @@ package com.example.syn_tax;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -196,7 +195,8 @@ public class HomeActivity extends AppCompatActivity {
                 String title= allBids.get ( i ).getTask ().getTitle ();
                 String desc=allBids.get ( i ).getTask ().getDescription ();
                 User requester= allBids.get ( i ).getTask ().getRequester ();
-                Task newTask= new Task(title,desc, requester,  "bidded", null);
+                Double locations = allBids.get ( i ).getTask().getLocations();
+                Task newTask= new Task(title,desc, requester,  "bidded", null, locations);
                 ElasticSearchController.updateTask ( allBids.get ( i ).getTask (), newTask );
                 allTasks.add (  newTask);
             }
@@ -271,7 +271,7 @@ public class HomeActivity extends AppCompatActivity {
 
             //Set the status to assigned if provider for that task is not null
             else if(allTasks.get ( i ).getProvider() != null ){
-                Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get (i).getDescription (), allTasks.get ( i ).getRequester (), "assigned", allTasks.get ( i ).getProvider() );
+                Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get (i).getDescription (), allTasks.get ( i ).getRequester (), "assigned", allTasks.get ( i ).getProvider(), allTasks.get ( i ).getLocations()  );
                 ElasticSearchController.updateTask ( allTasks.get (i), tempTask );
             }
 
@@ -279,7 +279,7 @@ public class HomeActivity extends AppCompatActivity {
             //Set the status to bidded if there exist a bid on that task and its not assigned
             else if (allBids.size ()!=0 ){
                 for(int j=0; j<allBids.size ();j++){
-                    Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get (i).getDescription (), allTasks.get ( i ).getRequester (), "bidded", null );
+                    Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get (i).getDescription (), allTasks.get ( i ).getRequester (), "bidded", null, allTasks.get ( i ).getLocations() );
                     ElasticSearchController.updateTask ( allTasks.get (i), tempTask );
                 }
             }
@@ -288,7 +288,7 @@ public class HomeActivity extends AppCompatActivity {
             //Set the status to requested if there no bid
             else if(allBids.size ()==0){
                 Log.e("title", allTasks.get ( i ).getTitle ());
-                Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get (i).getDescription (), allTasks.get ( i ).getRequester (), "requested", null );
+                Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get (i).getDescription (), allTasks.get ( i ).getRequester (), "requested", null,allTasks.get ( i ).getLocations() );
                 ElasticSearchController.updateTask ( allTasks.get (i), tempTask );
             }
 

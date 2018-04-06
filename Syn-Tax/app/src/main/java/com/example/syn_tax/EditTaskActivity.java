@@ -13,6 +13,7 @@
 
 package com.example.syn_tax;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +21,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -184,7 +184,7 @@ public class EditTaskActivity extends AppCompatActivity {
                 EditText title = findViewById ( R.id.editTaskTitle );
                 EditText description = findViewById ( R.id.editDescription );
                 ImageView photo = findViewById ( R.id.editPhotoView );
-                Button location = findViewById ( R.id.editLocation );
+                final Button location = findViewById ( R.id.editLocation );
                 EditText status = findViewById ( R.id.status );
 
 
@@ -212,12 +212,15 @@ public class EditTaskActivity extends AppCompatActivity {
                                 EditText title = findViewById ( R.id.editTaskTitle );
                                 EditText description = findViewById ( R.id.editDescription );
                                 EditText status = findViewById ( R.id.status );
+                                TextView tvlocation = findViewById(R.id.tvlocations);
 
                                 String stitle = title.getText ().toString ();
                                 String sdesc = description.getText ().toString ();
                                 String sstatus = status.getText ().toString ();
+                                String location = tvlocation.getText().toString();
+                                Double locations = Double.parseDouble(location);
 
-                                task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus );
+                                task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus,locations);
                                 ElasticSearchController.updateTask ( tempTask, task );
                                 updateButton ();
                             }
@@ -240,13 +243,30 @@ public class EditTaskActivity extends AppCompatActivity {
                 }
 
                 //add a photo from the fallery
-                ImageView editphoto = findViewById ( R.id.editPhotoView );
+                final ImageView editphoto = findViewById ( R.id.editPhotoView );
                 editphoto.setOnClickListener ( new View.OnClickListener () {
                     @Override
                     public void onClick(View v) {
                         editPhoto ();
                     }
                 } );
+
+                ImageView editphoto2 = findViewById(R.id.editPhotoView2);
+                editphoto2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(EditTaskActivity.this,"Click on the first image view",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+                ImageView editphoto3 = findViewById(R.id.editPhotoView3);
+                editphoto3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(EditTaskActivity.this,"Click on the first image view",Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 //Update Button
                 Button updateButton = (Button) findViewById ( R.id.updateBtn );
@@ -268,14 +288,14 @@ public class EditTaskActivity extends AppCompatActivity {
                                 //Instantiate a object of type Task
                                 // added in the username of the requester - Aidan
                                 //TODO delete the task from the elastic search then add this one
+                                Double location = latitude+longitude;
 
-                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus, null );
+                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus, null,location);
                                 // Check to add a photo to the task
                                 if (photoStatus == 1) {
                                     tempTask.setPhoto ( photo );
                                 }
 
-                                tempTask.setLocation ( latitude, longitude );
 
                                 ElasticSearchController.updateTask ( task, tempTask );
                                 updateButton ();
@@ -347,8 +367,14 @@ public class EditTaskActivity extends AppCompatActivity {
         ImageView editphoto = findViewById(R.id.editPhotoView);
         editphoto.setImageBitmap(Ophoto);
 
+        ImageView editphoto2 = findViewById(R.id.editPhotoView2);
+        editphoto2.setImageBitmap(Ophoto);
+
+        ImageView editphoto3 = findViewById(R.id.editPhotoView3);
+        editphoto3.setImageBitmap(Ophoto);
+
         //set the Location
-        TextView editlocation = findViewById(R.id.editLocation);
+        TextView editlocation = findViewById(R.id.tvlocations);
         editlocation.setText(str_Olocation);
     }
 
@@ -360,6 +386,7 @@ public class EditTaskActivity extends AppCompatActivity {
     public void editPhoto() {
         //invoke image gallery using an implicit intent
         Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
 
         //where do we want to find this data
         File photoDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -522,9 +549,32 @@ public class EditTaskActivity extends AppCompatActivity {
         //Make sure the result was okay
         //Make sure that we actually have an image
         ImageView editphoto= findViewById ( R.id.editPhotoView );
-        Button editlocation= findViewById ( R.id.editLocation );
+        ImageView editphoto2 = findViewById(R.id.editPhotoView2);
+        ImageView editphoto3 = findViewById(R.id.editPhotoView3);
+        TextView editlocation= findViewById ( R.id.tvlocations );
         if (requestCode == RESULT_GET_IMAGE && resultCode == RESULT_OK && data != null) {
             //uniform resource indicator - shows us the address of the image tha has been selected
+            ClipData clipData = data.getClipData();
+
+            if(clipData != null) {
+                for(int i = 0; i < clipData.getItemCount(); i++) {
+                    ClipData.Item item = clipData.getItemAt(i);
+                    Uri uri = item.getUri();
+
+                    if (i == 1) {
+                        editphoto.setImageURI(uri);
+                    }
+                    else if (i == 2) {
+                        editphoto2.setImageURI(uri);
+                    }
+                    else if (i == 3) {
+                        editphoto3.setImageURI(uri);
+
+                    }
+                }
+
+            }
+
             Uri imageUri = data.getData();
             editphoto.setImageURI(imageUri);
 
@@ -548,6 +598,10 @@ public class EditTaskActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place location = PlacePicker.getPlace(EditTaskActivity.this, data);
                 editlocation.setText(location.getAddress());
+                latitude = location.getLatLng().latitude;
+                longitude = location.getLatLng().longitude;
+                Task.setLocation(latitude,longitude);
+                locationStatus = 1;
             }
         }
     }

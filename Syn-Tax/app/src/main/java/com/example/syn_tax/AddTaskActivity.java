@@ -18,16 +18,15 @@
 
 package com.example.syn_tax;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -74,6 +73,9 @@ public class AddTaskActivity extends AppCompatActivity{
 
     //Photo
     ImageView photoView;
+    ImageView photoView2;
+    ImageView photoView3;
+
     private Bitmap photo;
     private Integer photoStatus=0;
     //private so only this class knows of the id final cause its gonna remain the same
@@ -120,6 +122,31 @@ public class AddTaskActivity extends AppCompatActivity{
             }
         });
 
+
+        //the user is prompted to click the first image view
+        photoView2 = findViewById(R.id.photoView2);
+        photoView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(AddTaskActivity.this,"Click the first image view", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        photoView3 = findViewById(R.id.photoView3);
+        photoView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(AddTaskActivity.this,"Click the first image view", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+
+
         //ADD BUTTON
         Button addButton = (Button) findViewById(R.id.addBtn);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -144,13 +171,13 @@ public class AddTaskActivity extends AppCompatActivity{
                 if (isValid() && locationStatus == 1) {
                     //Instantiate a object of type Task
                     // added in the username of the requester - Aidan
-                    Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus, null);
+                    Double locations = latitude+longitude;
+                    Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus, null,locations);
                     // Check to add a photo to the task
                     if (photoStatus == 1) {
                         newtask.setPhoto(photo);
                     }
 
-                    newtask.setLocation(latitude, longitude);
 
                     AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
                     execute.execute(newtask);
@@ -274,6 +301,7 @@ public class AddTaskActivity extends AppCompatActivity{
     public void addPhoto() {
         //invoke image gallery using an implicit intent
         Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
 
         //where do we want to find this data
         File photoDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -302,29 +330,51 @@ public class AddTaskActivity extends AppCompatActivity{
         //Make sure that we actually have an image
         if (requestCode == RESULT_GET_IMAGE && resultCode == RESULT_OK && data != null) {
             //uniform resource indicator - shows us the address of the image tha has been selected
-            Uri imageUri = data.getData();
-            photoView.setImageURI(imageUri);
+            ClipData clipData = data.getClipData();
+            if (clipData != null) {
+                for (int i = 0; i < clipData.getItemCount(); i++) {
+                    ClipData.Item item = clipData.getItemAt(i);
+                    Uri uri = item.getUri();
+                    if (i == 0) {
+                        photoView.setImageURI(uri);
+                    }
+                    else if (i == 1) {
+                        photoView2.setImageURI(uri);
+                    }
+                    else if (i == 2) {
+                        photoView3.setImageURI(uri);
+                    }
 
-            //declare a stream tor read the image from the sd card
-            InputStream inputStream;
-            //we get an input stream based on the uri of the image
-            try {
-                inputStream = getContentResolver().openInputStream(imageUri);
-                //getting a bitmap from the stream
-                photo = BitmapFactory.decodeStream(inputStream);
-                //show image to our user
-                photoView.setImageBitmap(photo);
-                photoStatus = 1;
+                    //declare a stream tor read the image from the sd card
+                    InputStream inputStream;
+                    //we get an input stream based on the uri of the image
+                    try {
+                        inputStream = getContentResolver().openInputStream(uri);
+                        //getting a bitmap from the stream
+                        photo = BitmapFactory.decodeStream(inputStream);
+                        //show image to our user
+                        photoView.setImageBitmap(photo);
+                        photoStatus = 1;
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG);
+                    }
+                }
+
+                }
+
             }
-        }
+
+
         if (requestCode == PLACE_LOCATION_REQUESTED) {
             if (resultCode == RESULT_OK) {
                 Place location = PlacePicker.getPlace(AddTaskActivity.this, data);
                 tvlocation.setText(location.getAddress());
+                longitude = location.getLatLng().longitude;
+                latitude = location.getLatLng().latitude;
+                Task.setLocation(latitude,longitude);
+                locationStatus = 1;
             }
         }
     }

@@ -13,7 +13,6 @@
 
     tools:context=".EditTaskActivity">
     <!--android:background="@drawable/syn_taxpages"-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -114,10 +113,25 @@
 
         <ImageView
             android:id="@+id/editPhotoView"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="13dp"
+            android:layout_height="43dp"
             android:layout_weight="0.2"
-            android:background="#8c8a8a"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+        <ImageView
+            android:id="@+id/editPhotoView2"
+            android:layout_width="13dp"
+            android:layout_height="43dp"
+            android:layout_weight="0.2"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+        <ImageView
+            android:id="@+id/editPhotoView3"
+            android:layout_width="13dp"
+            android:layout_height="43dp"
+            android:layout_weight="0.2"
             android:clickable="true"
             android:src="@android:drawable/ic_menu_gallery" />
 
@@ -152,8 +166,8 @@
             tools:ignore="OnClick" />
 
         <TextView
-            android:id="@+id/tvlocation"
-            android:layout_width="129dp"
+            android:id="@+id/tvlocations"
+            android:layout_width="163dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2" />
 

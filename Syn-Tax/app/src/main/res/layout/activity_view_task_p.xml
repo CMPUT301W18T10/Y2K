@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:text=" REQUESTER:"
+            android:text="REQUESTER:"
             android:textAlignment="textStart"
             android:textColor="@color/colorAccent"
             android:textSize="18sp"
@@ -129,10 +129,25 @@
 
         <ImageView
             android:id="@+id/photoBtn"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="10dp"
+            android:layout_height="43dp"
             android:layout_weight="0.2"
-            android:background="#8c8a8a"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+        <ImageView
+            android:id="@+id/photoBtn3"
+            android:layout_width="10dp"
+            android:layout_height="43dp"
+            android:layout_weight="0.2"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+        <ImageView
+            android:id="@+id/photoBtn2"
+            android:layout_width="10dp"
+            android:layout_height="43dp"
+            android:layout_weight="0.2"
             android:clickable="true"
             android:src="@android:drawable/ic_menu_gallery" />
 
@@ -222,10 +237,10 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:text=" LOWEST BID:"
+            android:text="LOWEST BID:"
             android:textAlignment="textStart"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -255,10 +270,10 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:text=" ENTER AMOUNT:"
+            android:text="ENTER A BID AMOUNT:"
             android:textAlignment="textStart"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
@@ -311,3 +326,4 @@
     </LinearLayout>
 
 </LinearLayout>
+

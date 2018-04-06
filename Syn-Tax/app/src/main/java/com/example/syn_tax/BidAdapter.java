@@ -15,7 +15,6 @@ package com.example.syn_tax;
 
 import android.app.Activity;
 import android.content.Context;
-
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,9 +25,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -140,9 +136,10 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         String title= getItem ( pos ).getTask ().getTitle ();
         String desc= getItem ( pos ).getTask ().getDescription ();
         String status= "assigned";
+        Double locations = getItem(pos).getTask().getLocations();
         User req= getItem ( pos ).getTask ().getRequester ();
-        Task newTask= new Task(title, desc, req, status, userList.get ( 0 ));
-        ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask );
+        Task newTask= new Task(title, desc, req, status, userList.get ( 0 ),locations);
+        ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask);
 
         long num=300;
         try {

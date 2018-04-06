@@ -43,8 +43,10 @@ public class Task {
     public String description;
     private String id;
     public String status;
-    public double latitude;
-    public double longitude;
+    public Double locations;
+
+    private static double latitude;
+    private static double longitude;
     public double lowestBid;
     private Boolean complete=false;
 
@@ -67,12 +69,13 @@ public class Task {
      * @param requester the user that requested the task to be done
      * @param status the status of the task: requested, done, completed, or assigned
      */
-    public Task(String title, String description,User requester, String status, User provider ) {
+    public Task(String title, String description,User requester, String status, User provider,Double locations ) {
         this.title= title;
         this.description=description;
         this.requester= requester;
         this.status=status;
         this.provider= provider;
+        this.locations = locations;
     }
 
 
@@ -196,7 +199,7 @@ public class Task {
      * @param lat its a double containing the latitude
      * @param lng its a double containing the longitude
      */
-    public void setLocation(Double lat, Double lng){
+    public static void setLocation(Double lat, Double lng){
         latitude = lat;
         longitude = lng;
     }
@@ -206,6 +209,7 @@ public class Task {
      * @return the latitude
      */
     public double getLat(){
+        System.out.println(latitude);
         return latitude;
     }
 
@@ -214,8 +218,11 @@ public class Task {
      * @return the longitude
      */
     public double getLong(){
+
         return longitude;
+
     }
+
 
     //SETTERS AND GETTERS FOR THE BIDS OF A TASK
 
@@ -245,8 +252,7 @@ public class Task {
      */
     public void setPhoto(Bitmap photo){
         if (photo != null) {
-            this.photo= photo;
-
+            this.photo = photo;
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
 
@@ -293,11 +299,12 @@ public class Task {
      * @param requester new reqester
      * @param status new status
      */
-    public void editTask(String title, String description,User requester, String status ){
+    public void editTask(String title, String description,User requester, String status,Double locations){
         this.title= title;
         this.description=description;
         this.requester= requester;
         this.status=status;
+        this.locations = locations;
     }
 
     //gets the lowest bid
@@ -333,6 +340,10 @@ public class Task {
      */
     public void setComplete(Boolean state){
         this.complete= state;
+    }
+
+    public Double getLocations() {
+        return locations;
     }
 }
 
