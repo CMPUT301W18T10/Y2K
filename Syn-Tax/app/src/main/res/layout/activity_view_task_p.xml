@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:text="REQUESTER:"
+            android:text=" REQUESTER:"
             android:textAlignment="textStart"
             android:textColor="@color/colorAccent"
             android:textSize="18sp"
@@ -222,10 +222,10 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:text="LOWEST BID:"
+            android:text=" LOWEST BID:"
             android:textAlignment="textStart"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -255,10 +255,10 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:text="ENTER A BID AMOUNT:"
+            android:text=" ENTER AMOUNT:"
             android:textAlignment="textStart"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText

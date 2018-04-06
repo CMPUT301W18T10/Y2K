@@ -204,75 +204,110 @@ public class TaskAdapter extends ArrayAdapter<Task> {
      * @param c class for the intent
      */
     private void edit_or_view(final View v,final int pos, final Class c, final String title, String todo, final String status){
+        AlertDialog.Builder btn = new AlertDialog.Builder(getContext ());
         //USER CAN only view/edit a task that they have bidded on
         if (todo== "view"){
-            Intent intent = new Intent(getContext(),c);
-            intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
-            intent.putExtra ( "status", status );
-            intent.putExtra ( "title", title );
-            intent.putExtra ( "sss", "Home" );
-            ((Activity)getContext()).startActivityForResult(intent,0);
+            if(status.equals ( "assigned" )){
+                btn.setMessage("VIEW ASSIGNED TASK");
+                btn.setPositiveButton("VIEW", new DialogInterface.OnClickListener() {
+                    @Override
+                    /**
+                     * VIEW the task
+                     */
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getContext(),c);
+                        intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
+                        intent.putExtra ( "status", status );
+                        intent.putExtra ( "title", title );
+                        intent.putExtra ( "sss", "Home" );
+                        ((Activity)getContext()).startActivityForResult(intent,0);
+                    }
+                });
+            }
 
+            else {
+                btn.setMessage ( "EDIT BID" );
+                btn.setPositiveButton ( "EDIT", new DialogInterface.OnClickListener () {
+                    @Override
+                    /**
+                     * VIEW the task
+                     */
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent ( getContext (), c );
+                        intent.putExtra ( HomeActivity.POINTER, String.valueOf ( pos ) );
+                        intent.putExtra ( "status", status );
+                        intent.putExtra ( "title", title );
+                        intent.putExtra ( "sss", "Home" );
+                        ((Activity) getContext ()).startActivityForResult ( intent, 0 );
+                    }
+                } );
+            }
+            btn.show();
         }
 
         //USER CAN EDIT AND DELETE ITS OWN TASK
         else{
 
+
+
             /**
              * DELETE or EDIT From the list of tasks when a task is CLicked on
              */
 
-            AlertDialog.Builder btn = new AlertDialog.Builder(getContext ());
-            btn.setMessage("DELETE OR EDIT A TASK");
+            btn.setMessage ( "DELETE OR VIEW A TASK" );
 
             //Set the integer position1 to be constant so it can not be reassigned
-            final int position1=pos;
+            final int position1 = pos;
 
             //DELETE the Task
-            btn.setNeutralButton ("Delete", new DialogInterface.OnClickListener() {
+            btn.setNeutralButton ( "Delete", new DialogInterface.OnClickListener () {
                 @Override
                 /**
                  * DELETE the Task
                  */
                 public void onClick(DialogInterface dialog, int which) {
-                    ElasticSearchController.deleteTask delete= new ElasticSearchController.deleteTask();
-                    delete.execute ( title);
-                    Intent intent= new Intent(getContext (), HomeActivity.class);
-                    ((Activity)getContext()).startActivityForResult(intent,0);
+                    ElasticSearchController.deleteTask delete = new ElasticSearchController.deleteTask ();
+                    delete.execute ( title );
+                    Intent intent = new Intent ( getContext (), HomeActivity.class );
+                    ((Activity) getContext ()).startActivityForResult ( intent, 0 );
                 }
-            });
+            } );
 
-            //EDIT the Task
-            btn.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+            //view the Task
+            btn.setNegativeButton ( "View", new DialogInterface.OnClickListener () {
                 @Override
                 /**
-                 * EDIT the task
+                 * view task
                  */
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(getContext(),c);
-                    intent.putExtra ("state", "edit");
+                    Intent intent = new Intent ( getContext (), c );
+                    intent.putExtra ( "state", "view" );
                     intent.putExtra ( "status", status );
                     intent.putExtra ( "sss", "Home" );
-                    intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
-                    ((Activity)getContext()).startActivityForResult(intent,0);
+                    intent.putExtra ( HomeActivity.POINTER, String.valueOf ( pos ) );
+                    ((Activity) getContext ()).startActivityForResult ( intent, 0 );
                 }
-            });
+            } );
 
-            //EDIT the Task
-            btn.setNegativeButton ("View", new DialogInterface.OnClickListener() {
-                @Override
-                /**
-                 * EDIT the task
-                 */
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(getContext(),c);
-                    intent.putExtra ("state", "view");
-                    intent.putExtra ( "status",  status);
-                    intent.putExtra ( "sss", "Home" );
-                    intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
-                    ((Activity)getContext()).startActivityForResult(intent,0);
-                }
-            });
+            if(!status.equals ( "assigned" )) {
+                btn.setMessage ( "DELETE OR VIEW OR EDIT A TASK" );
+                //EDIT the Task
+                btn.setPositiveButton ( "Edit", new DialogInterface.OnClickListener () {
+                    @Override
+                    /**
+                     * EDIT the task
+                     */
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent ( getContext (), c );
+                        intent.putExtra ( "state", "edit" );
+                        intent.putExtra ( "status", status );
+                        intent.putExtra ( "sss", "Home" );
+                        intent.putExtra ( HomeActivity.POINTER, String.valueOf ( pos ) );
+                        ((Activity) getContext ()).startActivityForResult ( intent, 0 );
+                    }
+                } );
+
+            }
 
             // Call to show the Alert Message
             btn.show();

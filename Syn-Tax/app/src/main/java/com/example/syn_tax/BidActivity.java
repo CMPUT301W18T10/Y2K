@@ -90,8 +90,6 @@ public class BidActivity extends AppCompatActivity {
             else{
                 bidList= new ArrayList<Bid> (  );
             }
-
-            Log.e("sss", bidList.toString ());
         }
 
         catch(Exception e){

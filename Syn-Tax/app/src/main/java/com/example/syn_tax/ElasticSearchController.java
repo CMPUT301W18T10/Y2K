@@ -62,6 +62,7 @@ https://stackoverflow.com/questions/30343011/how-to-check-if-an-android-device-i
 https://developer.android.com/reference/java/io/FileOutputStream.html (March 14,2018)
 https://www.programcreek.com/java-api-examples/index.php?api=io.searchbox.core.DeleteByQuery (March 17,2018)
 https://stackoverflow.com/questions/3875184/cant-create-handler-inside-thread-that-has-not-called-looper-prepare
+https://www.elastic.co/guide/en/elasticsearch/guide/current/bool-query.html
 */
 
 /**
@@ -344,7 +345,6 @@ public class ElasticSearchController extends Application {
                 searchString = "{\"query\":{\"match\":{\"taskname\":\"" + search_parameters[0] + "\"}}}";
             }
 
-
             // TODO Build the query
             Search search = new Search.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "bids" ).build ();
 
@@ -396,7 +396,7 @@ public class ElasticSearchController extends Application {
 
             //Get the tasks of a task
             else {
-                searchString = "{\"query\":{\"match\":{\"description\":\"" + search_parameters[0] + "\"}}}";
+                searchString = "{\"query\":{\"term\":{\"description\":\"" + search_parameters[0] + "\"}}}";
             }
 
             // TODO Build the query
@@ -724,8 +724,8 @@ public class ElasticSearchController extends Application {
             //FIRST CHECK TO SEE IF WERE CONNECTED TO THE DATABASE
             if (connected ()) {
                 //String for the search
-                String searchString= "{\"query\":{\"match\":{\"taskname\":\"" + search_parameters[0] + "\"}}}";
-                //searchString= "{\"query\":{\"bool\":{\"must\":{\"match\":{\"bidUserName\":\"" + search_parameters[1] + "\"}},\":{\"match\":{\"taskname\":\"" + search_parameters[0] + "\"}}}}}";
+                //String searchString= "{ \"query\": { \"match_all\": {} },\"filter\": { \"bool\" : { \"must\":   [ { \"match\": { \"taskname\": \"" + search_parameters[0] +  "\" }}, { \"match\": { \"bidUserName\": \"" + search_parameters[1] +  "\"  }}]}}}";
+                String searchString="{\"query\": {\"bool\": {\"must\": [{ \"match\": { \"taskname\": \""+  search_parameters[0] +"\" }},{ \"match\": { \"bidUserName\": \""+ search_parameters[1]+"\"}}] }}}";
 
                 // TODO Build the delete by query
                 DeleteByQuery oldBid = new DeleteByQuery.Builder ( searchString ).addIndex ( "syn-tax" ).addType ( "bids" ).build ();

@@ -17,6 +17,7 @@ package com.example.syn_tax;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,8 @@ public class SearchAdapter extends ArrayAdapter<Task> {
         final String taskUsername = getItem(pos).getRequester().getUsername();
         final String taskStatus = getItem(pos).getStatus();
         final String taskTitle = getItem(pos).getTitle();
-        if (taskStatus.equals("bidded")){
+
+        if (getItem ( pos ).getStatus ().equals("bidded")){
             try {
                 Double amount= getItem ( pos ).getLowestBid ().getBidAmount ();
                 lowestbid= amount.toString ();
@@ -63,6 +65,8 @@ public class SearchAdapter extends ArrayAdapter<Task> {
         else{
             lowestbid = "NONE";
         }
+
+
 
         TextView tTitle = data.findViewById(R.id.task_title);
         TextView tUser = data.findViewById(R.id.task_user);

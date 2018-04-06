@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -107,6 +108,7 @@ public class HomeActivity extends AppCompatActivity {
 
         biddedPListView = findViewById(R.id.biddedPList);
         assignedPListView = findViewById ( R.id.assignedPList );
+
     }
 
     /**
@@ -124,10 +126,7 @@ public class HomeActivity extends AppCompatActivity {
         biddedPtasks= new ArrayList<Task> (  );
         assignedPtasks= new ArrayList<Task> (  );
 
-        //Call to initlalize taskR array
-        loadTaskListRequester ();
-
-        //Update the bidded tasks and assigned tasks
+        //Update the task status
         try {
             update();
         } catch (ExecutionException e) {
@@ -136,9 +135,6 @@ public class HomeActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace ();
         }
-
-        //Set taskR for the Requester
-        loadTaskListRequester ();
 
         for(int i=0; i < tasksR.size (); i++) {
             if (tasksR.get ( i ).getStatus ().equals ( "requested" )) {
@@ -154,7 +150,6 @@ public class HomeActivity extends AppCompatActivity {
         loadTaskListProviderBidded ();
         loadTaskListProviderAssigned ();
 
-        Log.e("e", biddedPtasks.toString ());
 
         //Set the adapter
         requestedRAdapter= new TaskAdapter ( this, requestedRtasks );
@@ -173,47 +168,19 @@ public class HomeActivity extends AppCompatActivity {
         assignedPListView.setAdapter ( assignedPAdapter );
     }
 
-    /**
-     * Loads in the tasks for a user
-     * Grab the list of tasks we requested
-     */
-    private static void loadTaskListRequester(){
-        ArrayList<Task> allTasksList;
-        ElasticSearchController.getTasks allTasks = new ElasticSearchController.getTasks ();
-
-        try {
-            allTasks.execute("", LoginActivity.thisuser.getUsername ());
-            allTasksList = allTasks.get();
-            //IF CONNECTED THEN UPDATE
-            //ELSE add the new tasks to the requested tasks
-            if(allTasksList.size()>0){
-                tasksR=allTasksList;
-            }
-
-            else{
-                tasksR= new ArrayList<Task> (  );
-            }
-
-            Log.e("sss", tasksR.toString ());
-        }
-
-        catch(Exception e){
-            allTasksList = new ArrayList<Task>();
-        }
-    }
-
 
     /**
      * Loads in the tasks for a user
      * Grab the list of tasks we provided that we bidded on
      */
     private static void loadTaskListProviderBidded(){
-        ArrayList<Task> allTasksList = new ArrayList<Task> (  );
+        ArrayList<Task> allTasks= new ArrayList<Task> (  );
         ArrayList<Bid> allBids = new ArrayList<Bid> (  );
         ElasticSearchController.getBids bids = new ElasticSearchController.getBids ();
 
         try {
             bids.execute("", LoginActivity.thisuser.getUsername ());
+
             allBids= bids.get();
         } catch (InterruptedException e) {
             e.printStackTrace ();
@@ -221,13 +188,30 @@ public class HomeActivity extends AppCompatActivity {
             e.printStackTrace ();
         }
 
+        //Grab all the bids that the task associated to the bid is not assigned
         for (int i=0;i<allBids.size ();i++){
-            if (allBids.get ( i ).getTask ().getStatus ().equals ( "bidded" )){
-                allTasksList.add (  allBids.get ( i ).getTask ());
+            if (!allBids.get ( i ).getTask ().getStatus ().equals ( "assigned" )){
+                //Update task status
+
+                String title= allBids.get ( i ).getTask ().getTitle ();
+                String desc=allBids.get ( i ).getTask ().getDescription ();
+                User requester= allBids.get ( i ).getTask ().getRequester ();
+                Task newTask= new Task(title,desc, requester,  "bidded", null);
+                ElasticSearchController.updateTask ( allBids.get ( i ).getTask (), newTask );
+                allTasks.add (  newTask);
             }
         }
+
+        //for (int i=0;i<allBids.size ();i++){
+        //            if (allBids.get ( i ).getTask ().getStatus ().equals ( "bidded" ) && allBids.get ( i ).getBidUserName ().equals ( LoginActivity.thisuser.getUsername () )){
+        //                allTasks.add (  allBids.get ( i ).getTask ());
+        //            }
+        //
+        //        }
+
+        Log.e("bidsP", allBids.toString ());
         //Set the bidded Provider tasks
-        biddedPtasks=allTasksList;
+        biddedPtasks=allTasks;
     }
 
 
@@ -249,48 +233,91 @@ public class HomeActivity extends AppCompatActivity {
             e.printStackTrace ();
         }
 
-
         for(int i=0; i<allTasksList.size ();i++){
-            if(allTasksList.get ( i ).getProvider ()!= null && allTasksList.get ( i ).getStatus ().equals ( "assigned" )){
+            if(allTasksList.get ( i ).getStatus ().equals ( "assigned" )){
                 if(allTasksList.get ( i ).getProvider ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
                     taskList.add(allTasksList.get ( i ));
                 }
             }
         }
-
+        Log.e("assignedP", taskList.toString ());
         //Set the Assigned Provider tasks
         assignedPtasks=taskList;
     }
 
     /**
-     * updates the status of a task
+     * updates the status of all tasks
      */
-    public void update() throws ExecutionException, InterruptedException {
-        for(int i=0; i < tasksR.size (); i++) {
+    public static void update() throws ExecutionException, InterruptedException {
+        ArrayList<Task> allTasks= new ArrayList<Task> (  );
+        ArrayList<Task> myTasks= new ArrayList<Task> (  );
+        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks ();
+        tasks.execute ("","");
+
+
+        allTasks= tasks.get();
+        for (int i=0; i < allTasks.size (); i++){
+            //Update the status of a task
+
             ArrayList <Bid> allBids= new ArrayList<Bid> (  );
             ElasticSearchController.getBids bids= new ElasticSearchController.getBids ();
-            bids.execute ( tasksR.get ( i ).getTitle (), "" );
-
+            bids.execute ( allTasks.get ( i ).getTitle (), "" );
             allBids= bids.get();
-            //Change to bidded
-            if(allBids.size ()!=0 && tasksR.get ( i ).getStatus ().equals ( "requested" )){
+
+            //If the task is complete then delete the task and bids associated to it
+            if (allTasks.get ( i ).getComplete ()){
+                ElasticSearchController.deleteTask deleteTask= new ElasticSearchController.deleteTask ();
+                deleteTask.execute ( allTasks.get ( i ).getTitle () );
+
                 for(int j=0; j<allBids.size ();j++){
-                    if(allBids.get ( j ).getBidOwner ().equals ( LoginActivity.thisuser.getUsername () )){
-                        Task tempTask = new Task ( tasksR.get ( i ).getTitle (), tasksR.get (i).getDescription (), LoginActivity.thisuser, "bidded" );
-                        ElasticSearchController.updateTask ( tasksR.get (i), tempTask );
-                    }
+                    ElasticSearchController.deleteBid deleteBid= new ElasticSearchController.deleteBid ();
+                    deleteBid.execute ( allBids.get ( j ).getTask ().getTitle (), allBids.get ( j ).getBidUserName () );
                 }
             }
 
-            //Change to assigned
-            if(tasksR.get ( i ).getStatus ().equals ( "bidded" )){
-                if(!(tasksR.get ( i ).getProvider() == null )){
-                    Task tempTask = new Task ( tasksR.get ( i ).getTitle (), tasksR.get (i).getDescription (), LoginActivity.thisuser, "assigned" );
-                    ElasticSearchController.updateTask ( tasksR.get (i), tempTask );
+
+            //Set the status to assigned if provider for that task is not null
+            else if(allTasks.get ( i ).getProvider() != null ){
+                Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get (i).getDescription (), allTasks.get ( i ).getRequester (), "assigned", allTasks.get ( i ).getProvider() );
+                ElasticSearchController.updateTask ( allTasks.get (i), tempTask );
+            }
+
+
+            //Set the status to bidded if there exist a bid on that task and its not assigned
+            else if (allBids.size ()!=0 ){
+                for(int j=0; j<allBids.size ();j++){
+                    Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get (i).getDescription (), allTasks.get ( i ).getRequester (), "bidded", null );
+                    ElasticSearchController.updateTask ( allTasks.get (i), tempTask );
                 }
             }
-            //Find a way to make it change to done, and back to requested and bidded
+
+
+            //Set the status to requested if there no bid
+            else if(allBids.size ()==0){
+                Log.e("title", allTasks.get ( i ).getTitle ());
+                Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get (i).getDescription (), allTasks.get ( i ).getRequester (), "requested", null );
+                ElasticSearchController.updateTask ( allTasks.get (i), tempTask );
+            }
+
+
+            //Wait a bit for changes to sync
+            long num=300;
+            try {
+                Thread.sleep(num);
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
+
+            if( LoginActivity.thisuser.getUsername ().equals ( allTasks.get ( i ).getRequester ().getUsername () )){
+                myTasks.add( allTasks.get ( i ));
+            }
         }
+
+        tasksR= myTasks;
+
+        //TO set back to bidded from assigned, there must not be a provider
+        //TO set back to requested from bidded or assigned, there must not exist a bid on the task
+        //if done delete the task
     }
 
 

@@ -64,6 +64,14 @@ public class SearchActivity extends AppCompatActivity {
         listOfTasks = findViewById(R.id.searches);
         Button search = (Button) findViewById(R.id.search);
 
+        try {
+            HomeActivity.update ();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
         //Initially grab all the tasks from ELastic search, by passing in nothing(Empty string)
         try {
             searching ( "" );
@@ -72,8 +80,6 @@ public class SearchActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace ();
         }
-
-
 
         //When the user selects the searchBtn then call searching to return the list of tasks
         //Match the keywords entered
@@ -92,7 +98,6 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         } );
-
     }
 
 
@@ -112,10 +117,10 @@ public class SearchActivity extends AppCompatActivity {
             ArrayList<Task> tasks = search.get ();
             ArrayList<Task> results = new ArrayList<Task> (  );
 
+            String myname= LoginActivity.thisuser.getUsername ();
             //Filter through the tasks we got to make sure status== "requested" or "bidded"
             for(int i=0; i< tasks.size (); i++){
                 String taskname= tasks.get ( i ).getRequester ().getUsername ();
-                String myname= LoginActivity.thisuser.getUsername ();
 
                 Log.e("s", tasks.get ( i ).getStatus ());
                 if(!taskname.equals ( myname )){

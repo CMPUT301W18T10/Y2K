@@ -28,7 +28,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  *
@@ -100,52 +102,78 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    acceptBtn(v, pos, bids);
+                    try {
+                        acceptBtn(v, pos);
+                    } catch (ExecutionException e) {
+                        e.printStackTrace ();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace ();
+                    }
                 }
             });
         decline.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    declineBtn(v, bidUser);
+                    declineBtn(v,pos);
                 }
             });
-
 
 
         return data;
     }
 
 
-    private void acceptBtn(View v, int pos, ArrayList<Bid> bids){
-        Log.e("accept","accept button click");
+
+    //Set the bid username  as task provider
+    private void acceptBtn(View v, int pos) throws ExecutionException, InterruptedException {
         //SET THE TASK STATUS TO ASSIGN AND REMOVE EVERY OTHER BID ON THAT TASK
         //WHEN WE REMOVE A BID NOTIFY THAT USER
         // Elasticsearch ....
         String acceptedUser = getItem(pos).getBidUserName();
-        ArrayList<String> allBidUsers = new ArrayList<String>();
-        for(int i = 0; i < bids.size(); i++){
-            allBidUsers.add(getItem(i).getBidUserName());
-        }
-        for(int i = 0; i < allBidUsers.size(); i++){
-            if( allBidUsers.get(i) != acceptedUser) {
-                ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid();
-                delete.execute(allBidUsers.get(i));
-            }
-        }
-        //TODO: set status of task to assigned
+
+        ArrayList<User> userList= new ArrayList<User> (  );
+        ElasticSearchController.getUsers users= new ElasticSearchController.getUsers ();
+        users.execute ( acceptedUser );
+        userList= users.get ();
 
 
+        String title= getItem ( pos ).getTask ().getTitle ();
+        String desc= getItem ( pos ).getTask ().getDescription ();
+        String status= "assigned";
+        User req= getItem ( pos ).getTask ().getRequester ();
+        Task newTask= new Task(title, desc, req, status, userList.get ( 0 ));
+        ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask );
+
+        long num=300;
+        try {
+            Thread.sleep(num);
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
+        Intent intent= new Intent(getContext (), HomeActivity.class);
+        ((Activity)getContext()).startActivityForResult(intent,0);
     }
 
 
-    private void declineBtn(View v, String bidUser){
-        Log.e("Decline","Decline button clicked");
+    //Delete bid
+    private void declineBtn(View v, int pos){
 
         //TODO: stuff for declining a bid
         //REMOVE THE BID FROM THE TASK
         //ELasticsearch.....
-//        ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid();
-//        delete.execute(bidUser);
+        ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid();
+        delete.execute(getItem ( pos ).getTask ().getTitle (), getItem ( pos ).getBidUserName ());
+
+        long num=300;
+        try {
+            Thread.sleep(num);
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
+        Intent intent= new Intent(getContext (), BidActivity.class);
+        ((Activity)getContext()).startActivityForResult(intent,0);
     }
 
 

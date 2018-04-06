@@ -54,7 +54,7 @@ public class Task {
     private ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
     public static ArrayAdapter<Bid> bidAdapter; // For custom adapter to work
     private User requester;
-    private User provider=null;
+    private User provider;
 
 
 
@@ -67,11 +67,12 @@ public class Task {
      * @param requester the user that requested the task to be done
      * @param status the status of the task: requested, done, completed, or assigned
      */
-    public Task(String title, String description,User requester, String status ) {
+    public Task(String title, String description,User requester, String status, User provider ) {
         this.title= title;
         this.description=description;
         this.requester= requester;
         this.status=status;
+        this.provider= provider;
     }
 
 

@@ -126,11 +126,16 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             pos = Integer.parseInt(intent.getStringExtra(SearchActivity.POINTER));
             task= SearchActivity.specificTasks.get ( pos );
         }
-
+        if(task.getStatus ().equals ( "assigned" )){
+            EditText amount= findViewById ( R.id.myAmount );
+            amount.setClickable ( false );
+            amount.setFocusable ( false );
+        }
 
         //Get the old bid if it exists
         ArrayList<Bid> allBids= new ArrayList<Bid> (  );
         ElasticSearchController.getBids bids= new ElasticSearchController.getBids ();
+
         bids.execute ( "", LoginActivity.thisuser.getUsername () );
         try {
             allBids=bids.get ();
@@ -208,6 +213,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
                         AsyncTask<Bid, Void, Void> execute = new ElasticSearchController.addBids ();
                         execute.execute ( newBid );
                     }
+
 
                     homeBtn ();
                 }
@@ -301,6 +307,15 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
      * User is directed to the HomeActivity
      */
     public void homeBtn(){
+
+        //Wait a bit for changes to sync
+        long num=300;
+        try {
+            Thread.sleep(num);
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
         Intent intent= new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
@@ -311,6 +326,14 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
      * @param view
      */
     public void codeBtn(View view){
+        //Wait a bit for changes to sync
+        long num=300;
+        try {
+            Thread.sleep(num);
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+
         Intent intent= new Intent(this, CodeProvider.class);
         startActivity(intent);
     }

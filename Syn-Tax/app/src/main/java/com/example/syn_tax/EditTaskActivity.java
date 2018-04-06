@@ -106,6 +106,13 @@ public class EditTaskActivity extends AppCompatActivity {
         Otitle= task.getTitle ();
         //print the old task info
 
+        if(Objects.equals ( task.getStatus (), "assigned" )){
+            //Bids pressed pass the task title and fill out the bids page
+            Button bids= findViewById ( R.id.bids );
+            bids.setVisibility ( View.GONE );
+        }
+
+
         if(state.equals ( "view" )){
             try {
                 printTask(task);
@@ -162,12 +169,8 @@ public class EditTaskActivity extends AppCompatActivity {
         }
 
         else {
-            //Bids pressed pass the task title and fill out the bids page
-            Button bids= findViewById ( R.id.bids );
-            bids.setVisibility ( View.GONE );
-
-
             if (!Objects.equals ( task.getStatus (), "requested" )) {
+
                 Button saveBtn = findViewById ( R.id.updateBtn );
                 saveBtn.setText ( "DONE" );
                 try {
@@ -266,7 +269,7 @@ public class EditTaskActivity extends AppCompatActivity {
                                 // added in the username of the requester - Aidan
                                 //TODO delete the task from the elastic search then add this one
 
-                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus );
+                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus, null );
                                 // Check to add a photo to the task
                                 if (photoStatus == 1) {
                                     tempTask.setPhoto ( photo );
