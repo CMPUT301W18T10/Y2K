@@ -12,8 +12,8 @@
     android:weightSum="10"
     tools:context=".SearchActivity"
     android:focusable="true"
-    android:focusableInTouchMode="true" >
-    <!--android:background="@drawable/syn_taxsearch"-->
+    android:focusableInTouchMode="true"
+    android:background="@drawable/syn_taxpages">
 
 
     <LinearLayout
