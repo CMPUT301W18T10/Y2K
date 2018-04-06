@@ -209,7 +209,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         if (todo== "view"){
             if(status.equals ( "assigned" )){
                 btn.setMessage("VIEW ASSIGNED TASK");
-                btn.setPositiveButton("VIEW", new DialogInterface.OnClickListener() {
+                btn.setPositiveButton("VIEW/SUBMIT", new DialogInterface.OnClickListener() {
                     @Override
                     /**
                      * VIEW the task
