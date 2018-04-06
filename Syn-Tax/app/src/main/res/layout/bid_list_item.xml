@@ -18,14 +18,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User:"
-            android:textAlignment="textStart" />
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bid:"
-            android:textAlignment="textStart" />
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -41,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:text="username"
-            android:textAlignment="textStart" />
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/abid"
@@ -49,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:text="bid"
-            android:textAlignment="textStart" />
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <Button

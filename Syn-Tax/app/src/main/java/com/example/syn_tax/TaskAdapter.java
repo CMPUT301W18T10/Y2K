@@ -89,7 +89,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
             //Set the fields
             if (taskUsername.equals ( LoginActivity.thisuser.getUsername () )) {
-                title1.setText ( "Provider Username:" );
+                title1.setText ( "PUsername:" );
                 if (getItem ( pos ).getProvider () == null) {
                     task_username.setText ( "NONE" );
                 } else {
@@ -97,7 +97,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                 }
             } else {
                 title2.setText ( "My Accecpted Bid:" );
-                title1.setText ( "Requester Username:" );
+                title1.setText ( "RUsername:" );
                 task_username.setText ( getItem ( pos ).getRequester ().getUsername () );
             }
 
@@ -134,8 +134,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             task_username.setVisibility ( View.VISIBLE );
             myBidAmount.setVisibility ( View.VISIBLE );
 
-            title1.setText ( "Requester Username:" );
-            title2.setText ( "Lowest Bid So Far: " );
+            title1.setText ( "RUsername:" );
+            title2.setText ( "Lowest Bid:" );
             task_username.setText ( taskUsername );
             try {
                 if (getItem ( pos ).getLowestBid () == null) {

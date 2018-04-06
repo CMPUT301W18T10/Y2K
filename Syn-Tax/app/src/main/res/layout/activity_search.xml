@@ -20,7 +20,7 @@
         android:id="@+id/none"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="4.3"
+        android:layout_weight="3.7"
         android:gravity="bottom|center_horizontal"
         android:orientation="horizontal">
 
@@ -35,7 +35,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="4.1"
+        android:layout_weight="4"
         android:gravity="bottom|center_horizontal"
         android:orientation="horizontal">
 
@@ -59,7 +59,7 @@
         android:id="@+id/searches"
         android:layout_width="409dp"
         android:layout_height="498dp"
-        android:layout_weight="1.6"
+        android:layout_weight="2.4"
         android:divider="?attr/colorAccent"
         android:dividerHeight="2dp"
         android:paddingTop="10dp"

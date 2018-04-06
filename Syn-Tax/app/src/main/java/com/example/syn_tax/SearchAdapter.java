@@ -15,7 +15,9 @@
 package com.example.syn_tax;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,13 +87,23 @@ public class SearchAdapter extends ArrayAdapter<Task> {
             public void onClick(View v){
                 //TODO: where the click goes
                 // for a task of a requester
-
-                Intent intent = new Intent(getContext(),ViewTaskProviderActivity.class);
-                intent.putExtra(SearchActivity.POINTER,String.valueOf(pos));
-                intent.putExtra ( "status", taskStatus );
-                intent.putExtra ( "title", taskTitle );
-                intent.putExtra ( "sss", "search" );
-                ((Activity)getContext()).startActivityForResult(intent,0);
+                AlertDialog.Builder btn = new AlertDialog.Builder(getContext ());
+                btn.setMessage("VIEW TASK");
+                btn.setPositiveButton("VIEW", new DialogInterface.OnClickListener() {
+                    @Override
+                    /**
+                     * VIEW the task
+                     */
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent ( getContext (), ViewTaskProviderActivity.class );
+                        intent.putExtra ( SearchActivity.POINTER, String.valueOf ( pos ) );
+                        intent.putExtra ( "status", taskStatus );
+                        intent.putExtra ( "title", taskTitle );
+                        intent.putExtra ( "sss", "search" );
+                        ((Activity) getContext ()).startActivityForResult ( intent, 0 );
+                    }
+                });
+                btn.show();
             }
         });
 

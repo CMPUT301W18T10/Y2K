@@ -267,7 +267,7 @@ public class AddTaskActivity extends AppCompatActivity{
         try {
             if(!checkName(stitle)){
                 taskTitle.setError("Title is Taken. ");
-                Toast.makeText(AddTaskActivity.this, ".", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddTaskActivity.this, "Enter a Title.", Toast.LENGTH_SHORT).show();
                 valid=false;
             }
         }
