@@ -304,8 +304,6 @@ public class Task {
         this.description=description;
         this.requester= requester;
         this.status=status;
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
 
     //gets the lowest bid
