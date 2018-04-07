@@ -13,6 +13,7 @@
 
 package com.example.syn_tax;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,20 +25,26 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 public class FinishedCodesRequester extends AppCompatActivity {
-    private static final String FILE_NAME = "code.txt";
+    private static final String FILE_NAME = null;
     private static final Object DEBUGTAG = "JWP";
+    String e1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finished_codes_requester);
         loadSavedFile();
+        //get the filename
+//        Intent intent = getIntent();
+//        String FILE_NAME = intent.getStringExtra("code");
+
     }
-
-
 
     //reads the file from the input stream
     public void loadSavedFile() {
+        //get the filename
+        Intent intent = getIntent();
+        String FILE_NAME = intent.getStringExtra("code");
         try {
             FileInputStream fis = openFileInput(FILE_NAME);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));

@@ -16,6 +16,7 @@ package com.example.syn_tax;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,6 +121,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
 
 
+
     //Set the bid username  as task provider
     private void acceptBtn(View v, int pos) throws ExecutionException, InterruptedException {
         //SET THE TASK STATUS TO ASSIGN AND REMOVE EVERY OTHER BID ON THAT TASK
@@ -139,7 +141,8 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         Double latitudde = getItem(pos).getTask().getLat();
         Double longitude = getItem(pos).getTask().getLong();
         User req= getItem ( pos ).getTask ().getRequester ();
-        Task newTask= new Task(title, desc, req, status, userList.get ( 0 ),latitudde,longitude);
+        Bitmap photo = getItem(pos).getTask().getPhoto();
+        Task newTask= new Task(title, desc, req, status, userList.get ( 0 ),latitudde,longitude,photo);
         ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask);
 
         long num=300;

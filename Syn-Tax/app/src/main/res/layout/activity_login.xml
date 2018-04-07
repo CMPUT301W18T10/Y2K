@@ -61,7 +61,7 @@
             android:layout_above="@+id/saveBtn"
 
             android:layout_gravity="center_horizontal"
-            android:layout_toEndOf="@+id/title"
+            android:layout_toEndOf="@+id/titles"
 
             android:layout_weight="0.64"
             android:background="@color/colorPrimaryDark"

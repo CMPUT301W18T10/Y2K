@@ -234,7 +234,7 @@ public class EditTaskActivity extends AppCompatActivity {
                                 String sdesc = description.getText ().toString ();
                                 String sstatus = status.getText ().toString ();
                                 String location = tvlocation.getText().toString();
-                                Double locations = Double.parseDouble(location);
+
 
                                 //update our new editted task
                                 task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus);
@@ -309,7 +309,7 @@ public class EditTaskActivity extends AppCompatActivity {
                                 //TODO delete the task from the elastic search then add this one
                                 Double location = latitude+longitude;
 
-                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus, null,latitude,longitude);
+                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus, null,latitude,longitude,photo);
                                 // Check to add a photo to the task
                                 if (photoStatus == 1) {
                                     tempTask.setPhoto ( photo );
@@ -446,23 +446,23 @@ public class EditTaskActivity extends AppCompatActivity {
 
         //**********************CHECKS*****************************************
         //Check Title if dublicates
-        if (!stitle.equals ( Otitle )){
-            ArrayList<Task> allTasks;
-            try {
-                if (!checkName ( stitle )) {
-                    taskTitle.setError ( "Title is Taken." );
-                    Toast.makeText ( EditTaskActivity.this, "Title is Taken.", Toast.LENGTH_SHORT ).show ();
-                    valid = false;
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace ();
-            } catch (ExecutionException e) {
-                e.printStackTrace ();
-            }
-        }
+//        if (!stitle.equals ( Otitle )){
+//            ArrayList<Task> allTasks;
+//            try {
+//                if (!checkName ( stitle )) {
+//                    taskTitle.setError ( "Title is Taken." );
+//                    Toast.makeText ( EditTaskActivity.this, "Title is Taken.", Toast.LENGTH_SHORT ).show ();
+//                    valid = false;
+//                }
+//            } catch (InterruptedException e) {
+//                e.printStackTrace ();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace ();
+//            }
+//        }
 
         //Check Title
-        else if (stitle.isEmpty()){
+       if (stitle.isEmpty()){
             taskTitle.setError("Enter Title");
             Toast.makeText(EditTaskActivity.this, "Enter a Title.", Toast.LENGTH_SHORT).show();
             valid=false;

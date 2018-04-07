@@ -105,10 +105,10 @@ public class CodeProvider extends AppCompatActivity {
 
     }
     public void send(View view) {
-        Intent intent = new Intent();
-        intent.putExtra(FILE_NAME,FinishedCodesRequester.class);
-        startActivity(intent);
+        Intent intent = new Intent(CodeProvider.this,FinishedCodesRequester.class);
+        intent.putExtra("code",FILE_NAME);
         Toast.makeText(CodeProvider.this,"CODE SENT!",Toast.LENGTH_SHORT);
+        startActivity(intent);
 
     }
 

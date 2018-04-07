@@ -70,7 +70,7 @@ public class Task {
      * @param requester the user that requested the task to be done
      * @param status the status of the task: requested, done, completed, or assigned
      */
-    public Task(String title, String description,User requester, String status, User provider,Double latitude,Double longitude ) {
+    public Task(String title, String description,User requester, String status, User provider,Double latitude,Double longitude, Bitmap photo ) {
         this.title= title;
         this.description=description;
         this.requester= requester;
@@ -78,6 +78,8 @@ public class Task {
         this.provider= provider;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.photo = photo;
+
     }
 
 
