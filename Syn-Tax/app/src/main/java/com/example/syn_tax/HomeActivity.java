@@ -125,14 +125,28 @@ public class HomeActivity extends AppCompatActivity {
         biddedPtasks= new ArrayList<Task> (  );
         assignedPtasks= new ArrayList<Task> (  );
 
-        //Update the task status
-        try {
-            update();
-        } catch (ExecutionException e) {
+        if(ElasticSearchController.connected ()){
+            //Update the task status
+            try {
+                update();
+            } catch (ExecutionException e) {
 
-            e.printStackTrace ();
-        } catch (InterruptedException e) {
-            e.printStackTrace ();
+                e.printStackTrace ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
+
+        }
+        else{
+            //Load tasks from elastic search
+            try {
+                loadTasksNotConnected();
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            }
+
         }
 
         for(int i=0; i < tasksR.size (); i++) {
@@ -303,7 +317,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
 
-
             //Wait a bit for changes to sync
             long num=300;
             try {
@@ -322,6 +335,18 @@ public class HomeActivity extends AppCompatActivity {
         //TO set back to bidded from assigned, there must not be a provider
         //TO set back to requested from bidded or assigned, there must not exist a bid on the task
         //if done delete the task
+    }
+
+
+    /**
+     * Loads tasks when not connected to the network
+     */
+    public void loadTasksNotConnected() throws ExecutionException, InterruptedException {
+        ArrayList<Task> allTasks= new ArrayList<Task> (  );
+        ElasticSearchController.getTasks tasks= new ElasticSearchController.getTasks ();
+        tasks.execute ("","");
+        allTasks= tasks.get();
+        tasksR= allTasks;
     }
 
 
