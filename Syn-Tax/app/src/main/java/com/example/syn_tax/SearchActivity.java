@@ -72,6 +72,9 @@ public class SearchActivity extends AppCompatActivity {
     LocationManager locationManager;
 
     @Override
+    /**
+     * On create set up the search activity by updating all tasks and showing all tasks requested or bidded
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
@@ -120,6 +123,10 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Get the latitude of a task
+     * @return the latitude of a task
+     */
     //get our current locations latitude
     double getLatitude() {
         Double latti = 0.0;
@@ -140,6 +147,9 @@ public class SearchActivity extends AppCompatActivity {
         return latti;
     }
 
+    /**
+     * @return the longitude of a task
+     */
     //get our current locations longitude
     double getLongitude() {
         Double latti = 0.0;
@@ -300,7 +310,14 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    /** calculates the distance between two locations in MILES */
+    /**
+     * calculates the distance between two locations in MILES
+     * @param lat1 my current latitude
+     * @param lng1 my current longitude
+     * @param lat2 task latitude
+     * @param lng2 task longitude
+     * @return the distance between both of them
+     */
     public double distance(double lat1, double lng1, double lat2, double lng2) {
 
         double earthRadius = 3958.75; // in miles, change to 6371 for kilometer output

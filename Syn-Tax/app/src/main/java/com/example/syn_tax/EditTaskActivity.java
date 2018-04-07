@@ -54,8 +54,6 @@ import java.util.concurrent.ExecutionException;
  * @see ElasticSearchController
  *
  */
-
-
 public class EditTaskActivity extends AppCompatActivity {
     private static final Object DEBUGTAG = "jwp";
     public static int pos;
@@ -429,7 +427,10 @@ public class EditTaskActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Send the user to the code provider page
+     * @param view
+     */
     //get the code if the provider is finished
     public void getCode(View view) {
         String status = task.getStatus();

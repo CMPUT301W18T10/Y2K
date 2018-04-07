@@ -251,11 +251,6 @@ public class Task {
     }
 
 
-
-
-
-
-
     //SETTERS AND GETTERS FOR THE BIDS OF A TASK
     /**
      * Add a bid for the task

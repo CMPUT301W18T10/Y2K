@@ -45,7 +45,6 @@ import java.util.concurrent.ExecutionException;
  *
  * @see ElasticSearchController
  * @see CreateAccount
- * @see MainActivity
  *
  * */
 
