@@ -14,14 +14,16 @@
 package com.example.syn_tax;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -29,7 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * Created by hamdamare on 2018-03-24.
  */
 
-public class MapsActivity extends Activity {
+public class MapsActivity extends FragmentActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final int PERMISSION_LOCATION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
@@ -39,6 +41,7 @@ public class MapsActivity extends Activity {
     private GoogleMap mMap;
     Location location;
     MapFragment mapFrag = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+    Task task;
 
 
     /**
@@ -51,17 +54,13 @@ public class MapsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_map);
-        //double Lat = Task.getLat();
-        //double Lng = HomeActivity.;
-        //setUpMapIfNeeded(Lat, Lng);
+        setContentView(R.layout.activity_maps);
+        double Lat = task.getLat();
+        double Lng = task.getLong();
+        setUpMapIfNeeded(Lat, Lng);
 
-//        SupportMapFragment mapFragment =
-//                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
-
-
-
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync((OnMapReadyCallback) this);
 
     }
 
@@ -78,7 +77,6 @@ public class MapsActivity extends Activity {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
 
-
             Uri gmmIntentUri = Uri.parse("geo:<" + String.valueOf(Lat) + ">,<" + String.valueOf(Lng) + ">?q=<" + String.valueOf(Lat) + ">,<" + String.valueOf(Lng) + ">(Item Location)");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
@@ -86,7 +84,6 @@ public class MapsActivity extends Activity {
 
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-
 
                 mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
 
@@ -101,5 +98,6 @@ public class MapsActivity extends Activity {
             }
         }
     }
+
 }
 
