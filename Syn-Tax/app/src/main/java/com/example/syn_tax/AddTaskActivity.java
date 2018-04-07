@@ -173,7 +173,7 @@ public class AddTaskActivity extends AppCompatActivity{
                     System.out.println(lat);
                     System.out.println(log);
 
-                    //we store the location with the task
+                    //we store the location and the photos with the task
                     Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus, null,lat,log);
                     // Check to add a photo to the task
 
@@ -212,6 +212,8 @@ public class AddTaskActivity extends AppCompatActivity{
      * @throws ExecutionException
      * @throws InterruptedException
      */
+
+
     private boolean checkName(String title) throws ExecutionException, InterruptedException {
         Boolean check= true;
         ArrayList<Task> allTasks;
