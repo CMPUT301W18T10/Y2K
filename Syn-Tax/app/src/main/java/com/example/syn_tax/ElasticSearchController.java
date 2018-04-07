@@ -237,7 +237,7 @@ public class ElasticSearchController extends Application {
             }
 
             // TODO Build the query
-            Search search = new Search.Builder ( searchString ).addIndex ( "CMPUT301W18T10" ).addType ( "tasks" ).build ();
+            Search search = new Search.Builder ( searchString ).addIndex ( "cmput301w18t10" ).addType ( "tasks" ).build ();
 
             try {
                 // TODO get the results of the query
@@ -288,7 +288,7 @@ public class ElasticSearchController extends Application {
                 searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
             }
             // TODO Build the query
-            Search search = new Search.Builder ( searchString ).addIndex ( "CMPUT301W18T10" ).addType ( "users" ).build ();
+            Search search = new Search.Builder ( searchString ).addIndex ( "cmput301w18t10" ).addType ( "users" ).build ();
 
             try {
                 // TODO get the results of the query
@@ -342,7 +342,7 @@ public class ElasticSearchController extends Application {
             }
 
             // TODO Build the query
-            Search search = new Search.Builder ( searchString ).addIndex ( "CMPUT301W18T10" ).addType ( "bids" ).build ();
+            Search search = new Search.Builder ( searchString ).addIndex ( "cmput301w18t10" ).addType ( "bids" ).build ();
 
             try {
                 // TODO get the results of the query
@@ -396,7 +396,7 @@ public class ElasticSearchController extends Application {
             }
 
             // TODO Build the query
-            Search search = new Search.Builder ( searchString ).addIndex ( "CMPUT301W18T10" ).addType ( "tasks" ).build ();
+            Search search = new Search.Builder ( searchString ).addIndex ( "cmput301w18t10" ).addType ( "tasks" ).build ();
 
             try {
                 // TODO get the results of the query
@@ -444,7 +444,7 @@ public class ElasticSearchController extends Application {
 
                 verifySettings ();
                 for (Task task : tasks) {
-                    Index index = new Index.Builder ( task ).index ( "CMPUT301W18T10" ).type ( "tasks" ).build ();
+                    Index index = new Index.Builder ( task ).index ( "cmput301w18t10" ).type ( "tasks" ).build ();
 
                     try {
 
@@ -483,7 +483,7 @@ public class ElasticSearchController extends Application {
             if (connected ()) {
                 verifySettings ();
                 for (User user : users) {
-                    Index index = new Index.Builder ( user ).index ( "CMPUT301W18T10" ).type ( "users" ).build ();
+                    Index index = new Index.Builder ( user ).index ( "cmput301w18t10" ).type ( "users" ).build ();
 
                     try {
                         // where is the client?
@@ -520,7 +520,7 @@ public class ElasticSearchController extends Application {
 
                 verifySettings ();
                 for (Bid bid : bids) {
-                    Index index = new Index.Builder ( bid ).index ( "CMPUT301W18T10" ).type ( "bids" ).build ();
+                    Index index = new Index.Builder ( bid ).index ( "cmput301w18t10" ).type ( "bids" ).build ();
 
                     try {
 
@@ -627,7 +627,7 @@ public class ElasticSearchController extends Application {
                 String searchString = "{\"query\":{\"match\":{\"title\":\"" + search_parameters[0] + "\"}}}";
 
                 // TODO Build the delete by query
-                DeleteByQuery task = new DeleteByQuery.Builder ( searchString ).addIndex ( "CMPUT301W18T10" ).addType ( "tasks" ).build ();
+                DeleteByQuery task = new DeleteByQuery.Builder ( searchString ).addIndex ( "cmput301w18t10" ).addType ( "tasks" ).build ();
 
                 try {
                     // TODO delete the user
@@ -665,7 +665,7 @@ public class ElasticSearchController extends Application {
                 String searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
 
                 // TODO Build the delete by query
-                DeleteByQuery task = new DeleteByQuery.Builder ( searchString ).addIndex ( "CMPUT301W18T10" ).addType ( "tasks" ).build ();
+                DeleteByQuery task = new DeleteByQuery.Builder ( searchString ).addIndex ( "cmput301w18t10" ).addType ( "tasks" ).build ();
 
                 try {
                     // TODO delete the user
@@ -693,7 +693,7 @@ public class ElasticSearchController extends Application {
                 String searchString = "{\"query\":{\"match\":{\"username\":\"" + search_parameters[0] + "\"}}}";
 
                 // TODO Build the delete by query
-                DeleteByQuery olduser = new DeleteByQuery.Builder ( searchString ).addIndex ( "CMPUT301W18T10" ).addType ( "users" ).build ();
+                DeleteByQuery olduser = new DeleteByQuery.Builder ( searchString ).addIndex ( "cmput301w18t10" ).addType ( "users" ).build ();
 
                 try {
                     // TODO delete the user
@@ -723,7 +723,7 @@ public class ElasticSearchController extends Application {
                 String searchString="{\"query\": {\"bool\": {\"must\": [{ \"match\": { \"taskname\": \""+  search_parameters[0] +"\" }},{ \"match\": { \"bidUserName\": \""+ search_parameters[1]+"\"}}] }}}";
 
                 // TODO Build the delete by query
-                DeleteByQuery oldBid = new DeleteByQuery.Builder ( searchString ).addIndex ( "CMPUT301W18T10" ).addType ( "bids" ).build ();
+                DeleteByQuery oldBid = new DeleteByQuery.Builder ( searchString ).addIndex ( "cmput301w18t10" ).addType ( "bids" ).build ();
 
                 try {
                     // TODO delete the user
