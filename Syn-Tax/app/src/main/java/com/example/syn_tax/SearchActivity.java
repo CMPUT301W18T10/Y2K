@@ -206,7 +206,7 @@ public class SearchActivity extends AppCompatActivity {
                 //System.out.println(myLongi);
 
                 //then we compare our location with our task location
-                if (distance(myLatti,myLongi,taskLatti,taskLongi)> 3.10686) {
+                if (distance(myLatti,myLongi,taskLatti,taskLongi)> 3.10686 || distance(myLatti,myLongi,taskLatti,taskLongi)<= 3.10686) {
 
                     Toast.makeText(SearchActivity.this,"This task is too far",Toast.LENGTH_SHORT);
                     //System.out.println("Task is too far");

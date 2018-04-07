@@ -241,6 +241,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/code"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2.65"
@@ -249,8 +250,21 @@
         android:weightSum="1">
 
         <Button
+            android:id="@+id/codes"
+            android:layout_width="196dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="getCode"
+            android:text="Code"
+            android:textColor="@android:color/background_light"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <Button
             android:id="@+id/bids"
-            android:layout_width="wrap_content"
+            android:layout_width="177dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
@@ -271,7 +285,7 @@
 
         <Button
             android:id="@+id/updateBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"

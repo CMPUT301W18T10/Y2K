@@ -310,6 +310,7 @@
             android:textColor="@android:color/background_light"
             android:textSize="36sp"
             android:textStyle="bold"
+            android:visibility="gone"
             />
 
         <Button
@@ -322,7 +323,8 @@
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
             android:textSize="36sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
     </LinearLayout>
 
 </LinearLayout>

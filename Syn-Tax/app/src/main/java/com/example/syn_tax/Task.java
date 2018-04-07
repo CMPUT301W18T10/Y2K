@@ -232,7 +232,7 @@ public class Task {
      */
     public double getLat(){
         if (this.latitude == null) {
-            return 65.123;
+            return 52.2033344912395491030;
         }
         else {return this.latitude;}
     }
@@ -243,7 +243,7 @@ public class Task {
      */
     public double getLong(){
         if (this.longitude == null) {
-            return 120.12;
+            return 116.8341011201285091849;
         }
         else {
             return this.longitude;

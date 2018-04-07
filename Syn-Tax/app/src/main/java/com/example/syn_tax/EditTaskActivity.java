@@ -300,6 +300,7 @@ public class EditTaskActivity extends AppCompatActivity {
                         String sdesc = editdescription.getText ().toString ();
                         String sstatus = editstatus.getText ().toString ();
 
+
                         //valiidate user info
                         //Check to add a location to a task
                         try {
@@ -379,10 +380,13 @@ public class EditTaskActivity extends AppCompatActivity {
         //set the title and description
         EditText edittitle =  findViewById(R.id.editTaskTitle);
         edittitle.setText(Otitle);
+
         EditText editdesc = findViewById(R.id.editDescription);
         editdesc.setText(Odesc);
+
         EditText editStatus= findViewById ( R.id.status );
         editStatus.setText ( Ostatus);
+
 
         //set the photo
         ImageView editphoto = findViewById(R.id.editPhotoView);
@@ -422,6 +426,20 @@ public class EditTaskActivity extends AppCompatActivity {
         //set the data and type(get all image types)
         galleryIntent.setDataAndType(data,"image/*");
         startActivityForResult(galleryIntent, RESULT_GET_IMAGE);
+    }
+
+
+
+    //get the code if the provider is finished
+    public void getCode(View view) {
+        String status = task.getStatus();
+        if (status == "assigned") {
+            Button code = (Button) findViewById(R.id.codes);
+            code.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(EditTaskActivity.this,FinishedCodesRequester.class);
+            startActivity(intent);
+        }
+
     }
 
     /**
