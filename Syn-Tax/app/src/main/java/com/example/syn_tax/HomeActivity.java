@@ -114,7 +114,10 @@ public class HomeActivity extends AppCompatActivity {
      */
     protected void onStart(){
         super.onStart();
-        new NotifyUser().Display(HomeActivity.this);
+        if (ElasticSearchController.connected ()){
+            new NotifyUser().Display(HomeActivity.this);
+        }
+
 
         //REQUESTER
         requestedRtasks= new ArrayList<Task> (  );

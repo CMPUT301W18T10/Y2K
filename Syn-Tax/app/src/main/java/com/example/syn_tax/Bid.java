@@ -67,6 +67,9 @@ public class Bid {
     }
 
 
+    /**
+     * @return the list of tasks
+     */
     public Task getTask(){
         return task;
     }

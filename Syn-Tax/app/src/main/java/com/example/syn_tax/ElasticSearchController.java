@@ -710,7 +710,8 @@ public class ElasticSearchController extends Application {
     /**
      * Delete's a bid by looking at the username associated to a bid
      */
-    // TODO we need a function which gets task from elastic search
+    // TODO we need a function which gets task f
+    // rom elastic search
     public static class deleteBid extends AsyncTask<String, Void, ArrayList<Bid>> {
         @Override
         protected ArrayList<Bid> doInBackground(String... search_parameters) {

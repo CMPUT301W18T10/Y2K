@@ -34,8 +34,8 @@ public class User {
     private ArrayList<String> notification = new ArrayList<String>();
 
     private String id;
-    private String NotificationTitle = "title";
-    private String NotificationMsg = "msg";
+    private String NotificationTitle = "";
+    private String NotificationMsg = "";
 
     /**
      * Constructor, Set the username, email, and phoneNUmber
