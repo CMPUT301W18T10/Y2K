@@ -41,8 +41,12 @@ import java.util.concurrent.ExecutionException;
  *
  * Allows a provider to view a task
  * @see HomeActivity
+ * @see CodeProvider
+ * @see ElasticSearchController
  *
  */
+
+
 public class ViewTaskProviderActivity extends AppCompatActivity {
     public static int pos;
     int PLACE_LOCATION_REQUESTED = 1;
@@ -64,6 +68,10 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
     private Bid oldBid;
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,6 +198,11 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
         Button saveBtn=findViewById ( R.id.saveBtn );
         saveBtn.setOnClickListener(new View.OnClickListener() {
+            /**
+             * user updates their edited task
+             * @param v
+             *
+             */
             @Override
             public void onClick(View v) {
                 //Convert the string to a Double if the string is not empty else set it to 0
@@ -244,8 +257,6 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-
-
     //print the task photo get anything to print
     private void printTask() throws ExecutionException, InterruptedException  {
             Bitmap photo = task.getPhoto ();
@@ -339,7 +350,10 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * user directed to google maps where location selection is made
+     * @param view
+     */
     public void goLocationPicker(View view) {
         //calling the place picker function
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();

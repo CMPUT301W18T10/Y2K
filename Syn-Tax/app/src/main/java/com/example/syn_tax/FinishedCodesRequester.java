@@ -11,6 +11,15 @@
  * Last Modified 06/04/18 7:12 AM
  */
 
+
+ /**
+ *  FinishedCodeRequesteer class
+ * Feb 22, 2018
+ *
+ * Allows a requester to view the finished code
+ *
+ */
+
 package com.example.syn_tax;
 
 import android.content.Intent;
@@ -29,6 +38,10 @@ public class FinishedCodesRequester extends AppCompatActivity {
     private static final Object DEBUGTAG = "JWP";
     String e1;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +54,10 @@ public class FinishedCodesRequester extends AppCompatActivity {
     }
 
     //reads the file from the input stream
+
+    /**
+     * loads the saved code from the provider
+     */
     public void loadSavedFile() {
         //get the filename
         Intent intent = getIntent();

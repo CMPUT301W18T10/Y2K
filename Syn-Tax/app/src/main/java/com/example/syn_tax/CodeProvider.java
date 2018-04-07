@@ -15,6 +15,15 @@
             March 25 2018
  */
 
+/**
+ * CodeProvider Class
+ *
+ * Feb 22, 2018
+ *
+ * Allows the task provider to write code
+ * @see com.example.syn_tax.FinishedCodesRequester
+ */
+
 package com.example.syn_tax;
 
 import android.content.Intent;
@@ -32,12 +41,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
 public class CodeProvider extends AppCompatActivity {
     //this allows the user to write code in an edittext then save it
     private static final String FILE_NAME = "code.txt";
 
     EditText codes;
     Button save,load;
+
+    /**
+     *
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +63,13 @@ public class CodeProvider extends AppCompatActivity {
         save =  findViewById(R.id.savebtn);
         load = findViewById(R.id.loadbtn);
     }
+
+    /**
+     *
+     * @param v
+     *
+     * allows the provider to save their code
+     */
 
     public void save(View v) {
         String code  = codes.getText().toString();
@@ -76,6 +98,12 @@ public class CodeProvider extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     *
+     * @param v
+     * allows the user to load their saved code
+     */
     public void load(View v) {
         FileInputStream fis = null;
         try {
@@ -104,6 +132,12 @@ public class CodeProvider extends AppCompatActivity {
         }
 
     }
+
+    /**
+     *
+     * @param view
+     * sends the code to the provider
+     */
     public void send(View view) {
         Intent intent = new Intent(CodeProvider.this,FinishedCodesRequester.class);
         intent.putExtra("code",FILE_NAME);
