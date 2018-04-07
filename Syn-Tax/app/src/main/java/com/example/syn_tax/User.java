@@ -31,8 +31,11 @@ import java.util.ArrayList;
 public class User {
     private String username;
     private ArrayList<String> info = new ArrayList<String>();
+    private ArrayList<String> notification = new ArrayList<String>();
 
     private String id;
+    private String NotificationTitle = "title";
+    private String NotificationMsg = "msg";
 
     /**
      * Constructor, Set the username, email, and phoneNUmber
@@ -45,6 +48,8 @@ public class User {
         info.add(username);
         info.add(email);
         info.add(phoneNumber);
+        notification.add(NotificationTitle);
+        notification.add(NotificationMsg);
     }
 
     public String getUsername(){
