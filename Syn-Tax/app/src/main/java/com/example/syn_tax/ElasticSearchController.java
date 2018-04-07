@@ -549,12 +549,10 @@ public class ElasticSearchController extends Application {
     /**
      * Update the Item
      * If connected to the database, delete the old task, and replace with the new task
-     *  @param task1 oldTask
+     * @param task1 oldTask
      * @param task2 newTask
-     * @param latitudde
-     * @param longitude
      */
-    public static void updateTask(Task task1, Task task2, Double latitudde, Double longitude) {
+    public static void updateTask(Task task1, Task task2) {
         ElasticSearchController.deleteTask delete = new ElasticSearchController.deleteTask ();
         delete.execute ( task1.getTitle () );
 

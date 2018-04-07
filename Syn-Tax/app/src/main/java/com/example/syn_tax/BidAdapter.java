@@ -140,7 +140,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         Double longitude = getItem(pos).getTask().getLong();
         User req= getItem ( pos ).getTask ().getRequester ();
         Task newTask= new Task(title, desc, req, status, userList.get ( 0 ),latitudde,longitude);
-        ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask,latitudde,longitude);
+        ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask);
 
         long num=300;
         try {

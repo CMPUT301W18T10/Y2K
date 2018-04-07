@@ -170,14 +170,20 @@ public class AddTaskActivity extends AppCompatActivity{
 
                     Double lat = latitude;
                     Double log = longitude;
+                    System.out.println(lat);
+                    System.out.println(log);
 
-                    Task.setLocation(latitude,longitude);
-
+                    //we store the location with the task
                     Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus, null,lat,log);
                     // Check to add a photo to the task
+
                     if (photoStatus == 1) {
                         newtask.setPhoto(photo);
                     }
+
+                    //set the location even tho we pull it in
+                    newtask.setLongitude(log);
+                    newtask.setLatitude(lat);
 
 
                     AsyncTask<Task, Void, Void> execute = new ElasticSearchController.addTasks();
@@ -253,7 +259,6 @@ public class AddTaskActivity extends AppCompatActivity{
     public boolean isValid(){
         boolean valid=true;
 
-
         //title
         EditText taskTitle= findViewById(R.id.taskTitle);
         String stitle= taskTitle.getText().toString();
@@ -296,6 +301,7 @@ public class AddTaskActivity extends AppCompatActivity{
     }
 
 
+
     /**
      * invoke gallery when user clicks
      */
@@ -314,6 +320,7 @@ public class AddTaskActivity extends AppCompatActivity{
         //set the data and type(get all image types)
         galleryIntent.setDataAndType(data,"image/*");
         startActivityForResult(galleryIntent, RESULT_GET_IMAGE);
+
     }
 
 
@@ -329,11 +336,15 @@ public class AddTaskActivity extends AppCompatActivity{
         //make sure the gallery intent actually called our method
         //Make sure the result was okay
         //Make sure that we actually have an image
+        photoView = findViewById(R.id.photoView);
+        photoView2 = findViewById(R.id.photoView2);
+        photoView3 = findViewById(R.id.photoView3);
         if (requestCode == RESULT_GET_IMAGE && resultCode == RESULT_OK && data != null) {
             //uniform resource indicator - shows us the address of the image tha has been selected
             ClipData clipData = data.getClipData();
-            if (clipData != null) {
-                for (int i = 0; i < clipData.getItemCount(); i++) {
+
+            if(clipData != null) {
+                for(int i = 0; i < clipData.getItemCount(); i++) {
                     ClipData.Item item = clipData.getItemAt(i);
                     Uri uri = item.getUri();
                     if (i == 0) {
@@ -344,37 +355,40 @@ public class AddTaskActivity extends AppCompatActivity{
                     }
                     else if (i == 2) {
                         photoView3.setImageURI(uri);
+
                     }
-
-                    //declare a stream tor read the image from the sd card
-                    InputStream inputStream;
-                    //we get an input stream based on the uri of the image
-                    try {
-                        inputStream = getContentResolver().openInputStream(uri);
-                        //getting a bitmap from the stream
-                        photo = BitmapFactory.decodeStream(inputStream);
-                        //show image to our user
-                        photoView.setImageBitmap(photo);
-                        photoStatus = 1;
-
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                        Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG);
-                    }
-                }
-
                 }
 
             }
 
+            Uri imageUri = data.getData();
+            photoView.setImageURI(imageUri);
 
+            //declare a stream tor read the image from the sd card
+            InputStream inputStream;
+            //we get an input stream based on the uri of the image
+            try {
+                inputStream = getContentResolver().openInputStream(imageUri);
+                //getting a bitmap from the stream
+                photo = BitmapFactory.decodeStream(inputStream);
+                //show image to our user
+                photoView.setImageBitmap(photo);
+                photoStatus = 1;
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG);
+            }
+        }
+
+        //we get the location
         if (requestCode == PLACE_LOCATION_REQUESTED) {
             if (resultCode == RESULT_OK) {
                 Place location = PlacePicker.getPlace(AddTaskActivity.this, data);
                 tvlocation.setText(location.getAddress());
                 longitude = location.getLatLng().longitude;
                 latitude = location.getLatLng().latitude;
-                Task.setLocation(latitude,longitude);
+
                 locationStatus = 1;
             }
         }

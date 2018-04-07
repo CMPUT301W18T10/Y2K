@@ -75,6 +75,9 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         title= intent.getStringExtra ( "title" );
         state= intent.getStringExtra ( "sss");
 
+        //get the message from the search activity
+        //String message = getIntent().getStringExtra("message_key");
+
 
         //From the Home Page get the task
         if(!state.equals("search")) {
@@ -158,6 +161,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
 
 
+
         //Get the lowest bid
         try {
             if(task.getLowestBid ()!=null){
@@ -189,7 +193,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Convert the string to a Double if the string is not empty else set it to 0
-                EditText amount= findViewById ( R.id.myAmount );
+                EditText amount = findViewById ( R.id.myAmount );
                 String sAmount= amount.getText ().toString ();
 
                 Double dAmount;
@@ -236,12 +240,10 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
      * @throws InterruptedException
      */
     private void printTask() throws ExecutionException, InterruptedException  {
-
-        try{
             Bitmap photo = task.getPhoto ();
-
-            Double location = task.getLat () + task.getLong ();
-            String str_location = location.toString ();
+            Double Olat = task.getLat();
+            Double Olong =  task.getLong();
+            String str_location = "Latitude:"+Olat+"\n"+"Longitude"+Olong;;
 
             //set title
             TextView taskTitle = findViewById ( R.id.title );
@@ -267,9 +269,6 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
             //Set the location
             //Also allow user to view the task on a map
-            TextView getlocation = findViewById ( R.id.location );
-            getlocation.setText ( str_location );
-
             TextView tvlocation = findViewById(R.id.tvlocation);
             tvlocation.setText(str_location);
 
@@ -286,11 +285,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
                 String amount = lowestAmount.toString ();
                 lowest.setText ( amount );
             }
-        }
 
-        catch (NullPointerException e){
-            Log.e("e","Error loading");
-        }
     }
 
     /**

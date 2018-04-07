@@ -172,6 +172,7 @@ public class EditTaskActivity extends AppCompatActivity {
                 }
             } );
 
+
             saveBtn.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
@@ -194,6 +195,7 @@ public class EditTaskActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace ();
                 }
+
                 //Get Data
                 EditText title = findViewById ( R.id.editTaskTitle );
                 EditText description = findViewById ( R.id.editDescription );
@@ -236,7 +238,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
                                 //update our new editted task
                                 task.editTask ( stitle, sdesc, LoginActivity.thisuser, sstatus);
-                                ElasticSearchController.updateTask ( tempTask, task, latitude, longitude);
+                                ElasticSearchController.updateTask ( tempTask, task);
                                 updateButton ();
                             }
                         } catch (ExecutionException e) {
@@ -314,7 +316,7 @@ public class EditTaskActivity extends AppCompatActivity {
                                 }
 
 
-                                ElasticSearchController.updateTask ( task, tempTask, latitude, longitude);
+                                ElasticSearchController.updateTask ( task, tempTask);
                                 updateButton ();
                             }
 
@@ -346,14 +348,16 @@ public class EditTaskActivity extends AppCompatActivity {
      * @param task
      *
      */
-
     //print the old user information on this activity
     private void printTask(Task task) throws ExecutionException, InterruptedException {
         try{String Otitle = task.getTitle ();
         String Odesc = task.getDescription ();
+
         Bitmap Ophoto = task.getPhoto();
-        Double Olocation = task.getLat()+task.getLong();
-        String str_Olocation  = Olocation.toString();
+
+        Double Olat = task.getLat();
+        Double Olong =  task.getLong();
+        String str_Olocation = "Latitude:"+Olat+"\n"+"Longitude"+Olong;
         String Ostatus= task.getStatus ();
 
         Bid bid= task.getLowestBid ();
@@ -368,9 +372,9 @@ public class EditTaskActivity extends AppCompatActivity {
            Olowest= d.toString ();
         }
 
+
         TextView lowest= findViewById ( R.id.amount );
         lowest.setText ( Olowest );
-
 
         //set the title and description
         EditText edittitle =  findViewById(R.id.editTaskTitle);
@@ -393,6 +397,7 @@ public class EditTaskActivity extends AppCompatActivity {
         //set the Location
         TextView editlocation = findViewById(R.id.tvlocations);
         editlocation.setText(str_Olocation);
+
     }catch (Exception e) {
             Log.d((String) DEBUGTAG, "Error");}
     }
@@ -580,13 +585,13 @@ public class EditTaskActivity extends AppCompatActivity {
                     ClipData.Item item = clipData.getItemAt(i);
                     Uri uri = item.getUri();
 
-                    if (i == 1) {
+                    if (i == 0) {
                         editphoto.setImageURI(uri);
                     }
-                    else if (i == 2) {
+                    else if (i == 1) {
                         editphoto2.setImageURI(uri);
                     }
-                    else if (i == 3) {
+                    else if (i == 2) {
                         editphoto3.setImageURI(uri);
 
                     }
@@ -619,7 +624,6 @@ public class EditTaskActivity extends AppCompatActivity {
                 editlocation.setText(location.getAddress());
                 latitude = location.getLatLng().latitude;
                 longitude = location.getLatLng().longitude;
-                Task.setLocation(latitude,longitude);
                 locationStatus = 1;
             }
         }

@@ -16,6 +16,7 @@ package com.example.syn_tax;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import java.io.ByteArrayOutputStream;
@@ -43,10 +44,9 @@ public class Task {
     public String description;
     private String id;
     public String status;
-    public Double locations;
 
-    private static double latitude;
-    private static double longitude;
+    public Double latitude;
+    public Double longitude;
     public double lowestBid;
     private Boolean complete=false;
 
@@ -57,6 +57,7 @@ public class Task {
     public static ArrayAdapter<Bid> bidAdapter; // For custom adapter to work
     private User requester;
     private User provider;
+    private static final Object DEBUGTAG = "jwp";
 
 
 
@@ -184,6 +185,11 @@ public class Task {
         return this.provider;
     }
 
+
+
+
+
+    //GETTERS AND SETTERS FOR A TASK
     /**
      * Set the provider of a task
      * @param provider
@@ -192,17 +198,30 @@ public class Task {
         this.provider = provider;
     }
 
-
-    //SETTERS AND GETTERS FOR THE LOCATION OF A TASK
+    /**
+     * set the longitude of a task
+     * @param longitude
+     */
+    public void setLongitude(Double longitude) {
+        if (longitude == 0.0) {
+            this.longitude = 65.23;
+        }
+        else {
+            this.latitude = longitude;
+        }
+    }
 
     /**
-     * Set the location of a task by passing in the latitude and longitude
-     * @param lat its a double containing the latitude
-     * @param lng its a double containing the longitude
+     * Get the latitude of a task
+     * @param latitude
      */
-    public static void setLocation(Double lat, Double lng){
-        latitude = lat;
-        longitude = lng;
+    public void setLatitude(Double latitude) {
+        if (latitude == 0.0) {
+            this.latitude = 65.23;
+        }
+        else {
+            this.latitude = latitude;
+        }
     }
 
     /**
@@ -210,7 +229,10 @@ public class Task {
      * @return the latitude
      */
     public double getLat(){
-        return latitude;
+        if (this.latitude == null) {
+            return 65.123;
+        }
+        else {return this.latitude;}
     }
 
     /**
@@ -218,15 +240,21 @@ public class Task {
      * @return the longitude
      */
     public double getLong(){
-
-        return longitude;
-
+        if (this.longitude == null) {
+            return 120.12;
+        }
+        else {
+            return this.longitude;
+        }
     }
 
 
+
+
+
+
+
     //SETTERS AND GETTERS FOR THE BIDS OF A TASK
-
-
     /**
      * Add a bid for the task
      * @param newBid
@@ -242,7 +270,6 @@ public class Task {
      */
     public void deleteBid(Bid oldBid){
     }
-
 
     //SETTERS AND GETTERS FOR THE A PHOTO OF A TASK
 
@@ -261,16 +288,26 @@ public class Task {
         }
     }
 
+
+
+
     /**
      * Get the photo of a task
      * @return the photo of a task
      */
-    public Bitmap getPhoto(){
-        if (this.photo == null &&  this.photoString!= null){
+
+    public Bitmap getPhoto() {
+        try {
             byte[] decodeString = Base64.decode(this.photoString, Base64.DEFAULT);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ALPHA_8;
+            options.inSampleSize = 2;
             this.photo = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
+            return this.photo;
+        } catch (Exception e) {
+            Log.d((String) DEBUGTAG, "Error");
+            return null;
         }
-        return this.photo;
     }
 
 
@@ -339,10 +376,6 @@ public class Task {
      */
     public void setComplete(Boolean state){
         this.complete= state;
-    }
-
-    public Double getLocations() {
-        return locations;
     }
 }
 

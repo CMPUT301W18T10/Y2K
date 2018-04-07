@@ -112,7 +112,7 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
 
         //update it
         Task testtaskR1= new Task("Hamse", "", testUser, "requested");
-        ElasticSearchController.updateTask (testtask, testtaskR1, latitudde, longitude);
+        ElasticSearchController.updateTask (testtask, testtaskR1);
 
 
         //Check if its not in there

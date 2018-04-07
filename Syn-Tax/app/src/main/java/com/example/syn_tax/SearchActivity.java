@@ -150,7 +150,7 @@ public class SearchActivity extends AppCompatActivity {
         else{
             Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             if (location != null) {
-                longi = location.getLongitude();
+                latti = location.getLongitude();
             } else {
                 System.out.println("Cannot find current location");
 
@@ -187,53 +187,42 @@ public class SearchActivity extends AppCompatActivity {
             String myname = LoginActivity.thisuser.getUsername();
             //Filter through the tasks we got to make sure status== "requested" or "bidded"
             for (int i = 0; i < tasks.size(); i++) {
-
                 String taskname = tasks.get(i).getRequester().getUsername();
+
 
                 //check if a task is within 5 km
                 //initially we set this to false
-                boolean isWithin5km = false;
 
                 //first we need our task location and our current location
                 Double taskLongi = tasks.get(i).getLong();
+                //System.out.println(taskLongi);
+
                 Double taskLatti = tasks.get(i).getLat();
+                //System.out.println(taskLatti);
 
                 Double myLongi = getLongitude();
                 Double myLatti = getLatitude();
+                //System.out.println(myLatti);
+                //System.out.println(myLongi);
 
                 //then we compare our location with our task location
-                float[] locationResults = new float[1];
-                Location.distanceBetween(myLatti, myLongi, taskLatti, taskLongi, locationResults);
-                float distanceInMeters = locationResults[0];
+                if (distance(myLatti,myLongi,taskLatti,taskLongi)> 3.10686) {
 
-                if (distanceInMeters < 5000) {
-                    isWithin5km = true;
-                }
-
-                Log.e("s", tasks.get(i).getStatus());
-                if (!taskname.equals(myname)) {
-                    if(isWithin5km == true) {
-                        if (tasks.get(i).getStatus().equals("requested")) {
-                            results.add(tasks.get(i));
-                        } else if (tasks.get(i).getStatus().equals("bidded")) {
-                            results.add(tasks.get(i));
-                        }
-                    }
+                    Toast.makeText(SearchActivity.this,"This task is too far",Toast.LENGTH_SHORT);
+                    //System.out.println("Task is too far");
 
                 }
                 else {
-                    Toast.makeText(SearchActivity.this, "This Task is too far away", Toast.LENGTH_SHORT).show();
-
-
-
+                    //System.out.println("Task is good ");
                     if (tasks.get(i).getStatus().equals("requested")) {
                         results.add(tasks.get(i));
-                    } else if (tasks.get(i).getStatus().equals("bidded")) {
+
+                    }
+                    else if (tasks.get(i).getStatus().equals("bidded")) {
                         results.add(tasks.get(i));
                     }
 
                 }
-
 
                 specificTasks = results;
                 Log.e("dkk", specificTasks.toString());
@@ -308,6 +297,28 @@ public class SearchActivity extends AppCompatActivity {
                 getLongitude();
                 break;
         }
+    }
+
+
+    /** calculates the distance between two locations in MILES */
+    public double distance(double lat1, double lng1, double lat2, double lng2) {
+
+        double earthRadius = 3958.75; // in miles, change to 6371 for kilometer output
+
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+
+        double sindLat = Math.sin(dLat / 2);
+        double sindLng = Math.sin(dLng / 2);
+
+        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
+                * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+        double dist = earthRadius * c;
+
+        return dist; // output distance, in MILES
     }
 
 }

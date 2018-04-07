@@ -53,7 +53,7 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
         addtask.execute ( task );
 
         Task newTask = new Task ( "newAssignment", "", testuser, "requested" );
-        ElasticSearchController.updateTask ( task, newTask, latitudde, longitude);
+        ElasticSearchController.updateTask ( task, newTask);
 
         ElasticSearchController.getTasks tasks = new ElasticSearchController.getTasks ();
         tasks.execute ( "" );
