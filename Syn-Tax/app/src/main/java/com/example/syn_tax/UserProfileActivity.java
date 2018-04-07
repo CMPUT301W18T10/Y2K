@@ -62,7 +62,7 @@ public class UserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         //UNDERLINE Titles
-        TextView title = findViewById(R.id.titles);
+        TextView title = findViewById(R.id.title );
         title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         //GET THE USER INFO
@@ -103,6 +103,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     User tempUser = LoginActivity.thisuser;
                     LoginActivity.thisuser.editProfile (LoginActivity.thisuser.getUsername (), sEmail, sPhoneNumber);
                     ElasticSearchController.updateUser (tempUser, LoginActivity.thisuser);
+
 
                     done();
                 }

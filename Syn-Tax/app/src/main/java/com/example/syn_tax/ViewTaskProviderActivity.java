@@ -63,6 +63,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
     private Task task;
     private Bid oldBid;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,8 +74,6 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         status=intent.getStringExtra ( "status" );
         title= intent.getStringExtra ( "title" );
         state= intent.getStringExtra ( "sss");
-
-
 
         //get the message from the search activity
         //String message = getIntent().getStringExtra("message_key");
@@ -88,7 +87,6 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             bidTitle.setText ( "My Bid:" );
 
             if (status.equals ( "assigned" )) {
-                System.out.println("ASSIGNED");
                 task = HomeActivity.assignedPtasks.get ( pos );
                 //Set the code button to visible
                 Button code= findViewById ( R.id.codeBtn );
@@ -98,7 +96,6 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
                 task = HomeActivity.biddedPtasks.get( pos );
             }
 
-
             //Get my Bid on the task
             EditText amount= findViewById ( R.id.myAmount );
             ArrayList<Bid> allBids= new ArrayList<Bid> (  );
@@ -106,7 +103,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             ElasticSearchController.getBids bids= new ElasticSearchController.getBids ();
             bids.execute ( "", LoginActivity.thisuser.getUsername () );
             try {
-                allBids = bids.get ();
+                allBids=bids.get ();
             } catch (InterruptedException e) {
                 e.printStackTrace ();
             } catch (ExecutionException e) {
@@ -135,7 +132,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             task= SearchActivity.specificTasks.get ( pos );
         }
         if(task.getStatus ().equals ( "assigned" )){
-            EditText amount = findViewById ( R.id.myAmount );
+            EditText amount= findViewById ( R.id.myAmount );
             amount.setClickable ( false );
             amount.setFocusable ( false );
         }
@@ -191,7 +188,6 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         }
 
 
-
         Button saveBtn=findViewById ( R.id.saveBtn );
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,6 +219,11 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
                         execute.execute ( newBid );
                     }
 
+                    try {
+                        new NotifyUser().Notify(task.getRequester (), "m", task.getTitle());
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
 
                     homeBtn ();
                 }
@@ -255,7 +256,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
 
             //set title
-            TextView taskTitle = findViewById ( R.id.titles);
+            TextView taskTitle = findViewById ( R.id.title );
             taskTitle.setText ( title );
 
             //Set the username
@@ -367,6 +368,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace ();
         }
+
         Intent intent= new Intent(this, CodeProvider.class);
         startActivity(intent);
     }

@@ -16,7 +16,6 @@ package com.example.syn_tax;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,14 +110,19 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         decline.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    declineBtn(v,pos);
+                    try {
+                        declineBtn(v,pos);
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
 
 
         return data;
     }
-
 
 
 
@@ -134,16 +138,20 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         users.execute ( acceptedUser );
         userList= users.get ();
 
-
         String title= getItem ( pos ).getTask ().getTitle ();
         String desc= getItem ( pos ).getTask ().getDescription ();
         String status= "assigned";
         Double latitudde = getItem(pos).getTask().getLat();
         Double longitude = getItem(pos).getTask().getLong();
         User req= getItem ( pos ).getTask ().getRequester ();
-        Bitmap photo = getItem(pos).getTask().getPhoto();
         Task newTask= new Task(title, desc, req, status, userList.get ( 0 ),latitudde,longitude);
         ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask);
+
+
+        //call to notify to accept
+        User user= users.get().get(0);
+
+        new NotifyUser().Notify(user,"Accepted", getItem ( pos ).getTask ().getTitle ());
 
         long num=300;
         try {
@@ -158,14 +166,21 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
 
     //Delete bid
-    private void declineBtn(View v, int pos){
+    private void declineBtn(View v, int pos) throws ExecutionException, InterruptedException {
 
         //TODO: stuff for declining a bid
-        //REMOVE THE BID FROM THE TASK
-        //ELasticsearch.....
+        //REMOVE THE BID FROM THE TASK, and notify userP
+        ElasticSearchController.getUsers users= new   ElasticSearchController.getUsers();
+        users.execute(getItem ( pos ).getBidUserName());
+        User userP= users.get().get(0);
+
+        new NotifyUser().Notify(userP,"Declined", getItem ( pos ).getTask ().getTitle ());
+
+        //ELasticsearch
         ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid();
         delete.execute(getItem ( pos ).getTask ().getTitle (), getItem ( pos ).getBidUserName ());
 
+        //Wait for a bit
         long num=300;
         try {
             Thread.sleep(num);

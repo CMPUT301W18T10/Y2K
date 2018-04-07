@@ -52,6 +52,17 @@ public class User {
         notification.add(NotificationMsg);
     }
 
+    public void setNotificationMsg(String title, String message){
+        notification.add(title+": "+ message);
+    }
+    public void clearNotifications(){
+        notification.clear();
+    }
+
+    public ArrayList<String> getNotification(){
+
+        return notification;
+    }
     public String getUsername(){
         return this.username;
     }

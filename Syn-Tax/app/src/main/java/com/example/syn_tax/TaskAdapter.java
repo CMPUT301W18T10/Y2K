@@ -248,8 +248,6 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         //USER CAN EDIT AND DELETE ITS OWN TASK
         else{
 
-
-
             /**
              * DELETE or EDIT From the list of tasks when a task is CLicked on
              */

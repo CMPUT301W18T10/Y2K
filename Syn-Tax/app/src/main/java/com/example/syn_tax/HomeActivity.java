@@ -14,7 +14,6 @@
 package com.example.syn_tax;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -108,7 +107,6 @@ public class HomeActivity extends AppCompatActivity {
 
         biddedPListView = findViewById(R.id.biddedPList);
         assignedPListView = findViewById ( R.id.assignedPList );
-
     }
 
     /**
@@ -116,6 +114,7 @@ public class HomeActivity extends AppCompatActivity {
      */
     protected void onStart(){
         super.onStart();
+        new NotifyUser().Display(HomeActivity.this);
 
         //REQUESTER
         requestedRtasks= new ArrayList<Task> (  );
@@ -210,7 +209,6 @@ public class HomeActivity extends AppCompatActivity {
                 String title= allBids.get ( i ).getTask ().getTitle ();
                 String desc=allBids.get ( i ).getTask ().getDescription ();
                 User requester= allBids.get ( i ).getTask ().getRequester ();
-                Bitmap photo = allBids.get(i).getTask().getPhoto();
 
                 //getting the location ERROR HERE
                 //allBids.get ( i ).getTask ().getLong();
@@ -313,6 +311,7 @@ public class HomeActivity extends AppCompatActivity {
             //Set the status to requested if there no bid
             else if(allBids.size ()==0) {
                 Log.e("title", allTasks.get(i).getTitle());
+
                     Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(), allTasks.get(i).getRequester(), "requested", null, allTasks.get(i).getLat(), allTasks.get(i).getLong());
                     ElasticSearchController.updateTask(allTasks.get(i), tempTask);
 
@@ -392,7 +391,4 @@ public class HomeActivity extends AppCompatActivity {
         intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
         startActivity(intent);
     }
-
-
-
 }
