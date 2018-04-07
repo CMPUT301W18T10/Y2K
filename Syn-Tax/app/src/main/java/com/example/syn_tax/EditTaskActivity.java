@@ -310,7 +310,7 @@ public class EditTaskActivity extends AppCompatActivity {
                                 //TODO delete the task from the elastic search then add this one
                                 Double location = latitude+longitude;
 
-                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus, null,latitude,longitude,photo);
+                                Task tempTask = new Task ( stitle, sdesc, LoginActivity.thisuser, sstatus, null,latitude,longitude);
                                 // Check to add a photo to the task
                                 if (photoStatus == 1) {
                                     tempTask.setPhoto ( photo );

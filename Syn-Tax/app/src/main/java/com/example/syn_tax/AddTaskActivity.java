@@ -174,7 +174,7 @@ public class AddTaskActivity extends AppCompatActivity{
                     System.out.println(log);
 
                     //we store the location with the task
-                    Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus, null,lat,log,photo);
+                    Task newtask = new Task(stitle, sdescription,LoginActivity.thisuser, sstatus, null,lat,log);
                     // Check to add a photo to the task
 
                     if (photoStatus == 1) {
