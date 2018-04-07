@@ -125,7 +125,13 @@ public class BidAdapter extends ArrayAdapter<Bid> {
     }
 
 
-
+    /**
+     * Accept Button for a bid made on a task, then notify the user who made the bid
+     * @param v
+     * @param pos
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     //Set the bid username  as task provider
     private void acceptBtn(View v, int pos) throws ExecutionException, InterruptedException {
         //SET THE TASK STATUS TO ASSIGN AND REMOVE EVERY OTHER BID ON THAT TASK
@@ -165,7 +171,14 @@ public class BidAdapter extends ArrayAdapter<Bid> {
     }
 
 
-    //Delete bid
+    /**
+     * Decline button for the bid on each task per user
+     * if it is declined then notify the user associated with the declined bid
+     * @param v
+     * @param pos
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     private void declineBtn(View v, int pos) throws ExecutionException, InterruptedException {
 
         //TODO: stuff for declining a bid
@@ -192,7 +205,9 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         ((Activity)getContext()).startActivityForResult(intent,0);
     }
 
-
+    /**
+     * when a bid is clicked, open the viewTaskProvider Activity
+     */
     private void bidClicked(){
         Log.e("Bid","Bid button clicked");
         //TODO: figure out where a bid click is supposed to go
