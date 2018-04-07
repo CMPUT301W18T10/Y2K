@@ -128,7 +128,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/photoBtn"
+            android:id="@+id/photos1"
             android:layout_width="10dp"
             android:layout_height="43dp"
             android:layout_weight="0.2"
@@ -136,7 +136,7 @@
             android:src="@android:drawable/ic_menu_gallery" />
 
         <ImageView
-            android:id="@+id/photoBtn3"
+            android:id="@+id/photos2"
             android:layout_width="10dp"
             android:layout_height="43dp"
             android:layout_weight="0.2"
@@ -144,7 +144,7 @@
             android:src="@android:drawable/ic_menu_gallery" />
 
         <ImageView
-            android:id="@+id/photoBtn2"
+            android:id="@+id/photos3"
             android:layout_width="10dp"
             android:layout_height="43dp"
             android:layout_weight="0.2"

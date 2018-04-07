@@ -93,7 +93,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
                 code.setVisibility ( View.VISIBLE );
             }
             else if (status.equals ( "bidded" )) {
-                task = HomeActivity.biddedPtasks.get ( pos );
+                task = HomeActivity.biddedPtasks.get( pos );
             }
 
             //Get my Bid on the task
@@ -109,6 +109,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace ();
             }
+
 
             try{
                 for(int i=0;i<allBids.size ();i++){
@@ -158,7 +159,6 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
                 break;
             }
         }
-
 
 
 
@@ -239,11 +239,16 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
      * @throws ExecutionException
      * @throws InterruptedException
      */
+
+
+    //print the task photo get anything to print
     private void printTask() throws ExecutionException, InterruptedException  {
             Bitmap photo = task.getPhoto ();
+
             Double Olat = task.getLat();
             Double Olong =  task.getLong();
             String str_location = "Latitude:"+Olat+"\n"+"Longitude"+Olong;;
+
 
             //set title
             TextView taskTitle = findViewById ( R.id.title );
@@ -253,18 +258,19 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             TextView username = findViewById ( R.id.username );
             username.setText ( task.getRequester ().getUsername () );
 
+
             //Set the description
             TextView description = findViewById ( R.id.description );
             description.setText ( task.getDescription () );
 
             //Set the photo
-            ImageView photoview = findViewById ( R.id.photoBtn );
+            ImageView photoview = findViewById ( R.id.photos1);
             photoview.setImageBitmap ( photo );
 
-            ImageView photoview2 = findViewById(R.id.photoBtn2);
+            ImageView photoview2 = findViewById(R.id.photos2);
             photoview2.setImageBitmap(photo);
 
-            ImageView photoview3 = findViewById(R.id.photoBtn3);
+            ImageView photoview3 = findViewById(R.id.photos3);
             photoview3.setImageBitmap(photo);
 
             //Set the location
@@ -288,10 +294,12 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
     }
 
+
     /**
      * Checks if the user entered a correct value for the amount
      * @return
      */
+
     public Boolean isValid(){
         Boolean valid=true;
         EditText amount= findViewById ( R.id.myAmount );
@@ -326,6 +334,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
     }
 
 
+
     public void goLocationPicker(View view) {
         //calling the place picker function
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
@@ -339,6 +348,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 
 
     /**
