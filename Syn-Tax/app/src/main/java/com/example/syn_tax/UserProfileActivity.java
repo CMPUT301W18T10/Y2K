@@ -61,10 +61,6 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        //UNDERLINE Titles
-        TextView title = findViewById(R.id.title );
-        title.setPaintFlags(title.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
         //GET THE USER INFO
         Intent intent= getIntent();
         info= intent.getStringArrayListExtra("userInfo");

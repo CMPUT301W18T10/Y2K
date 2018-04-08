@@ -137,6 +137,8 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             amount.setFocusable(false);
         }
 
+
+
         //Get the old bid if it exists
         ArrayList<Bid> allBids = new ArrayList<Bid>();
         ElasticSearchController.getBids bids = new ElasticSearchController.getBids();
@@ -183,6 +185,28 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+        final TextView username = findViewById(R.id.username);
+        username.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+
+                ElasticSearchController.getUsers users= new ElasticSearchController.getUsers ();
+                users.execute ( username.getText ().toString () );
+                User user= null;
+                try {
+                    user = users.get().get(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace ();
+                } catch (ExecutionException e) {
+                    e.printStackTrace ();
+                }
+                Intent intent= new Intent(ViewTaskProviderActivity.this, UserProfileActivity.class);
+                intent.putExtra("userInfo", user.retrieveInfo());
+                startActivity(intent);
+            }
+        } );
 
 
         Button saveBtn = findViewById(R.id.saveBtn);

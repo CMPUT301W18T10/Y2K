@@ -206,8 +206,9 @@
 
         <Button
             android:id="@+id/codebtn"
-            android:layout_width="168dp"
-            android:layout_height="75dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
             android:background="@drawable/syn_taxblank"
             android:onClick="codeBtn"
             android:text="Add Code"

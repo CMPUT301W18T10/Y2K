@@ -86,6 +86,29 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
 
 
+        final TextView username = data.findViewById(R.id.user);
+        username.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+
+                ElasticSearchController.getUsers users= new ElasticSearchController.getUsers ();
+                users.execute ( username.getText ().toString () );
+                User user= null;
+                try {
+                    user = users.get().get(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace ();
+                } catch (ExecutionException e) {
+                    e.printStackTrace ();
+                }
+                Intent intent= new Intent(getContext (), UserProfileActivity.class);
+                intent.putExtra("userInfo", user.retrieveInfo());
+                ((Activity)getContext()).startActivityForResult(intent,0);
+            }
+        } );
+
+
+
         //click listener for a bid item
         thisBidButton.setOnClickListener ( new View.OnClickListener () {
                 @Override
@@ -150,13 +173,12 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         Double latitudde = getItem(pos).getTask().getLat();
         Double longitude = getItem(pos).getTask().getLong();
         User req= getItem ( pos ).getTask ().getRequester ();
+
         Task newTask= new Task(title, desc, req, status, userList.get ( 0 ),latitudde,longitude);
         ElasticSearchController.updateTask ( getItem ( pos ).getTask (), newTask);
 
-
         //call to notify to accept
-        User user= users.get().get(0);
-
+        User user= userList.get ( 0 );
         new NotifyUser().Notify(user,"Accepted", getItem ( pos ).getTask ().getTitle ());
 
         long num=300;

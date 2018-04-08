@@ -213,22 +213,7 @@ public class HomeActivity extends AppCompatActivity {
         for (int i=0;i<allBids.size ();i++){
             if (!allBids.get ( i ).getTask ().getStatus ().equals ( "assigned" )){
                 //Update task status
-
-                String title= allBids.get ( i ).getTask ().getTitle ();
-                String desc=allBids.get ( i ).getTask ().getDescription ();
-                User requester= allBids.get ( i ).getTask ().getRequester ();
-
-                //getting the location ERROR HERE
-                //allBids.get ( i ).getTask ().getLong();
-                //allBids.get ( i ).getTask ().getLat()
-
-                Double longitude = 65.232312;
-                Double latitudde = 117.834 ;
-
-                Task newTask= new Task(title,desc, requester,  "bidded", null, latitudde,longitude);
-                ElasticSearchController.updateTask ( allBids.get ( i ).getTask (), newTask);
-
-                allTasks.add (  newTask);
+                allTasks.add ( allBids.get ( i ).getTask ());
             }
         }
 
@@ -257,6 +242,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         for(int i=0; i<allTasksList.size ();i++){
+            Log.e("e", allTasksList.get ( i ).getStatus ());
             if(allTasksList.get ( i ).getStatus ().equals ( "assigned" )){
                 if(allTasksList.get ( i ).getProvider ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
                     taskList.add(allTasksList.get ( i ));
@@ -310,8 +296,16 @@ public class HomeActivity extends AppCompatActivity {
             //Set the status to bidded if there exist a bid on that task and its not assigned
             else if (allBids.size ()!=0 ) {
                 for (int j = 0; j < allBids.size(); j++) {
-                    Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(), allTasks.get(i).getRequester(), "bidded", null, allTasks.get(i).getLat(), allTasks.get(i).getLong());
-                    ElasticSearchController.updateTask(allTasks.get(i), tempTask);
+
+                    String title= allBids.get ( i ).getTask ().getTitle ();
+                    String desc=allBids.get ( i ).getTask ().getDescription ();
+                    User requester= allBids.get ( i ).getTask ().getRequester ();
+
+                    Double longitude = 65.232312;
+                    Double latitudde = 117.834 ;
+
+                    Task newTask= new Task(title,desc, requester,  "bidded", null, latitudde,longitude);
+                    ElasticSearchController.updateTask (allTasks.get(i), newTask);
                 }
             }
 

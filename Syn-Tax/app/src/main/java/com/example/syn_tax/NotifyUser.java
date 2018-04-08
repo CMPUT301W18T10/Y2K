@@ -99,7 +99,6 @@ public class NotifyUser extends AppCompatActivity {
         User currentUser;
         ElasticSearchController.getUsers user=new ElasticSearchController.getUsers();
         user.execute(LoginActivity.thisuser.getUsername());
-
         try {
             currentUser=user.get().get(0);
             //Display the notfication for that current user
@@ -119,9 +118,7 @@ public class NotifyUser extends AppCompatActivity {
                 toasty.show ();
             }
 
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
-        } catch (ExecutionException e1) {
+        } catch (InterruptedException | IndexOutOfBoundsException | ExecutionException e1) {
             e1.printStackTrace();
         }
     }
