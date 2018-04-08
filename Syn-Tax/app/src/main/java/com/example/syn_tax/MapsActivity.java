@@ -31,7 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * Created by hamdamare on 2018-03-24.
  */
 
-public class MapsActivity extends FragmentActivity {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final int PERMISSION_LOCATION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
@@ -42,6 +42,9 @@ public class MapsActivity extends FragmentActivity {
     Location location;
     MapFragment mapFrag = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
     Task task;
+    Double taskLat;
+    Double taskLng;
+
 
 
     /**
@@ -55,10 +58,17 @@ public class MapsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        double Lat = task.getLat();
-        double Lng = task.getLong();
-        setUpMapIfNeeded(Lat, Lng);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
 
+
+        taskLat = extras.getDouble("taskLat");
+        taskLng = extras.getDouble("taskLng");
+
+
+
+
+        setUpMapIfNeeded(taskLat, taskLng);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync((OnMapReadyCallback) this);
 
@@ -73,7 +83,6 @@ public class MapsActivity extends FragmentActivity {
      * @param Lng
      */
     private void setUpMapIfNeeded(double Lat, double Lng) {
-
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
 
@@ -99,5 +108,34 @@ public class MapsActivity extends FragmentActivity {
         }
     }
 
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (mMap == null) {
+
+            Uri gmmIntentUri = Uri.parse("geo:<" + String.valueOf(taskLat) + ">,<" + String.valueOf(taskLng) + ">?q=<" + String.valueOf(taskLat) + ">,<" + String.valueOf(taskLng) + ">(Item Location)");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
+
+            // Check if we were successful in obtaining the map.
+            if (mMap != null) {
+
+                mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+
+                    @Override
+                    public void onMyLocationChange(Location arg0) {
+                        // TODO Auto-generated method stub
+
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+                    }
+                });
+
+            }
+        }
+    }
+
 }
+
 

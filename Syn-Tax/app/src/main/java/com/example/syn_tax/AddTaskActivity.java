@@ -18,7 +18,6 @@
 
 package com.example.syn_tax;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -339,11 +338,11 @@ public class AddTaskActivity extends AppCompatActivity{
         //Make sure the result was okay
         //Make sure that we actually have an image
         photoView = findViewById(R.id.photoView);
-        photoView2 = findViewById(R.id.photoView2);
-        photoView3 = findViewById(R.id.photoView3);
+        //photoView2 = findViewById(R.id.photoView2);
+        //photoView3 = findViewById(R.id.photoView3);
         if (requestCode == RESULT_GET_IMAGE && resultCode == RESULT_OK && data != null) {
             //uniform resource indicator - shows us the address of the image tha has been selected
-            ClipData clipData = data.getClipData();
+            /*ClipData clipData = data.getClipData();
 
             if(clipData != null) {
                 for(int i = 0; i < clipData.getItemCount(); i++) {
@@ -361,7 +360,7 @@ public class AddTaskActivity extends AppCompatActivity{
                     }
                 }
 
-            }
+            }*/
 
             Uri imageUri = data.getData();
             photoView.setImageURI(imageUri);

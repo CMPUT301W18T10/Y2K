@@ -267,10 +267,11 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
 
             //set title
-            TextView taskTitle = findViewById ( R.id.title );
-            taskTitle.setText ( title );
+           TextView taskTitle = findViewById ( R.id.titles );
+           taskTitle.setText ( title );
 
-            //Set the username
+
+        //Set the username
             TextView username = findViewById ( R.id.username );
             username.setText ( task.getRequester ().getUsername () );
 

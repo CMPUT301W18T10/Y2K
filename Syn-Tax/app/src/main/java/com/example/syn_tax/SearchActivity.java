@@ -31,7 +31,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -66,10 +65,14 @@ public class SearchActivity extends AppCompatActivity {
     private SearchAdapter searchAdapter;
     public static final String POINTER = "Task_Position";
     static final int REQUEST_LOCATION = 1;
+    private Button getMap;
+    public Double taskLatti;
+    public Double taskLongi;
 
 
 
     LocationManager locationManager;
+    private boolean TaskDist = false;
 
     @Override
     /**
@@ -79,6 +82,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        getMap = (Button) findViewById(R.id.map_btn);
         getLatitude();
         //getLongitude();
 
@@ -176,12 +180,14 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
+
+
     /**
      * User searches passing in a keyword to match a task title
      *
      * @param keywords String
      */
-    public void searching(String keywords) throws ExecutionException, InterruptedException {
+    public boolean searching(String keywords) throws ExecutionException, InterruptedException {
 
         //DO SOMETHING
         Log.e("s", keywords);
@@ -204,10 +210,10 @@ public class SearchActivity extends AppCompatActivity {
                 //initially we set this to false
 
                 //first we need our task location and our current location
-                Double taskLongi = tasks.get(i).getLong();
+                taskLongi = tasks.get(i).getLong();
                 //System.out.println(taskLongi);
 
-                Double taskLatti = tasks.get(i).getLat();
+                taskLatti = tasks.get(i).getLat();
                 //System.out.println(taskLatti);
 
                 Double myLongi = getLongitude();
@@ -216,12 +222,19 @@ public class SearchActivity extends AppCompatActivity {
                 //System.out.println(myLongi);
 
                 //then we compare our location with our task location
-                if (distance(myLatti,myLongi,taskLatti,taskLongi)> 3.10686 || distance(myLatti,myLongi,taskLatti,taskLongi)<= 3.10686) {
+                if (distance(myLatti,myLongi,taskLatti,taskLongi)> 3.10686) {
 
-                    Toast.makeText(SearchActivity.this,"This task is too far",Toast.LENGTH_SHORT);
-                    //System.out.println("Task is too far");
+                    //System.out.println("Task is bad");
+                    if (tasks.get(i).getStatus().equals("requested")) {
+                        results.add(tasks.get(i));
 
+                    } else if (tasks.get(i).getStatus().equals("bidded")) {
+                        results.add(tasks.get(i));
+                    }
+                    TaskDist = false;
                 }
+
+
                 else {
                     //System.out.println("Task is good ");
                     if (tasks.get(i).getStatus().equals("requested")) {
@@ -231,6 +244,7 @@ public class SearchActivity extends AppCompatActivity {
                     else if (tasks.get(i).getStatus().equals("bidded")) {
                         results.add(tasks.get(i));
                     }
+                    TaskDist = true;
 
                 }
 
@@ -244,7 +258,33 @@ public class SearchActivity extends AppCompatActivity {
                 listOfTasks.setAdapter(searchAdapter);
             }
         }
+        return TaskDist;
     }
+
+
+
+    public void getTaskMap(View view) throws ExecutionException, InterruptedException {
+        Intent intent = new Intent(this, MapsActivity.class);
+        Bundle extras = new Bundle();
+        if(taskLatti!= null && taskLongi != null && searching("s") == true) {
+            extras.putDouble("taskLat",taskLatti);
+            extras.putDouble("taskLng",taskLongi);
+            intent.putExtras(extras);
+            startActivity(intent);
+
+        }
+
+        else {
+            taskLatti = 54.032485921934;
+            taskLongi = 115.40245835819;
+            extras.putDouble("taskLat",taskLatti);
+            extras.putDouble("taskLng",taskLongi);
+            intent.putExtras(extras);
+            startActivity(intent);
+        }
+    }
+
+
 
 
     /**

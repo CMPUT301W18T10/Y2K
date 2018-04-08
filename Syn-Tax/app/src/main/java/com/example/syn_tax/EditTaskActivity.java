@@ -13,7 +13,6 @@
 
 package com.example.syn_tax;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -597,7 +596,7 @@ public class EditTaskActivity extends AppCompatActivity {
         TextView editlocation= findViewById ( R.id.tvlocations );
         if (requestCode == RESULT_GET_IMAGE && resultCode == RESULT_OK && data != null) {
             //uniform resource indicator - shows us the address of the image tha has been selected
-            ClipData clipData = data.getClipData();
+            /*ClipData clipData = data.getClipData();
 
             if(clipData != null) {
                 for(int i = 0; i < clipData.getItemCount(); i++) {
@@ -616,7 +615,7 @@ public class EditTaskActivity extends AppCompatActivity {
                     }
                 }
 
-            }
+            }*/
 
             Uri imageUri = data.getData();
             editphoto.setImageURI(imageUri);
