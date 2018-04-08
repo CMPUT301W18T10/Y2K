@@ -138,11 +138,15 @@ public class CodeProvider extends AppCompatActivity {
      * @param view
      * sends the code to the provider
      */
+
     public void send(View view) {
         Intent intent = new Intent(CodeProvider.this,FinishedCodesRequester.class);
+        Intent intent2 = new Intent(this,HomeActivity.class);
         intent.putExtra("code",FILE_NAME);
+        System.out.println(FILE_NAME);
         Toast.makeText(CodeProvider.this,"CODE SENT!",Toast.LENGTH_SHORT);
         startActivity(intent);
+        startActivity(intent2);
 
     }
 

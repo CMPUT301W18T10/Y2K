@@ -411,7 +411,7 @@ public class EditTaskActivity extends AppCompatActivity {
     public void editPhoto() {
         //invoke image gallery using an implicit intent
         Intent galleryIntent = new Intent(Intent.ACTION_PICK);
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        //galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
 
         //where do we want to find this data
         File photoDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -439,8 +439,8 @@ public class EditTaskActivity extends AppCompatActivity {
             Intent intent = new Intent(EditTaskActivity.this,FinishedCodesRequester.class);
             startActivity(intent);
         }
-
     }
+
 
     /**
      *

@@ -34,7 +34,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 public class FinishedCodesRequester extends AppCompatActivity {
-    private static final String FILE_NAME = null;
+    private static String FILE_NAME = "code.txt";
     private static final Object DEBUGTAG = "JWP";
     String e1;
 
@@ -61,7 +61,8 @@ public class FinishedCodesRequester extends AppCompatActivity {
     public void loadSavedFile() {
         //get the filename
         Intent intent = getIntent();
-        String FILE_NAME = intent.getStringExtra("code");
+        //FILE_NAME = intent.getStringExtra("code");
+        System.out.println(FILE_NAME);
         try {
             FileInputStream fis = openFileInput(FILE_NAME);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
@@ -79,7 +80,6 @@ public class FinishedCodesRequester extends AppCompatActivity {
         } catch (Exception e) {
             Log.d((String) DEBUGTAG, "Unable to read file");
         }
-
 
 
     }

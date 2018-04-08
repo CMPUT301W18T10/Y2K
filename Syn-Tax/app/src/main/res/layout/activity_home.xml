@@ -203,13 +203,17 @@
         android:showDividers="middle"
         android:weightSum="1">
 
-        <ListView
-            android:id="@+id/noneList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:divider="#2e2e2e"
-            android:dividerHeight="1dp"/>
+
+        <Button
+            android:id="@+id/codebtn"
+            android:layout_width="168dp"
+            android:layout_height="75dp"
+            android:background="@drawable/syn_taxblank"
+            android:onClick="codeBtn"
+            android:text="Add Code"
+            android:textColor="@color/colorAccent"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/assignedRList"
@@ -218,9 +222,11 @@
             android:layout_weight="0.5"
             android:divider="#2e2e2e"
             android:dividerHeight="1dp"
+
             android:scrollbars="vertical">
 
         </ListView>
+
     </LinearLayout>
 
     <LinearLayout

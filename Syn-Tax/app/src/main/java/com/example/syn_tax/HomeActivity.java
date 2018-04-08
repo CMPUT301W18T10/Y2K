@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -70,6 +71,7 @@ public class HomeActivity extends AppCompatActivity {
     private ListView requestedRListView;
     private ListView biddedRListView;
     private ListView assignedRListView;
+    private String status;
 
 
 
@@ -107,6 +109,7 @@ public class HomeActivity extends AppCompatActivity {
 
         biddedPListView = findViewById(R.id.biddedPList);
         assignedPListView = findViewById ( R.id.assignedPList );
+
     }
 
     /**
@@ -158,8 +161,10 @@ public class HomeActivity extends AppCompatActivity {
             } else if (tasksR.get ( i ).getStatus ().equals ( "bidded" )) {
                 biddedRtasks.add ( tasksR.get ( i ) );
             } else if (tasksR.get ( i ).getStatus ().equals ( "assigned" )) {
+
                 assignedRtasks.add ( tasksR.get ( i ) );
             }
+            status = tasksR.get(i).getStatus();
         }
 
         //Provider
@@ -393,5 +398,31 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent= new Intent(this, UserProfileActivity.class);
         intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
         startActivity(intent);
+    }
+
+
+
+    /**
+     * User is directed to the code page to write code
+     * @param view
+     */
+    public void codeBtn(View view){
+        //Wait a bit for changes to sync
+        if (status == "assigned") {
+            long num = 300;
+            try {
+                Thread.sleep(num);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Intent intent = new Intent(this, CodeProvider.class);
+
+            startActivity(intent);
+        }
+
+        else {
+            Toast.makeText(HomeActivity.this,"You have no assigned tasks",Toast.LENGTH_LONG);
+        }
     }
 }
