@@ -333,6 +333,7 @@ public class AddTaskActivity extends AppCompatActivity{
      * @param data
      */
     @Override
+    //app keeps crashing with more than one photo NO SPACE!!! so i just set one
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //make sure the gallery intent actually called our method
         //Make sure the result was okay
