@@ -230,7 +230,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                 btn.setPositiveButton ( "EDIT", new DialogInterface.OnClickListener () {
                     @Override
                     /**
-                     * VIEW the task
+                     * Edit the task
                      */
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent ( getContext (), c );

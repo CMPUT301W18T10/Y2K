@@ -211,13 +211,14 @@ public class HomeActivity extends AppCompatActivity {
 
         //Grab all the bids that the task associated to the bid is not assigned
         for (int i=0;i<allBids.size ();i++){
-            if (!allBids.get ( i ).getTask ().getStatus ().equals ( "assigned" )){
+            Log.e("status", allBids.get ( i ).getTask ().getStatus ());
+            if (allBids.get ( i ).getTask ().getProvider ()==null){
                 //Update task status
                 allTasks.add ( allBids.get ( i ).getTask ());
             }
         }
 
-        Log.e("bidsP", allBids.toString ());
+        Log.e("bidsP", allTasks.toString ());
         //Set the bidded Provider tasks
         biddedPtasks=allTasks;
     }
@@ -242,8 +243,8 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         for(int i=0; i<allTasksList.size ();i++){
-            Log.e("e", allTasksList.get ( i ).getStatus ());
-            if(allTasksList.get ( i ).getStatus ().equals ( "assigned" )){
+            if(allTasksList.get ( i ).getProvider ()!=null){
+                Log.e("e", allTasksList.get ( i ).getStatus ());
                 if(allTasksList.get ( i ).getProvider ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
                     taskList.add(allTasksList.get ( i ));
                 }
@@ -295,17 +296,20 @@ public class HomeActivity extends AppCompatActivity {
 
             //Set the status to bidded if there exist a bid on that task and its not assigned
             else if (allBids.size ()!=0 ) {
+                Log.e("status", allBids.get ( i ).getTask ().getStatus ());
                 for (int j = 0; j < allBids.size(); j++) {
 
-                    String title= allBids.get ( i ).getTask ().getTitle ();
-                    String desc=allBids.get ( i ).getTask ().getDescription ();
-                    User requester= allBids.get ( i ).getTask ().getRequester ();
+                    String title= allBids.get ( j ).getTask ().getTitle ();
+                    String desc=allBids.get ( j ).getTask ().getDescription ();
+                    User requester= allBids.get ( j ).getTask ().getRequester ();
 
                     Double longitude = 65.232312;
                     Double latitudde = 117.834 ;
 
                     Task newTask= new Task(title,desc, requester,  "bidded", null, latitudde,longitude);
                     ElasticSearchController.updateTask (allTasks.get(i), newTask);
+
+                    Log.e("status", allBids.get ( j).getTask ().getStatus ());
                 }
             }
 
@@ -320,7 +324,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             //Wait a bit for changes to sync
-            long num=300;
+            long num=200;
             try {
                 Thread.sleep(num);
             } catch (InterruptedException e) {

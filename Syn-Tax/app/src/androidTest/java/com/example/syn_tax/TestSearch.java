@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by Hamsemare on 2018-02-21.
  */
@@ -27,7 +29,7 @@ public class TestSearch extends ActivityInstrumentationTestCase2{
     /**
      * Test when no keywords entered to search for tasks.
      */
-    public void testWithNoWords(){
+    public void testWithNoWords() throws ExecutionException, InterruptedException {
         if (Looper.myLooper() == null){
             Looper.prepare();
         }
@@ -44,6 +46,10 @@ public class TestSearch extends ActivityInstrumentationTestCase2{
         catch (RuntimeException e){
             Log.i("Error", "Error occured when searching for tasks.");
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
         }
     }
 
@@ -66,6 +72,10 @@ public class TestSearch extends ActivityInstrumentationTestCase2{
         } catch (RuntimeException e) {
             Log.e("Error", "Error occured when searching for tasks.");
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
         }
     }
 }

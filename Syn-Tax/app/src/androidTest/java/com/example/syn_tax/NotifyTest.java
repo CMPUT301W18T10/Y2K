@@ -28,9 +28,9 @@ public class NotifyTest extends ActivityInstrumentationTestCase2{
         User UserP2= new User("aidan", "t@g2.ca", "910-1000-0100");
 
 
-        Task task= new Task("test", "testing add photo", UserR, "requested");
-        Task task1= new Task("test", "testing add photo", UserR1,"requested");
-        Task task2= new Task("test", "testing add photo", UserR2,"requested");
+        Task task= new Task("test", "testing add photo", UserR, "requested",  null, 0.0, 0.0);
+        Task task1= new Task("test", "testing add photo", UserR1,"requested",  null, 0.0, 0.0);
+        Task task2= new Task("test", "testing add photo", UserR2,"requested",  null, 0.0, 0.0);
 
         task.setProvider ( UserP );
 

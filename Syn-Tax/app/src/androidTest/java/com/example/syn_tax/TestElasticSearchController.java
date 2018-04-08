@@ -48,11 +48,11 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
      */
     public void testUpdateTask() throws ExecutionException, InterruptedException {
         User testuser = new User ( "hamsemare", "test@g.com", "000-0000-0000" );
-        Task task = new Task ( "Assignment", "Complete a coding project", testuser, "requested" );
+        Task task = new Task ( "Assignment", "Complete a coding project", testuser, "requested",  null, 0.0, 0.0);
         ElasticSearchController.addTasks addtask = new ElasticSearchController.addTasks ();
         addtask.execute ( task );
 
-        Task newTask = new Task ( "newAssignment", "", testuser, "requested" );
+        Task newTask = new Task ( "newAssignment", "", testuser, "requested",  null, 0.0, 0.0 );
         ElasticSearchController.updateTask ( task, newTask);
 
         ElasticSearchController.getTasks tasks = new ElasticSearchController.getTasks ();
@@ -132,7 +132,7 @@ public class TestElasticSearchController extends ActivityInstrumentationTestCase
     public void testAddTask() throws ExecutionException, InterruptedException {
         User testuser = new User ( "hamsemare", "test@g.com", "000-0000-0000" );
 
-        Task task = new Task ( "Assignment", "Complete a coding project", testuser, "requested" );
+        Task task = new Task ( "Assignment", "Complete a coding project", testuser, "requested",  null, 0.0, 0.0 );
 
         ElasticSearchController.addTasks addtask = new ElasticSearchController.addTasks ();
         addtask.execute ( task );

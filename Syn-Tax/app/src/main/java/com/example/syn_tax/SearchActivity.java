@@ -222,40 +222,39 @@ public class SearchActivity extends AppCompatActivity {
                 //System.out.println(myLongi);
 
                 //then we compare our location with our task location
-                if (distance(myLatti,myLongi,taskLatti,taskLongi)> 3.10686) {
+                if(!tasks.get ( i ).getRequester ().getUsername ().equals (
+                        LoginActivity.thisuser.getUsername () )) {
+                    if (distance ( myLatti, myLongi, taskLatti, taskLongi ) > 3.10686) {
 
-                    //System.out.println("Task is bad");
-                    if (tasks.get(i).getStatus().equals("requested")) {
-                        results.add(tasks.get(i));
+                        //System.out.println("Task is bad");
+                        if (tasks.get ( i ).getStatus ().equals ( "requested" )) {
+                            results.add ( tasks.get ( i ) );
 
-                    } else if (tasks.get(i).getStatus().equals("bidded")) {
-                        results.add(tasks.get(i));
+                        } else if (tasks.get ( i ).getStatus ().equals ( "bidded" )) {
+                            results.add ( tasks.get ( i ) );
+                        }
+                        TaskDist = false;
+                    } else {
+                        //System.out.println("Task is good ");
+                        if (tasks.get ( i ).getStatus ().equals ( "requested" )) {
+                            results.add ( tasks.get ( i ) );
+
+                        } else if (tasks.get ( i ).getStatus ().equals ( "bidded" )) {
+                            results.add ( tasks.get ( i ) );
+                        }
+                        TaskDist = true;
+
                     }
-                    TaskDist = false;
-                }
-
-
-                else {
-                    //System.out.println("Task is good ");
-                    if (tasks.get(i).getStatus().equals("requested")) {
-                        results.add(tasks.get(i));
-
-                    }
-                    else if (tasks.get(i).getStatus().equals("bidded")) {
-                        results.add(tasks.get(i));
-                    }
-                    TaskDist = true;
-
                 }
 
                 specificTasks = results;
-                Log.e("dkk", specificTasks.toString());
+                Log.e ( "dkk", specificTasks.toString () );
 
                 //CALL TO SET THE ADAPTER FOR THE LIST VIEW
                 //Set the adapter
-                searchAdapter = new SearchAdapter(this, specificTasks);
+                searchAdapter = new SearchAdapter ( this, specificTasks );
                 //Set the list views
-                listOfTasks.setAdapter(searchAdapter);
+                listOfTasks.setAdapter ( searchAdapter );
             }
         }
         return TaskDist;

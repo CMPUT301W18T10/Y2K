@@ -181,7 +181,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         User user= userList.get ( 0 );
         new NotifyUser().Notify(user,"Accepted", getItem ( pos ).getTask ().getTitle ());
 
-        long num=300;
+        long num=500;
         try {
             Thread.sleep(num);
         } catch (InterruptedException e) {

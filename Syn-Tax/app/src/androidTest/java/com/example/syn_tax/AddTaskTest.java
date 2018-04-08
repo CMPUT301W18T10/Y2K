@@ -43,7 +43,7 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
         String photoname = "photoname";
 
         User testuser = new User("hamare","test@g.ca","000-000-0000");
-        Task task= new Task(title, description, testuser, status);
+        Task task= new Task(title, description, testuser, status,  null, 0.0, 0.0);
 
         //Add it
         ElasticSearchController.addTasks addtasks= new ElasticSearchController.addTasks ();
@@ -74,7 +74,7 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
      */
     public void testGetTask() throws ExecutionException, InterruptedException {
         User testUser = new User("hamda", "test@g.ca", "000-000-0000");
-        Task testtaskR1 = new Task("hamda", "desc", testUser, "requested");
+        Task testtaskR1 = new Task("hamda", "desc", testUser, "requested",  null, 0.0, 0.0);
 
         //Add it
         ElasticSearchController.addTasks addtasks= new ElasticSearchController.addTasks ();
@@ -104,14 +104,14 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
      */
     public void testEditTask() throws ExecutionException, InterruptedException {
         User testUser = new User("hamda", "test@g.ca", "000-000-0000");
-        Task testtask = new Task("hamda", "desc", testUser, "requested");
+        Task testtask = new Task("hamda", "desc", testUser, "requested",  null, 0.0, 0.0);
 
         //Add it
         ElasticSearchController.addTasks addtasks= new ElasticSearchController.addTasks ();
         addtasks.execute ( testtask);
 
         //update it
-        Task testtaskR1= new Task("Hamse", "", testUser, "requested");
+        Task testtaskR1= new Task("Hamse", "", testUser, "requested",  null, 0.0, 0.0);
         ElasticSearchController.updateTask (testtask, testtaskR1);
 
 
@@ -139,25 +139,25 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
     public void testStatus(){
 
         User testUser = new User("Oj","test@gmail.com", "999-999-999");
-        Task testTask = new Task("get status","get status",testUser, "requested");
+        Task testTask = new Task("get status","get status",testUser, "requested",  null, 0.0, 0.0);
 
         testTask.setStatus("Bidded");
         assertEquals("Bidded", testTask.getStatus());
 
         User testUser2 = new User("Oj","test@gmail.com", "999-999-999");
-        Task testTask2 = new Task("get status","get status",testUser2, "requested");
+        Task testTask2 = new Task("get status","get status",testUser2, "requested",  null, 0.0, 0.0);
 
         testTask2.setStatus("Assigned");
         assertEquals("Assigned", testTask2.getStatus());
 
         User testUser3 = new User("Oj","test@gmail.com", "999-999-999");
-        Task testTask3 = new Task("get status","get status",testUser3, "requested");
+        Task testTask3 = new Task("get status","get status",testUser3, "requested",  null, 0.0, 0.0);
 
         testTask3.setStatus("Done");
         assertEquals("Done", testTask3.getStatus());
 
         User testUser4 = new User("Oj","test@gmail.com", "999-999-999");
-        Task testTask4 = new Task("get status","get status",testUser4, "requested");
+        Task testTask4 = new Task("get status","get status",testUser4, "requested",  null, 0.0, 0.0);
 
         testTask4.setStatus("Requested");
         assertEquals("Requested", testTask4.getStatus());

@@ -131,6 +131,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
             pos = Integer.parseInt(intent.getStringExtra(SearchActivity.POINTER));
             task = SearchActivity.specificTasks.get(pos);
         }
+
         if (task.getStatus().equals("assigned")) {
             EditText amount = findViewById(R.id.myAmount);
             amount.setClickable(false);
@@ -347,7 +348,7 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
     public void homeBtn() {
 
         //Wait a bit for changes to sync
-        long num = 300;
+        long num = 500;
         try {
             Thread.sleep(num);
         } catch (InterruptedException e) {
