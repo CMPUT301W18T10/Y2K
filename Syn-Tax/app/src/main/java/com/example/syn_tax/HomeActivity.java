@@ -291,20 +291,9 @@ public class HomeActivity extends AppCompatActivity {
                     deleteBid.execute ( allBids.get ( j ).getTask ().getTitle (), allBids.get ( j ).getBidUserName () );
                 }
             }
-
-
-            //Set the status to assigned if provider for that task is not null
-            else if(allTasks.get ( i ).getProvider() != null ) {
-                    Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(),
-                            allTasks.get(i).getRequester(), "assigned", allTasks.get(i).getProvider(),
-                            allTasks.get(i).getLat(), allTasks.get(i).getLong());
-                    ElasticSearchController.updateTask(allTasks.get(i), tempTask);
-
-            }
-
-
+            
             //Set the status to bidded if there exist a bid on that task and its not assigned
-            else if (allBids.size ()!=0 ) {
+            else if (allBids.size ()!=0  && allTasks.get ( i ).getProvider() == null ) {
                 for (int j = 0; j < allBids.size(); j++) {
                     Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(),
                             allTasks.get(i).getRequester(), "bidded", null,

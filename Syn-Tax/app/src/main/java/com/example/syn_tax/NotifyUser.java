@@ -67,17 +67,18 @@ public class NotifyUser extends AppCompatActivity {
     public void Notify(User user ,String flag, String taskn) throws ExecutionException{
         User NotifiedUser = user;
         String title= taskn;
+        String message;
         if (flag == "Declined"){
-            String message = "Sorry, Your Bid Has Been Declined!";
+            message = "Sorry, Your Bid Has Been Declined!";
         }
         else if (flag == "Accepted"){
-            String message = "Congratulations, Your Bid Has Been Accepted!";
+            message = "Congratulations, Your Bid Has Been Accepted!";
         }
         else if (flag== "Coded"){
-            String message = "Code for Task Is Now Available!";
+            message = "Code for Task Is Now Available!";
         }
         else{
-            String message= "Bid for Your Task Has Been Placed";
+            message= "Bid for Your Task Has Been Placed";
         }
 
         //Wait a bit to update
