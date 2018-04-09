@@ -24,12 +24,12 @@
         "source": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/res/drawable/ic_notifications_black_24dp.xml"
     },
     {
-        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout-v21_notification_template_icon_group.xml.flat",
-        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/res/layout-v21/notification_template_icon_group.xml"
-    },
-    {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-xhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout-v21_notification_template_icon_group.xml.flat",
+        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/res/layout-v21/notification_template_icon_group.xml"
     },
     {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_places_ic_search.png.flat",
@@ -56,12 +56,12 @@
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-xxxhdpi-v4/abc_ic_star_half_black_16dp.png"
     },
     {
-        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/color_common_google_signin_btn_text_dark.xml.flat",
-        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/res/color/common_google_signin_btn_text_dark.xml"
-    },
-    {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout_activity_login.xml.flat",
         "source": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/color_common_google_signin_btn_text_dark.xml.flat",
+        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/res/color/common_google_signin_btn_text_dark.xml"
     },
     {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout_design_bottom_sheet_dialog.xml.flat",
@@ -88,12 +88,12 @@
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/res/drawable-mdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
-        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
-        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
-    },
-    {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_background_transition_holo_dark.xml.flat",
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
+        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
@@ -220,12 +220,12 @@
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout_select_dialog_singlechoice_material.xml.flat",
-        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/layout/select_dialog_singlechoice_material.xml"
-    },
-    {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable_abc_vector_test.xml.flat",
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable/abc_vector_test.xml"
+    },
+    {
+        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout_select_dialog_singlechoice_material.xml.flat",
+        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/layout/select_dialog_singlechoice_material.xml"
     },
     {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable_abc_btn_default_mtrl_shape.xml.flat",
@@ -248,12 +248,12 @@
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png"
     },
     {
-        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_design_ic_visibility_off.png.flat",
-        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/res/drawable-hdpi-v4/design_ic_visibility_off.png"
-    },
-    {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/anim-v21_design_bottom_sheet_slide_out.xml.flat",
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/res/anim-v21/design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_design_ic_visibility_off.png.flat",
+        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/res/drawable-hdpi-v4/design_ic_visibility_off.png"
     },
     {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout_abc_alert_dialog_button_bar_material.xml.flat",
@@ -280,12 +280,12 @@
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d2b84def7fa2a80df582c845fd0eac6d/res/layout/notification_template_big_media_custom.xml"
     },
     {
-        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout_abc_screen_simple.xml.flat",
-        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/layout/abc_screen_simple.xml"
-    },
-    {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/anim_tooltip_enter.xml.flat",
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/anim/tooltip_enter.xml"
+    },
+    {
+        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout_abc_screen_simple.xml.flat",
+        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/layout/abc_screen_simple.xml"
     },
     {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
@@ -316,12 +316,12 @@
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/res/drawable/common_google_signin_btn_icon_light_normal.xml"
     },
     {
-        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
-        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-mdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
-    },
-    {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout-v21_place_autocomplete_fragment.xml.flat",
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-12.0.1.aar/93940caab4be98add588e343715fd919/res/layout-v21/place_autocomplete_fragment.xml"
+    },
+    {
+        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
+        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-mdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
     },
     {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/layout_place_autocomplete_item_prediction.xml.flat",
@@ -348,12 +348,12 @@
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png"
     },
     {
-        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
-        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-hdpi-v4/abc_ic_star_half_black_36dp.png"
+    },
+    {
+        "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
+        "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_star_black_48dp.png.flat",

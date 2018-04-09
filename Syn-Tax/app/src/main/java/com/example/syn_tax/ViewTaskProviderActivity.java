@@ -244,9 +244,11 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
                         //add bid
                         Bid newBid = new Bid ( LoginActivity.thisuser.getUsername (), dAmount, task, task.getTitle (), task.getRequester ().getUsername () );
 
+                        Boolean ss=false;
                         //or update the bid
                         if (oldBid != null) {
                             ElasticSearchController.updateBid ( oldBid, newBid );
+                            ss=true;
                         }
 
                         //add bid because i have never bidded on this task before
@@ -264,7 +266,14 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
                         ElasticSearchController.updateTask ( task, tempTask );
 
                         try {
-                            new NotifyUser ().Notify ( task.getRequester (), "m", task.getTitle () );
+                            String string;
+                            if(ss){
+                                string="m";
+                            }
+                            else{
+                                string="j";
+                            }
+                            new NotifyUser ().Notify ( task.getRequester (), string, task.getTitle () );
                         } catch (ExecutionException e) {
                             e.printStackTrace ();
                         }

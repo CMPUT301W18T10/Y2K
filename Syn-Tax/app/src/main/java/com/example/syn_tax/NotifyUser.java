@@ -78,8 +78,11 @@ public class NotifyUser extends AppCompatActivity {
         else if (flag== "Coded"){
             message = "Code for Task Is Now Available!";
         }
+        else if(flag=="m"){
+            message= "Bid for Your Task Has Been Updates!";
+        }
         else{
-            message= "Bid for Your Task Has Been Placed";
+            message= "Bid for Your Task Has Been Placed!";
         }
 
         //Wait a bit to update

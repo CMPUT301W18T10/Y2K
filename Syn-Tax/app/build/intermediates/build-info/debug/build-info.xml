@@ -2,56 +2,47 @@
 <instant-run
     abi="x86"
     api-level="27"
-    build-mode="FULL"
+    build-mode="COLD"
     density="hdpi"
     format="10"
     plugin-version="3.1.0"
-    timestamp="1523307034116"
+    timestamp="1523308858375"
     token="-8152521086947065475"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="20035" />
+        duration="5103" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="1056" />
+        duration="0" />
     <task
         name="verifier"
-        duration="268" />
+        duration="0" />
 
     <artifact
         location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
         type="SPLIT" />
     <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
+        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
         type="SPLIT" />
     <artifact
         location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
         type="SPLIT" />
     <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
+        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
         type="SPLIT" />
     <artifact
         location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
         type="SPLIT" />
     <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
-        type="SPLIT" />
-    <artifact
         location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
+        type="SPLIT" />
+    <artifact
+        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
         type="SPLIT" />
     <artifact
         location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
@@ -59,9 +50,6 @@
     <artifact
         location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
         type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
-        type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
@@ -106,6 +94,38 @@
         <artifact
             location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
             type="SPLIT_MAIN" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1523308858375"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
+            type="SPLIT" />
     </build>
 
 </instant-run>

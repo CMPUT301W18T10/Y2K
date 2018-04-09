@@ -739,6 +739,21 @@
             ]
         },
         {
+            "outputFile": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/values-night-v8_values-night-v8.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593",
+                        "endColumns": "69,83,83,95,101,101,93",
+                        "endOffsets": "120,204,288,384,486,588,682"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/values-ca_values-ca.arsc.flat",
             "map": [
                 {
@@ -807,21 +822,6 @@
                         "startOffsets": "2094,2201,2385,2514,2625,2834,2963,3116,3447,3677,3788,3978,4111,4334,4522,4617,4715",
                         "endColumns": "106,183,128,110,208,128,152,136,229,110,189,132,222,187,94,97,115",
                         "endOffsets": "2196,2380,2509,2620,2829,2958,3111,3248,3672,3783,3973,4106,4329,4517,4612,4710,4826"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/values-night-v8_values-night-v8.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/values-night-v8/values-night-v8.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,125,209,293,389,491,593",
-                        "endColumns": "69,83,83,95,101,101,93",
-                        "endOffsets": "120,204,288,384,486,588,682"
                     }
                 }
             ]
@@ -1232,49 +1232,6 @@
             ]
         },
         {
-            "outputFile": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/values-v26_values-v26.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/values-v26/values-v26.xml",
-                    "from": {
-                        "startLines": "2,3,4,8,12,16",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,130,217,431,657,896",
-                        "endLines": "2,3,7,11,15,16",
-                        "endColumns": "74,86,12,12,12,92",
-                        "endOffsets": "125,212,426,652,891,984"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,8,12,20",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,130,217,431,657,1140",
-                        "endLines": "2,3,7,11,15,20",
-                        "endColumns": "74,86,12,12,12,92",
-                        "endOffsets": "125,212,426,652,891,1228"
-                    }
-                },
-                {
-                    "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/res/values-v26/values-v26.xml",
-                    "from": {
-                        "startLines": "2,6",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,299",
-                        "endLines": "5,6",
-                        "endColumns": "12,96",
-                        "endOffsets": "294,391"
-                    },
-                    "to": {
-                        "startLines": "16,21",
-                        "startColumns": "4,4",
-                        "startOffsets": "896,1233",
-                        "endLines": "19,21",
-                        "endColumns": "12,96",
-                        "endOffsets": "1135,1325"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/values-da_values-da.arsc.flat",
             "map": [
                 {
@@ -1343,6 +1300,49 @@
                         "startOffsets": "3175",
                         "endColumns": "185",
                         "endOffsets": "3356"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/res/merged/debug/values-v26_values-v26.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/values-v26/values-v26.xml",
+                    "from": {
+                        "startLines": "2,3,4,8,12,16",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,130,217,431,657,896",
+                        "endLines": "2,3,7,11,15,16",
+                        "endColumns": "74,86,12,12,12,92",
+                        "endOffsets": "125,212,426,652,891,984"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,8,12,20",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,130,217,431,657,1140",
+                        "endLines": "2,3,7,11,15,20",
+                        "endColumns": "74,86,12,12,12,92",
+                        "endOffsets": "125,212,426,652,891,1228"
+                    }
+                },
+                {
+                    "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/res/values-v26/values-v26.xml",
+                    "from": {
+                        "startLines": "2,6",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,299",
+                        "endLines": "5,6",
+                        "endColumns": "12,96",
+                        "endOffsets": "294,391"
+                    },
+                    "to": {
+                        "startLines": "16,21",
+                        "startColumns": "4,4",
+                        "startOffsets": "896,1233",
+                        "endLines": "19,21",
+                        "endColumns": "12,96",
+                        "endOffsets": "1135,1325"
                     }
                 }
             ]

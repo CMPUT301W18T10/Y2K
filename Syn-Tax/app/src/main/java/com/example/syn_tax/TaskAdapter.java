@@ -261,7 +261,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             //DELETE or EDIT From the list of tasks when a task is CLicked on
 
 
-            btn.setMessage ( "DELETE OR VIEW A TASK" );
+            btn.setMessage ( "DELETE OR VIEW OR EDIT A TASK" );
 
             //Set the integer position1 to be constant so it can not be reassigned
             final int position1 = pos;
@@ -296,29 +296,24 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                 }
             } );
 
-            if(!status.equals ( "assigned" )) {
-                btn.setMessage ( "DELETE OR VIEW OR EDIT A TASK" );
-                //EDIT the Task
-                btn.setPositiveButton ( "Edit", new DialogInterface.OnClickListener () {
-                    @Override
-                    /**
-                     * EDIT the task
-                     */
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent ( getContext (), c );
-                        intent.putExtra ( "state", "edit" );
-                        intent.putExtra ( "status", status );
-                        intent.putExtra ( "sss", "Home" );
-                        intent.putExtra ( HomeActivity.POINTER, String.valueOf ( pos ) );
-                        ((Activity) getContext ()).startActivityForResult ( intent, 0 );
-                    }
-                } );
-
-            }
+            //EDIT the Task
+            btn.setPositiveButton ( "Edit", new DialogInterface.OnClickListener () {
+                @Override
+                /**
+                 * EDIT the task
+                 */
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent ( getContext (), c );
+                    intent.putExtra ( "state", "edit" );
+                    intent.putExtra ( "status", status );
+                    intent.putExtra ( "sss", "Home" );
+                    intent.putExtra ( HomeActivity.POINTER, String.valueOf ( pos ) );
+                    ((Activity) getContext ()).startActivityForResult ( intent, 0 );
+                }
+            } );
 
             // Call to show the Alert Message
             btn.show();
-
 
         }
     }
