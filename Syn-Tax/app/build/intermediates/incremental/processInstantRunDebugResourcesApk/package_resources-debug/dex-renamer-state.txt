@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-#Mon Apr 09 15:21:15 MDT 2018
-=======
-#Mon Apr 09 15:21:02 MDT 2018
->>>>>>> ea2aca070f95b1dba79ddee65e2e7d98fcd88974
+#Mon Apr 09 15:39:37 MDT 2018

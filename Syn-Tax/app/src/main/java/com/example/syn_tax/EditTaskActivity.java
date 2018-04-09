@@ -71,7 +71,7 @@ public class EditTaskActivity extends AppCompatActivity {
     private Double longitude;
     private String Otitle;
     private String state;
-    private String status;
+    private static String status;
     private static Task task;
 
     /**
@@ -82,6 +82,7 @@ public class EditTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
+
 
         //get the data from the homeActivity
         Intent intent = getIntent();
@@ -435,7 +436,6 @@ public class EditTaskActivity extends AppCompatActivity {
      */
     //get the code if the provider is finished
     public void getCode(View view) {
-        String status = task.getStatus();
         if (status == "assigned") {
             Button code = (Button) findViewById(R.id.codes);
             code.setVisibility(View.VISIBLE);
@@ -456,8 +456,8 @@ public class EditTaskActivity extends AppCompatActivity {
         EditText taskTitle = findViewById(R.id.editTaskTitle);
         String stitle= taskTitle.getText().toString();
 
-        EditText status= findViewById ( R.id.status );
-        String sstatus= status.getText ().toString ();
+        EditText statuss= findViewById ( R.id.status );
+        String sstatus= statuss.getText ().toString ();
 
         //description
         //set the title and description
@@ -466,21 +466,24 @@ public class EditTaskActivity extends AppCompatActivity {
         String sdescription= description.getText().toString();
 
         //**********************CHECKS*****************************************
-        //Check Title if dublicates
-        if (!stitle.equals ( Otitle )){
-            ArrayList<Task> allTasks;
-            try {
-                if (!checkName ( stitle )) {
-                    taskTitle.setError ( "Title is Taken." );
-                    Toast.makeText ( EditTaskActivity.this, "Title is Taken.", Toast.LENGTH_SHORT ).show ();
-                    valid = false;
+        if(!status.equals ( "requested" )){
+            //Check Title if dublicates
+            if (!stitle.equals ( Otitle )){
+                ArrayList<Task> allTasks;
+                try {
+                    if (!checkName ( stitle )) {
+                        taskTitle.setError ( "Title is Taken." );
+                        Toast.makeText ( EditTaskActivity.this, "Title is Taken.", Toast.LENGTH_SHORT ).show ();
+                        valid = false;
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace ();
+                } catch (ExecutionException e) {
+                    e.printStackTrace ();
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace ();
-            } catch (ExecutionException e) {
-                e.printStackTrace ();
             }
         }
+
 
         //Check Title
        if (stitle.isEmpty()){
@@ -498,7 +501,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
         //Check status
         else if (sstatus.isEmpty()){
-            status.setError("Enter status");
+            statuss.setError("Enter status");
             Toast.makeText(EditTaskActivity.this, "Enter a status.", Toast.LENGTH_SHORT).show();
             valid=false;
         }
@@ -520,7 +523,7 @@ public class EditTaskActivity extends AppCompatActivity {
         //Check if valid status
         if ( !(sstatus.equals ( "done" )) && !(sstatus.equals ( "assigned" )) && !(sstatus.equals ( "requested" )) &&
                 !(sstatus.equals ( "bidded" ))){
-            status.setError ( "Enter status." );
+            statuss.setError ( "Enter status." );
             Toast.makeText(EditTaskActivity.this, "Invalid status.", Toast.LENGTH_SHORT).show();
             valid=false;
         }
