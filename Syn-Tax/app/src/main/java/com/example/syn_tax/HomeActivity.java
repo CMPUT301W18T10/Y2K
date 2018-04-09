@@ -120,6 +120,7 @@ public class HomeActivity extends AppCompatActivity {
         if (ElasticSearchController.connected ()){
             new NotifyUser().Display(HomeActivity.this);
         }
+        status="";
 
 
         //REQUESTER
@@ -169,6 +170,11 @@ public class HomeActivity extends AppCompatActivity {
         loadTaskListProviderAssigned ();
         loadTaskListProviderBidded ();
 
+        for(int i =0; i< biddedPtasks.size ();i++){
+            if(biddedPtasks.get ( i ).getStatus ().equals ( "requested" )){
+                biddedPtasks.remove ( biddedPtasks.get ( i ) );
+            }
+        }
 
         //Set the adapter
         requestedRAdapter= new TaskAdapter ( this, requestedRtasks );
@@ -208,15 +214,16 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         //Grab all the bids that the task associated to the bid is not assigned
-        for (int i=0;i<allBids.size ();i++){
-            if (allBids.get ( i ).getTask ().getProvider ()==null &&
-                    !allBids.get ( i ).getTask ().getStatus ().equals ( "assigned" )){
-                //Update task status
-                Task tempTask = new Task(allBids.get ( i ).getTask ().getTitle(), allBids.get ( i ).getTask ().getDescription(),
-                        allBids.get ( i ).getTask ().getRequester(), "bidded", null,
-                        allBids.get ( i ).getTask ().getLat(), allBids.get ( i ).getTask ().getLong());
-                ElasticSearchController.updateTask (allBids.get ( i ).getTask (), tempTask);
-                allTasks.add ( tempTask);
+        if (allBids.size ()>0) {
+            for (int i = 0; i < allBids.size (); i++) {
+                if (allBids.get ( i ).getTask ().getProvider () == null) {
+                    //Update task status
+                    Task tempTask = new Task ( allBids.get ( i ).getTask ().getTitle (), allBids.get ( i ).getTask ().getDescription (),
+                            allBids.get ( i ).getTask ().getRequester (), "bidded", null,
+                            allBids.get ( i ).getTask ().getLat (), allBids.get ( i ).getTask ().getLong () );
+                    ElasticSearchController.updateTask ( allBids.get ( i ).getTask (), tempTask );
+                    allTasks.add (allBids.get ( i ).getTask () );
+                }
             }
         }
 
@@ -244,10 +251,23 @@ public class HomeActivity extends AppCompatActivity {
             e.printStackTrace ();
         }
 
+
+
         for(int i=0; i<allTasksList.size ();i++){
             if(allTasksList.get ( i ).getProvider ()!=null){
                 if(allTasksList.get ( i ).getProvider ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
-                    taskList.add(allTasksList.get ( i ));
+
+                    String title= allTasksList.get ( i ).getTitle ();
+                    String desc= allTasksList.get ( i ).getDescription ();
+                    String status= "assigned";
+                    Double latitudde = allTasksList.get ( i ).getLat();
+                    Double longitude = allTasksList.get ( i ).getLong();
+                    User req= allTasksList.get ( i ).getRequester ();
+                    User user= allTasksList.get ( i ).getProvider ();
+                    Task newTask= new Task(title, desc, req, status, user,latitudde,longitude);
+                    ElasticSearchController.updateTask ( allTasksList.get ( i ), newTask);
+
+                    taskList.add(newTask);
                     status= "assigned";
                 }
             }
@@ -288,29 +308,28 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
 
+
             //Set the status to bidded if there exist a bid on that task and its not assigned
-            else if (allBids.size ()!=0) {
-                for (int j = 0; j < allBids.size(); j++) {
-                    if(!allTasks.get(i).getStatus ().equals ( "assigned" )) {
-                        Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get ( i ).getDescription (),
-                                allTasks.get ( i ).getRequester (), "bidded", null,
-                                allTasks.get ( i ).getLat (), allTasks.get ( i ).getLong () );
-                        ElasticSearchController.updateTask ( allTasks.get ( i ), tempTask );
-                    }
-                }
+            else if (allBids.size ()>0 && allTasks.get(i).getProvider ()==null) {
+                Log.e("eeee", allTasks.get(i).getStatus ());
+                Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get ( i ).getDescription (),
+                        allTasks.get ( i ).getRequester (), "bidded", null,
+                        allTasks.get ( i ).getLat (), allTasks.get ( i ).getLong () );
+                ElasticSearchController.updateTask ( allTasks.get ( i ), tempTask );
+                Log.e("new", tempTask.getStatus ());
             }
 
 
             //Set the status to requested if there no bid
             else if(allBids.size ()==0) {
                 Log.e("title", allTasks.get(i).getTitle());
-
                 Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(),
                         allTasks.get(i).getRequester(), "requested", null, allTasks.get(i).getLat(),
                         allTasks.get(i).getLong());
                 ElasticSearchController.updateTask(allTasks.get(i), tempTask);
 
             }
+
 
             //Wait a bit for changes to sync
             long num=200;

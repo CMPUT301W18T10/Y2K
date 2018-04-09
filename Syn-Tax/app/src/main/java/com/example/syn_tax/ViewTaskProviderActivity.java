@@ -245,6 +245,14 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
                         execute.execute(newBid);
                     }
 
+                    //Set it to bidded
+
+                    //Update task status
+                    Task tempTask = new Task ( task.getTitle(), task.getDescription (),
+                            task.getRequester (), "bidded", null,
+                            task.getLat (), task.getLong () );
+                    ElasticSearchController.updateTask ( task, tempTask );
+
                     try {
                         new NotifyUser().Notify(task.getRequester(), "m", task.getTitle());
                     } catch (ExecutionException e) {
