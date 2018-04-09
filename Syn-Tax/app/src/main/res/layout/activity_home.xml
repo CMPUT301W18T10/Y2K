@@ -198,7 +198,7 @@
         android:layout_height="90dp"
         android:layout_weight="1"
         android:divider="?android:attr/dividerVertical"
-        android:gravity="bottom"
+        android:gravity="center"
         android:orientation="horizontal"
         android:showDividers="middle"
         android:weightSum="1">
@@ -207,12 +207,12 @@
         <Button
             android:id="@+id/codebtn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:background="@drawable/syn_taxblank"
+            android:background="@color/colorAccent"
             android:onClick="codeBtn"
             android:text="Add Code"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="26sp"
             android:textStyle="bold" />
 
