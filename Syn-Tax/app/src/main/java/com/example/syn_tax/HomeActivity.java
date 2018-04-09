@@ -296,7 +296,6 @@ public class HomeActivity extends AppCompatActivity {
 
             //Set the status to bidded if there exist a bid on that task and its not assigned
             else if (allBids.size ()!=0 ) {
-                Log.e("status", allBids.get ( i ).getTask ().getStatus ());
                 for (int j = 0; j < allBids.size(); j++) {
 
                     String title= allBids.get ( j ).getTask ().getTitle ();
@@ -318,8 +317,10 @@ public class HomeActivity extends AppCompatActivity {
             else if(allBids.size ()==0) {
                 Log.e("title", allTasks.get(i).getTitle());
 
-                    Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(), allTasks.get(i).getRequester(), "requested", null, allTasks.get(i).getLat(), allTasks.get(i).getLong());
-                    ElasticSearchController.updateTask(allTasks.get(i), tempTask);
+                Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(),
+                        allTasks.get(i).getRequester(), "requested", null, allTasks.get(i).getLat(),
+                        allTasks.get(i).getLong());
+                ElasticSearchController.updateTask(allTasks.get(i), tempTask);
 
             }
 

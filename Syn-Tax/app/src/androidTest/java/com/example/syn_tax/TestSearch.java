@@ -27,34 +27,6 @@ public class TestSearch extends ActivityInstrumentationTestCase2{
 
 
     /**
-     * Test when no keywords entered to search for tasks.
-     */
-    public void testWithNoWords() throws ExecutionException, InterruptedException {
-        if (Looper.myLooper() == null){
-            Looper.prepare();
-        }
-
-        SearchActivity testsearch= new SearchActivity();
-        testsearch.searching("");
-        try {
-            testsearch.searching("");
-        }
-        catch (IllegalArgumentException e) {
-            Log.i("Error", "Error occured when searching for tasks.");
-            e.printStackTrace();
-        }
-        catch (RuntimeException e){
-            Log.i("Error", "Error occured when searching for tasks.");
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace ();
-        } catch (ExecutionException e) {
-            e.printStackTrace ();
-        }
-    }
-
-
-    /**
      * Test when keywords are entered to search for tasks.
      */
     public void testWithKeyword() {

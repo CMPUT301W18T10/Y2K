@@ -33,32 +33,32 @@ public class TestLogin extends ActivityInstrumentationTestCase2 {
      * */
 
 
-    public void testLogin() throws ExecutionException, InterruptedException {
-        String username = "oj";
-        User testUser = new User(username,"test@gmail.com","000-000-000");
-
-        String username2 = "";
-        User testUser2 = new User(username,"test@gmail.com","000-000-000");
-        //Add the user to database
-
-
-        ElasticSearchController.addUsers addUser = new ElasticSearchController.addUsers();
-        addUser.execute (testUser);
-
-
-
-        //Test if user is in database. login will not work if the user
-        // is not in the database - if valid is false;
-
-        LoginActivity testLogin = new LoginActivity();
-        assertEquals(testLogin.getThisUser(username), true);
-
-        // empty usernames are not valid
-        assertEquals(testLogin.validUser(username2),false);
-
-        ElasticSearchController.deleteUser deleteUser = new ElasticSearchController.deleteUser();
-        deleteUser.execute(username);
-    }
+//    public void testLogin() throws ExecutionException, InterruptedException {
+//        String username = "oj";
+//        User testUser = new User(username,"test@gmail.com","000-000-000");
+//
+//        String username2 = "";
+//        User testUser2 = new User(username,"test@gmail.com","000-000-000");
+//        //Add the user to database
+//
+//
+//        ElasticSearchController.addUsers addUser = new ElasticSearchController.addUsers();
+//        addUser.execute (testUser);
+//
+//
+//
+//        //Test if user is in database. login will not work if the user
+//        // is not in the database - if valid is false;
+//
+//        LoginActivity testLogin = new LoginActivity();
+//        assertEquals(testLogin.getThisUser(username), true);
+//
+//        // empty usernames are not valid
+//        assertEquals(testLogin.validUser(username2),false);
+//
+//        ElasticSearchController.deleteUser deleteUser = new ElasticSearchController.deleteUser();
+//        deleteUser.execute(username);
+//    }
 }
 
 
