@@ -37,7 +37,7 @@ import java.util.Arrays;
 *
 * March 18, 2018
 *
-* First validates the user inputs then checks if the username
+    * First validates the user inputs then checks if the username
 * is in the database, then creates an account if the username is unused
 *
  * @see ElasticSearchController
