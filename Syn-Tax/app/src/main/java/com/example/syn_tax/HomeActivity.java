@@ -209,13 +209,9 @@ public class HomeActivity extends AppCompatActivity {
 
         //Grab all the bids that the task associated to the bid is not assigned
         for (int i=0;i<allBids.size ();i++){
-            if (allBids.get ( i ).getTask ().getProvider ()==null){
-                //Update task status
-                Task tempTask = new Task(allBids.get ( i ).getTask ().getTitle(), allBids.get ( i ).getTask ().getDescription(),
-                        allBids.get ( i ).getTask ().getRequester(), "bidded", null,
-                        allBids.get ( i ).getTask ().getLat(), allBids.get ( i ).getTask ().getLong());
-                ElasticSearchController.updateTask (allBids.get ( i ).getTask (), tempTask);
-                allTasks.add ( tempTask);
+            if (allBids.get ( i ).getTask ().getProvider ()==null &&
+                    !allBids.get ( i ).getTask ().getStatus ().equals ( "assigned" )){
+                allTasks.add (allBids.get ( i ).getTask ());
             }
         }
 
@@ -246,12 +242,7 @@ public class HomeActivity extends AppCompatActivity {
         for(int i=0; i<allTasksList.size ();i++){
             if(allTasksList.get ( i ).getProvider ()!=null){
                 if(allTasksList.get ( i ).getProvider ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
-                    Task tempTask = new Task(allTasksList.get ( i ).getTitle(), allTasksList.get ( i ).getDescription(),
-                            allTasksList.get ( i ).getRequester(), "assigned", allTasksList.get ( i ).getProvider (),
-                            allTasksList.get ( i ).getLat(), allTasksList.get ( i ).getLong());
-                    ElasticSearchController.updateTask (allTasksList.get ( i ), tempTask);
-                    taskList.add(tempTask);
-
+                    taskList.add(allTasksList.get ( i ));
                     status= "assigned";
                 }
             }
@@ -293,12 +284,14 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             //Set the status to bidded if there exist a bid on that task and its not assigned
-            else if (allBids.size ()!=0  && allTasks.get ( i ).getProvider() == null ) {
+            else if (allBids.size ()!=0) {
                 for (int j = 0; j < allBids.size(); j++) {
-                    Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(),
-                            allTasks.get(i).getRequester(), "bidded", null,
-                            allTasks.get(i).getLat(), allTasks.get(i).getLong());
-                    ElasticSearchController.updateTask (allTasks.get(i), tempTask);
+                    if(!allTasks.get(i).getStatus ().equals ( "assigned" )) {
+                        Task tempTask = new Task ( allTasks.get ( i ).getTitle (), allTasks.get ( i ).getDescription (),
+                                allTasks.get ( i ).getRequester (), "bidded", null,
+                                allTasks.get ( i ).getLat (), allTasks.get ( i ).getLong () );
+                        ElasticSearchController.updateTask ( allTasks.get ( i ), tempTask );
+                    }
                 }
             }
 
