@@ -211,61 +211,72 @@ public class ViewTaskProviderActivity extends AppCompatActivity {
 
 
         Button saveBtn = findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            /**
-             * user updates their edited task
-             * @param v
-             *
-             */
-            @Override
-            public void onClick(View v) {
-                //Convert the string to a Double if the string is not empty else set it to 0
-                EditText amount = findViewById(R.id.myAmount);
-                String sAmount = amount.getText().toString();
-
-                Double dAmount;
-                if (sAmount.length() > 0) {
-                    dAmount = Double.parseDouble(sAmount);
-                } else {
-                    dAmount = 0.0;
+        if(task.getStatus().equals("assigned")){
+            saveBtn.setOnClickListener ( new View.OnClickListener () {
+                @Override
+                public void onClick(View v) {
+                    homeBtn ();
                 }
-                if (isValid() && dAmount > 0) {
+            } );
 
-                    //add bid
-                    Bid newBid = new Bid(LoginActivity.thisuser.getUsername(), dAmount, task, task.getTitle(), task.getRequester().getUsername());
+        }
+        else {
+            saveBtn.setOnClickListener ( new View.OnClickListener () {
+                /**
+                 * user updates their edited task
+                 *
+                 * @param v
+                 */
+                @Override
+                public void onClick(View v) {
+                    //Convert the string to a Double if the string is not empty else set it to 0
+                    EditText amount = findViewById ( R.id.myAmount );
+                    String sAmount = amount.getText ().toString ();
 
-                    //or update the bid
-                    if (oldBid != null) {
-                        ElasticSearchController.updateBid(oldBid, newBid);
+                    Double dAmount;
+                    if (sAmount.length () > 0) {
+                        dAmount = Double.parseDouble ( sAmount );
+                    } else {
+                        dAmount = 0.0;
                     }
+                    if (isValid () && dAmount > 0) {
 
-                    //add bid because i have never bidded on this task before
-                    else {
-                        AsyncTask<Bid, Void, Void> execute = new ElasticSearchController.addBids();
-                        execute.execute(newBid);
+                        //add bid
+                        Bid newBid = new Bid ( LoginActivity.thisuser.getUsername (), dAmount, task, task.getTitle (), task.getRequester ().getUsername () );
+
+                        //or update the bid
+                        if (oldBid != null) {
+                            ElasticSearchController.updateBid ( oldBid, newBid );
+                        }
+
+                        //add bid because i have never bidded on this task before
+                        else {
+                            AsyncTask<Bid, Void, Void> execute = new ElasticSearchController.addBids ();
+                            execute.execute ( newBid );
+                        }
+
+                        //Set it to bidded
+
+                        //Update task status
+                        Task tempTask = new Task ( task.getTitle (), task.getDescription (),
+                                task.getRequester (), "bidded", null,
+                                task.getLat (), task.getLong () );
+                        ElasticSearchController.updateTask ( task, tempTask );
+
+                        try {
+                            new NotifyUser ().Notify ( task.getRequester (), "m", task.getTitle () );
+                        } catch (ExecutionException e) {
+                            e.printStackTrace ();
+                        }
+
+                        homeBtn ();
+                    } else if (dAmount <= 0) {
+                        amount.setError ( "Invalid Bid. " );
+                        Toast.makeText ( ViewTaskProviderActivity.this, "Enter a Bid.", Toast.LENGTH_SHORT ).show ();
                     }
-
-                    //Set it to bidded
-
-                    //Update task status
-                    Task tempTask = new Task ( task.getTitle(), task.getDescription (),
-                            task.getRequester (), "bidded", null,
-                            task.getLat (), task.getLong () );
-                    ElasticSearchController.updateTask ( task, tempTask );
-
-                    try {
-                        new NotifyUser().Notify(task.getRequester(), "m", task.getTitle());
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
-
-                    homeBtn();
-                } else if (dAmount <= 0) {
-                    amount.setError("Invalid Bid. ");
-                    Toast.makeText(ViewTaskProviderActivity.this, "Enter a Bid.", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            } );
+        }
     }
 
 

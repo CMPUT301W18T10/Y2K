@@ -121,14 +121,14 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         } );
 
 
-
-        //click listener for a bid item, calls the bidclicked method
-        thisBidButton.setOnClickListener ( new View.OnClickListener () {
-                @Override
-                public void onClick(View v) {
-                    bidClicked ();
-                }
-            } );
+//
+//        //click listener for a bid item, calls the bidclicked method
+//        thisBidButton.setOnClickListener ( new View.OnClickListener () {
+//                @Override
+//                public void onClick(View v) {
+//                    bidClicked ();
+//                }
+//            } );
 
         //Click listener for the accept button on a bid item, calls the acceptBtn method
         accept.setOnClickListener(new View.OnClickListener() {
@@ -240,15 +240,15 @@ public class BidAdapter extends ArrayAdapter<Bid> {
         ((Activity)getContext()).startActivityForResult(intent,0);
     }
 
-    /**
-     * when a bid is clicked, open the viewTaskProvider Activity
-     */
-    private void bidClicked(){
-        Log.e("Bid","Bid button clicked");
-        //GO TO VIEW TASK PROVIDER PAGE SO THEY CAN EDIT THE TASK
-        Intent intent= new Intent(getContext(), ViewTaskProviderActivity.class);
-        intent.putExtra("title", task.getTitle());
-        intent.putExtra ( "username", task.getRequester().getUsername());
-        ((Activity)getContext()).startActivityForResult(intent,0);
-    }
+//    /**
+//     * when a bid is clicked, open the viewTaskProvider Activity
+//     */
+//    private void bidClicked(){
+//        Log.e("Bid","Bid button clicked");
+//        //GO TO VIEW TASK PROVIDER PAGE SO THEY CAN EDIT THE TASK
+//        Intent intent= new Intent(getContext(), ViewTaskProviderActivity.class);
+//        intent.putExtra("title", task.getTitle());
+//        intent.putExtra ( "username", task.getRequester().getUsername());
+//        ((Activity)getContext()).startActivityForResult(intent,0);
+//    }
 }

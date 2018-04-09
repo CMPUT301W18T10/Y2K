@@ -1,0 +1,339 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:2:1-72:12
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:2:1-72:12
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:2:1-72:12
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:2:1-72:12
+MERGED from [com.android.support:design:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/AndroidManifest.xml:17:1-31:12
+MERGED from [com.google.android.gms:play-services-places:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-12.0.1.aar/93940caab4be98add588e343715fd919/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:17:1-32:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/3bd8653fee37edb0d43e601b5b6b4030/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/5696f56f3151f427cb9d0bab1173e1fb/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/2e81a1cc2aba9a1d7521697814e1ba8e/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c6dfcafaf25ae89ca2be8423c3fe9d5d/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:transition:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/437328ac7dbf1be2b52f189fd06e1a2b/AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-base:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-tasks:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-12.0.1.aar/82a5baae8bce65ec285cf9d5d307de30/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.1.aar/8db5390147ca747cdcc5f6b88cec03ed/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/6da85b473870e71c2fdbd9ecbe29d858/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d2b84def7fa2a80df582c845fd0eac6d/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/ff635ab71e2763bab01f1954673fe2fa/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/85cc9529325fe1b29c82158280c26bd1/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/091a12f5ccf9b4ac4b4378176196da94/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/AndroidManifest.xml:17:1-31:12
+MERGED from [com.google.android.gms:play-services-maps-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-12.0.1.aar/99af0583e7d3bd1a27eebb83d3efb6e6/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-places-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-license-12.0.1.aar/de72a20150abfd117de3ab8c95bd5e5d/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-base-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-license-12.0.1.aar/4a4773c7c1105767e192e90c1e7ba805/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-basement-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-12.0.1.aar/2e172b7e59323dce4d9d059341b13b21/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-12.0.1.aar/25f134dcae054d8a7ef9c4f8ef900496/AndroidManifest.xml:17:1-24:12
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/632b64b365fb09f3365d7fd9c476a197/AndroidManifest.xml:17:1-30:12
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:2:1-72:12
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:2:1-72:12
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:2:1-72:12
+	package
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:3:5-34
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:5:5-30
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:4:5-28
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+uses-sdk
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:7:5-44
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:7:5-44
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:7:5-44
+MERGED from [com.android.support:design:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:design:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/AndroidManifest.xml:21:5-23:78
+MERGED from [com.google.android.gms:play-services-places:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-12.0.1.aar/93940caab4be98add588e343715fd919/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-12.0.1.aar/93940caab4be98add588e343715fd919/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/3bd8653fee37edb0d43e601b5b6b4030/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/3bd8653fee37edb0d43e601b5b6b4030/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/5696f56f3151f427cb9d0bab1173e1fb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/5696f56f3151f427cb9d0bab1173e1fb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/2e81a1cc2aba9a1d7521697814e1ba8e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/2e81a1cc2aba9a1d7521697814e1ba8e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c6dfcafaf25ae89ca2be8423c3fe9d5d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c6dfcafaf25ae89ca2be8423c3fe9d5d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/437328ac7dbf1be2b52f189fd06e1a2b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/437328ac7dbf1be2b52f189fd06e1a2b/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-12.0.1.aar/82a5baae8bce65ec285cf9d5d307de30/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-12.0.1.aar/82a5baae8bce65ec285cf9d5d307de30/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.1.aar/8db5390147ca747cdcc5f6b88cec03ed/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.1.aar/8db5390147ca747cdcc5f6b88cec03ed/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/6da85b473870e71c2fdbd9ecbe29d858/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/6da85b473870e71c2fdbd9ecbe29d858/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d2b84def7fa2a80df582c845fd0eac6d/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d2b84def7fa2a80df582c845fd0eac6d/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/ff635ab71e2763bab01f1954673fe2fa/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/ff635ab71e2763bab01f1954673fe2fa/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/85cc9529325fe1b29c82158280c26bd1/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/85cc9529325fe1b29c82158280c26bd1/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/091a12f5ccf9b4ac4b4378176196da94/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/091a12f5ccf9b4ac4b4378176196da94/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/AndroidManifest.xml:21:5-23:58
+MERGED from [com.google.android.gms:play-services-maps-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-12.0.1.aar/99af0583e7d3bd1a27eebb83d3efb6e6/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-12.0.1.aar/99af0583e7d3bd1a27eebb83d3efb6e6/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-license-12.0.1.aar/de72a20150abfd117de3ab8c95bd5e5d/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-license-12.0.1.aar/de72a20150abfd117de3ab8c95bd5e5d/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-license-12.0.1.aar/4a4773c7c1105767e192e90c1e7ba805/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-license-12.0.1.aar/4a4773c7c1105767e192e90c1e7ba805/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-12.0.1.aar/2e172b7e59323dce4d9d059341b13b21/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-12.0.1.aar/2e172b7e59323dce4d9d059341b13b21/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-12.0.1.aar/25f134dcae054d8a7ef9c4f8ef900496/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-12.0.1.aar/25f134dcae054d8a7ef9c4f8ef900496/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/632b64b365fb09f3365d7fd9c476a197/AndroidManifest.xml:20:5-22:41
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/632b64b365fb09f3365d7fd9c476a197/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:7:5-44
+INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:7:5-44
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:7:5-44
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:7:15-41
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:9:22-78
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:10:5-81
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:10:22-78
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:11:5-75
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:11:22-72
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:12:5-80
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:12:22-77
+uses-permission#android.permission.INTERNET
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:13:5-67
+MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:13:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:14:5-79
+MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:14:22-76
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:21:5-79
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:21:22-76
+application
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:23:5-70:19
+MERGED from [com.android.support:design:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:design:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/AndroidManifest.xml:25:5-29:19
+MERGED from [com.google.android.gms:play-services-places:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-12.0.1.aar/93940caab4be98add588e343715fd919/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-12.0.1.aar/93940caab4be98add588e343715fd919/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:30:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/3bd8653fee37edb0d43e601b5b6b4030/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/3bd8653fee37edb0d43e601b5b6b4030/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/5696f56f3151f427cb9d0bab1173e1fb/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/5696f56f3151f427cb9d0bab1173e1fb/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/2e81a1cc2aba9a1d7521697814e1ba8e/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/2e81a1cc2aba9a1d7521697814e1ba8e/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c6dfcafaf25ae89ca2be8423c3fe9d5d/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c6dfcafaf25ae89ca2be8423c3fe9d5d/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:transition:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/437328ac7dbf1be2b52f189fd06e1a2b/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:transition:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/437328ac7dbf1be2b52f189fd06e1a2b/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-base:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-tasks:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-12.0.1.aar/82a5baae8bce65ec285cf9d5d307de30/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-12.0.1.aar/82a5baae8bce65ec285cf9d5d307de30/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.1.aar/8db5390147ca747cdcc5f6b88cec03ed/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.1.aar/8db5390147ca747cdcc5f6b88cec03ed/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/6da85b473870e71c2fdbd9ecbe29d858/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/6da85b473870e71c2fdbd9ecbe29d858/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d2b84def7fa2a80df582c845fd0eac6d/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d2b84def7fa2a80df582c845fd0eac6d/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/ff635ab71e2763bab01f1954673fe2fa/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/ff635ab71e2763bab01f1954673fe2fa/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/85cc9529325fe1b29c82158280c26bd1/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/85cc9529325fe1b29c82158280c26bd1/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/091a12f5ccf9b4ac4b4378176196da94/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/091a12f5ccf9b4ac4b4378176196da94/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/AndroidManifest.xml:25:5-29:19
+MERGED from [com.google.android.gms:play-services-maps-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-12.0.1.aar/99af0583e7d3bd1a27eebb83d3efb6e6/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-12.0.1.aar/99af0583e7d3bd1a27eebb83d3efb6e6/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-license-12.0.1.aar/de72a20150abfd117de3ab8c95bd5e5d/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-places-license-12.0.1.aar/de72a20150abfd117de3ab8c95bd5e5d/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-base-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-license-12.0.1.aar/4a4773c7c1105767e192e90c1e7ba805/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-base-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-license-12.0.1.aar/4a4773c7c1105767e192e90c1e7ba805/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-basement-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-12.0.1.aar/2e172b7e59323dce4d9d059341b13b21/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-basement-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-12.0.1.aar/2e172b7e59323dce4d9d059341b13b21/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-tasks-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-12.0.1.aar/25f134dcae054d8a7ef9c4f8ef900496/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-tasks-license:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-12.0.1.aar/25f134dcae054d8a7ef9c4f8ef900496/AndroidManifest.xml:22:5-20
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/632b64b365fb09f3365d7fd9c476a197/AndroidManifest.xml:24:5-28:19
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/632b64b365fb09f3365d7fd9c476a197/AndroidManifest.xml:24:5-28:19
+	android:supportsRtl
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:31:9-35
+	android:label
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:28:9-41
+	android:hardwareAccelerated
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:26:9-44
+	android:windowSoftInputMode
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:33:9-60
+	android:roundIcon
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:30:9-54
+	android:largeHeap
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:29:9-33
+	android:icon
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:27:9-43
+	android:allowBackup
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:25:9-35
+	android:theme
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:32:9-40
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:24:9-48
+activity#com.example.syn_tax.LoginActivity
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:34:9-42:20
+	android:label
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:36:13-45
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:35:13-42
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:37:13-41:29
+action#android.intent.action.MAIN
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:38:17-69
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:38:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:40:17-77
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:40:27-74
+activity#com.example.syn_tax.CreateAccount
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:43:9-51
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:43:19-48
+activity#com.example.syn_tax.HomeActivity
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:44:9-50
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:44:19-47
+activity#com.example.syn_tax.UserProfileActivity
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:45:9-57
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:45:19-54
+activity#com.example.syn_tax.SearchActivity
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:46:9-52
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:46:19-49
+activity#com.example.syn_tax.AddTaskActivity
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:47:9-53
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:47:19-50
+activity#com.example.syn_tax.EditTaskActivity
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:48:9-54
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:48:19-51
+activity#com.example.syn_tax.ViewTaskProviderActivity
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:49:9-62
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:49:19-59
+meta-data#com.google.android.geo.API_KEY
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:59:9-61:71
+	android:value
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:61:13-68
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:60:13-58
+activity#com.example.syn_tax.MapsActivity
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:63:9-65:58
+	android:label
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:65:13-55
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:64:13-41
+activity#com.example.syn_tax.CodeProvider
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:66:9-50
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:66:19-47
+activity#com.example.syn_tax.BidActivity
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:67:9-49
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:67:19-46
+activity#com.example.syn_tax.MyLocation
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:68:9-48
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:68:19-45
+activity#com.example.syn_tax.FinishedCodesRequester
+ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:69:9-69
+	android:name
+		ADDED from /Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/src/main/AndroidManifest.xml:69:19-57
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/5696f56f3151f427cb9d0bab1173e1fb/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/5696f56f3151f427cb9d0bab1173e1fb/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/2e81a1cc2aba9a1d7521697814e1ba8e/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/2e81a1cc2aba9a1d7521697814e1ba8e/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c6dfcafaf25ae89ca2be8423c3fe9d5d/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c6dfcafaf25ae89ca2be8423c3fe9d5d/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:transition:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/437328ac7dbf1be2b52f189fd06e1a2b/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:transition:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/437328ac7dbf1be2b52f189fd06e1a2b/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/6da85b473870e71c2fdbd9ecbe29d858/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/6da85b473870e71c2fdbd9ecbe29d858/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d2b84def7fa2a80df582c845fd0eac6d/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d2b84def7fa2a80df582c845fd0eac6d/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/ff635ab71e2763bab01f1954673fe2fa/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/ff635ab71e2763bab01f1954673fe2fa/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/85cc9529325fe1b29c82158280c26bd1/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/85cc9529325fe1b29c82158280c26bd1/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/091a12f5ccf9b4ac4b4378176196da94/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/091a12f5ccf9b4ac4b4378176196da94/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f52a504d4623b7bcdd2ff349e9b3f108/AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:design:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/AndroidManifest.xml:28:13-35
+	android:name
+		ADDED from [com.android.support:design:26.1.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/aa17198209c8f99b1aeef6a38603fc6d/AndroidManifest.xml:27:13-51
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-maps-12.0.1.aar/a3eb97affa8d2f70c38de4210bf3da62/AndroidManifest.xml:28:9-32
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/18db53a37812d3f2f5fa58064b3aea08/AndroidManifest.xml:24:13-79
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.1.aar/8db5390147ca747cdcc5f6b88cec03ed/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.1.aar/8db5390147ca747cdcc5f6b88cec03ed/AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:12.0.1] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.1.aar/8db5390147ca747cdcc5f6b88cec03ed/AndroidManifest.xml:24:13-58
+meta-data#android.arch.lifecycle.VERSION
+ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/632b64b365fb09f3365d7fd9c476a197/AndroidManifest.xml:25:9-27:47
+	android:value
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/632b64b365fb09f3365d7fd9c476a197/AndroidManifest.xml:27:13-44
+	android:name
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/632b64b365fb09f3365d7fd9c476a197/AndroidManifest.xml:26:13-58
