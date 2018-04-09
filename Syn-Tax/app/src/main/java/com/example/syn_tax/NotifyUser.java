@@ -17,6 +17,7 @@ package com.example.syn_tax;
 import android.content.Context;
 
 
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.Gravity;
@@ -116,9 +117,21 @@ public class NotifyUser extends AppCompatActivity {
             }
 
             if(!display.equals("")){
-                Toast toasty = Toast.makeText ( context, display,  Toast.LENGTH_LONG);
+                final Toast toasty = Toast.makeText ( context, display,  Toast.LENGTH_LONG);
                 toasty.setGravity ( Gravity.TOP, 0, 300 );
                 toasty.show ();
+                new CountDownTimer(9000,1000){
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {toasty.show();
+
+                    }
+
+                    @Override
+                    public void onFinish() {toasty.show();
+
+                    }
+                }.start();
             }
 
             currentUser.clearNotifications();
