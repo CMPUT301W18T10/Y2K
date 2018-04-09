@@ -13,29 +13,16 @@
 
 package com.example.syn_tax;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
+
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+
+
 import android.support.v7.app.AppCompatActivity;
-import android.text.LoginFilter;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -60,9 +47,23 @@ public class NotifyUser extends AppCompatActivity {
 
     protected static String CHANNEL_ID = UUID.randomUUID().toString();
 
+    /**
+     * NotifyUser constructor, used when changes to the user notification contents are
+     * made
+     * @see BidAdapter
+     * @see HomeActivity
+     * @see ViewTaskProviderActivity
+     */
     public  NotifyUser()  {
     }
 
+    /**
+     * Notify method called using constructor to notify user of status
+     * @param user  content user - user to be notified
+     * @param flag  Passed with the user - options are accepted and declined
+     * @param taskn Task whose response initiated the notification
+     * @throws ExecutionException
+     */
     public void Notify(User user ,String flag, String taskn) throws ExecutionException{
         User NotifiedUser = user;
         String title= taskn;
@@ -92,7 +93,12 @@ public class NotifyUser extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Display method. called with context from user.
+     *
+     * @see
+     * @param context
+     */
 
     public static void Display(Context context){
         //Notify user
