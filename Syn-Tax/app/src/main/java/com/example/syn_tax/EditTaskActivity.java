@@ -158,6 +158,9 @@ public class EditTaskActivity extends AppCompatActivity {
             //Bids pressed pass the task title and fill out the bids page
             Button bids= findViewById ( R.id.bids );
 
+            if(status.getText ().toString ().equals ( "assigned" )){
+                bids.setVisibility ( View.GONE );
+            }
 
 
             bids.setOnClickListener ( new View.OnClickListener () {
@@ -464,20 +467,20 @@ public class EditTaskActivity extends AppCompatActivity {
 
         //**********************CHECKS*****************************************
         //Check Title if dublicates
-//        if (!stitle.equals ( Otitle )){
-//            ArrayList<Task> allTasks;
-//            try {
-//                if (!checkName ( stitle )) {
-//                    taskTitle.setError ( "Title is Taken." );
-//                    Toast.makeText ( EditTaskActivity.this, "Title is Taken.", Toast.LENGTH_SHORT ).show ();
-//                    valid = false;
-//                }
-//            } catch (InterruptedException e) {
-//                e.printStackTrace ();
-//            } catch (ExecutionException e) {
-//                e.printStackTrace ();
-//            }
-//        }
+        if (!stitle.equals ( Otitle )){
+            ArrayList<Task> allTasks;
+            try {
+                if (!checkName ( stitle )) {
+                    taskTitle.setError ( "Title is Taken." );
+                    Toast.makeText ( EditTaskActivity.this, "Title is Taken.", Toast.LENGTH_SHORT ).show ();
+                    valid = false;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            }
+        }
 
         //Check Title
        if (stitle.isEmpty()){

@@ -166,8 +166,8 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         //Provider
-        loadTaskListProviderBidded ();
         loadTaskListProviderAssigned ();
+        loadTaskListProviderBidded ();
 
 
         //Set the adapter
@@ -291,7 +291,7 @@ public class HomeActivity extends AppCompatActivity {
                     deleteBid.execute ( allBids.get ( j ).getTask ().getTitle (), allBids.get ( j ).getBidUserName () );
                 }
             }
-            
+
             //Set the status to bidded if there exist a bid on that task and its not assigned
             else if (allBids.size ()!=0  && allTasks.get ( i ).getProvider() == null ) {
                 for (int j = 0; j < allBids.size(); j++) {
