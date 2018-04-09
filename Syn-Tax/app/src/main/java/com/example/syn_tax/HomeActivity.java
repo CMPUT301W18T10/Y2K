@@ -217,12 +217,23 @@ public class HomeActivity extends AppCompatActivity {
         if (allBids.size ()>0) {
             for (int i = 0; i < allBids.size (); i++) {
                 if (allBids.get ( i ).getTask ().getProvider () == null) {
-                    //Update task status
-                    Task tempTask = new Task ( allBids.get ( i ).getTask ().getTitle (), allBids.get ( i ).getTask ().getDescription (),
-                            allBids.get ( i ).getTask ().getRequester (), "bidded", null,
-                            allBids.get ( i ).getTask ().getLat (), allBids.get ( i ).getTask ().getLong () );
-                    ElasticSearchController.updateTask ( allBids.get ( i ).getTask (), tempTask );
-                    allTasks.add (allBids.get ( i ).getTask () );
+                    int inAssignedPtasks = 0;
+                    for(int j = 0; j < assignedPtasks.size();j++){
+                        if(assignedPtasks.get(0).getTitle().equals(allBids.get(i).getTask().getTitle())){
+                            inAssignedPtasks = 1;
+                            break;
+                        }
+
+                    }
+                    if(inAssignedPtasks == 0) {
+
+                        //Update task status
+                        Task tempTask = new Task(allBids.get(i).getTask().getTitle(), allBids.get(i).getTask().getDescription(),
+                                allBids.get(i).getTask().getRequester(), "bidded", null,
+                                allBids.get(i).getTask().getLat(), allBids.get(i).getTask().getLong());
+                        ElasticSearchController.updateTask(allBids.get(i).getTask(), tempTask);
+                        allTasks.add(allBids.get(i).getTask());
+                    }
                 }
             }
         }
@@ -256,7 +267,7 @@ public class HomeActivity extends AppCompatActivity {
         for(int i=0; i<allTasksList.size ();i++){
             if(allTasksList.get ( i ).getProvider ()!=null){
                 if(allTasksList.get ( i ).getProvider ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
-
+                    Log.e("status of assigned",allTasksList.get(i).getStatus());
                     String title= allTasksList.get ( i ).getTitle ();
                     String desc= allTasksList.get ( i ).getDescription ();
                     String status= "assigned";
