@@ -39,14 +39,27 @@ public class BidAdapter extends ArrayAdapter<Bid> {
     private ArrayList<Bid> bids;
     private Task task;
 
-
+    /**
+     * For calling in and passing in variables to bid adapter
+     * @param context The current context
+     * @param bids The array list of bids
+     */
     public BidAdapter(Context context, ArrayList<Bid> bids){
 
         super(context, R.layout.bid_list_item, bids);
     }
 
+    /**
+     * Gets the data for a bid, inflates the layout for the bid and populates the layout with
+     * the bid information.
+     * @param pos The positiion in the array list of a task
+     * @param convertView the current view
+     * @param parent The view group
+     * @return Returns data which is the inflated layout full of the task information
+     */
     @Override
     public View getView(final int pos, View convertView, ViewGroup parent){
+        //Layout inflater for a bid item
         LayoutInflater inf = LayoutInflater.from(getContext());
         final View data = inf.inflate(R.layout.bid_list_item, parent, false);
 
@@ -109,7 +122,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
 
 
-        //click listener for a bid item
+        //click listener for a bid item, calls the bidclicked method
         thisBidButton.setOnClickListener ( new View.OnClickListener () {
                 @Override
                 public void onClick(View v) {
@@ -117,7 +130,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
                 }
             } );
 
-
+        //Click listener for the accept button on a bid item, calls the acceptBtn method
         accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
@@ -130,6 +143,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
                     }
                 }
             });
+        // Click listener for the decline button on a bid item, calls the declineBtn Method
         decline.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -150,8 +164,8 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
     /**
      * Accept Button for a bid made on a task, then notify the user who made the bid
-     * @param v
-     * @param pos
+     * @param v The current view
+     * @param pos The position in the bids list where a click occurs
      * @throws ExecutionException
      * @throws InterruptedException
      */
@@ -196,14 +210,13 @@ public class BidAdapter extends ArrayAdapter<Bid> {
     /**
      * Decline button for the bid on each task per user
      * if it is declined then notify the user associated with the declined bid
-     * @param v
-     * @param pos
+     * @param v The current view
+     * @param pos The position in the bidlist where the click occurs
      * @throws ExecutionException
      * @throws InterruptedException
      */
     private void declineBtn(View v, int pos) throws ExecutionException, InterruptedException {
 
-        //TODO: stuff for declining a bid
         //REMOVE THE BID FROM THE TASK, and notify userP
         ElasticSearchController.getUsers users= new   ElasticSearchController.getUsers();
         users.execute(getItem ( pos ).getBidUserName());
@@ -211,7 +224,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
 
         new NotifyUser().Notify(userP,"Declined", getItem ( pos ).getTask ().getTitle ());
 
-        //ELasticsearch
+        //Elasticsearch
         ElasticSearchController.deleteBid delete = new ElasticSearchController.deleteBid();
         delete.execute(getItem ( pos ).getTask ().getTitle (), getItem ( pos ).getBidUserName ());
 
@@ -232,7 +245,6 @@ public class BidAdapter extends ArrayAdapter<Bid> {
      */
     private void bidClicked(){
         Log.e("Bid","Bid button clicked");
-        //TODO: figure out where a bid click is supposed to go
         //GO TO VIEW TASK PROVIDER PAGE SO THEY CAN EDIT THE TASK
         Intent intent= new Intent(getContext(), ViewTaskProviderActivity.class);
         intent.putExtra("title", task.getTitle());

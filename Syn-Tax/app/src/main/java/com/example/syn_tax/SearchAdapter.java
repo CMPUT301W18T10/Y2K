@@ -33,17 +33,31 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by aapae on 4/3/2018.
+ * @author Aidan Paetsch
+ * This is an adapter class for Items in the search activity list view
+ *
  */
-
 public class SearchAdapter extends ArrayAdapter<Task> {
     private ArrayList<Task> tasks;
     private String lowestbid;
 
+    /**
+     * For calling searchAdapter
+     * @param context The current context
+     * @param tasks The Array list of tasks that the search returns
+     */
     public SearchAdapter(Context context, ArrayList<Task> tasks){
         super(context, R.layout.search_list_item, tasks);
     }
 
+    /**
+     * Grabs the data for a task, inflates the layout of a task, fills the layout with the
+     * data from the task
+     * @param pos The position in the list of tasks
+     * @param convertView The current view
+     * @param parent The view group
+     * @return returns data which is the inflated layout containing the list items
+     */
     @Override
     public View getView(final int pos, View convertView, ViewGroup parent){
         LayoutInflater inf = LayoutInflater.from(getContext());
@@ -81,11 +95,10 @@ public class SearchAdapter extends ArrayAdapter<Task> {
         tLowestBid.setText(lowestbid);
 
         LinearLayout thisButton = data.findViewById(R.id.my_search_item);
-
+        //On click listener for a search list item click
         thisButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //TODO: where the click goes
                 // for a task of a requester
                 AlertDialog.Builder btn = new AlertDialog.Builder(getContext ());
                 btn.setMessage("VIEW TASK");

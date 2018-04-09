@@ -45,19 +45,23 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
     /**
      * Takes in a context and an array list of tasks and sets a list view of tasks
-     * @param context
-     * @param tasks
+     * @param context The current context
+     * @param tasks An array list of Tasks
      */
     public TaskAdapter(Context context, ArrayList<Task> tasks){
         super(context, R.layout.task_list_item, tasks);
     }
 
-    @Override
     /**
-     * Gets the view and sets all of its attributes
-     * @param pos position in the list of a click
-     *
+     * Gets the task information, Inflates the task list item layout and populates that layout with
+     * The data from the task
+     * @param pos The position in the tasks array list for a task
+     * @param convertView The current view
+     * @param parent The current view group
+     * @return Returns the data for a task layout
      */
+    @Override
+    // Gets the view and sets all of its attributes
     public View getView(final int pos, View convertView, ViewGroup parent){
         //layout inflater for a task item
         LayoutInflater inf = LayoutInflater.from(getContext());
@@ -199,21 +203,26 @@ public class TaskAdapter extends ArrayAdapter<Task> {
     }
 
 
+
     /**
-     * @param pos position of a list item
-     * @param c class for the intent
+     *
+     * @param v The current view
+     * @param pos Position of a task list item
+     * @param c Class for the intent
+     * @param title Title of the
+     * @param todo String of what is being done
+     * @param status status of a task
      */
     private void edit_or_view(final View v,final int pos, final Class c, final String title, String todo, final String status){
         AlertDialog.Builder btn = new AlertDialog.Builder(getContext ());
         //USER CAN only view/edit a task that they have bidded on
-        if (todo== "view"){
+        if (todo == "view"){
             if(status.equals ( "assigned" )){
                 btn.setMessage("VIEW ASSIGNED TASK");
                 btn.setPositiveButton("VIEW/SUBMIT", new DialogInterface.OnClickListener() {
+
+                    //On the click of an item that is to be viewed
                     @Override
-                    /**
-                     * VIEW the task
-                     */
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getContext(),c);
                         intent.putExtra(HomeActivity.POINTER,String.valueOf(pos));
@@ -248,9 +257,9 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         //USER CAN EDIT AND DELETE ITS OWN TASK
         else{
 
-            /**
-             * DELETE or EDIT From the list of tasks when a task is CLicked on
-             */
+
+            //DELETE or EDIT From the list of tasks when a task is CLicked on
+
 
             btn.setMessage ( "DELETE OR VIEW A TASK" );
 
