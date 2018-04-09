@@ -236,7 +236,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
             e.printStackTrace ();
         }
 
-        Intent intent= new Intent(getContext (), BidActivity.class);
+        Intent intent= new Intent(getContext (), HomeActivity.class);
         ((Activity)getContext()).startActivityForResult(intent,0);
     }
 

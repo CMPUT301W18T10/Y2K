@@ -62,6 +62,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public static final String POINTER = "Task_Position";
+    private static String status;
 
     //Provider ListViews
     private ListView biddedPListView;
@@ -71,7 +72,6 @@ public class HomeActivity extends AppCompatActivity {
     private ListView requestedRListView;
     private ListView biddedRListView;
     private ListView assignedRListView;
-    private String status;
 
 
 
@@ -161,10 +161,8 @@ public class HomeActivity extends AppCompatActivity {
             } else if (tasksR.get ( i ).getStatus ().equals ( "bidded" )) {
                 biddedRtasks.add ( tasksR.get ( i ) );
             } else if (tasksR.get ( i ).getStatus ().equals ( "assigned" )) {
-
                 assignedRtasks.add ( tasksR.get ( i ) );
             }
-            status = tasksR.get(i).getStatus();
         }
 
         //Provider
@@ -211,10 +209,13 @@ public class HomeActivity extends AppCompatActivity {
 
         //Grab all the bids that the task associated to the bid is not assigned
         for (int i=0;i<allBids.size ();i++){
-            Log.e("status", allBids.get ( i ).getTask ().getStatus ());
             if (allBids.get ( i ).getTask ().getProvider ()==null){
                 //Update task status
-                allTasks.add ( allBids.get ( i ).getTask ());
+                Task tempTask = new Task(allBids.get ( i ).getTask ().getTitle(), allBids.get ( i ).getTask ().getDescription(),
+                        allBids.get ( i ).getTask ().getRequester(), "bidded", null,
+                        allBids.get ( i ).getTask ().getLat(), allBids.get ( i ).getTask ().getLong());
+                ElasticSearchController.updateTask (allBids.get ( i ).getTask (), tempTask);
+                allTasks.add ( tempTask);
             }
         }
 
@@ -244,9 +245,14 @@ public class HomeActivity extends AppCompatActivity {
 
         for(int i=0; i<allTasksList.size ();i++){
             if(allTasksList.get ( i ).getProvider ()!=null){
-                Log.e("e", allTasksList.get ( i ).getStatus ());
                 if(allTasksList.get ( i ).getProvider ().getUsername ().equals ( LoginActivity.thisuser.getUsername () )){
-                    taskList.add(allTasksList.get ( i ));
+                    Task tempTask = new Task(allTasksList.get ( i ).getTitle(), allTasksList.get ( i ).getDescription(),
+                            allTasksList.get ( i ).getRequester(), "assigned", allTasksList.get ( i ).getProvider (),
+                            allTasksList.get ( i ).getLat(), allTasksList.get ( i ).getLong());
+                    ElasticSearchController.updateTask (allTasksList.get ( i ), tempTask);
+                    taskList.add(tempTask);
+
+                    status= "assigned";
                 }
             }
         }
@@ -289,26 +295,21 @@ public class HomeActivity extends AppCompatActivity {
 
             //Set the status to assigned if provider for that task is not null
             else if(allTasks.get ( i ).getProvider() != null ) {
-                    Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(), allTasks.get(i).getRequester(), "assigned", allTasks.get(i).getProvider(), allTasks.get(i).getLat(), allTasks.get(i).getLong());
+                    Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(),
+                            allTasks.get(i).getRequester(), "assigned", allTasks.get(i).getProvider(),
+                            allTasks.get(i).getLat(), allTasks.get(i).getLong());
                     ElasticSearchController.updateTask(allTasks.get(i), tempTask);
+
             }
 
 
             //Set the status to bidded if there exist a bid on that task and its not assigned
             else if (allBids.size ()!=0 ) {
                 for (int j = 0; j < allBids.size(); j++) {
-
-                    String title= allBids.get ( j ).getTask ().getTitle ();
-                    String desc=allBids.get ( j ).getTask ().getDescription ();
-                    User requester= allBids.get ( j ).getTask ().getRequester ();
-
-                    Double longitude = 65.232312;
-                    Double latitudde = 117.834 ;
-
-                    Task newTask= new Task(title,desc, requester,  "bidded", null, latitudde,longitude);
-                    ElasticSearchController.updateTask (allTasks.get(i), newTask);
-
-                    Log.e("status", allBids.get ( j).getTask ().getStatus ());
+                    Task tempTask = new Task(allTasks.get(i).getTitle(), allTasks.get(i).getDescription(),
+                            allTasks.get(i).getRequester(), "bidded", null,
+                            allTasks.get(i).getLat(), allTasks.get(i).getLong());
+                    ElasticSearchController.updateTask (allTasks.get(i), tempTask);
                 }
             }
 
@@ -421,7 +422,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         else {
-            Toast.makeText(HomeActivity.this,"You have no assigned tasks",Toast.LENGTH_LONG);
+            Toast.makeText(HomeActivity.this,"You have no assigned tasks",Toast.LENGTH_LONG).show();
         }
     }
 }

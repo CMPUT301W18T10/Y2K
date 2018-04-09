@@ -114,15 +114,16 @@ public class NotifyUser extends AppCompatActivity {
                 display= display + currentUser.getNotification().get(i)+ "\n";
             }
 
-            currentUser.clearNotifications();
-            //Connect elastic search and clear
-            ElasticSearchController.updateUser(LoginActivity.thisuser, currentUser);
-
             if(!display.equals("")){
                 Toast toasty = Toast.makeText ( context, display,  Toast.LENGTH_LONG);
                 toasty.setGravity ( Gravity.TOP, 0, 300 );
                 toasty.show ();
             }
+
+            currentUser.clearNotifications();
+            //Connect elastic search and clear
+            ElasticSearchController.updateUser(LoginActivity.thisuser, currentUser);
+
 
         } catch (InterruptedException | IndexOutOfBoundsException | ExecutionException e1) {
             e1.printStackTrace();
