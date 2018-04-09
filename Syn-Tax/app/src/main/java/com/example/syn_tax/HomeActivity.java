@@ -211,7 +211,12 @@ public class HomeActivity extends AppCompatActivity {
         for (int i=0;i<allBids.size ();i++){
             if (allBids.get ( i ).getTask ().getProvider ()==null &&
                     !allBids.get ( i ).getTask ().getStatus ().equals ( "assigned" )){
-                allTasks.add (allBids.get ( i ).getTask ());
+                //Update task status
+                Task tempTask = new Task(allBids.get ( i ).getTask ().getTitle(), allBids.get ( i ).getTask ().getDescription(),
+                        allBids.get ( i ).getTask ().getRequester(), "bidded", null,
+                        allBids.get ( i ).getTask ().getLat(), allBids.get ( i ).getTask ().getLong());
+                ElasticSearchController.updateTask (allBids.get ( i ).getTask (), tempTask);
+                allTasks.add ( tempTask);
             }
         }
 
@@ -357,8 +362,10 @@ public class HomeActivity extends AppCompatActivity {
      * Go to the SearchActivity page
      */
     public void searchBtn(View view){
-        Intent intent= new Intent(this, SearchActivity.class);
-        startActivity(intent);
+        if (ElasticSearchController.connected ()) {
+            Intent intent = new Intent ( this, SearchActivity.class );
+            startActivity ( intent );
+        }
     }
 
     /**
@@ -377,9 +384,11 @@ public class HomeActivity extends AppCompatActivity {
      * Go to the UserProfileActivity
      */
     public void userInfo(View view){
-        Intent intent= new Intent(this, UserProfileActivity.class);
-        intent.putExtra("userInfo", LoginActivity.thisuser.retrieveInfo());
-        startActivity(intent);
+        if (ElasticSearchController.connected ()) {
+            Intent intent = new Intent ( this, UserProfileActivity.class );
+            intent.putExtra ( "userInfo", LoginActivity.thisuser.retrieveInfo () );
+            startActivity ( intent );
+        }
     }
 
 
@@ -389,22 +398,22 @@ public class HomeActivity extends AppCompatActivity {
      * @param view
      */
     public void codeBtn(View view){
-        //Wait a bit for changes to sync
-        if (status == "assigned") {
-            long num = 300;
-            try {
-                Thread.sleep(num);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        if (ElasticSearchController.connected ()) {
+            //Wait a bit for changes to sync
+            if (status == "assigned") {
+                long num = 300;
+                try {
+                    Thread.sleep ( num );
+                } catch (InterruptedException e) {
+                    e.printStackTrace ();
+                }
+
+                Intent intent = new Intent ( this, CodeProvider.class );
+
+                startActivity ( intent );
+            } else {
+                Toast.makeText ( HomeActivity.this, "You have no assigned tasks", Toast.LENGTH_LONG ).show ();
             }
-
-            Intent intent = new Intent(this, CodeProvider.class);
-
-            startActivity(intent);
-        }
-
-        else {
-            Toast.makeText(HomeActivity.this,"You have no assigned tasks",Toast.LENGTH_LONG).show();
         }
     }
 }
