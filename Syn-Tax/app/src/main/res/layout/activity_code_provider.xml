@@ -1,55 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/syn_taxblank"
+    android:orientation="vertical"
     tools:context="com.example.syn_tax.CodeProvider">
 
 
-    <Button
-        android:id="@+id/loadbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="172dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="32dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="load"
-        android:text="Load"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/finsihedBtn"
-        android:layout_width="58dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="524dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="148dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="send"
-        android:text="Send"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
         android:id="@+id/txt"
-        android:layout_width="276dp"
-        android:layout_height="152dp"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
         android:layout_marginTop="108dp"
         android:background="@color/colorAccent"
         android:ems="10"
@@ -63,21 +26,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/savebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="save"
-        android:text="Save"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/loadbtn"
-        app:layout_constraintHorizontal_bias="0.537"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt"
-        app:layout_constraintVertical_bias="0.636" />
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/loadbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="0"
+            android:onClick="load"
+            android:text="Load"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/finsihedBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="0"
+            android:onClick="send"
+            android:text="Send"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/savebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="0"
+            android:onClick="save"
+            android:text="Save"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textStyle="bold"
+
+            />
+    </LinearLayout>
+
+</LinearLayout>
