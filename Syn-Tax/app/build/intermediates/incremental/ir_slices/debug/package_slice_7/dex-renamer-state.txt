@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 #Mon Apr 09 15:21:27 MDT 2018
 base.0=/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/transforms/dexMerger/debug/7
+=======
+#Mon Apr 09 15:21:21 MDT 2018
+base.0=C\:\\Users\\aapae\\Desktop\\Cmpt 301\\Y2K\\Syn-Tax\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\8
+>>>>>>> ea2aca070f95b1dba79ddee65e2e7d98fcd88974
 path.0=classes.dex
 renamed.0=classes.dex
