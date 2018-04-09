@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v22/values-v22.xml",
+            "outputFile": "C:\\Users\\aapae\\Desktop\\Cmpt 301\\Y2K\\Syn-Tax\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v22\\values-v22.xml",
             "map": [
                 {
-                    "source": "/Users/Hamsemare/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ad8fdb63da5858968c9fa3aa207a5ac3/res/values-v22/values-v22.xml",
+                    "source": "C:\\Users\\aapae\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\07a8a4ab79986d3008df9a59df006100\\res\\values-v22\\values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",

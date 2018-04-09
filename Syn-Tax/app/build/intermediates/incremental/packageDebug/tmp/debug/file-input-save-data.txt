@@ -1,11 +1,11 @@
 #Internal package file, do not edit.
-#Mon Apr 09 14:51:49 MDT 2018
-1.base=/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/transforms/dexMerger/debug/12
+#Mon Apr 09 15:21:22 MDT 2018
+1.base=C\:\\Users\\aapae\\Desktop\\Cmpt 301\\Y2K\\Syn-Tax\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12
 0.baseType=DIRECTORY
 1.baseType=DIRECTORY
 count=2
 1.set=DEX
 0.path=classes.dex
 0.set=DEX
-0.base=/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/transforms/dexMerger/debug/11
+0.base=C\:\\Users\\aapae\\Desktop\\Cmpt 301\\Y2K\\Syn-Tax\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
 1.path=classes.dex
