@@ -2,66 +2,30 @@
 <instant-run
     abi="x86"
     api-level="27"
-    build-mode="FULL"
+    build-mode="HOT_WARM"
     density="hdpi"
     format="10"
     plugin-version="3.1.0"
-    timestamp="1523309962957"
+    timestamp="1523311077996"
     token="-8152521086947065475"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="7555" />
+        duration="1257" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="535" />
     <task
         name="instant-run-transform"
-        duration="912" />
+        duration="266" />
     <task
         name="verifier"
-        duration="432" />
+        duration="108" />
 
     <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
-        type="SPLIT_MAIN" />
+        location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/reload-dex/debug/classes.dex"
+        type="RELOAD_DEX" />
 
     <build
         build-mode="FULL"
@@ -106,6 +70,38 @@
         <artifact
             location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
             type="SPLIT_MAIN" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1523310637487"
+        verifier="FIELD_TYPE_CHANGE" >
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
+            type="SPLIT" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1523310892838"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/builds/debug/1523310892838/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1523310967837"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/builds/debug/1523310967837/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1523311077996"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/Hamsemare/Desktop/Y2K/Syn-Tax/app/build/intermediates/reload-dex/debug/classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>

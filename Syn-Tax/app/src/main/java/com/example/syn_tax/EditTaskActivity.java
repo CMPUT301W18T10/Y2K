@@ -90,6 +90,10 @@ public class EditTaskActivity extends AppCompatActivity {
         status=intent.getStringExtra ( "status" );
         pos = Integer.parseInt(intent.getStringExtra(HomeActivity.POINTER));
 
+        if (status.equals ( "assigned" )) {
+            Button code = (Button) findViewById ( R.id.codes );
+            code.setVisibility ( View.VISIBLE );
+        }
 
 
 
@@ -436,12 +440,9 @@ public class EditTaskActivity extends AppCompatActivity {
      */
     //get the code if the provider is finished
     public void getCode(View view) {
-        if (status == "assigned") {
-            Button code = (Button) findViewById(R.id.codes);
-            code.setVisibility(View.VISIBLE);
-            Intent intent = new Intent(EditTaskActivity.this,FinishedCodesRequester.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(EditTaskActivity.this,FinishedCodesRequester.class);
+        startActivity(intent);
+
     }
 
 
@@ -466,7 +467,7 @@ public class EditTaskActivity extends AppCompatActivity {
         String sdescription= description.getText().toString();
 
         //**********************CHECKS*****************************************
-        if(!status.equals ( "requested" )){
+        if(status.equals ( "requested" )){
             //Check Title if dublicates
             if (!stitle.equals ( Otitle )){
                 ArrayList<Task> allTasks;
