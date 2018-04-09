@@ -430,7 +430,7 @@ public class HomeActivity extends AppCompatActivity {
     public void codeBtn(View view){
         if (ElasticSearchController.connected ()) {
             //Wait a bit for changes to sync
-            if (status == "assigned") {
+            if (assignedPtasks.size ()>0) {
                 long num = 300;
                 try {
                     Thread.sleep ( num );
